@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PetTrackr — Universal Biosensors · Deep Vyas</title>
+<meta name="description" content="PetTrackr is Universal Biosensors&#x27; companion app for a Bluetooth glucose analyser, used by people managing a diabetic cat or dog. I designed it end to end: 100+ screens across iOS ">
+<meta name="theme-color" content="#FCFCFD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0B0D" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="PetTrackr — A daily companion for a diabetic pet, under constraints that ruled out most design choices.">
+<link rel="icon" href="d-logo.svg">
+<script>try{var t=localStorage.getItem("dv26-theme");document.documentElement.setAttribute("data-theme",t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/system.css">
+<style>
+/* ── Case hero ─────────────────────────────────────────────────── */
+.back{padding-top:clamp(26px,4vw,44px)}
+.back a{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.back a:hover{color:var(--accent)}
+.chero{padding-top:clamp(20px,3vw,34px)}
+.chero .kick{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:clamp(20px,2.6vw,30px)}
+.chero .kick .dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.chero h1{font-size:clamp(29px,5.4vw,74px);font-weight:600;line-height:1.01;letter-spacing:-.045em;max-width:18ch;text-wrap:balance}
+.chero h1 em{font-family:var(--display);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
+.chero .sum{margin-top:clamp(22px,2.8vw,34px);font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--muted);max-width:62ch}
+.meta{margin-top:clamp(34px,4vw,52px);display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--line-2);border-block:1px solid var(--line-2)}
+/* The 1px gaps are divider rules, so every cell needs breathing room on the
+   side a rule falls — except the one that opens a row, which stays flush with
+   the content edge. The exception moves with the column count. */
+.meta div{background:var(--bg);padding:18px 24px 20px 24px}
+.meta div:first-child{padding-left:0}
+.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+.meta dd{font-size:14.5px;line-height:1.5;color:var(--ink);font-weight:450}
+.chero-fig{margin-top:clamp(34px,4.4vw,60px)}
+/* the case heroes are 16:9; the frame matches so none of them is cropped */
+.chero-fig img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center;
+  border-radius:var(--r);border:1px solid var(--line-2);background:var(--raise)}
+.chero-fig figcaption{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint)}
+
+/* ── Outcome bar ───────────────────────────────────────────────── */
+.outs{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
+.out{background:var(--bg);padding:clamp(22px,2.4vw,30px)}
+.out .n{font-family:var(--mono);font-weight:500;font-size:clamp(24px,2.8vw,36px);letter-spacing:-.045em;color:var(--accent);line-height:1.05}
+.out .c{margin-top:10px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+
+/* ── Chapters ──────────────────────────────────────────────────── */
+.ch{padding-top:clamp(64px,9vw,120px)}
+.ch-head{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(18px,3vw,40px);
+  padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:clamp(30px,3.6vw,48px)}
+.ch-head .idx{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.14em;color:var(--accent);padding-top:.55em}
+.ch-head .ttl{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.17em;text-transform:uppercase;color:var(--faint);padding-top:.55em}
+.ch-head h2{grid-column:2;font-size:clamp(24px,3.2vw,40px);font-weight:600;letter-spacing:-.035em;
+  line-height:1.1;max-width:22ch;margin-top:12px;text-wrap:balance}
+.ch-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
+.prose{grid-column:1/8;min-width:0}
+.prose p{font-size:16.5px;line-height:1.68;color:var(--muted)}
+.prose p+p{margin-top:1.05em}
+.prose strong{color:var(--ink);font-weight:500}
+.side{grid-column:9/-1;min-width:0}
+
+/* process artefacts — the diagrams that carry a decision. They come from
+   the project record and keep their own palette, so they are framed as
+   documents rather than restyled to match the site. */
+.art{margin:clamp(24px,2.8vw,36px) 0 0}
+.art img{width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line);background:#fff}
+.art figcaption{margin-top:11px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+  line-height:1.62;color:var(--faint);max-width:78ch}
+.art.wide{margin-top:clamp(30px,3.4vw,44px)}
+
+/* problem-side signals: the numbers the research turned up */
+.signals{border-top:1px solid var(--line-2)}
+.signal{padding:14px 0;border-bottom:1px solid var(--line-2)}
+.signal .n{font-family:var(--mono);font-weight:500;font-size:clamp(19px,2vw,24px);letter-spacing:-.04em;color:var(--accent)}
+.signal .c{margin-top:5px;font-size:13px;line-height:1.5;color:var(--muted)}
+
+/* numbered findings */
+.finds{margin-top:clamp(32px,4vw,52px);border-top:1px solid var(--line-2)}
+.find{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(16px,2.4vw,32px);
+  padding:22px 0;border-bottom:1px solid var(--line-2)}
+.find .n{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.12em;color:var(--accent);padding-top:.5em}
+.find h3{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.find p{grid-column:2;margin-top:8px;font-size:14.5px;line-height:1.62;color:var(--muted);max-width:68ch}
+
+/* method cards */
+.methods{margin-top:clamp(30px,3.6vw,46px);display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
+.method{background:var(--bg);padding:clamp(20px,2.2vw,28px);transition:background-color .3s var(--ease)}
+.method:hover{background:var(--surface)}
+.method .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+.method h3{font-size:16.5px;font-weight:600;letter-spacing:-.02em;margin-top:10px}
+.method p{margin-top:9px;font-size:14px;line-height:1.6;color:var(--muted)}
+
+/* quote */
+.quote{margin-top:clamp(30px,3.6vw,48px);padding:clamp(24px,3vw,36px);border-radius:var(--r);
+  background:var(--accent-soft);border:1px solid var(--line-2)}
+.quote p{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.4vw,28px);line-height:1.34;
+  letter-spacing:-.015em;color:var(--ink);max-width:40ch}
+.quote cite{display:block;margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);font-style:normal}
+
+/* criteria */
+.crit{list-style:none;counter-reset:c;border-top:1px solid var(--line-2)}
+.crit li{counter-increment:c;position:relative;padding:16px 0 16px 42px;border-bottom:1px solid var(--line-2);
+  font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.crit li::before{content:counter(c,decimal-leading-zero);position:absolute;left:0;top:18px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent)}
+
+/* decisions */
+.dec{padding:clamp(28px,3.2vw,42px) 0;border-bottom:1px solid var(--line-2)}
+.dec:first-of-type{border-top:1px solid var(--line)}
+/* The chapter head already draws a rule under itself, so a block that opens
+   a chapter must not draw a second one below the heading's margin. */
+.ch-head + .dec,.ch-head + .lessons{border-top:0}
+.dec-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
+.dec .k{grid-column:1/4;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);padding-top:6px}
+.dec .b{grid-column:4/-1;min-width:0}
+.dec h3{font-size:clamp(19px,2.1vw,25px);font-weight:600;letter-spacing:-.028em;line-height:1.22;max-width:26ch}
+.dec p{margin-top:12px;font-size:15.5px;line-height:1.65;color:var(--muted);max-width:66ch}
+
+/* gallery */
+.gal{margin-top:clamp(34px,4vw,54px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,24px) clamp(12px,1.6vw,20px);align-items:start}
+.gal figure{margin:0}
+/* Four to a row, so each one is a thumbnail: enough to recognise the screen,
+   with the magnifier there for anyone who wants to read it. One fixed 3:2 box
+   keeps the captions on a common baseline, and contain means nothing is cropped
+   — these run from 0.46 (a phone screen) to 1.69 (a desktop table). */
+.gal img{width:100%;aspect-ratio:3/2;object-fit:contain;padding:6px;
+  border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--raise);
+  transition:border-color .3s var(--ease)}
+.gal figure:hover img{border-color:var(--line)}
+.gal figcaption{margin-top:10px;font-size:12.5px;line-height:1.55;color:var(--muted)}
+.gal figcaption b{display:block;font-weight:500;color:var(--ink);margin-bottom:3px;font-size:13.5px;letter-spacing:-.01em}
+/* the magnifier is sized for a full-width figure; scale it to the thumbnail */
+.gal .zoom-btn{right:7px;bottom:7px;width:27px;height:27px}
+.gal .zoom-btn svg{width:12px;height:12px}
+
+
+/* zoom affordance + lightbox — built by js/system.js around every case-study
+   screenshot, so the markup below stays plain <figure><img>. */
+.zoomwrap{position:relative;display:block;line-height:0}
+.zoomwrap img{cursor:zoom-in}
+/* Solid rather than translucent: it sits over arbitrary screenshots, and a
+   backdrop-filter is one more thing that can fail to composite. */
+.zoom-btn{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:999px;
+  display:grid;place-items:center;cursor:zoom-in;color:var(--ink-2);
+  background:var(--bg);border:1px solid var(--line);
+  box-shadow:0 2px 10px rgba(11,12,15,.14);opacity:.92;
+  transition:opacity .24s var(--ease),transform .24s var(--ease),color .24s var(--ease)}
+.zoom-btn svg{width:15px;height:15px}
+.zoomwrap:hover .zoom-btn,.zoom-btn:hover,.zoom-btn:focus-visible{opacity:1;transform:scale(1.07);color:var(--accent)}
+
+.lb{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:16px;padding:clamp(18px,4vw,52px);
+  background:rgba(8,9,12,.9);backdrop-filter:blur(7px);
+  opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease)}
+.lb.on{opacity:1;visibility:visible}
+.lb img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:var(--r-sm);
+  background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.55);
+  transform:scale(.975);transition:transform .32s var(--ease)}
+.lb.on img{transform:scale(1)}
+.lb-cap{text-align:center;color:#D7D9DE;font-size:14px;line-height:1.55;max-width:74ch}
+.lb-cap b{display:block;color:#fff;font-weight:500;margin-bottom:3px}
+.lb-x{position:absolute;top:clamp(14px,2vw,22px);right:clamp(14px,2vw,22px);
+  width:40px;height:40px;border-radius:999px;display:grid;place-items:center;color:#fff;
+  border:1px solid rgba(255,255,255,.3);transition:background-color .22s var(--ease)}
+.lb-x:hover{background:rgba(255,255,255,.14)}
+.lb-x svg{width:17px;height:17px}
+@media (prefers-reduced-motion:reduce){.lb,.lb img,.zoom-btn{transition:none}.lb img{transform:none}}
+
+/* caveat */
+.caveat{margin-top:clamp(28px,3vw,40px);padding:20px 22px;border-left:2px solid var(--accent);
+  background:var(--raise);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:15px;line-height:1.62;color:var(--ink-2)}
+.caveat b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);font-weight:400;margin-bottom:8px}
+
+/* lessons */
+.lessons{border-top:1px solid var(--line)}
+.lesson{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(16px,3vw,44px);
+  padding:24px 0;border-bottom:1px solid var(--line-2);align-items:start}
+.lesson h3{font-size:17px;font-weight:600;letter-spacing:-.022em;line-height:1.3}
+.lesson p{font-size:15px;line-height:1.64;color:var(--muted)}
+
+/* next */
+.nextnav{margin-top:clamp(64px,8vw,110px);padding:clamp(30px,3.6vw,46px) 0 clamp(50px,6vw,80px);
+  border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.nextnav .lbl{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.15em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:10px}
+.nextnav a.big{font-size:clamp(24px,3.4vw,44px);font-weight:600;letter-spacing:-.038em;
+  display:inline-flex;align-items:center;gap:14px;transition:color .25s var(--ease);
+  white-space:nowrap}   /* hyphenated names like Flint-Link must not break across lines */
+/* the arrow carries no intrinsic size, so as a flex item it shrinks to nothing
+   once the name refuses to wrap — size it in em so it tracks the name. */
+.nextnav a.big svg{flex:0 0 auto;width:.58em;height:.58em}
+.nextnav a.big:hover{color:var(--accent)}
+.nextnav .r{text-align:right}
+
+@media(max-width:980px){
+  .gal{grid-template-columns:repeat(3,1fr)}
+  .prose,.side{grid-column:1/-1}
+  .side{margin-top:8px}
+  .meta{grid-template-columns:repeat(2,1fr)}
+  .meta div{padding-left:24px}
+  .meta div:nth-child(2n+1){padding-left:0}
+  .outs{grid-template-columns:repeat(2,1fr)}
+  .dec .k,.dec .b{grid-column:1/-1}
+  .dec .k{padding-top:0;margin-bottom:12px}
+}
+@media(max-width:720px){
+  .methods{grid-template-columns:1fr}
+  .gal{grid-template-columns:repeat(2,1fr)}
+  .lesson{grid-template-columns:1fr;gap:8px}
+  .ch-head{grid-template-columns:1fr}
+  .ch-head h2{grid-column:1;margin-top:10px}
+  .ch-head .ttl{padding-top:0;margin-top:6px}
+  /* a wide dashboard screenshot cropped to a phone-width box is unreadable —
+     letterbox it against the surface instead of cropping the interface away */
+  .chero-fig img{object-fit:contain;background:var(--raise)}
+  .chero-fig img{aspect-ratio:16/9}
+  .nextnav{flex-direction:column;align-items:flex-start}
+  .nextnav .r{text-align:left}
+}
+@media(max-width:480px){
+  .gal{grid-template-columns:1fr}
+  .gal img{aspect-ratio:auto;padding:0}
+  .meta,.outs{grid-template-columns:1fr}
+  .meta div{padding-left:0}
+  .find{grid-template-columns:1fr}
+  .find p{grid-column:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="index.html" aria-label="Deep Vyas — home"><img class="mark" src="d-logo.svg" alt="" width="28" height="28"> Deep Vyas</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-act">
+      <button class="icon-btn" id="theme" aria-label="Switch colour theme">
+        <svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg>
+      </button>
+      <a class="nav-cv" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">CV &nearr;</a>
+    </div>
+    <div class="prog" id="prog" aria-hidden="true"></div>
+  </div>
+</header>
+<main id="top">
+<div class="back wrap"><a href="index.html#work">&larr; All work</a></div>
+<header class="chero wrap">
+  <div class="kick rv"><span class="label">Universal Biosensors</span><span class="dot"></span><span class="label">Mobile · iOS &amp; Android</span><span class="dot"></span><span class="label">6 months, 2022–23</span></div>
+  <h1 class="rv">A daily companion for a diabetic pet, under constraints that <em>ruled out most design choices</em>.</h1>
+  <p class="sum rv">PetTrackr is Universal Biosensors' companion app for a Bluetooth glucose analyser, used by people managing a diabetic cat or dog. I designed it end to end: 100+ screens across iOS and Android in six months. Two constraints shaped nearly every decision — the analyser holds only seven days of readings, and owners log at 7am with one hand on a restless animal.</p>
+  <dl class="meta rv"><div><dt>Role on this project</dt><dd>Lead UI/UX Designer · Only designer, research to handoff</dd></div><div><dt>Project type</dt><dd>iOS and Android app, hardware-connected</dd></div><div><dt>Domain</dt><dd>Pet health</dd></div><div><dt>Timeline</dt><dd>6 months (2022–2023)</dd></div></dl>
+  <figure class="chero-fig rv"><img src="img/pettrackr-hero.jpg" alt="PetTrackr app screens for logging and reviewing glucose readings" width="1000" height="562" loading="eager" decoding="async"><figcaption>Illustrative data.</figcaption></figure>
+</header>
+<section class="ch wrap" id="problem">
+  <div class="ch-head rv"><span class="idx">01</span><span class="ttl">The problem</span><h2>Managing a diabetic pet ran on paper and memory.</h2></div>
+  <div class="ch-body rv"><div class="prose"><p>Rather than ask about pain points, I asked owners to walk me through yesterday morning from start to finish. What came back was a routine held together by notebooks, phone alarms and remembering.</p><p><strong>And one constraint that couldn't be designed around:</strong> seven days of analyser memory. Miss a week of syncing and the data is simply gone.</p></div><div class="side"><div class="signals"><div class="signal"><p class="n">7 days</p><p class="c">Analyser memory — miss a week of syncing and the data is gone</p></div><div class="signal"><p class="n">7 steps</p><p class="c">In the onboarding I designed first, which 40% never finished</p></div><div class="signal"><p class="n">10</p><p class="c">In-home interviews, plus a 14-day diary study</p></div></div></div></div>
+  <figure class="art wide rv"><img src="img/pet-constraint.jpg" alt="The constraint that shaped everything: the analyser holds seven days. At nine days without a sync, two days of readings are already gone." width="1600" height="537" loading="lazy" decoding="async"><figcaption>The constraint that shaped everything: the analyser holds seven days. At nine days without a sync, two days of readings are already gone.</figcaption></figure>
+  <div class="finds rv"><div class="find"><span class="n">01</span><h3>Seven days of analyser memory</h3><p>A hardware limit, not a preference. Syncing, reminders and device status all had to be built around a window that closes.</p></div><div class="find"><span class="n">02</span><h3>Logging happens one-handed, at 7am</h3><p>With a restless animal in the other hand. Any flow assuming a calm, two-handed user fails in the room where it gets used.</p></div><div class="find"><span class="n">03</span><h3>A number means nothing without a range</h3><p>A reading of 140 tells you nothing unless you know the pet's range — and owners are not clinicians.</p></div><div class="find"><span class="n">04</span><h3>Generic alarms get dismissed</h3><p>Every diary participant had abandoned generic phone alarms by the end of week one. The ones managing several pets on different schedules gave up first.</p></div></div>
+</section>
+<section class="ch wrap" id="research">
+  <div class="ch-head rv"><span class="idx">02</span><span class="ttl">Research</span><h2>Ten homes and a fourteen-day diary study.</h2></div>
+  <div class="ch-body rv"><div class="prose"><p>In-home interviews put the routine in context. The diary study caught what interviews never do: what people quietly stop doing in week two.</p></div></div>
+  <div class="methods rv"><div class="method"><span class="k">Discover</span><h3>10 in-home interviews</h3><p>Walking through yesterday morning in the actual kitchen, with the actual animal.</p></div><div class="method"><span class="k">Discover</span><h3>14-day diary study</h3><p>Where the generic-alarm failure showed up — not on day one, but by the end of week one.</p></div><div class="method"><span class="k">Validate</span><h3>3 rounds of usability testing</h3><p>Round 1 is where my own onboarding design failed, at 60% completion.</p></div><div class="method"><span class="k">Specialist</span><h3>Vet consultation</h3><p>Brought in at week six, and it reshaped the reporting feature.</p></div></div>
+  <figure class="art wide rv"><img src="img/pet-research.jpg" alt="7 of 10 owners were tracking on paper, phone notes or memory." width="1600" height="405" loading="lazy" decoding="async"><figcaption>7 of 10 owners were tracking on paper, phone notes or memory.</figcaption></figure>
+  <blockquote class="quote rv"><p>&ldquo;I can never remember if I've done the reading. I have 3 dogs and they're all on different schedules.&rdquo;</p><cite>Pet owner · In-home interview</cite></blockquote>
+</section>
+<section class="ch wrap" id="strategy">
+  <div class="ch-head rv"><span class="idx">03</span><span class="ttl">Strategy</span><h2>Design for 7am, one hand, and a person who is frightened.</h2></div>
+  <div class="ch-body rv"><div class="prose"><p>I set four testable targets before the first wireframe. The call that mattered most came after Round 1: the problem wasn't the interface, it was the emotional state. Someone who has just learned their pet is diabetic doesn't want setup. They want reassurance the animal will be okay.</p></div><div class="side"><ol class="crit"><li>Onboarding completion of at least 85% in usability testing.</li><li>Logging a single reading in under 30 seconds, one-handed.</li><li>A chart a non-clinical owner can interpret without training.</li></ol></div></div>
+</section>
+<section class="ch wrap" id="design">
+  <div class="ch-head rv"><span class="idx">04</span><span class="ttl">Design</span><h2>The decisions, and what each one cost.</h2></div>
+  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 01 · Onboarding</span><div class="b"><h3>Cut onboarding to one first win</h3><p>I designed a seven-step onboarding and I believed in it. In Round 1, only 60% finished. The rebuild came down to one question: what single action makes the app feel worth it? Logging one reading and seeing it land on the chart. Completion reached 89%. <strong>Every step of the original had a reason — and someone who leaves at step 4 doesn't care how well steps 5 to 7 were designed.</strong></p><figure class="art"><img src="img/pet-decision1.jpg" alt="Before: seven onboarding steps, 60% completed. After: three skippable intros and one first win — 89%." width="1600" height="870" loading="lazy" decoding="async"><figcaption>Before: seven onboarding steps, 60% completed. After: three skippable intros and one first win — 89%.</figcaption></figure></div></div></article>
+  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 02 · Logging</span><div class="b"><h3>Make logging a confirmation, not data entry</h3><p>The active pet, date and time come pre-filled, so the app assumes the most likely answer instead of asking for it. One reading, under 30 seconds, one hand.</p><figure class="art"><img src="img/pet-decision2.jpg" alt="The Add Blood Glucose screen." width="1600" height="1061" loading="lazy" decoding="async"><figcaption>The Add Blood Glucose screen.</figcaption></figure></div></div></article>
+  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 03 · Charts</span><div class="b"><h3>Let the chart say what the number means</h3><p>Colour zones for low, in range and high cut time-to-understand from 22 seconds to 7.</p><figure class="art"><img src="img/pet-decision3.jpg" alt="Before: a list of readings with no context. After: colour zones." width="1600" height="1263" loading="lazy" decoding="async"><figcaption>Before: a list of readings with no context. After: colour zones.</figcaption></figure></div></div></article>
+  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 04 · Reminders</span><div class="b"><h3>Reminders specific to the pet and the task</h3><p>Each pet carries its own schedule by type, and notifications name the pet and what's due.</p><figure class="art"><img src="img/pet-decision4.jpg" alt="Before: a generic 7:00 AM phone alarm. After: per-pet reminders that name the pet and the task." width="1600" height="1031" loading="lazy" decoding="async"><figcaption>Before: a generic 7:00 AM phone alarm. After: per-pet reminders that name the pet and the task.</figcaption></figure></div></div></article>
+  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 05 · Reports</span><div class="b"><h3>Build reports for the vet's inbox, not for the app</h3><p>Vets wanted two-week trends before adjusting insulin, and most clinics don't use shared apps. Owners pick a time frame and share a PDF — which is how the clinic actually works.</p><figure class="art"><img src="img/pet-decision5.jpg" alt="Reports: 7, 14 or 30 days, or a year." width="1600" height="795" loading="lazy" decoding="async"><figcaption>Reports: 7, 14 or 30 days, or a year.</figcaption></figure></div></div></article>
+  <div class="gal rv"><figure><img src="img/pet-profile.jpg" alt="PetTrackr pet profile setup" width="646" height="1400" loading="lazy" decoding="async"><figcaption><b>Pet profile</b>Species, breed, glucose range and insulin dose, set once per pet — what makes every later reading readable.</figcaption></figure><figure><img src="img/pet-logbook.jpg" alt="PetTrackr logbook" width="646" height="1400" loading="lazy" decoding="async"><figcaption><b>Logbook</b>Every reading, meal, insulin dose and exercise for the day, per pet.</figcaption></figure><figure><img src="img/pet-myanalyzer.jpg" alt="PetTrackr analyser status screen" width="646" height="1400" loading="lazy" decoding="async"><figcaption><b>My analysers</b>Last sync and connection state per analyser. One is nine days out — past the seven-day memory, so that data is gone.</figcaption></figure><figure><img src="img/pet-states.jpg" alt="PetTrackr empty and error states" width="1400" height="950" loading="lazy" decoding="async"><figcaption><b>States</b>Designed alongside the main flows, because a hardware-connected app spends real time in them.</figcaption></figure></div>
+</section>
+<section class="ch wrap" id="impact">
+  <div class="ch-head rv"><span class="idx">05</span><span class="ttl">Impact</span><h2>89% completion, against an 85% target.</h2></div>
+  <div class="ch-body rv"><div class="prose"><p>The pairing guide came out of the same testing: four of five testers failed analyser pairing in Round 1, before any step-by-step guide existed.</p></div></div>
+  <div class="outs rv" style="margin-top:clamp(30px,3.6vw,46px)"><div class="out"><p class="n">60 → 89%</p><p class="c">Onboarding completion after the first-win rebuild</p></div><div class="out"><p class="n">3–5 min → &lt;30s</p><p class="c">To log a single glucose reading</p></div><div class="out"><p class="n">22 → 7 sec</p><p class="c">Chart comprehension with colour zones</p></div></div>
+  <figure class="art wide rv"><img src="img/pet-outcomes.jpg" alt="Results against the four targets." width="1600" height="576" loading="lazy" decoding="async"><figcaption>Results against the four targets.</figcaption></figure>
+</section>
+<section class="ch wrap" id="reflection">
+  <div class="ch-head rv"><span class="idx">06</span><span class="ttl">Reflection</span><h2>What it taught me.</h2></div>
+  <div class="lessons rv"><div class="lesson"><h3>Being right about the details and wrong about the priorities is still a failure</h3><p>Every step of the seven-step onboarding had a good reason behind it. None of that mattered to the people who left at step four.</p></div><div class="lesson"><h3>The interface wasn't the problem — the emotional state was</h3><p>It took a diary study, not a usability metric, to show that people who had just learned their pet was diabetic wanted reassurance before setup.</p></div></div>
+  <p class="caveat rv"><b>What I&rsquo;d do differently</b>Treat vets as users from week one. I brought them in at week six as specialist input, and it cost two sprints of rework on reporting.</p>
+</section>
+<nav class="nextnav wrap" aria-label="More work">
+  <div><span class="lbl">Previous</span><a class="big" href="flintlink.html">Flint-Link</a></div>
+  <div class="r"><span class="lbl">Next case study</span><a class="big" href="kidneylink.html">KidneyLink <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</nav>
+</main>
+<footer>
+<div class="wrap foot-in"><span>&copy; 2026 Deep Vyas &mdash; PetTrackr &middot; Universal Biosensors</span><a href="index.html#contact">Have a role in mind? &rarr;</a><a href="#top">Back to top &uarr;</a></div></footer>
+<script src="js/system.js" defer></script>
+</body>
+</html>

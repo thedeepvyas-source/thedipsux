@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Deep Vyas — Senior UI/UX Designer</title>
+<meta name="description" content="Deep Vyas, Senior UI/UX Designer and design lead. 10+ years making complex B2B enterprise systems and B2C consumer products feel obvious — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce.">
+<meta name="theme-color" content="#FCFCFD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0B0D" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="Deep Vyas — Senior UI/UX Designer">
+<meta property="og:description" content="10+ years across B2B enterprise systems and B2C consumer products — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce. Measured in deltas, not screenshots.">
+<meta property="og:type" content="website">
+<link rel="icon" href="d-logo.svg">
+<script>/* set theme before paint — no flash */
+try{var t=localStorage.getItem("dv26-theme");
+document.documentElement.setAttribute("data-theme",t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/system.css">
+<style>
+/* ── 5. Hero ───────────────────────────────────────────────────── */
+/* Sized so the headline AND the metric rail clear the fold at 1440x900. */
+/* the hero owns the first screen: Selected work begins below the fold.
+   svh (not vh) so mobile browser chrome doesn't push it off. */
+.hero{position:relative;padding-top:clamp(22px,3vw,40px);padding-bottom:clamp(12px,1.6vh,22px);
+  min-height:calc(100vh - var(--nav-h));
+  min-height:calc(100svh - var(--nav-h));
+  display:flex;flex-direction:column;justify-content:flex-start;gap:0}
+/* The block sits just above centre: display type this large reads as low
+   when it is optically centred, so the trailing spacer takes the surplus. */
+.hero::before{content:"";flex:1 1 0}
+.hero::after{content:"";flex:1.2 1 0}
+.hero-say{margin-top:clamp(26px,3.4vw,42px)}
+.hero-top{flex:0 0 auto}
+.hero-h{font-size:clamp(32px,5.2vw,72px);font-weight:600;line-height:1.02;letter-spacing:-.042em;
+  max-width:21ch;text-wrap:balance}
+.hero-h em{font-family:var(--display);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--accent)}
+.hero-say{flex:0 0 auto}
+.hero-say p{font-size:clamp(16px,1.3vw,18px);line-height:1.6;color:var(--muted);max-width:62ch}
+.hero-say strong{color:var(--ink);font-weight:500}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(22px,2.6vw,32px)}
+
+/* Selected work opens directly below the fold, so it takes a much smaller
+   top padding than --sec: the hero's trailing whitespace already separates them. */
+#work{padding-top:clamp(20px,2.4vw,36px);--pad-top:clamp(20px,2.4vw,36px)}
+
+/* ── 6. Selected work — a typographic index ────────────────────
+   Six rows in a ledger on the left; the hovered or focused row's
+   screenshot sticks alongside on the right. Below 900px the same
+   <figure> falls in beneath its own row — one set of images, no
+   duplication, and nothing important depends on hover. */
+.idx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);
+  grid-template-rows:repeat(6,auto);column-gap:clamp(30px,4.4vw,72px)}
+
+.idx-row{grid-column:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;
+  gap:6px clamp(14px,2vw,26px);align-items:baseline;position:relative;
+  padding:clamp(22px,2.5vw,32px) 0;border-bottom:1px solid var(--line-2)}
+/* the wash sits on a pseudo-element so the row's own box — and therefore the
+   hairline rules between rows — stay aligned with the rest of the grid */
+.idx-row::after{content:"";position:absolute;left:-22px;right:-22px;top:0;bottom:0;z-index:-1;
+  background:var(--accent-soft);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  opacity:0;transition:opacity .34s var(--ease)}
+.idx-row.is-on::after{opacity:1}
+.idx-row::before{content:"";position:absolute;left:-22px;top:-1px;bottom:-1px;width:2px;
+  background:var(--accent);transform:scaleY(0);transform-origin:center;
+  transition:transform .38s var(--ease)}
+.idx-row.is-on::before{transform:scaleY(1)}
+.idx-row .ix{grid-column:1;grid-row:1;font-family:var(--mono);font-size:var(--t-label);
+  letter-spacing:.12em;color:var(--faint);transition:color .25s var(--ease)}
+.idx-row .nm{grid-column:2;grid-row:1;font-size:clamp(24px,2.9vw,38px);font-weight:600;
+  letter-spacing:-.038em;line-height:1.04;transition:color .25s var(--ease)}
+.idx-row .d{grid-column:3;grid-row:1;justify-self:end;font-family:var(--mono);font-weight:500;
+  font-size:clamp(15px,1.6vw,21px);letter-spacing:-.04em;white-space:nowrap;color:var(--ink)}
+.idx-row .d b{color:var(--accent);font-weight:500}
+.idx-row .meta{grid-column:2;grid-row:2;display:flex;flex-direction:column;gap:5px;margin-top:2px}
+.idx-row .co{font-family:var(--display);font-style:italic;font-size:16.5px;color:var(--muted)}
+.idx-row .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.idx-row .dc{grid-column:3;grid-row:2;justify-self:end;text-align:right;font-family:var(--mono);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.idx-row.is-on .ix{color:var(--accent)}
+.idx-row.is-on .nm{color:var(--accent-tint)}
+/* the wash lightens the effective background, so the faintest label is
+   lifted a step to stay above 4.5:1 — and it reads as a nice hover detail */
+.idx-row.is-on .cat{color:var(--muted)}
+
+.idx-fig{grid-column:2;grid-row:1/-1;position:sticky;top:104px;align-self:start;margin:0;
+  opacity:0;visibility:hidden;transition:opacity .42s var(--ease),visibility .42s var(--ease)}
+.idx-fig.on{opacity:1;visibility:visible}
+.idx-fig img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;
+  border-radius:var(--r);border:1px solid var(--line-2);background:var(--raise)}
+.idx-fig figcaption{padding-top:18px}
+.idx-fig .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent)}
+.idx-fig .pb{margin-top:12px;font-size:16px;line-height:1.55;color:var(--ink-2);max-width:46ch}
+.pv{margin-top:16px;padding-top:15px;border-top:1px solid var(--line-2)}
+.pv-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pv-nums{font-family:var(--mono);font-weight:500;font-size:clamp(20px,2.1vw,27px);letter-spacing:-.045em;
+  display:inline-flex;align-items:baseline;gap:8px;white-space:nowrap;color:var(--ink)}
+.pv-from{color:var(--muted)}
+.pv-arw{color:var(--accent);font-size:.78em;transform:translateY(-1px)}
+.pv-tag{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.pv-cap{margin-top:9px;font-size:14px;line-height:1.55;color:var(--muted);max-width:48ch}
+@media(max-width:480px){.pv-head{flex-wrap:wrap;gap:8px}}
+.idx-fig .ff{margin-top:15px;padding-top:13px;border-top:1px solid var(--line-2);
+  font-size:14px;line-height:1.58;color:var(--muted);max-width:50ch}
+.idx-fig .ff b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--faint);font-weight:400;margin-bottom:5px}
+.idx-fig .go{margin-top:18px}
+
+/* ── 9. About ─────────────────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
+.about-body{grid-column:1/7}
+.about-body p{font-size:16.5px;line-height:1.66;color:var(--muted)}
+.about-body p+p{margin-top:1em}
+.about-grid .pull{grid-column:8/-1;margin:0;font-family:var(--display);font-style:italic;
+  font-size:clamp(22px,2.4vw,30px);line-height:1.26;letter-spacing:-.015em;color:var(--ink);
+  padding-left:20px;border-left:2px solid var(--accent)}
+.cv-list{margin-top:clamp(44px,5vw,72px);border-top:1px solid var(--line)}
+.cv-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,2.6fr) auto;gap:clamp(16px,3vw,40px);
+  align-items:baseline;padding:19px 0;border-bottom:1px solid var(--line-2);transition:color .25s var(--ease)}
+/* the last row's rule would sit a blank 88px above the Contact section's own
+   top rule — two hairlines with nothing between them, so drop this one */
+.cv-row:last-child{border-bottom:0}
+.cv-row:hover{color:var(--accent)}
+.cv-row .r{font-size:16px;font-weight:500;letter-spacing:-.02em}
+.cv-row .o{font-size:15px;color:var(--muted)}
+.cv-row .y{font-family:var(--mono);font-size:14px;color:var(--faint);white-space:nowrap}
+.cv-row:hover .o,.cv-row:hover .y{color:inherit}
+
+/* ── 9b. Mentoring ─────────────────────────────────────────────
+   Same parts as the rest of the page: a divider grid for the numbers, the
+   cv-row rhythm for the badges, and the About pull-quote for the testimonial. */
+.ment-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
+.ment-body{grid-column:1/6}
+.ment-body p{font-size:16.5px;line-height:1.66;color:var(--muted)}
+.ment-body p strong{color:var(--ink);font-weight:500}
+.ment-body .btn{margin-top:clamp(22px,2.6vw,30px)}
+.ment-side{grid-column:7/-1;min-width:0}
+.ment-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
+.ment-num{background:var(--bg);padding:clamp(18px,2vw,24px)}
+.ment-num .n{font-family:var(--mono);font-weight:500;font-size:clamp(21px,2.4vw,30px);
+  letter-spacing:-.045em;word-spacing:-.2em;color:var(--accent);line-height:1.05}
+.ment-num .c{margin-top:9px;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.badges{margin-top:clamp(22px,2.6vw,32px);border-top:1px solid var(--line-2)}
+.badge{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:baseline;
+  padding:13px 0;border-bottom:1px solid var(--line-2)}
+.badge:last-child{border-bottom:0}
+.badge .t{font-size:15px;font-weight:500;letter-spacing:-.018em}
+.badge .d{font-family:var(--mono);font-size:13px;color:var(--faint);white-space:nowrap}
+.testi{margin:clamp(42px,5vw,70px) 0 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap)}
+.testi blockquote{grid-column:2/10;margin:0;font-family:var(--display);font-style:italic;
+  font-size:clamp(20px,2.2vw,28px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);
+  padding-left:20px;border-left:2px solid var(--accent)}
+.testi figcaption{grid-column:2/10;margin-top:15px;padding-left:22px;font-family:var(--mono);
+  font-size:12.5px;letter-spacing:.06em;color:var(--faint)}
+.testi figcaption b{color:var(--ink-2);font-weight:500}
+@media(max-width:980px){
+  .ment-body,.ment-side{grid-column:1/-1}
+  .ment-side{margin-top:clamp(26px,3.4vw,36px)}
+  .testi blockquote,.testi figcaption{grid-column:1/-1}
+}
+@media(max-width:620px){.ment-nums{grid-template-columns:1fr}}
+
+/* ── 10. Contact ──────────────────────────────────────────────── */
+.contact{padding-top:var(--sec);padding-bottom:clamp(56px,6vw,88px)}
+.contact-in{border-top:1px solid var(--line);padding-top:clamp(38px,4.6vw,66px)}
+#contact{--pad-top:calc(var(--sec) + clamp(38px,4.6vw,66px))}   /* .contact + .contact-in */
+/* the statement runs at --t-statement, so its line box carries far more space
+   above the cap than a 32px lede does; pull the margin back to keep the optical
+   gap to the heading the same as the other sections */
+.contact .sec-head .lede{font-size:var(--t-statement);font-weight:600;letter-spacing:-.04em;
+  line-height:1.02;max-width:16ch;margin-top:2px}
+.contact .sec-head .lede em{font-family:var(--display);font-style:italic;font-weight:400;
+  color:var(--accent);letter-spacing:-.01em}
+.contact-sub{margin-top:18px;font-size:16.5px;line-height:1.58;color:var(--muted);max-width:52ch}
+.mail{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(26px,3.2vw,40px);
+  font-family:var(--mono);font-size:clamp(17px,2.3vw,28px);letter-spacing:-.035em;color:var(--ink);
+  padding-bottom:9px;border-bottom:1px solid var(--line);transition:color .25s var(--ease),border-color .25s var(--ease)}
+.mail:hover{color:var(--accent);border-color:var(--accent)}
+.mail .cp{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;padding:5px 11px;transition:all .22s var(--ease)}
+.mail:hover .cp{color:var(--accent);border-color:var(--accent-line)}
+.links{margin-top:clamp(34px,4vw,56px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
+  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
+.link{background:var(--bg);padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:7px;
+  transition:background-color .3s var(--ease)}
+.link:hover{background:var(--surface)}
+.link .t{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:500;letter-spacing:-.02em}
+.link .t svg{width:14px;height:14px;color:var(--muted);transition:transform .3s var(--ease),color .3s var(--ease)}
+.link:hover .t svg{transform:translate(3px,-3px);color:var(--accent)}
+.link .d{font-size:14px;color:var(--muted)}
+
+/* ── 11. Responsive ───────────────────────────────────────────── */
+@media(max-width:1080px){
+  .links{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  .about-body,.about-grid .pull{grid-column:1/-1}
+  .about-grid .pull{margin-top:clamp(22px,3vw,32px)}
+  /* once the card stacks, flex-basis governs HEIGHT — reset it or the media
+     box stretches and the image floats in a void */
+  /* the preview stops being a preview and becomes the row's own image */
+  .idx{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  .idx-row{border-bottom:0;padding-bottom:14px}
+  .idx-row::before,.idx-row::after{display:none}
+  .idx-fig{grid-column:1;grid-row:auto;position:static;opacity:1;visibility:visible;
+    padding-bottom:clamp(34px,5.5vw,52px);margin-bottom:clamp(34px,5.5vw,52px);
+    border-bottom:1px solid var(--line-2)}
+  .idx-fig:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+}
+@media(max-width:760px){
+  .idx-fig .pb,.idx-fig .ff{max-width:none}
+  .sec-head{grid-template-columns:minmax(0,1fr);gap:0}
+  .sec-head .idx{grid-column:1;grid-row:1;padding-top:0;margin-bottom:10px}
+  .sec-head h2{grid-column:1;grid-row:2}
+  .sec-head .lede{grid-column:1;grid-row:3;max-width:none}
+  .sec-head .aside{grid-column:1;grid-row:4;align-self:start;margin-top:14px;max-width:none}
+  .cv-row{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
+  .cv-row .o{grid-column:1/-1;order:3}
+  .idx-fig img{aspect-ratio:16/11;object-fit:contain;background:var(--raise)}
+}
+@media(max-width:480px){
+  .links{grid-template-columns:minmax(0,1fr)}
+  .mail{flex-wrap:wrap;gap:10px}
+  .idx-row{grid-template-columns:auto minmax(0,1fr)}
+  .idx-row .nm{grid-column:2;grid-row:1}
+  .idx-row .d{grid-column:2;grid-row:2;justify-self:start;margin-top:8px}
+  .idx-row .dc{grid-column:2;grid-row:3;justify-self:start;text-align:left;margin-top:3px}
+  .idx-row .meta{grid-column:2;grid-row:4;margin-top:11px}
+}
+@media print{.nav{display:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+
+<!-- ══ Nav ══ -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Deep Vyas — home"><img class="mark" src="d-logo.svg" alt="" width="28" height="28"> Deep Vyas</a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#work" data-nav>Work</a>
+      <a href="#about" data-nav>About</a>
+      <a href="#mentoring" data-nav>Mentoring</a>
+      <a href="#contact" data-nav>Contact</a>
+    </nav>
+    <div class="nav-act">
+      <button class="icon-btn" id="theme" aria-label="Switch colour theme">
+        <svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg>
+      </button>
+      <a class="nav-cv" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">CV ↗</a>
+    </div>
+    <div class="prog" id="prog" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══ 01 · Hero ══ -->
+<section class="hero wrap" aria-labelledby="hero-h">
+
+  <div class="hero-top">
+  <h1 class="hero-h rv" id="hero-h">I ask <em>boring</em> questions until the product gets simple.</h1>
+  </div>
+
+    <div class="hero-say rv">
+      <p>Lead designer for complex <strong>B2B enterprise systems and B2C consumer products</strong> — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce. 10+ years, mostly in regulated, messy systems.</p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#work">See the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">View CV</a>
+      </div>
+    </div>
+</section>
+
+<!-- ══ 02 · Selected work ══ -->
+<section class="sec wrap" id="work" aria-labelledby="work-h">
+  <div class="sec-head rv">
+    <span class="idx">02</span>
+    <h2 id="work-h">Selected work</h2>
+    <p class="lede">Six products. Each one is a delta.</p>
+  </div>
+
+  <div class="idx rv" id="idx">
+  <a class="idx-row is-on" href="teleconsult.html" data-i="0">
+    <span class="ix">01</span>
+    <span class="nm">myAster</span>
+    <span class="d"><b>297</b></span>
+    <span class="meta"><span class="co">Aster DM</span><span class="cat">Native app · Six services · Team of four</span></span>
+    <span class="dc">screens across six services</span>
+  </a>
+  <figure class="idx-fig on" data-i="0">
+    <img src="img/myaster-thumb.jpg" width="990" height="618" alt="myAster healthcare app" loading="eager" decoding="async">
+    <figcaption>
+      <span class="k">Native app · Six services · Team of four</span>
+      <p class="pb">Six services, six accounts, six checkouts — and a patient who should only have to set up their family, ID and insurance once.</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-from">6 services</span><span class="pv-arw">→</span><span class="pv-to">1</span></span><span class="pv-tag">Delivered</span></div>
+        <p class="pv-cap">One account, one checkout and one identity model serving all six services.</p>
+      </div>
+      <p class="ff"><b>What failed first</b>[placeholder — what you tried first on myAster]</p>
+      <a class="go" href="teleconsult.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  <a class="idx-row" href="flintlink.html" data-i="1">
+    <span class="ix">02</span>
+    <span class="nm">Flint-Link</span>
+    <span class="d"><b>3</b> of 4</span>
+    <span class="meta"><span class="co">Flint Group</span><span class="cat">B2B portal · Self-serve</span></span>
+    <span class="dc">pilot orgs dropped spreadsheets</span>
+  </a>
+  <figure class="idx-fig" data-i="1">
+    <img src="img/flintlink-thumb.jpg" width="990" height="618" alt="Flint-Link supplier portal" loading="lazy" decoding="async">
+    <figcaption>
+      <span class="k">B2B portal · Self-serve</span>
+      <p class="pb">The portal was organised around documents; customers think in orders.</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-to">6–10 hrs/week</span></span><span class="pv-tag">Production</span></div>
+        <p class="pv-cap">Account manager time returned, per person, previously spent retrieving documents.</p>
+      </div>
+      <p class="ff"><b>What failed first</b>I built a document-type IA because every competitor had one. It fell apart the first time someone looked for a document tied to a delivery.</p>
+      <a class="go" href="flintlink.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  <a class="idx-row" href="pettrackr.html" data-i="2">
+    <span class="ix">03</span>
+    <span class="nm">PetTrackr</span>
+    <span class="d">22s <b>→</b> 7s</span>
+    <span class="meta"><span class="co">Universal Biosensors</span><span class="cat">Mobile · iOS &amp; Android · Hardware-connected</span></span>
+    <span class="dc">chart comprehension</span>
+  </a>
+  <figure class="idx-fig" data-i="2">
+    <img src="img/pettrackr-thumb.jpg" width="990" height="618" alt="PetTrackr mobile app" loading="lazy" decoding="async">
+    <figcaption>
+      <span class="k">Mobile · iOS &amp; Android · Hardware-connected</span>
+      <p class="pb">The analyser holds seven days of readings. Miss a week of syncing and the data is gone.</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-from">3–5 min</span><span class="pv-arw">→</span><span class="pv-to">&lt;30s</span></span><span class="pv-tag">Usability test</span></div>
+        <p class="pv-cap">Time to log one glucose reading, one-handed, with the pet and time pre-filled.</p>
+      </div>
+      <p class="ff"><b>What failed first</b>I designed a seven-step onboarding and believed in it. Most people never reached the end.</p>
+      <a class="go" href="pettrackr.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  <a class="idx-row" href="kidneylink.html" data-i="3">
+    <span class="ix">04</span>
+    <span class="nm">KidneyLink</span>
+    <span class="d"><b>3×</b></span>
+    <span class="meta"><span class="co">U.S. Renal Care</span><span class="cat">Clinical · Enterprise UX</span></span>
+    <span class="dc">faster morning review</span>
+  </a>
+  <figure class="idx-fig" data-i="3">
+    <img src="img/kidneylink-thumb.jpg" width="990" height="618" alt="KidneyLink clinical portal" loading="lazy" decoding="async">
+    <figcaption>
+      <span class="k">Clinical · Enterprise UX</span>
+      <p class="pb">Patient data sat across disconnected systems and arrived without context, so risk was discovered after admission instead of before it.</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-from">38%</span><span class="pv-arw">→</span><span class="pv-to">91%</span></span><span class="pv-tag">Usability test</span></div>
+        <p class="pv-cap">Comprehension on the eGFR task, after one plain-language line replaced the detailed chart.</p>
+      </div>
+      <p class="ff"><b>What failed first</b>My first design failed round one of testing.</p>
+      <a class="go" href="kidneylink.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  <a class="idx-row" href="rxagile.html" data-i="4">
+    <span class="ix">05</span>
+    <span class="nm">RxAgile</span>
+    <span class="d"><b>4.6</b>/5</span>
+    <span class="meta"><span class="co">Pharmacy Benefits</span><span class="cat">PBM · Greenfield · Complex domain</span></span>
+    <span class="dc">operator satisfaction</span>
+  </a>
+  <figure class="idx-fig" data-i="4">
+    <img src="img/rxagile-thumb.jpg" width="990" height="742" alt="RxAgile pharmacy benefits platform" loading="lazy" decoding="async">
+    <figcaption>
+      <span class="k">PBM · Greenfield · Complex domain</span>
+      <p class="pb">A pharmacy-benefits administration platform built from scratch, in a domain I had to learn before I could design anything in it. Errors measured from [baseline].</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-to">60% fewer</span></span><span class="pv-tag">Production</span></div>
+        <p class="pv-cap">Client onboarding errors after launch, measured against [baseline].</p>
+      </div>
+      <p class="ff"><b>What failed first</b>Six weeks and eight interviews in, one sentence revealed an entire user type I had designed nothing for.</p>
+      <a class="go" href="rxagile.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  <a class="idx-row" href="aip.html" data-i="5">
+    <span class="ix">06</span>
+    <span class="nm">Apex Insights Portal</span>
+    <span class="d"><b>~$100k</b></span>
+    <span class="meta"><span class="co">LTC Analytics</span><span class="cat">Analytics · 0 → 1 · 126 screens</span></span>
+    <span class="dc">won pre-production</span>
+  </a>
+  <figure class="idx-fig" data-i="5">
+    <img src="img/apex-thumb.jpg" width="990" height="618" alt="Apex Insights analytics portal" loading="lazy" decoding="async">
+    <figcaption>
+      <span class="k">Analytics · 0 → 1 · 126 screens</span>
+      <p class="pb">Executives made staffing decisions from reports an analyst assembled by hand across four systems, arriving three days late.</p>
+      <div class="pv">
+        <div class="pv-head"><span class="pv-nums"><span class="pv-from">3+ days</span><span class="pv-arw">→</span><span class="pv-to">same day</span></span><span class="pv-tag">Production</span></div>
+        <p class="pv-cap">Report turnaround at the pilot client, previously assembled by hand across four systems.</p>
+      </div>
+      <p class="ff"><b>What failed first</b>Our first IA grouped reports by data source. In testing, nobody could find anything.</p>
+      <a class="go" href="aip.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </figcaption>
+  </figure>
+  </div>
+</section>
+
+<!-- ══ 05 · About ══ -->
+<section class="sec wrap" id="about" aria-labelledby="about-h">
+  <div class="sec-head rv">
+    <span class="idx">03</span>
+    <h2 id="about-h">About</h2>
+    <p class="lede">Self-taught, still curious, mostly patient.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-body rv">
+      <p>I'm Deep, a self-taught Senior UI/UX Designer based in Ahmedabad, India. I came up through graphic design and got pulled into UI/UX when I got more interested in why people use things than in how they look.</p>
+      <p>Ten years, and the industries keep changing: healthcare, EV charging, print and delivery logistics, fintech, e-commerce. Enterprise B2B one quarter, consumer apps the next, on web, iOS and Android. What stays the same is the job: learn the business fast, then design something the client's engineers can build.</p>
+      <p>That means running client conversations, aligning stakeholders who want different things, turning a rough brief into a product strategy, and leading a team through to developer handoff. I build scalable design systems, prototype in code to shorten the path from idea to release, and keep the work close enough to engineering that what I design is what actually ships.</p>
+    </div>
+    <p class="pull rv">I'd rather look slow for two weeks than design confidently in the wrong direction for two months.</p>
+  </div>
+
+  <div class="cv-list rv">
+    <div class="cv-row"><span class="r">Senior UI/UX Designer (design lead, team of 4)</span><span class="o">Apexon — enterprise healthcare, analytics and B2B platforms.</span><span class="y">2022 — now</span></div>
+    <div class="cv-row"><span class="r">Senior UI/UX Designer</span><span class="o">TNM Media — consumer apps, e-commerce and brand systems.</span><span class="y">2018 — 2022</span></div>
+    <div class="cv-row"><span class="r">UI/UX Designer</span><span class="o">Infostretch — web platforms and early enterprise product work.</span><span class="y">2016 — 2018</span></div>
+    <div class="cv-row"><span class="r">UI/UX &amp; Graphic Designer</span><span class="o">Azilen Technologies — where the switch from graphics to product happened.</span><span class="y">2014 — 2016</span></div>
+  </div>
+
+</section>
+
+<!-- ══ 06 · Mentoring ══ -->
+<section class="sec wrap" id="mentoring" aria-labelledby="mentoring-h">
+  <div class="sec-head rv">
+    <span class="idx">04</span>
+    <h2 id="mentoring-h">Mentoring</h2>
+    <p class="lede">150+ designers, on portfolio reviews, career growth and craft.</p>
+  </div>
+
+  <div class="ment-grid">
+    <div class="ment-body rv">
+      <p>Outside client work I mentor designers around the world. I'm in the <strong>top 1% on ADPList</strong>, where I've mentored 150+ designers on portfolio reviews, career growth and improving their craft.</p>
+      <a class="btn btn-fill" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer">Book a session on ADPList <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+    </div>
+
+    <div class="ment-side rv">
+      <div class="ment-nums">
+        <div class="ment-num"><p class="n">150+</p><p class="c">Designers mentored</p></div>
+        <div class="ment-num"><p class="n">Top 1%</p><p class="c">Mentor on ADPList</p></div>
+        <div class="ment-num"><p class="n">24</p><p class="c">ADPList achievements</p></div>
+      </div>
+      <div class="badges">
+        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Sep 2025</span></div>
+        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Jun 2025</span></div>
+        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Mar 2025</span></div>
+      </div>
+    </div>
+  </div>
+
+  <figure class="testi rv">
+    <blockquote>Deep provided outstanding guidance on my resume and portfolio, offering specific feedback and examples that will enhance my work. He was able to understand my background experience and guide me through the next steps in my career. I highly recommend booking with him for an exceptional experience!</blockquote>
+    <figcaption><b>Manali Gortekar</b> &middot; Product Designer, Cisco Meraki</figcaption>
+  </figure>
+</section>
+
+<!-- ══ 07 · Contact ══ -->
+<section class="contact wrap" id="contact" aria-labelledby="contact-h">
+  <div class="contact-in">
+    <div class="sec-head rv">
+      <span class="idx">05</span>
+      <h2 id="contact-h">Contact</h2>
+      <p class="lede">Have a role in mind? <em>Let's talk.</em></p>
+    </div>
+    <p class="contact-sub rv">Open to Senior and Lead roles across B2B enterprise systems and B2C consumer products — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce — remote or relocating anywhere in India.</p>
+
+    <a class="mail rv" href="mailto:thedeepvyas@gmail.com" id="mail" data-mail="thedeepvyas@gmail.com">thedeepvyas@gmail.com <span class="cp" id="cp">Copy</span></a>
+
+    <div class="links rv">
+      <a class="link" href="https://www.instagram.com/the.deep.ux/" target="_blank" rel="noopener noreferrer"><span class="t">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">@the.deep.ux</span></a>
+      <a class="link" href="https://www.linkedin.com/in/the-deep-vyas" target="_blank" rel="noopener noreferrer"><span class="t">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">/in/the-deep-vyas</span></a>
+      <a class="link" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer"><span class="t">ADPList <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">Top 1% mentor · 150+ mentored</span></a>
+      <a class="link" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer"><span class="t">Résumé <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">PDF · one page</span></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Deep Vyas</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
+
+<script src="js/system.js" defer></script>
+<script defer>
+addEventListener("DOMContentLoaded",function(){
+  "use strict";
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* ── Selected work: the index drives the sticky preview ────── */
+  var idxRows = [].slice.call(document.querySelectorAll(".idx-row"));
+  var idxFigs = [].slice.call(document.querySelectorAll(".idx-fig"));
+
+  if(idxRows.length && idxRows.length === idxFigs.length){
+    var active = 0;
+    function showCase(i){
+      if(i === active) return;
+      idxRows[active].classList.remove("is-on");
+      idxFigs[active].classList.remove("on");
+      idxRows[i].classList.add("is-on");
+      idxFigs[i].classList.add("on");
+      active = i;
+    }
+    idxRows.forEach(function(row, i){
+      /* pointerenter, not mouseover: no repeat firing as the cursor
+         crosses the row's own children */
+      row.addEventListener("pointerenter", function(){ showCase(i); });
+      row.addEventListener("focus", function(){ showCase(i); });
+    });
+  }
+
+  /* ── Copy email ────────────────────────────────────────────── */
+  var mail = document.getElementById("mail"), cp = document.getElementById("cp"), toast = document.getElementById("toast");
+  cp.addEventListener("click", function(ev){
+    ev.preventDefault(); ev.stopPropagation();
+    var addr = mail.dataset.mail;
+    function done(){
+      cp.textContent = "Copied";
+      toast.classList.add("on");
+      setTimeout(function(){ cp.textContent = "Copy"; toast.classList.remove("on"); }, 1900);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(addr).then(done, function(){ location.href = "mailto:" + addr; });
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = addr; ta.setAttribute("readonly",""); ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand("copy"); done(); }catch(e){ location.href = "mailto:" + addr; }
+      document.body.removeChild(ta);
+    }
+  });
+});
+</script>
+</body>
+</html>

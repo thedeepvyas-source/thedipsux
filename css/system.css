@@ -1,0 +1,253 @@
+/* ═══════════════════════════════════════════════════════════════
+   DELTA design system — shared tokens, base, primitives, chrome.
+   Loaded by every page. Page-specific sections stay inline.
+   ═══════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   DELTA — a portfolio built on before → after.
+   Design system: tokens ▸ primitives ▸ sections. No framework.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Tokens ─────────────────────────────────────────────────── */
+:root{
+  /* surface */
+  --bg:#FCFCFD; --surface:#FFFFFF; --raise:#F2F3F6; --inverse:#0B0C0F;
+  /* ink */
+  --ink:#0B0C0F; --ink-2:#31343C; --muted:#63676F; --faint:#6B6F79;
+  /* structure */
+  --line:rgba(11,12,15,.12); --line-2:rgba(11,12,15,.06); --line-3:rgba(11,12,15,.035);
+  /* the one accent */
+  --accent:#2540F0; --on-accent:#FFFFFF; --accent-soft:rgba(37,64,240,.08); --accent-line:rgba(37,64,240,.32);
+  --accent-tint:#5C6FE8; /* softer than the accent — used for the hovered project name */
+  /* type */
+  --sans:'Inter Tight','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  /* scale */
+  --t-display:clamp(42px,6.8vw,98px);
+  --t-statement:clamp(28px,4.2vw,56px);
+  --t-case:clamp(27px,3.4vw,44px);
+  --t-h:clamp(19px,1.9vw,23px);
+  --t-body:17px; --t-sm:16px; --t-xs:14px; --t-label:11px;
+  /* rhythm */
+  --nav-h:75px;        /* measured; the hero subtracts it to fill the first screen */
+  --wrap:1240px;
+  --pad:clamp(20px,5vw,56px);
+  --sec:clamp(64px,8vw,116px);
+  --gap:clamp(28px,3.6vw,52px);
+  --r:12px; --r-sm:7px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+html[data-theme="dark"]{
+  --bg:#0A0B0D; --surface:#111216; --raise:#191B20; --inverse:#F4F5F7;
+  --ink:#F4F5F7; --ink-2:#CBCED5; --muted:#9296A0; --faint:#868A94;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.075); --line-3:rgba(255,255,255,.04);
+  --accent:#7C8CFF; --on-accent:#0A0B0D; --accent-soft:rgba(124,140,255,.12); --accent-line:rgba(124,140,255,.4);
+  --accent-tint:#96A2F0;
+}
+
+/* ── 2. Base ───────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);font-size:var(--t-body);line-height:1.62;font-weight:400;
+  background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  font-feature-settings:"ss01","cv05";
+  overflow-x:hidden;
+  transition:background-color .55s var(--ease),color .55s var(--ease);  /* paced with the diya being snuffed */
+}
+a{color:inherit;text-decoration:none}
+img,svg,video{display:block;max-width:100%}
+/* width/height attributes are presentational hints; without this the height
+   hint pins a framed image and cancels its CSS aspect-ratio. */
+img{height:auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--on-accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--pad)}
+.skip{position:fixed;left:-999px;top:0;z-index:200}
+.skip:focus{left:16px;top:14px;background:var(--inverse);color:var(--bg);padding:11px 18px;border-radius:999px;font-size:var(--t-sm)}
+
+/* ── 3. Primitives ─────────────────────────────────────────────── */
+.label{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.17em;text-transform:uppercase;color:var(--faint);font-weight:400}
+.serif{font-family:var(--display);font-weight:400;font-style:italic;letter-spacing:-.005em}
+.accent{color:var(--accent)}
+
+/* section header: index number ▸ title ▸ rule */
+.sec{padding-top:var(--sec);position:relative}
+/* Every linked section opens with its own top padding, so the anchor only has
+   to make up the difference between that padding and the sticky nav. A flat
+   96px overshot it and left the tail of the previous section on screen.
+   Sections whose padding isn't --sec restate it as --pad-top. */
+section[id]{--pad-top:var(--sec);
+  scroll-margin-top:calc(var(--nav-h) + 20px - var(--pad-top))}
+/* idx │ title + lede │ supporting note — the note fills the right half so the
+   rule underneath reads as one measured line rather than a half-empty one */
+/* the first track is the ordinal marker. `auto` resolved to ~94px for 16px of
+   text, leaving a 121px void before the heading — size it to the number. */
+.sec-head{display:grid;grid-template-columns:clamp(18px,1.6vw,22px) minmax(0,1.1fr) minmax(0,1fr);
+  gap:0 clamp(16px,1.7vw,26px);align-items:start;
+  padding-bottom:clamp(22px,2.6vw,32px);border-bottom:1px solid var(--line);margin-bottom:clamp(38px,5vw,72px)}
+.sec-head .idx{grid-column:1;grid-row:1;font-family:var(--mono);font-size:var(--t-label);
+  letter-spacing:.14em;color:var(--accent);padding-top:.7em}
+.sec-head h2{grid-column:2;grid-row:1;font-size:var(--t-h);font-weight:600;letter-spacing:-.02em;line-height:1.3}
+.sec-head .lede{grid-column:2;grid-row:2;font-size:clamp(21px,2.5vw,32px);line-height:1.28;letter-spacing:-.03em;
+  color:var(--ink);max-width:20ch;margin-top:12px;text-wrap:balance}
+.sec-head .aside{grid-column:3;grid-row:1/span 2;min-width:0;align-self:end;font-size:var(--t-sm);line-height:1.62;
+  color:var(--muted);max-width:42ch;padding-bottom:4px}
+
+/* links */
+.go{display:inline-flex;align-items:center;gap:10px;font-size:var(--t-sm);font-weight:500;letter-spacing:-.01em;
+  padding-bottom:4px;border-bottom:1px solid var(--line);transition:color .22s var(--ease),border-color .22s var(--ease)}
+.go svg{width:15px;height:15px;transition:transform .3s var(--ease)}
+.go:hover{color:var(--accent);border-color:var(--accent-line)}
+.go:hover svg{transform:translateX(5px)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:999px;
+  font-size:var(--t-sm);font-weight:500;letter-spacing:-.01em;border:1px solid var(--line);
+  transition:background-color .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease),transform .24s var(--ease)}
+.btn svg{width:15px;height:15px;transition:transform .3s var(--ease)}
+.btn:hover{transform:translateY(-1px)}
+.btn:hover svg{transform:translateX(4px)}
+.btn-fill{background:var(--inverse);color:var(--bg);border-color:transparent}
+.btn-fill:hover{background:var(--accent);color:var(--on-accent)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+
+/* ── 4. Nav ────────────────────────────────────────────────────── */
+.nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);
+  border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
+.nav.stuck{border-bottom-color:var(--line-2)}
+.nav-in{max-width:var(--wrap);margin-inline:auto;padding:16px var(--pad);
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:inline-flex;align-items:center;gap:11px;font-size:18px;font-weight:600;letter-spacing:-.022em}
+.brand .mark{width:34px;height:34px;flex:0 0 34px;display:block;
+  transition:transform .3s var(--ease),opacity .3s var(--ease)}
+.brand:hover .mark{transform:rotate(-6deg) scale(1.06)}
+@media (prefers-reduced-motion:reduce){.brand:hover .mark{transform:none;opacity:.8}}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{position:relative;font-size:var(--t-xs);color:var(--muted);padding:7px 12px;border-radius:999px;
+  transition:color .2s var(--ease),background-color .2s var(--ease)}
+.nav-links a::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:1px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a[aria-current="true"]::after{transform:scaleX(1)}
+.nav-links a[aria-current="true"]{color:var(--ink)}
+.nav-act{display:flex;align-items:center;gap:8px}
+.icon-btn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;
+  color:var(--muted);transition:color .2s var(--ease),border-color .2s var(--ease),transform .3s var(--ease)}
+.icon-btn svg{width:15px;height:15px}
+.icon-btn:hover{color:var(--ink);border-color:var(--ink)}
+.nav-cv{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:9px 15px;border-radius:999px;
+  border:1px solid var(--line);color:var(--ink);transition:background-color .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease)}
+.nav-cv:hover{background:var(--inverse);color:var(--bg);border-color:transparent}
+/* ── Theme toggle: a diya ───────────────────────────────────────
+   Light theme  — the lamp is lit; the flame leans and flickers.
+   Clicking it  — the flame bends in the draught, shrinks, goes out, the warm
+                  glow fades, and a thread of grey smoke curls off the wick
+                  while the page crosses to the dark theme.
+   Dark theme   — the lamp rests extinguished, smoke drifting on a 2.4s loop.
+   Clicking back — the flame relights with a small pop and the flicker resumes. */
+#theme{width:42px;height:42px}
+.icon-btn .diya{width:26px;height:26px;overflow:visible}   /* let the glow and smoke spill past the 24-unit box */
+
+/* ── lit state ─────────────────────────────────────────────── */
+.diya .flame{transform-box:fill-box;transform-origin:50% 100%;will-change:transform;
+  animation:flame 1.25s ease-in-out infinite}
+.diya .f-out{animation:flame-glow 1.9s ease-in-out infinite}
+.diya .f-core{transform-box:fill-box;transform-origin:50% 100%;
+  animation:flame-core .82s ease-in-out infinite}
+html:not([data-theme="dark"]) .diya .flame{
+  animation:relight .45s cubic-bezier(.34,1.32,.64,1) backwards,
+            flame 1.25s .45s ease-in-out infinite}
+
+/* Deliberately large: at 26px a 2% wobble is invisible. The lean does most of
+   the work (±5°, readable at any size); the stretch stays mild so the flame
+   keeps its point instead of squashing into a blob. */
+@keyframes flame{
+  0%,100%{transform:scale(1,1)     translate(0,0)        rotate(0deg)}
+  18%    {transform:scale(.92,1.13) translate(-.8px,-.5px) rotate(-5deg)}
+  40%    {transform:scale(1.08,.94) translate(.7px,.1px)   rotate(4deg)}
+  62%    {transform:scale(.94,1.09) translate(-.6px,-.35px) rotate(-3deg)}
+  82%    {transform:scale(1.04,.98) translate(.4px,0)      rotate(1.5deg)}
+}
+@keyframes flame-glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(255,150,30,.5))}
+  30%    {filter:drop-shadow(0 0 8px rgba(255,170,50,.95))}
+  62%    {filter:drop-shadow(0 0 3px rgba(255,150,30,.62))}
+}
+@keyframes flame-core{
+  0%,100%{transform:scale(1,1);opacity:1}
+  45%    {transform:scale(1.08,.72);opacity:.58}
+}
+@keyframes relight{
+  0%  {transform:scale(.35,0);opacity:0}
+  48% {transform:scale(.94,1.1);opacity:1}
+  100%{transform:scale(1,1);opacity:1}
+}
+
+/* ── snuffed state ─────────────────────────────────────────── */
+.diya .smoke path{transform-box:fill-box;transform-origin:50% 100%;opacity:0;
+  stroke-dasharray:13;stroke-dashoffset:13}
+html[data-theme="dark"] .diya .flame{animation:snuff .62s cubic-bezier(.4,0,.25,1) forwards}
+html[data-theme="dark"] .diya .f-out{animation:glow-out .62s ease-out forwards}
+html[data-theme="dark"] .diya .f-core{animation:none}
+html[data-theme="dark"] .diya .s1{animation:smoke 2.4s .42s ease-out infinite}
+html[data-theme="dark"] .diya .s2{animation:smoke 2.4s 1.26s ease-out infinite}
+
+@keyframes snuff{
+  0%  {transform:scale(1,1)    rotate(0deg); opacity:1}
+  30% {transform:scale(.9,1.1)  rotate(-10deg);opacity:1}   /* bends in the draught */
+  58% {transform:scale(.74,.48) rotate(6deg);  opacity:.8}  /* then drops away fast */
+  100%{transform:scale(.4,0)    rotate(0deg);  opacity:0}
+}
+@keyframes glow-out{
+  0%  {filter:drop-shadow(0 0 7px rgba(255,165,45,.9))}
+  55% {filter:drop-shadow(0 0 3px rgba(255,150,30,.4))}
+  100%{filter:drop-shadow(0 0 0 rgba(255,150,30,0))}
+}
+/* the dash offset draws the wisp from the wick upward, so it reads as rising
+   rather than simply fading in */
+@keyframes smoke{
+  0%  {opacity:0;  stroke-dashoffset:13;transform:translateY(1px) scale(.8,.6) rotate(0deg)}
+  18% {opacity:.62}
+  55% {opacity:.5; stroke-dashoffset:0; transform:translateY(-1.5px) scale(1,1) rotate(2deg)}
+  100%{opacity:0;  stroke-dashoffset:0; transform:translateY(-5px) scale(1.25,1.2) rotate(-3deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .diya .flame,.diya .f-out,.diya .f-core,.diya .smoke path{animation:none!important}
+  .diya .f-out{filter:drop-shadow(0 0 4px rgba(255,155,35,.65))}
+  html[data-theme="dark"] .diya .flame{opacity:0}
+  html[data-theme="dark"] .diya .smoke path{opacity:.55;stroke-dashoffset:0}
+}
+.prog{position:absolute;left:0;bottom:-1px;height:1.5px;background:var(--accent);width:0;transition:width .12s linear}
+@media(max-width:880px){.nav-links{display:none}}
+@media(max-width:520px){.nav-cv{display:none}}   /* CV hides; the 42px toggle still sets the nav height */
+
+/* ── 5. Footer & toast ─────────────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:26px 0 40px}
+.foot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--faint)}
+.foot-in a:hover{color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);background:var(--inverse);color:var(--bg);
+  font-size:13.5px;padding:11px 20px;border-radius:999px;opacity:0;pointer-events:none;z-index:120;
+  transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media print{.nav,.toast{display:none}body{background:#fff;color:#000}}
+
+
+/* section header collapses to two columns before it collapses to one */
+@media(max-width:980px){
+  .sec-head{grid-template-columns:clamp(18px,1.6vw,22px) minmax(0,1fr)}
+  .sec-head .aside{grid-column:2;grid-row:3;align-self:start;margin-top:16px;max-width:52ch}
+}
