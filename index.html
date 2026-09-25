@@ -5,15 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Deep Vyas — Senior UI/UX Designer</title>
 <meta name="description" content="Deep Vyas, Senior UI/UX Designer and design lead. 10+ years making complex B2B enterprise systems and B2C consumer products feel obvious — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce.">
-<meta name="theme-color" content="#FCFCFD" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0A0B0D" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FCFCFD">
 <meta property="og:title" content="Deep Vyas — Senior UI/UX Designer">
 <meta property="og:description" content="10+ years across B2B enterprise systems and B2C consumer products — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce. Measured in deltas, not screenshots.">
 <meta property="og:type" content="website">
 <link rel="icon" href="d-logo.svg">
 <script>/* set theme before paint — no flash */
+/* light is the default; the OS preference does not decide it. a stored
+   choice from the toggle always wins. */
 try{var t=localStorage.getItem("dv26-theme");
-document.documentElement.setAttribute("data-theme",t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}</script>
+if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">

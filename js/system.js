@@ -9,13 +9,22 @@
 
   /* ── Theme ─────────────────────────────────────────────────── */
   var root = document.documentElement, tBtn = document.getElementById("theme");
+
+  /* keep the browser chrome on the theme the page is actually showing, not on
+     the one the OS prefers — run it at startup too, for a returning visitor
+     who saved dark. */
+  function syncThemeColor(){
+    var m = document.querySelector('meta[name="theme-color"]');
+    if(!m){ m = document.createElement("meta"); m.name = "theme-color"; document.head.appendChild(m); }
+    m.content = root.getAttribute("data-theme") === "dark" ? "#0A0B0D" : "#FCFCFD";
+  }
+  syncThemeColor();
+
   tBtn.addEventListener("click", function(){
     var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
     try{ localStorage.setItem("dv26-theme", next); }catch(e){}
-    var m = document.querySelector('meta[name="theme-color"]:not([media])');
-    if(!m){ m = document.createElement("meta"); m.name = "theme-color"; document.head.appendChild(m); }
-    m.content = next === "dark" ? "#0A0B0D" : "#FCFCFD";
+    syncThemeColor();
   });
 
   /* ── Nav: sticky border + scroll progress + active section ─── */

@@ -640,12 +640,13 @@ def render(c, prev, nxt):
     A('<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">')
     A(f'<title>{esc(c["name"])} — {esc(c["client"])} · Deep Vyas</title>')
     A(f'<meta name="description" content="{esc(strip_tags(c["sum"])[:180])}">')
-    A('<meta name="theme-color" content="#FCFCFD" media="(prefers-color-scheme: light)">')
-    A('<meta name="theme-color" content="#0A0B0D" media="(prefers-color-scheme: dark)">')
+    A('<meta name="theme-color" content="#FCFCFD">')
     A(f'<meta property="og:title" content="{esc(c["name"])} — {esc(plain_title)}">')
     A('<link rel="icon" href="d-logo.svg">')
-    A('<script>try{var t=localStorage.getItem("dv26-theme");'
-      'document.documentElement.setAttribute("data-theme",t||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));}catch(e){}</script>')
+    A('<script>/* light is the default; the OS preference does not decide it. '
+      'a stored choice from the toggle always wins. */'
+      'try{var t=localStorage.getItem("dv26-theme");'
+      'if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>')
     A('<link rel="preconnect" href="https://fonts.googleapis.com">')
     A('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>')
     A('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">')
