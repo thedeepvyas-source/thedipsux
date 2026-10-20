@@ -3,306 +3,1702 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Flint-Link — Flint Group · Deep Vyas</title>
-<meta name="description" content="Flint Group supplies printing inks and coatings in 100+ countries. To get a certificate, an order update or support, its customers emailed their account manager and waited a day or">
-<meta name="theme-color" content="#FCFCFD">
-<meta property="og:title" content="Flint-Link — Replacing email chaos with a self-serve portal for a global B2B supply chain.">
+<title>Flint-Link — a customer portal that answers before anyone has to email · Deep Vyas</title>
+<meta name="description" content="A customer portal for Flint Group: documents, orders and consignment stock organised around the order, so customers stop emailing their account manager. Case study by Deep Vyas.">
+<meta name="theme-color" content="#F6F5F0">
+<meta property="og:title" content="Flint-Link — a customer portal that answers before anyone has to email">
+<meta property="og:description" content="14 customer interviews and two site visits behind an information architecture rebuilt around the order, with responsive workflows on top of it.">
+<meta property="og:type" content="article">
 <link rel="icon" href="d-logo.svg">
-<script>/* light is the default; the OS preference does not decide it. a stored choice from the toggle always wins. */try{var t=localStorage.getItem("dv26-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/system.css">
+<script>/* light is the default; the OS preference does not decide it. a stored choice from the toggle always wins. */
+try{var t=localStorage.getItem("dv26-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}
+document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-/* ── Case hero ─────────────────────────────────────────────────── */
-.back{padding-top:clamp(26px,4vw,44px)}
-.back a{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
-.back a:hover{color:var(--accent)}
-.chero{padding-top:clamp(20px,3vw,34px)}
-.chero .kick{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:clamp(20px,2.6vw,30px)}
-.chero .kick .dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
-.chero h1{font-size:clamp(29px,5.4vw,74px);font-weight:600;line-height:1.01;letter-spacing:-.045em;max-width:18ch;text-wrap:balance}
-.chero h1 em{font-family:var(--display);font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
-.chero .sum{margin-top:clamp(22px,2.8vw,34px);font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--muted);max-width:62ch}
-.meta{margin-top:clamp(34px,4vw,52px);display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  background:var(--line-2);border-block:1px solid var(--line-2)}
-/* The 1px gaps are divider rules, so every cell needs breathing room on the
-   side a rule falls — except the one that opens a row, which stays flush with
-   the content edge. The exception moves with the column count. */
-.meta div{background:var(--bg);padding:18px 24px 20px 24px}
-.meta div:first-child{padding-left:0}
-.meta dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
-.meta dd{font-size:14.5px;line-height:1.5;color:var(--ink);font-weight:450}
-.chero-fig{margin-top:clamp(34px,4.4vw,60px)}
-/* the case heroes are 16:9; the frame matches so none of them is cropped */
-.chero-fig img{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center;
-  border-radius:var(--r);border:1px solid var(--line-2);background:var(--raise)}
-.chero-fig figcaption{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint)}
-
-/* ── Outcome bar ───────────────────────────────────────────────── */
-.outs{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
-.out{background:var(--bg);padding:clamp(22px,2.4vw,30px)}
-.out .n{font-family:var(--mono);font-weight:500;font-size:clamp(24px,2.8vw,36px);letter-spacing:-.045em;color:var(--accent);line-height:1.05}
-.out .c{margin-top:10px;font-size:13.5px;line-height:1.5;color:var(--muted)}
-
-/* ── Chapters ──────────────────────────────────────────────────── */
-.ch{padding-top:clamp(64px,9vw,120px)}
-.ch-head{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(18px,3vw,40px);
-  padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:clamp(30px,3.6vw,48px)}
-.ch-head .idx{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.14em;color:var(--accent);padding-top:.55em}
-.ch-head .ttl{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.17em;text-transform:uppercase;color:var(--faint);padding-top:.55em}
-.ch-head h2{grid-column:2;font-size:clamp(24px,3.2vw,40px);font-weight:600;letter-spacing:-.035em;
-  line-height:1.1;max-width:22ch;margin-top:12px;text-wrap:balance}
-.ch-body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
-.prose{grid-column:1/8;min-width:0}
-.prose p{font-size:16.5px;line-height:1.68;color:var(--muted)}
-.prose p+p{margin-top:1.05em}
-.prose strong{color:var(--ink);font-weight:500}
-.side{grid-column:9/-1;min-width:0}
-
-/* process artefacts — the diagrams that carry a decision. They come from
-   the project record and keep their own palette, so they are framed as
-   documents rather than restyled to match the site. */
-.art{margin:clamp(24px,2.8vw,36px) 0 0}
-.art img{width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line);background:#fff}
-.art figcaption{margin-top:11px;font-family:var(--mono);font-size:11px;letter-spacing:.05em;
-  line-height:1.62;color:var(--faint);max-width:78ch}
-.art.wide{margin-top:clamp(30px,3.4vw,44px)}
-
-/* problem-side signals: the numbers the research turned up */
-.signals{border-top:1px solid var(--line-2)}
-.signal{padding:14px 0;border-bottom:1px solid var(--line-2)}
-.signal .n{font-family:var(--mono);font-weight:500;font-size:clamp(19px,2vw,24px);letter-spacing:-.04em;color:var(--accent)}
-.signal .c{margin-top:5px;font-size:13px;line-height:1.5;color:var(--muted)}
-
-/* numbered findings */
-.finds{margin-top:clamp(32px,4vw,52px);border-top:1px solid var(--line-2)}
-.find{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(16px,2.4vw,32px);
-  padding:22px 0;border-bottom:1px solid var(--line-2)}
-.find .n{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.12em;color:var(--accent);padding-top:.5em}
-.find h3{font-size:17px;font-weight:600;letter-spacing:-.02em}
-.find p{grid-column:2;margin-top:8px;font-size:14.5px;line-height:1.62;color:var(--muted);max-width:68ch}
-
-/* method cards */
-.methods{margin-top:clamp(30px,3.6vw,46px);display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
-  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
-.method{background:var(--bg);padding:clamp(20px,2.2vw,28px);transition:background-color .3s var(--ease)}
-.method:hover{background:var(--surface)}
-.method .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
-.method h3{font-size:16.5px;font-weight:600;letter-spacing:-.02em;margin-top:10px}
-.method p{margin-top:9px;font-size:14px;line-height:1.6;color:var(--muted)}
-
-/* quote */
-.quote{margin-top:clamp(30px,3.6vw,48px);padding:clamp(24px,3vw,36px);border-radius:var(--r);
-  background:var(--accent-soft);border:1px solid var(--line-2)}
-.quote p{font-family:var(--display);font-style:italic;font-size:clamp(20px,2.4vw,28px);line-height:1.34;
-  letter-spacing:-.015em;color:var(--ink);max-width:40ch}
-.quote cite{display:block;margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--faint);font-style:normal}
-
-/* criteria */
-.crit{list-style:none;counter-reset:c;border-top:1px solid var(--line-2)}
-.crit li{counter-increment:c;position:relative;padding:16px 0 16px 42px;border-bottom:1px solid var(--line-2);
-  font-size:15.5px;line-height:1.6;color:var(--ink-2)}
-.crit li::before{content:counter(c,decimal-leading-zero);position:absolute;left:0;top:18px;
-  font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--accent)}
-
-/* decisions */
-.dec{padding:clamp(28px,3.2vw,42px) 0;border-bottom:1px solid var(--line-2)}
-.dec:first-of-type{border-top:1px solid var(--line)}
-/* The chapter head already draws a rule under itself, so a block that opens
-   a chapter must not draw a second one below the heading's margin. */
-.ch-head + .dec,.ch-head + .lessons{border-top:0}
-.dec-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
-.dec .k{grid-column:1/4;font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);padding-top:6px}
-.dec .b{grid-column:4/-1;min-width:0}
-.dec h3{font-size:clamp(19px,2.1vw,25px);font-weight:600;letter-spacing:-.028em;line-height:1.22;max-width:26ch}
-.dec p{margin-top:12px;font-size:15.5px;line-height:1.65;color:var(--muted);max-width:66ch}
-
-/* gallery */
-.gal{margin-top:clamp(34px,4vw,54px);display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.8vw,24px) clamp(12px,1.6vw,20px);align-items:start}
-.gal figure{margin:0}
-/* Four to a row, so each one is a thumbnail: enough to recognise the screen,
-   with the magnifier there for anyone who wants to read it. One fixed 3:2 box
-   keeps the captions on a common baseline, and contain means nothing is cropped
-   — these run from 0.46 (a phone screen) to 1.69 (a desktop table). */
-.gal img{width:100%;aspect-ratio:3/2;object-fit:contain;padding:6px;
-  border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--raise);
-  transition:border-color .3s var(--ease)}
-.gal figure:hover img{border-color:var(--line)}
-.gal figcaption{margin-top:10px;font-size:12.5px;line-height:1.55;color:var(--muted)}
-.gal figcaption b{display:block;font-weight:500;color:var(--ink);margin-bottom:3px;font-size:13.5px;letter-spacing:-.01em}
-/* the magnifier is sized for a full-width figure; scale it to the thumbnail */
-.gal .zoom-btn{right:7px;bottom:7px;width:27px;height:27px}
-.gal .zoom-btn svg{width:12px;height:12px}
-
-
-/* zoom affordance + lightbox — built by js/system.js around every case-study
-   screenshot, so the markup below stays plain <figure><img>. */
-.zoomwrap{position:relative;display:block;line-height:0}
-.zoomwrap img{cursor:zoom-in}
-/* Solid rather than translucent: it sits over arbitrary screenshots, and a
-   backdrop-filter is one more thing that can fail to composite. */
-.zoom-btn{position:absolute;right:10px;bottom:10px;width:34px;height:34px;border-radius:999px;
-  display:grid;place-items:center;cursor:zoom-in;color:var(--ink-2);
-  background:var(--bg);border:1px solid var(--line);
-  box-shadow:0 2px 10px rgba(11,12,15,.14);opacity:.92;
-  transition:opacity .24s var(--ease),transform .24s var(--ease),color .24s var(--ease)}
-.zoom-btn svg{width:15px;height:15px}
-.zoomwrap:hover .zoom-btn,.zoom-btn:hover,.zoom-btn:focus-visible{opacity:1;transform:scale(1.07);color:var(--accent)}
-
-.lb{position:fixed;inset:0;z-index:150;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:16px;padding:clamp(18px,4vw,52px);
-  background:rgba(8,9,12,.9);backdrop-filter:blur(7px);
-  opacity:0;visibility:hidden;transition:opacity .3s var(--ease),visibility .3s var(--ease)}
-.lb.on{opacity:1;visibility:visible}
-.lb img{max-width:100%;max-height:80vh;object-fit:contain;border-radius:var(--r-sm);
-  background:#fff;box-shadow:0 30px 90px rgba(0,0,0,.55);
-  transform:scale(.975);transition:transform .32s var(--ease)}
-.lb.on img{transform:scale(1)}
-.lb-cap{text-align:center;color:#D7D9DE;font-size:14px;line-height:1.55;max-width:74ch}
-.lb-cap b{display:block;color:#fff;font-weight:500;margin-bottom:3px}
-.lb-x{position:absolute;top:clamp(14px,2vw,22px);right:clamp(14px,2vw,22px);
-  width:40px;height:40px;border-radius:999px;display:grid;place-items:center;color:#fff;
-  border:1px solid rgba(255,255,255,.3);transition:background-color .22s var(--ease)}
-.lb-x:hover{background:rgba(255,255,255,.14)}
-.lb-x svg{width:17px;height:17px}
-@media (prefers-reduced-motion:reduce){.lb,.lb img,.zoom-btn{transition:none}.lb img{transform:none}}
-
-/* caveat */
-.caveat{margin-top:clamp(28px,3vw,40px);padding:20px 22px;border-left:2px solid var(--accent);
-  background:var(--raise);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:15px;line-height:1.62;color:var(--ink-2)}
-.caveat b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--faint);font-weight:400;margin-bottom:8px}
-
-/* lessons */
-.lessons{border-top:1px solid var(--line)}
-.lesson{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:clamp(16px,3vw,44px);
-  padding:24px 0;border-bottom:1px solid var(--line-2);align-items:start}
-.lesson h3{font-size:17px;font-weight:600;letter-spacing:-.022em;line-height:1.3}
-.lesson p{font-size:15px;line-height:1.64;color:var(--muted)}
-
-/* next */
-.nextnav{margin-top:clamp(64px,8vw,110px);padding:clamp(30px,3.6vw,46px) 0 clamp(50px,6vw,80px);
-  border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
-.nextnav .lbl{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.15em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:10px}
-.nextnav a.big{font-size:clamp(24px,3.4vw,44px);font-weight:600;letter-spacing:-.038em;
-  display:inline-flex;align-items:center;gap:14px;transition:color .25s var(--ease);
-  white-space:nowrap}   /* hyphenated names like Flint-Link must not break across lines */
-/* the arrow carries no intrinsic size, so as a flex item it shrinks to nothing
-   once the name refuses to wrap — size it in em so it tracks the name. */
-.nextnav a.big svg{flex:0 0 auto;width:.58em;height:.58em}
-.nextnav a.big:hover{color:var(--accent)}
-.nextnav .r{text-align:right}
-
-@media(max-width:980px){
-  .gal{grid-template-columns:repeat(3,1fr)}
-  .prose,.side{grid-column:1/-1}
-  .side{margin-top:8px}
-  .meta{grid-template-columns:repeat(2,1fr)}
-  .meta div{padding-left:24px}
-  .meta div:nth-child(2n+1){padding-left:0}
-  .outs{grid-template-columns:repeat(2,1fr)}
-  .dec .k,.dec .b{grid-column:1/-1}
-  .dec .k{padding-top:0;margin-bottom:12px}
+/* The Figma file is set in Inter 3.x. Google Fonts now serves Inter 4, which is
+   about 5% narrower at regular, so paragraphs break a line earlier than the file
+   draws them. These are the four weights the file uses, pinned. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-600-normal.woff2) format("woff2")}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   PetTrackr case study — written against Figma frame 54067:126
+   "PetTrackr · Case study · Claude findings (desktop)", 1440 × 21224.
+   Same design language as the home page; its own stylesheet.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#1C2628; --body:#3D4A4B; --muted:#5F6A69; --accent:#2E6470;
+  --line:#DAD5CB; --line-2:#CFC9BD; --line-ink:#1C2628;
+  --paper:#F6F5F0; --paper-2:#EDEBE4; --surface:#FFFFFF;
+  --case:#EEB846;                     /* PetTrackr's colour in the logo palette */
+  --tint:rgba(238,184,70,0.1);
+  --hair:rgba(0,0,0,.08);
+  --accent-hover:#275560; --accent-active:#1F4850; --accent-visited:#1F4850;
+  --err:#B4472A;
+  --ease-out:cubic-bezier(.2,0,0,1);
+  --d-micro:170ms; --d-base:320ms; --d-enter:520ms; --d-signature:580ms;
+  --ease-enter:cubic-bezier(.22,1,.36,1);
+  --rise:14px; --stagger:70ms;
+  --px:80px;
 }
-@media(max-width:720px){
-  .methods{grid-template-columns:1fr}
-  .gal{grid-template-columns:repeat(2,1fr)}
-  .lesson{grid-template-columns:1fr;gap:8px}
-  .ch-head{grid-template-columns:1fr}
-  .ch-head h2{grid-column:1;margin-top:10px}
-  .ch-head .ttl{padding-top:0;margin-top:6px}
-  /* a wide dashboard screenshot cropped to a phone-width box is unreadable —
-     letterbox it against the surface instead of cropping the interface away */
-  .chero-fig img{object-fit:contain;background:var(--raise)}
-  .chero-fig img{aspect-ratio:16/9}
-  .nextnav{flex-direction:column;align-items:flex-start}
-  .nextnav .r{text-align:left}
+html[data-theme="dark"]{
+  --ink:#F2F0EA; --body:#C3C9C6; --muted:#8E938F; --accent:#7FB5B6;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.12); --line-ink:rgba(255,255,255,.55);
+  --paper:#16191A; --paper-2:#1C2021; --surface:#202425;
+  --hair:rgba(255,255,255,.10);
+  --accent-hover:#96C7C8; --accent-active:#B0D6D6; --accent-visited:#A8CFD0;
+  --err:#E08B6E;
 }
-@media(max-width:480px){
-  .gal{grid-template-columns:1fr}
-  .gal img{aspect-ratio:auto;padding:0}
-  .meta,.outs{grid-template-columns:1fr}
-  .meta div{padding-left:0}
-  .find{grid-template-columns:1fr}
-  .find p{grid-column:1}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+section[id],header[id]{scroll-margin-top:92px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-synthesis-weight:none;-webkit-font-smoothing:antialiased}
+img{display:block}
+p,figure,blockquote,figcaption{margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:500}
+.page{max-width:1440px;margin:0 auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:60;background:var(--accent);color:#fff;
+  padding:10px 14px;border-radius:4px;font-size:14px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ── type scale, on the file's whole-pixel line boxes ────────────── */
+.t-display{font-weight:500;font-size:72px;line-height:76px;letter-spacing:-2.88px}
+.t-h-xl  {font-weight:500;font-size:56px;line-height:60px;letter-spacing:-1.96px}
+.t-h-l   {font-weight:500;font-size:44px;line-height:48px;letter-spacing:-1.32px}
+.t-h-m   {font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.t-n-xl  {font-weight:500;font-size:120px;line-height:120px;letter-spacing:-4.8px}
+.t-n-l   {font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px}
+.t-n-m   {font-weight:500;font-size:40px;line-height:44px;letter-spacing:-1.2px}
+.t-title-strong{font-weight:600;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-title-m{font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-title-s{font-weight:500;font-size:16px;line-height:22px}
+.t-body-l{font-weight:400;font-size:18px;line-height:28px}
+.t-body-m{font-weight:400;font-size:16px;line-height:25px}
+.t-body-s{font-weight:400;font-size:14px;line-height:21px}
+.t-body-xs{font-weight:400;font-size:13px;line-height:20px}
+.t-label{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+
+/* ── nav ──────────────────────────────────────────────────────────── */
+.nav{height:76px;padding:0 var(--px);display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:50;background:var(--paper)}
+.nav .brand{display:flex;gap:12px;align-items:center}
+.nav .brand img{width:35px;height:35px}
+.nav .right{display:flex;gap:40px;align-items:center}
+.nav .links{display:flex;gap:32px;align-items:flex-start;white-space:nowrap}
+.nav .links a{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  color:var(--body);min-height:24px;display:flex;align-items:center;
+  transition:color var(--d-micro) var(--ease-out)}
+.nav .links a:hover{color:var(--ink)}
+.nav .links a[aria-current="page"]{color:var(--accent);
+  text-decoration:underline;text-underline-offset:3px}
+.nav .cv{padding:4px 0;color:var(--ink);white-space:nowrap;
+  transition:color var(--d-micro) var(--ease-out)}
+.nav .cv:hover{color:var(--accent)}
+/* the brand strip holds the nav's bottom edge and doubles as read progress */
+.strip{display:flex;height:2px;position:absolute;left:0;right:0;bottom:0}
+.strip span{flex:1 1 0}
+.strip::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--paper);opacity:.8;
+  transform:scaleX(var(--unread,1));transform-origin:100% 50%;will-change:transform}
+.toggle{width:48px;height:48px;flex:0 0 48px;border:0;background:none;padding:0;
+  border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--muted);transition:color .2s var(--ease-out)}
+.toggle:hover{color:var(--ink)}
+.toggle .btn{width:40px;height:40px;border-radius:999px;background:var(--surface);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;
+  transition:background .2s var(--ease-out)}
+html[data-theme="light"] .toggle .btn{background:var(--paper)}
+.toggle:hover .btn{background:var(--paper-2)}
+
+/* ── Theme toggle: a diya ───────────────────────────────────────
+   Ported verbatim from css/system.css, so this page's lamp behaves exactly
+   like the one on every other page.
+   Light theme  — the lamp is lit; the flame leans and flickers.
+   Clicking it  — the flame bends in the draught, shrinks, goes out, the warm
+                  glow fades, and a thread of grey smoke curls off the wick
+                  while the page crosses to the dark theme.
+   Dark theme   — the lamp rests extinguished, smoke drifting on a 2.4s loop.
+   Clicking back — the flame relights with a small pop and the flicker resumes. */
+.toggle .diya{width:24px;height:24px;overflow:visible}   /* let the glow and smoke spill past the 24-unit box */
+
+/* ── lit state ─────────────────────────────────────────────── */
+.diya .flame{transform-box:fill-box;transform-origin:50% 100%;will-change:transform;
+  animation:flame 1.25s ease-in-out infinite}
+.diya .f-out{animation:flame-glow 1.9s ease-in-out infinite}
+.diya .f-core{transform-box:fill-box;transform-origin:50% 100%;
+  animation:flame-core .82s ease-in-out infinite}
+html:not([data-theme="dark"]) .diya .flame{
+  animation:relight .45s cubic-bezier(.34,1.32,.64,1) backwards,
+            flame 1.25s .45s ease-in-out infinite}
+
+/* Deliberately large: at 24px a 2% wobble is invisible. The lean does most of
+   the work (±5°, readable at any size); the stretch stays mild so the flame
+   keeps its point instead of squashing into a blob. */
+@keyframes flame{
+  0%,100%{transform:scale(1,1)     translate(0,0)        rotate(0deg)}
+  18%    {transform:scale(.92,1.13) translate(-.8px,-.5px) rotate(-5deg)}
+  40%    {transform:scale(1.08,.94) translate(.7px,.1px)   rotate(4deg)}
+  62%    {transform:scale(.94,1.09) translate(-.6px,-.35px) rotate(-3deg)}
+  82%    {transform:scale(1.04,.98) translate(.4px,0)      rotate(1.5deg)}
+}
+@keyframes flame-glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(255,150,30,.5))}
+  30%    {filter:drop-shadow(0 0 8px rgba(255,170,50,.95))}
+  62%    {filter:drop-shadow(0 0 3px rgba(255,150,30,.62))}
+}
+@keyframes flame-core{
+  0%,100%{transform:scale(1,1);opacity:1}
+  45%    {transform:scale(1.08,.72);opacity:.58}
+}
+@keyframes relight{
+  0%  {transform:scale(.35,0);opacity:0}
+  48% {transform:scale(.94,1.1);opacity:1}
+  100%{transform:scale(1,1);opacity:1}
+}
+
+/* ── snuffed state ─────────────────────────────────────────── */
+.diya .smoke path{transform-box:fill-box;transform-origin:50% 100%;opacity:0;
+  stroke-dasharray:13;stroke-dashoffset:13}
+html[data-theme="dark"] .diya .flame{animation:snuff .62s cubic-bezier(.4,0,.25,1) forwards}
+html[data-theme="dark"] .diya .f-out{animation:glow-out .62s ease-out forwards}
+html[data-theme="dark"] .diya .f-core{animation:none}
+html[data-theme="dark"] .diya .s1{animation:smoke 2.4s .42s ease-out infinite}
+html[data-theme="dark"] .diya .s2{animation:smoke 2.4s 1.26s ease-out infinite}
+
+@keyframes snuff{
+  0%  {transform:scale(1,1)    rotate(0deg); opacity:1}
+  30% {transform:scale(.9,1.1)  rotate(-10deg);opacity:1}   /* bends in the draught */
+  58% {transform:scale(.74,.48) rotate(6deg);  opacity:.8}  /* then drops away fast */
+  100%{transform:scale(.4,0)    rotate(0deg);  opacity:0}
+}
+@keyframes glow-out{
+  0%  {filter:drop-shadow(0 0 7px rgba(255,165,45,.9))}
+  55% {filter:drop-shadow(0 0 3px rgba(255,150,30,.4))}
+  100%{filter:drop-shadow(0 0 0 rgba(255,150,30,0))}
+}
+/* the dash offset draws the wisp from the wick upward, so it reads as rising
+   rather than simply fading in */
+@keyframes smoke{
+  0%  {opacity:0;  stroke-dashoffset:13;transform:translateY(1px) scale(.8,.6) rotate(0deg)}
+  18% {opacity:.62}
+  55% {opacity:.5; stroke-dashoffset:0; transform:translateY(-1.5px) scale(1,1) rotate(2deg)}
+  100%{opacity:0;  stroke-dashoffset:0; transform:translateY(-5px) scale(1.25,1.2) rotate(-3deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .diya .flame,.diya .f-out,.diya .f-core,.diya .smoke path{animation:none!important}
+  .diya .f-out{filter:drop-shadow(0 0 4px rgba(255,155,35,.65))}
+  html[data-theme="dark"] .diya .flame{opacity:0}
+  html[data-theme="dark"] .diya .smoke path{opacity:.55;stroke-dashoffset:0}
+}
+
+/* ════════════ motion ════════════
+   Entrances are opacity and transform only, so nothing reflows. Every initial
+   state is scoped to .js: without script the page renders fully visible. */
+.js [data-rev]{will-change:opacity,transform}
+.js [data-rev].is-in{will-change:auto}
+
+/* rise — section statements, body copy, project text */
+.js [data-rev="rise"]{opacity:0;transform:translate3d(0,var(--rise),0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="rise"].is-in{opacity:1;transform:none}
+
+/* fade — the CV list and the mentoring badges, which should stay quiet */
+.js [data-rev="fade"]{opacity:0;transition:opacity var(--d-base) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 60ms)}
+.js [data-rev="fade"].is-in{opacity:1}
+
+/* wipe — the ledger rows read as a table filling in, left to right */
+.js [data-rev="wipe"]{opacity:0;clip-path:inset(0 100% 0 0);
+  transition:opacity var(--d-base) var(--ease-out),
+             clip-path var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="wipe"].is-in{opacity:1;clip-path:inset(0 0 0 0)}
+
+/* lift — the screens inside a thumbnail assemble in z-order */
+.js [data-rev="lift"]{opacity:0;transform:translate3d(0,16px,0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.js [data-rev="lift"].is-in{opacity:1;transform:none}
+
+/* draw — the quote's rule grows down from the top */
+.js [data-rev="draw"]{transform:scaleY(0);transform-origin:50% 0;
+  transition:transform var(--d-enter) var(--ease-enter)}
+.js [data-rev="draw"].is-in{transform:none}
+
+/* mask — the one signature device, on the hero headline and the 150+ */
+.ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.ln.flush{padding-bottom:0;margin-bottom:0}
+.ln>span{display:block}
+.js .ln>span{transform:translate3d(0,105%,0);
+  transition:transform var(--d-signature) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 90ms)}
+.js .ln.is-in>span,.js .is-in .ln>span{transform:none}
+
+
+/* ── shared components ────────────────────────────────────────────── */
+.btn{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer;color:inherit}
+.btn .in{background:var(--accent);color:#fff;border-radius:4px;padding:12px 20px;
+  display:flex;align-items:center;white-space:pre;
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:background-color var(--d-micro) var(--ease-out)}
+.btn:hover .in{background:var(--accent-hover)}
+.btn:active .in{background:var(--accent-active)}
+html[data-theme="dark"] .btn .in{color:#10191A}
+.tlink{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer}
+.tlink .in{padding:4px 0;display:flex;white-space:pre;color:var(--accent);
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:color var(--d-micro) var(--ease-out)}
+/* the rule sits on the label alone, so it never runs under the arrow */
+.tlink .in .lbl{text-decoration:underline 1px transparent;text-underline-offset:3px;
+  transition:text-decoration-color var(--d-micro) var(--ease-out)}
+.tlink:hover .in .lbl,a:hover > .tlink .in .lbl{text-decoration-color:currentColor}
+.tlink:active .in,a:active .tlink .in{color:var(--accent-active)}
+.tlink:active .in .lbl,a:active .tlink .in .lbl{text-decoration-color:currentColor}
+a.tlink:visited .in,a:visited .tlink .in{color:var(--accent-visited)}
+.arw{display:inline-block;transition:transform var(--d-micro) var(--ease-out)}
+.btn:hover .arw,.tlink:hover .arw,a:hover .arw{transform:translateX(3px)}
+.btn:hover .arw.up,.tlink:hover .arw.up,a:hover .arw.up{transform:translate(2px,-2px)}
+.tlink:hover .arw.back,a:hover .arw.back{transform:translateX(-3px)}
+
+/* ── the page's section rhythm ────────────────────────────────────── */
+.sec{padding:0 var(--px);position:relative}
+.sec.ruled{box-shadow:inset 0 1px 0 0 var(--line)}
+/* the ledger column: a label on the left, the content on the right */
+.lede{display:flex;align-items:flex-start;justify-content:space-between;width:100%}
+.lede .lab{width:416px;flex:0 0 416px;display:flex;gap:12px;white-space:nowrap;
+  color:var(--ink);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.lede .lab .n{color:var(--accent)}
+.col{width:746px;flex:0 0 746px;min-width:0}
+.col-wide{width:1280px;flex:0 0 1280px;min-width:0}
+.eyebrow{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.note{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* a screen: the frame carries the hairline, the image fills it */
+.sh{background:var(--surface);border-radius:6px;overflow:hidden;position:relative;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.sh img{position:absolute;max-width:none}
+.sh.fit img{inset:0;width:100%;height:100%;object-fit:cover}
+.js .sh img.fades{opacity:0;transition:opacity .15s var(--ease-out)}
+.js .sh img.is-loaded{opacity:1}
+/* a tinted plate the phone screens sit on */
+.plate{background:var(--tint);border-radius:4px;width:100%}
+
+/* ── the sticky section index ─────────────────────────────────────── */
+.srail{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:40;display:none;
+  flex-direction:column;gap:4px;padding:5px;border-radius:999px;
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.srail a{position:relative;width:32px;height:32px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+/* hover fills the pill; the current section keeps the accent either way */
+.srail a:hover,.srail a:focus-visible{background:var(--paper-2);color:var(--ink)}
+.srail a[aria-current="true"],
+.srail a[aria-current="true"]:hover,
+.srail a[aria-current="true"]:focus-visible{background:var(--accent);color:#F6F5F0}
+/* the section title, shown beside the number on hover or keyboard focus */
+.srail .lbl{position:absolute;left:42px;top:2px;transform:translateX(-4px);
+  padding:6px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;
+  background:var(--ink);color:#F6F5F0;
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:normal;
+  opacity:0;transition:opacity var(--d-micro) var(--ease-out),
+                       transform var(--d-micro) var(--ease-out)}
+html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line)}
+.srail a:hover .lbl,.srail a:focus-visible .lbl{opacity:1;transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.srail .lbl{transform:none}}
+@media (min-width:1180px){.srail{display:flex}}
+
+/* ── next case study ──────────────────────────────────────────────── */
+.nextcase{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.nextcase>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.nextcase .card{display:flex;gap:80px;align-items:center;width:100%;color:inherit}
+.nextcase .ptitle.w488{width:488px;max-width:100%}
+.nextcase .thumb{width:640px;flex:0 0 640px;height:400px;border-radius:4px;position:relative;
+  overflow:hidden;background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+.nextcase .thumb figure{position:absolute;margin:0;border-radius:8px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.nextcase .thumb img{width:100%;height:100%;object-fit:cover;
+  transition:transform var(--d-enter) var(--ease-out)}
+.nextcase .card:hover .thumb img{transform:scale(1.025)}
+.nextcase .body{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:20px}
+.nextcase .meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.nextcase .pnum{position:relative;display:inline-flex;color:var(--ink)}
+.nextcase .pnum::before{content:"";position:absolute;left:-4px;top:22px;height:16px;
+  width:100%;background:rgba(66,143,79,0.35)}
+.nextcase .pnum span{position:relative}
+.nextcase .name{color:var(--ink)}
+.nextcase .kind{color:var(--muted);white-space:nowrap}
+.nextcase .ptitle{color:var(--ink)}
+.nextcase .pdesc{color:var(--body)}
+.nextcase .out{padding:4px 0;width:100%}
+.nextcase .out p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.nextcase .card:hover .tlink .in .lbl{text-decoration-color:currentColor}
+
+/* ── footer ───────────────────────────────────────────────────────── */
+.foot{padding:32px 96px;display:flex;align-items:flex-start;justify-content:space-between;
+  box-shadow:inset 0 1px 0 0 var(--line)}
+.foot p{color:var(--muted);white-space:nowrap}
+
+/* ── a section head: label left, heading column right ─────────────── */
+.shead{display:flex;align-items:baseline;justify-content:space-between;width:100%}
+.shead .lab{width:380px;flex:0 0 380px;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.shead .lab b{font-weight:500;color:var(--accent)}
+.shead .lab.acc{color:var(--accent)}
+.shead .hd{width:746px;flex:0 0 746px;display:flex;flex-direction:column;gap:20px}
+.shead .hd h2{color:var(--ink)}
+.shead .hd h2.w628{width:628px;max-width:100%}
+.shead .hd h2.w668{width:668px;max-width:100%}
+.shead .hd h2.w716{width:716px;max-width:100%}
+.shead .hd h2.w596{width:596px;max-width:100%}
+.shead .hd p{color:var(--muted);width:640px;max-width:100%}
+
+/* ── the day strip, inside the teal inset ─────────────────────────── */
+.inset .mem{padding:40px 0;display:flex;flex-direction:column;gap:20px;width:100%}
+.inset .mem .k{color:rgba(246,245,240,.9);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px}
+.inset .mem .days{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:center}
+.inset .mem .days>div{flex:1 1 0;min-width:0;padding:12px 0;border-radius:8px;
+  background:var(--paper);display:flex;flex-direction:column;gap:4px}
+.inset .mem .days>div.gone{background:none;color:rgba(246,245,240,.75);
+  box-shadow:inset 0 0 0 1px rgba(246,245,240,.45)}
+.inset .mem .days>div.gone{border:1px dashed rgba(246,245,240,.45);box-shadow:none;padding:11px 0}
+.inset .mem .days b{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:var(--ink)}
+.inset .mem .days span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+.inset .mem .days>div.gone b,.inset .mem .days>div.gone span{color:rgba(246,245,240,.75)}
+.inset .mem>p{color:rgba(246,245,240,.9);font-weight:400;font-size:16px;line-height:25px}
+
+/* ── 02 · understanding ───────────────────────────────────────────── */
+.sec-2{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.evbar{display:flex;gap:40px;align-items:flex-start;padding:32px 0;width:100%}
+.evbar .big{width:300px;flex:0 0 300px;padding-top:20px;
+  display:flex;flex-direction:column;gap:4px;color:var(--accent)}
+.evbar .big b{font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px;white-space:nowrap}
+.evbar .big span{font-weight:500;font-size:16px;line-height:22px;width:280px}
+.evbar .rest{flex:1 1 0;min-width:0;display:flex;gap:16px;align-items:stretch}
+.evbar .rest>div{flex:1 1 0;min-width:0;padding:20px 0;
+  display:flex;flex-direction:column;gap:8px}
+.evbar .rest b{font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px;color:var(--accent)}
+.evbar .rest span{font-weight:400;font-size:14px;line-height:21px;color:var(--muted)}
+.mem{padding:40px 0;display:flex;flex-direction:column;gap:20px;width:100%}
+.mem .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.mem .days{display:flex;gap:8px;align-items:flex-start;width:100%;text-align:center}
+.mem .days>div{flex:1 1 0;min-width:0;padding:12px 0;border-radius:8px;
+  background:var(--paper);display:flex;flex-direction:column;gap:4px}
+.mem .days>div.gone{background:rgba(238,184,70,.28);color:var(--accent)}
+.mem .days b{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:var(--ink)}
+.mem .days span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+.mem .days>div.gone b,.mem .days>div.gone span{color:var(--accent)}
+.mem>p{color:var(--muted)}
+
+/* ── 03 · research and insights ───────────────────────────────────── */
+.sec-3{background:var(--paper);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.methods{display:flex;gap:16px;align-items:stretch;padding-top:20px;width:100%}
+/* stroke inside: it adds no height, and leaves the file's 152px text column */
+.methods>div{flex:1 1 0;min-width:0;background:var(--surface);
+  box-shadow:inset 0 0 0 1px var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.methods .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .methods .ic{background:rgba(125,195,208,.12)}
+.methods .ic img{width:19px;height:19px}
+.methods b{font-weight:500;font-size:16px;line-height:22px;color:var(--ink)}
+.methods span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+/* evidence → insight → decision */
+.eid{display:flex;flex-direction:column;width:100%}
+/* this page sets the rows 12px apart and pads them 16 */
+.eid.g12{gap:12px}
+.eid.g12 .row{padding:16px 0;align-items:center}
+.eid.g12 .row:last-child{padding-bottom:0}
+.eid .hdr{display:flex;align-items:flex-start;padding-bottom:16px;width:100%}
+.eid .hdr>span{flex:1 1 0;min-width:0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.eid .hdr>span:last-child{color:var(--accent)}
+.eid .row{display:flex;gap:12px;align-items:stretch;padding:20px 0;width:100%;
+  border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .eid .row{border-top-color:var(--line)}
+.eid .row:last-child{padding-bottom:0}
+.eid .row>div{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.eid .ev p{font-weight:400;font-size:16px;line-height:25px;color:var(--body)}
+.eid .ev span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+.eid .ins p{font-weight:500;font-size:16px;line-height:22px;color:var(--ink)}
+.eid .dec p{font-weight:500;font-size:16px;line-height:22px;color:var(--accent)}
+.eid .dec span{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:var(--muted)}
+.eid .row>img{width:16px;height:16px;flex:0 0 16px;align-self:flex-start;margin-top:3px}
+
+/* ── 04 · UX strategy ─────────────────────────────────────────────── */
+.sec-4{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.t-h-s{font-weight:500;font-size:24px;line-height:28px;letter-spacing:-.48px}
+.princ{background:linear-gradient(var(--ptint,var(--tint)),var(--ptint,var(--tint))),var(--paper);
+  border-radius:12px;padding:40px 48px;width:100%;display:flex;align-items:center}
+.princ .in{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.princ .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.princ h3{width:100%;color:var(--ink)}
+.six{display:flex;flex-wrap:wrap;gap:8px 48px;align-items:flex-start;width:100%}
+.six>div{width:384px;flex:0 0 384px;padding:24px 0 40px;
+  display:flex;flex-direction:column;gap:16px}
+.six .n{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.six h3{color:var(--ink)}
+.after{display:flex;flex-direction:column;gap:12px;width:100%}
+.after>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.after .wrap{padding:24px 0;width:100%;display:flex;flex-direction:column;align-items:flex-start}
+.after .lab{width:100%;color:var(--accent);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px}
+.after .row{display:flex;gap:12px;align-items:stretch;width:100%}
+.after .step{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.after .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .after .ic{background:rgba(125,195,208,.12)}
+.after .ic img{width:19px;height:19px}
+.after .step b{font-weight:500;font-size:16px;line-height:22px;color:var(--ink)}
+.after .step span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+.after .arw-i{width:20px;height:20px;flex:0 0 20px;align-self:center}
+.after .lab.on{color:var(--accent)}
+.after .step .big{font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px;color:var(--accent)}
+.after .step.sel span{color:var(--accent)}
+.after .time{width:280px;flex:0 0 280px;background:rgba(46,100,112,.06);
+  border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+html[data-theme="dark"] .after .time{background:rgba(125,195,208,.1)}
+.after .time b{font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px;color:var(--accent)}
+.after .time span{font-weight:400;font-size:13px;line-height:20px;color:var(--muted)}
+
+/* ── the six decision sections share these three pieces ───────────── */
+.dsec{padding:120px var(--px);display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.dsec.paper{background:var(--paper)}
+.dsec.paper-2{background:var(--paper-2)}
+/* a ruled list, used either side of a before/after comparison — a card here */
+.rlist{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.rlist .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .rlist .ic{background:rgba(125,195,208,.12)}
+.rlist .ic img{width:19px;height:19px}
+.rlist .k{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.rlist .li{display:flex;gap:12px;align-items:flex-start;width:100%;
+  padding:20px 0 8px;border-top:1px solid #D9D4C9;white-space:nowrap}
+html[data-theme="dark"] .rlist .li,html[data-theme="dark"] .rlist .blk{border-top-color:var(--line)}
+.rlist .li:first-of-type{padding-top:0;border-top:0}
+.rlist .li:last-of-type{padding-bottom:0}
+.rlist .li .n{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.rlist .li p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.rlist .blk{display:flex;flex-direction:column;gap:4px;width:100%;
+  padding:20px 0 16px;border-top:1px solid #D9D4C9}
+.rlist .blk:first-of-type{padding-top:0;border-top:0}
+.rlist .blk:last-of-type{padding-bottom:0}
+.rlist .blk b{font-weight:500;font-size:16px;line-height:22px;color:var(--ink)}
+.rlist .blk.on b{color:var(--accent)}
+.rlist .blk span{font-weight:400;font-size:14px;line-height:21px;color:var(--muted)}
+.cmp{padding:40px 0;width:100%}
+.cmp .row{display:flex;gap:12px;align-items:stretch;width:100%}
+.cmp .arw-i{width:25px;height:9px;flex:0 0 25px;align-self:center}
+/* the decision strip: one card, four ruled columns, the decision tinted */
+.dstrip{display:flex;align-items:stretch;width:100%;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dstrip>div{flex:1 1 0;min-width:0;padding:24px;display:flex;flex-direction:column;gap:8px}
+.dstrip>div+div{border-left:1px solid var(--line)}
+.dstrip .ic{width:28px;height:28px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .dstrip .ic{background:rgba(125,195,208,.12)}
+.dstrip .ic img{width:15px;height:15px}
+.dstrip .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.dstrip .res .k{color:var(--accent)}
+.dstrip p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.dstrip .dec{background:rgba(46,100,112,.06)}
+html[data-theme="dark"] .dstrip .dec{background:rgba(125,195,208,.08)}
+.dstrip .dec p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+/* this page sets the decision and the result in Title M, and the other two muted */
+.dstrip.t18 p{color:var(--muted)}
+.dstrip.t18 .dec p,.dstrip.t18 .res p{color:var(--ink);font-weight:500;
+  font-size:18px;line-height:25px;letter-spacing:-.09px}
+.dstrip.t18 .dec .k{color:var(--accent)}
+/* an information-architecture tree, before and after */
+.iacmp{display:flex;gap:24px;align-items:stretch;width:100%}
+.iacmp>div{flex:1 1 0;min-width:0;padding:32px 0;display:flex;flex-direction:column;gap:8px}
+.iacmp .k{width:100%;color:var(--accent);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px}
+.iacmp .sp{width:100%;height:8px}
+.iacmp .sp.lg{height:12px}
+.iacmp .root{display:flex;align-items:center;width:100%}
+.iacmp .root span{padding:8px 16px;color:var(--ink);font-weight:500;
+  font-size:16px;line-height:22px;white-space:nowrap}
+.iacmp .lv{display:flex;gap:8px;align-items:flex-start;width:100%;padding-left:32px}
+.iacmp .lv.d2{padding-left:64px}
+.iacmp .lv .br{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.iacmp .lv p{padding-bottom:8px;color:var(--body);font-weight:400;
+  font-size:16px;line-height:25px;white-space:nowrap}
+.iacmp .num{display:flex;gap:16px;align-items:center;width:100%}
+.iacmp .num b{color:var(--accent);font-weight:500;font-size:56px;
+  line-height:59px;letter-spacing:-1.96px;white-space:nowrap}
+.iacmp .num span{flex:1 1 0;min-width:0;color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+/* a full-width screenshot with numbered markers, and the notes under it */
+.shot{position:relative;width:100%;height:737px;border-radius:8px;
+  overflow:hidden;background:var(--surface)}
+.shot>img{position:absolute;left:0;top:0;width:1248px;height:736.667px;max-width:none}
+.mk{width:24px;height:24px;border-radius:12px;background:#499F58;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  color:#1C2628;font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.shot .mk{position:absolute}
+/* a cropped screenshot beside a numbered legend */
+.annot2{display:flex;gap:40px;align-items:flex-start;width:100%}
+.annot2 .shot{flex:none}
+.annot2 .legend{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:24px}
+.annot2 .legend>div{display:flex;flex-direction:column;gap:4px;width:100%}
+.annot2 .legend .top{display:flex;gap:12px;align-items:flex-start;width:100%}
+.annot2 .legend .top b{flex:1 1 0;min-width:0;color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.annot2 .legend>div>p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+/* two screens with an arrow between them */
+.seq{display:flex;align-items:flex-start;width:100%}
+.seq>figure{width:580px;flex:none;display:flex;flex-direction:column;gap:12px;margin:0}
+.seq figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+.seq .gap{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px;
+  align-items:center;justify-content:center;padding-top:160px}
+.seq .gap img{width:20px;height:20px}
+.seq .gap span{color:var(--muted);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px;text-align:center;white-space:nowrap}
+/* the three download states, drawn as a small state diagram */
+.states{padding:40px 0;display:flex;gap:12px;align-items:center;width:100%}
+.states .box{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:24px;display:flex;flex-direction:column;gap:12px}
+.states .box.start{width:240px;flex:none}
+.states .box.now{flex:1 1 0;min-width:0;border-color:rgba(46,100,112,.45)}
+.states .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:#E6EEEF}
+.states .ic img{width:19px;height:19px}
+.states .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.states .box.now .k{color:var(--accent)}
+.states b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.states p{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+.states .bar{width:100%;height:8px;border-radius:4px;background:var(--paper-2);overflow:hidden}
+.states .bar i{display:block;height:8px;border-radius:4px;background:var(--accent);width:245px;max-width:100%}
+.states .arw-i{width:20px;height:20px;flex:0 0 20px}
+.states .pair{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
+.states .ok{background:#EEF5F0;border-color:#BFD9C8;gap:8px;width:100%}
+.states .ok .ic{background:#DCEBE1}
+.states .ok .k{color:#2F7D52}
+.states .bad{background:#FBF0EC;border-color:#E9C7BB;gap:8px;width:100%}
+.states .bad .ic{background:#F5DDD5}
+.states .bad .k{color:#B4472A}
+.states .retry{align-self:flex-start;display:flex;gap:6px;align-items:center;
+  background:var(--surface);border:1px solid #E9C7BB;border-radius:999px;padding:6px 12px}
+.states .retry img{width:14px;height:14px}
+.states .retry span{color:#B4472A;font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.notes{display:flex;gap:24px;align-items:flex-start;width:100%}
+.notes>div{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.notes .top{display:flex;gap:12px;align-items:flex-start;width:100%}
+.notes .top b{flex:1 1 0;min-width:0;color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.notes>div>p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* the tinted stage the phone screens sit on */
+.stage{background:linear-gradient(var(--tint),var(--tint)),var(--paper);border-radius:4px;width:100%;overflow:hidden;
+  padding:64px 48px 48px;display:flex;flex-direction:column;align-items:center}
+.stage .row{width:var(--row-w,936px);max-width:100%;display:flex;flex-wrap:wrap;gap:48px;
+  align-items:flex-start;justify-content:center}
+.stage figure{display:flex;flex-direction:column;gap:12px;width:280px;flex:0 0 280px}
+.stage .sh{width:280px;height:606px;border-radius:6px}
+.stage .sh img{left:-1px;top:-1px;width:280px;height:606px}
+.stage figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* ── D6 · where the portal gave way to a PDF ──────────────────────── */
+.report{padding:40px 0;display:flex;flex-direction:column;gap:20px;width:100%}
+.pos{display:flex;gap:12px;align-items:stretch;width:100%}
+.pos>.side{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.pos>.side.r{text-align:right}
+.pos .side .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.pos .side b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.pos .arw-i{width:25px;height:9px;flex:0 0 25px;align-self:center}
+.pos .ship{flex:1 1 0;min-width:0;background:var(--accent);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;align-items:center}
+html[data-theme="dark"] .pos .ship{background:#13343C}
+.pos .ship .k{width:100%;color:rgba(246,245,240,.9);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px}
+.pos .ship b{width:100%;color:#F6F5F0;font-weight:500;font-size:16px;line-height:22px}
+.tcols{display:flex;gap:20px;align-items:stretch;width:100%}
+.tcols>div{flex:1 1 0;min-width:0;padding:20px 0 24px;display:flex;flex-direction:column;gap:8px}
+.tcols .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.tcols .res .k{color:var(--accent)}
+.tcols b{color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.tcols p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* ── 06 · the whole section sits on the tint, stage and all ───────── */
+.sec-6{background:var(--tint);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.sec-6 .stage{background:none;padding:64px 48px 48px}
+
+/* ── 07 · validation and iteration ────────────────────────────────── */
+.sec-7{background:var(--paper);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+/* design → finding → improvement → result */
+.dfir{display:flex;flex-direction:column;width:100%}
+.dfir .hdr{display:flex;gap:24px;align-items:flex-start;padding-bottom:24px;width:100%}
+.dfir .hdr>span{flex:1 1 0;min-width:0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.dfir .hdr>span:last-child{color:var(--accent)}
+.dfir .row{display:flex;gap:24px;align-items:flex-start;padding:24px 0;width:100%;
+  box-shadow:inset 0 1px 0 0 #D9D4C9}
+html[data-theme="dark"] .dfir .row{box-shadow:inset 0 1px 0 0 var(--line)}
+.dfir .row:last-child{padding-bottom:0}
+.dfir .row>p{flex:1 1 0;min-width:0;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.dfir .row>p.d{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.dfir .res{flex:1 1 0;min-width:0;display:flex;gap:12px;align-items:flex-start}
+.dfir .res img{width:16px;height:16px;flex:0 0 16px;margin-top:1px}
+.dfir .res p{flex:1 1 0;min-width:0;color:var(--accent);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+/* this page's version: 18px design column, 20px rows, no result icon */
+.dfir.v2 .hdr{gap:24px;padding-bottom:16px}
+.dfir.v2 .row{gap:24px;padding:20px 0;align-items:stretch;
+  box-shadow:none;border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .dfir.v2 .row{border-top-color:var(--line)}
+.dfir.v2 .row>p.d{color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.dfir.v2 .row>p.r{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+/* the lessons table on this page: lesson, then, now */
+.lessons.v2{display:flex;flex-direction:column;width:100%}
+.lessons.v2 .hdr{display:flex;gap:24px;align-items:flex-start;padding-bottom:16px;width:100%}
+.lessons.v2 .hdr>span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.lessons.v2 .hdr>span.a{width:360px;flex:0 0 360px}
+.lessons.v2 .hdr>span.b,.lessons.v2 .hdr>span.c{flex:1 1 0;min-width:0}
+.lessons.v2 .row{display:flex;gap:24px;align-items:stretch;width:100%;
+  padding:20px 0;border-top:1px solid #D9D4C9}
+/* every row keeps its bottom padding here, including the last */
+.lessons.v2 .row:last-child{padding-bottom:20px}
+.lessons.v2 .row>b{width:360px;flex:0 0 360px;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.lessons.v2 .row>.then{flex:1 1 0;min-width:0;color:var(--muted);
+  font-weight:400;font-size:16px;line-height:25px}
+.lessons.v2 .row>.now{flex:1 1 0;min-width:0;color:var(--accent);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+/* two wide screens side by side */
+.wides{display:flex;gap:24px;align-items:flex-start;width:100%}
+.wides figure{width:612px;flex:none;display:flex;flex-direction:column;gap:12px;margin:0}
+.wides figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* the signed-off table: status, target, outcome */
+.sot{display:flex;flex-direction:column;width:100%}
+.sot .hdr{display:flex;gap:24px;align-items:flex-start;padding-bottom:16px;width:100%}
+.sot .hdr>span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.sot .hdr>span.a{width:160px;flex:0 0 160px}
+.sot .hdr>span.b{width:340px;flex:0 0 340px}
+.sot .hdr>span.c{flex:1 1 0;min-width:0}
+.sot .row{display:flex;gap:24px;align-items:stretch;width:100%;
+  padding:20px 0;border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .sot .row{border-top-color:var(--line)}
+.sot .row>.st{width:160px;flex:0 0 160px;color:var(--accent);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.sot .row>b{width:340px;flex:0 0 340px;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.sot .row>p{flex:1 1 0;min-width:0;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* the open issues table */
+.issues{display:flex;flex-direction:column;width:100%}
+.issues .hdr{display:flex;gap:24px;align-items:flex-start;padding-bottom:16px;width:100%}
+.issues .hdr>span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.issues .hdr>span.a{width:280px;flex:0 0 280px}
+.issues .hdr>span.b{flex:1 1 0;min-width:0}
+.issues .hdr>span.c{width:180px;flex:0 0 180px}
+.issues .row{display:flex;gap:24px;align-items:stretch;width:100%;
+  padding:20px 0;border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .issues .row{border-top-color:var(--line)}
+.issues .row>b{width:280px;flex:0 0 280px;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.issues .row>p{flex:1 1 0;min-width:0;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.issues .row>span{width:180px;flex:0 0 180px;color:var(--accent);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+
+/* a small icon + label heading used three times in this section */
+.ilab{display:flex;gap:8px;align-items:center}
+.ilab img{width:16px;height:16px;flex:0 0 16px}
+.ilab span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.block{display:flex;flex-direction:column;gap:16px;width:100%}
+/* what we got wrong */
+.wrong{display:flex;flex-direction:column;width:100%}
+.wrong .row{display:flex;gap:40px;align-items:flex-start;padding:32px 0;width:100%}
+.wrong .pills{width:320px;flex:0 0 320px;padding-bottom:24px;
+  display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+.wrong .pills span{padding-bottom:4px;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;white-space:nowrap}
+/* two pills side by side: no wrap, no baseline pad (rows 1 and 3) */
+.wrong .pills.nw{flex-wrap:nowrap;align-items:center}
+.wrong .pills.nw span{padding-bottom:0}
+.wrong .tx{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.wrong .tx .top{display:flex;gap:12px;align-items:center;width:100%}
+.wrong .tx .top b{flex:1 1 0;min-width:0;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.wrong .tx .top .pill{padding-bottom:4px;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;white-space:nowrap}
+.wrong .tx .top .pill.on{color:var(--accent)}
+.wrong .tx p{color:var(--muted);font-weight:400;font-size:18px;line-height:28px}
+/* the annotated client-review slice */
+.annot{background:linear-gradient(var(--tint),var(--tint)),var(--paper);border-radius:4px;padding:32px;width:100%;
+  display:flex;gap:32px;align-items:flex-start}
+.annot .slice{width:404px;flex:0 0 404px;height:470px;position:relative}
+.annot .slice .sh{position:absolute;left:44px;top:0;width:360px;height:470px;border-radius:8px}
+.annot .slice .sh img{left:-1px;top:-1px;width:360px;height:804px}
+.annot .slice .pin{position:absolute;left:4px;width:28px;height:28px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.annot .slice .tick{position:absolute;left:32px;width:12px;height:1px;background:var(--accent)}
+.annot .side{flex:1 1 0;min-width:0;padding-top:24px;
+  display:flex;flex-direction:column;gap:24px}
+.annot .side .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.annot .side>p{color:var(--body);font-weight:400;font-size:18px;line-height:28px}
+.annot .item{display:flex;gap:16px;align-items:flex-start;width:100%}
+.annot .item .n{width:28px;height:28px;flex:0 0 28px;border-radius:999px;
+  display:flex;align-items:flex-start;justify-content:center;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.annot .item .tx{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:4px}
+.annot .item b{color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.annot .item span{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+/* still unproven */
+.unproven{padding:24px 0;display:flex;flex-direction:column;gap:16px;width:100%}
+.unproven .cols{display:flex;gap:16px;align-items:stretch;width:100%}
+.unproven .cols>div{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.unproven .cols .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .unproven .cols .ic{background:rgba(125,195,208,.12)}
+.unproven .cols .ic img{width:19px;height:19px}
+.unproven .cols b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.unproven .cols>div>span{color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+/* the measure-next cards run 18/16 on this page */
+.unproven .cols>div>b{font-size:18px;line-height:25px;letter-spacing:-.09px}
+.unproven .cols>div>span{font-size:16px;line-height:25px}
+
+/* ── 08 · results and impact ──────────────────────────────────────── */
+.sec-8{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.targets{display:flex;flex-direction:column;width:100%}
+.targets .row{display:flex;gap:24px;align-items:center;padding:24px 0;width:100%;
+  border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .targets .row,html[data-theme="dark"] .owners .r{border-top-color:var(--line)}
+.targets .row:first-child{padding-top:0;border-top:0}
+.targets .row:last-child{padding-bottom:0}
+.targets .st{width:160px;flex:0 0 160px;display:flex;gap:8px;align-items:center;padding-bottom:4px}
+.targets .st img{width:8px;height:8px;flex:0 0 8px}
+.targets .st span{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.targets .row.none .st span{color:var(--muted)}
+.targets .row>b{width:340px;flex:0 0 340px;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.targets .row>p{flex:1 1 0;min-width:0;color:var(--body);font-weight:400;font-size:18px;line-height:28px}
+.targets .row.none>p{color:var(--muted)}
+.hold{background:var(--accent);border-radius:12px;padding:32px;width:100%;
+  display:flex;flex-direction:column;gap:8px}
+html[data-theme="dark"] .hold{background:#13343C}
+.hold .k{color:rgba(246,245,240,.9);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.hold b{color:#F6F5F0;font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.hold p{color:rgba(246,245,240,.9);font-weight:400;font-size:16px;line-height:25px}
+/* who did what */
+.own{display:flex;flex-direction:column;gap:16px;width:100%}
+.own .grp{display:flex;flex-direction:column;gap:20px;width:100%}
+.own .scale{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:flex-start;width:100%}
+.own .scale>span{flex:1 1 0;min-width:0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.own .scale>span.mid{color:var(--accent)}
+.own .levels{display:flex;gap:24px;align-items:stretch;width:100%}
+.own .levels>div{flex:1 1 0;min-width:0;padding-bottom:32px;
+  display:flex;flex-direction:column;gap:16px}
+.own .levels h3{color:var(--ink);font-weight:500;font-size:24px;line-height:28px;letter-spacing:-.48px}
+.own .levels>div.lead h3,.own .levels>div.lead>p{color:var(--accent)}
+.own .levels>p,.own .levels>div>p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.own .levels>div.team>p{color:var(--muted)}
+.own .chips{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;width:100%}
+.own .chips span{color:var(--body);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.own .levels>div.lead .chips span{color:var(--accent)}
+.owners{display:flex;flex-direction:column;width:100%}
+.owners .r{display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 0;
+  border-top:1px solid #D9D4C9}
+.owners .r:first-child{padding-top:0;border-top:0}
+.owners .r:last-child{padding-bottom:0}
+.owners b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.owners span{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+/* the five process stages */
+.stages{display:flex;align-items:flex-start;width:100%}
+.stages>div{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:16px}
+.stages .top{display:flex;align-items:center;justify-content:space-between;
+  padding-right:24px;width:100%}
+.stages .top span{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.stages .top span.dim{color:var(--muted)}
+.stages .top img{width:25px;height:9px;flex:0 0 25px}
+.stages p{padding-right:24px;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* ── 09 · reflection ──────────────────────────────────────────────── */
+.sec-9{background:var(--paper);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.lessons{display:flex;flex-direction:column;width:100%}
+.lessons .hdr{display:flex;gap:32px;align-items:flex-start;padding-bottom:16px;width:100%}
+.lessons .hdr .sp{width:360px;flex:0 0 360px;height:1px}
+.lessons .hdr>span{flex:1 1 0;min-width:0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.lessons .hdr>span.now{color:var(--accent)}
+.lessons .row{display:flex;gap:32px;align-items:flex-start;padding:24px 0;width:100%;
+  border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .lessons .row{border-top-color:var(--line)}
+.lessons .row:last-child{padding-bottom:0}
+.lessons .ttl{width:360px;flex:0 0 360px;display:flex;gap:20px;align-items:flex-start}
+.lessons .ttl .n{color:var(--accent);font-weight:500;font-size:40px;line-height:44px;
+  letter-spacing:-1.2px;white-space:nowrap}
+.lessons .ttl b{flex:1 1 0;min-width:0;color:var(--ink);
+  font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.lessons .then{flex:1 1 0;min-width:0;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.lessons .now{flex:1 1 0;min-width:0;color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.next-d{display:flex;flex-direction:column;gap:16px;width:100%}
+.next-d h3{color:var(--ink);font-weight:500;font-size:24px;line-height:28px;letter-spacing:-.48px}
+.next-d .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.next-d .k.w746{width:746px;max-width:100%}
+
+/* ── hero ─────────────────────────────────────────────────────────── */
+.hero{background:var(--paper);padding:96px var(--px) 160px;
+  display:flex;flex-direction:column;gap:32px;align-items:flex-start}
+.hero .chips{display:flex;gap:20px;align-items:flex-start}
+.hero .chips span{padding:4px 0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;white-space:nowrap}
+.hero h1{width:1010px;max-width:100%;color:var(--ink)}
+.hero .sub{width:640px;max-width:100%;color:var(--muted)}
+/* the meta row is ruled: hairlines drawn inside, so they add no height */
+.hero .meta{display:flex;align-items:stretch;width:100%;
+  box-shadow:inset 0 1px 0 0 var(--line),inset 0 -1px 0 0 var(--line)}
+.hero .meta>div{flex:1 1 0;min-width:0;padding:20px 24px;
+  display:flex;flex-direction:column;gap:8px}
+.hero .meta>div:first-child{padding-left:0;padding-right:24px}
+.hero .meta>div+div{box-shadow:inset 1px 0 0 0 var(--line)}
+.hero .meta .ic{width:28px;height:28px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(46,100,112,.08)}
+.hero .meta .ic img{width:15px;height:15px}
+html[data-theme="dark"] .hero .meta .ic{background:rgba(125,195,208,.12)}
+.hero .meta .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.hero .meta .v{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+/* ── this project is keyed green, and the hero shows browser + phone ── */
+.hero{--tint:rgba(66,143,79,.1)}
+.hero .chips span{padding:0}
+.hero .text{display:flex;flex-direction:column;gap:32px;width:100%;align-items:flex-start}
+.hero h1{width:1180px}
+.hero .screens.wide{height:auto;padding:48px;display:flex;gap:24px;
+  align-items:flex-end;justify-content:center;overflow:hidden;
+  border-radius:4px;width:100%;background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+.hero .screens.wide .sh{height:449px;border-radius:8px;flex:none}
+.hero .screens.wide .sh.lg{width:760px}
+.hero .screens.wide .sh.sm{width:170px}
+.hero .screens.wide .sh.lg img{left:-1px;top:-1px;width:760px;height:448.611px}
+.hero .screens.wide .sh.sm img{left:-1px;top:-1px;width:170px}
+
+/* ── hero stage, this version: captioned screens on a padded plate ── */
+.hero .screens{height:auto;padding:64px 0;display:flex;gap:40px;
+  align-items:flex-start;justify-content:center;overflow:hidden;
+  border-radius:4px;width:100%;background:var(--tint)}
+.hero .screens figure{width:290px;flex:0 0 290px;display:flex;flex-direction:column;gap:12px;margin:0}
+.hero .screens .sh{width:290px;height:560px;flex:none;border-radius:6px}
+.hero .screens .sh img{left:-1px;top:-1px;width:290px;height:627px}
+.hero .screens figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* ── 01 · ownership and process, drawn as cards ───────────────────── */
+.ownership{display:flex;flex-direction:column;gap:16px;width:100%}
+.ownership>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.crow{display:flex;gap:16px;align-items:stretch;width:100%}
+.ocard{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.ocard .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .ocard .ic{background:rgba(125,195,208,.12)}
+.ocard .ic img{width:19px;height:19px}
+.ocard h3{color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.ocard .lab{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.ocard .tl{color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.ocard .sl{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.ocard>p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.ocard.lead h3,.ocard.lead>p{color:var(--accent)}
+.ocard.team>p{color:var(--muted)}
+.ocard .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%}
+.ocard .chips span{background:var(--paper-2);border-radius:999px;padding:6px 12px;
+  color:var(--muted);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.ocard.lead .chips span{color:var(--accent)}
+/* a process stage: badge, label, one line of body */
+.scard{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.scard .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .scard .ic{background:rgba(125,195,208,.12)}
+.scard .ic img{width:19px;height:19px}
+.scard .k{padding-right:24px;color:var(--accent);font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px;white-space:nowrap}
+.scard .k.dim{color:var(--muted)}
+.scard p{padding-right:24px;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* ── 01 · the problem, set in the brand teal ──────────────────────── */
+.inset{background:var(--accent);padding:160px var(--px);color:#F6F5F0;
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+html[data-theme="dark"] .inset{background:#13343C}
+.inset .in{padding:0 var(--px);display:flex;flex-direction:column;gap:40px;width:100%}
+.inset .head{display:flex;align-items:baseline;justify-content:space-between;width:100%}
+.inset .head .lab{width:380px;flex:0 0 380px;
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  color:rgba(246,245,240,.9)}
+.inset .head .lab b{font-weight:500;color:#B7DFBF}
+.inset .head .hd{width:746px;flex:0 0 746px;display:flex;flex-direction:column;gap:20px}
+.inset .head .hd h2{color:#F6F5F0}
+/* the short intro under the heading, 640 wide like every other section intro */
+.inset .head .hd p{width:640px;max-width:100%;color:rgba(246,245,240,.85)}
+.pstmt{display:flex;gap:16px;align-items:stretch;width:100%}
+/* these four draw their stroke inside, so it adds no height */
+.pstmt>div{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
+  background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);
+  display:flex;flex-direction:column;gap:12px;color:rgba(246,245,240,.9)}
+.pstmt .ic,.before .ic,.loop .ic{width:36px;height:36px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1)}
+.pstmt .ic img,.before .ic img,.loop .ic img{width:19px;height:19px}
+.pstmt .k{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.pstmt p{font-weight:400;font-size:16px;line-height:25px}
+.pstmt .ux{background:rgba(238,184,70,.14);box-shadow:inset 0 0 0 1px rgba(244,209,134,.45)}
+.pstmt .ux .k{color:#B7DFBF}
+.pstmt .ux p{color:#F6F5F0;font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+/* the loop a request used to take, ending on the time it cost */
+.loop{padding:24px 0;display:flex;gap:12px;align-items:stretch;width:100%}
+.loop .step{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  display:flex;flex-direction:column;gap:12px}
+.loop .step b{font-weight:500;font-size:16px;line-height:22px;color:#F6F5F0}
+.loop .step span{font-weight:400;font-size:13px;line-height:20px;color:rgba(246,245,240,.9)}
+.loop .step .big{font-weight:500;font-size:28px;line-height:32px;letter-spacing:-.56px;color:#F6F5F0}
+.loop .arw-i{width:20px;height:20px;flex:0 0 20px;align-self:center}
+.inset .note{font-weight:400;font-size:13px;line-height:20px;color:rgba(246,245,240,.9)}
+/* the routine as it was, step cards with the time called out at the end */
+.before{padding:24px 0;width:100%;display:flex;flex-direction:column;align-items:flex-start}
+.before>.k{width:100%;font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;color:rgba(246,245,240,.9)}
+.before .row{display:flex;gap:12px;align-items:stretch;width:100%}
+.before .step{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  display:flex;flex-direction:column;gap:12px}
+.before .step b{font-weight:500;font-size:16px;line-height:22px;color:#F6F5F0}
+.before .step span{font-weight:400;font-size:13px;line-height:20px;color:rgba(246,245,240,.9)}
+.before .arw-i{width:25px;height:9px;flex:0 0 25px;align-self:center}
+.before .time{width:280px;flex:0 0 280px;padding:24px;border-radius:12px;
+  background:rgba(238,184,70,.14);border:1px solid rgba(244,209,134,.45);
+  display:flex;flex-direction:column;gap:12px}
+.before .time b{font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px;color:#F6F5F0}
+.before .time span{font-weight:400;font-size:13px;line-height:20px;color:rgba(246,245,240,.9)}
+
+/* ════════════ responsive ════════════
+   The frame is drawn at 1440; every column width above is the file's. Below
+   that the fixed columns give first, then the rows stack. */
+@media (max-width:1439px){
+  /* the fixed-size screenshot crops clip rather than push the page wide */
+  .shot,.hero .screens.wide .sh{max-width:100%}
+  .seq figure,.wides figure,.annot2 .shot{max-width:100%}
+  .seq,.wides{flex-wrap:wrap;gap:24px}
+  .seq .gap{flex:1 1 100%;padding-top:0;flex-direction:row}
+  .iacmp .lv p,.iacmp .root span{white-space:normal}
+  .states .box.start{width:auto;flex:1 1 200px}
+  .shead .lab{flex:0 1 380px}
+  .shead .hd{flex:0 1 746px}
+  .inset .head .lab{flex:0 1 380px}
+  .inset .head .hd{flex:0 1 746px}
+  .hero h1,.hero .sub,.princ h3,.shead .hd p,.inset .head .hd p{max-width:100%}
+  .nextcase .thumb{flex:0 1 640px}
+  .lessons .ttl,.lessons .hdr .sp{flex:0 1 360px}
+  .wrong .pills{flex:0 1 320px}
+  .annot .slice{flex:0 1 404px}
+  .evbar .big{flex:0 1 300px}
+  .targets .st{flex:0 1 160px}
+  .targets .row>b{flex:0 1 340px}
+  .before .lab,.after .lab{flex:0 1 80px}
+  .before .time,.after .time{flex:0 1 220px}
+}
+@media (max-width:1240px){
+  :root{--px:56px}
+  .t-display{font-size:clamp(44px,5.6vw,72px);letter-spacing:-.04em}
+  .t-h-xl{font-size:clamp(34px,4.2vw,56px);letter-spacing:-.035em}
+  .t-h-l{font-size:clamp(30px,3.4vw,44px);letter-spacing:-.03em}
+  .foot{padding-left:var(--px);padding-right:var(--px)}
+  .nextcase .card{gap:48px}
+  .stage{padding:48px 32px 32px}
+  .srail{left:12px}
+}
+@media (max-width:1024px){
+  .sec-2,.sec-3,.sec-4,.sec-6,.sec-7,.sec-8,.sec-9,.dsec,.nextcase{
+    padding-top:88px;padding-bottom:88px;gap:48px}
+  .hero{padding-top:72px;padding-bottom:96px}
+  .inset{padding:88px 0}
+  .shead,.inset .head{flex-wrap:wrap;gap:20px}
+  .shead .lab,.shead .hd,.inset .head .lab,.inset .head .hd{flex:1 1 100%;width:auto;min-width:0}
+  /* a fixed width would otherwise set the flex item's automatic minimum */
+  .shead .hd p,.inset .head .hd p,.hero .sub,.hero h1,.princ h3,.mbody .left p{width:100%}
+  .hero .meta,.pstmt,.evbar,.evbar .rest,.methods,.six,.cmp .row,.dstrip,.tcols,
+  .unproven .cols,.own .levels,.stages,.nextcase .card,.annot,.pos,
+  .crow,.before .row,.after .row,.loop,.iacmp,.annot2{flex-wrap:wrap;gap:16px}
+  .loop .step,.iacmp>div,.annot2 .legend{flex:1 1 240px}
+  /* the state diagram stacks rather than squeezing four boxes into a row */
+  .states{flex-direction:column;align-items:stretch;gap:16px}
+  .states>*,.states .box,.states .pair{width:100%;flex:0 0 auto;min-width:0}
+  .states .arw-i{align-self:center;transform:rotate(90deg)}
+  .notes,.wides,.seq{flex-wrap:wrap}
+  .issues .row,.issues .hdr,.sot .row,.sot .hdr,.lessons.v2 .row,.lessons.v2 .hdr{flex-wrap:wrap;gap:12px}
+  .issues .row>b,.issues .hdr>span.a,.sot .row>b,.sot .hdr>span.b,
+  .sot .row>.st,.sot .hdr>span.a,.issues .row>span,.issues .hdr>span.c,
+  .lessons.v2 .row>b,.lessons.v2 .hdr>span.a{flex:1 1 100%;width:auto}
+  .hero .meta,.tcols,.nextcase .card,.annot{gap:32px}
+  .hero .meta>div,.pstmt>div,.methods>div,.dstrip>div,.tcols>div,
+  .unproven .cols>div,.own .levels>div,.stages>div,
+  .ocard,.scard,.before .step,.after .step,.rlist,.pos>.side,.pos .ship{flex:1 1 240px}
+  /* the meta row and the decision strip rule between columns; once they wrap,
+     the rule has to run along the top instead */
+  .hero .meta{box-shadow:none}
+  .hero .meta>div{padding-left:0;padding-right:0;box-shadow:inset 0 1px 0 0 var(--line)!important}
+  .hero .meta>div:first-child{box-shadow:none!important}
+  .dstrip>div+div{border-left:0;border-top:1px solid var(--line)}
+  .before .time,.after .time{flex:1 1 240px;width:auto}
+  .evbar .big,.annot .slice,.nextcase .thumb{flex:1 1 100%;width:auto}
+  .nextcase .thumb{height:auto;aspect-ratio:640/400}
+  .six>div{flex:1 1 320px;width:auto}
+  .eid .row,.dfir .row,.lessons .row,.targets .row,.before .row,.after .row{flex-wrap:wrap;gap:12px}
+  .eid .row>img,.before .arw-i,.after .arw-i,.stages .top img,.pos .arw-i{display:none}
+  .eid .row>div,.dfir .row>p,.dfir .res{flex:1 1 240px}
+  .lessons .ttl,.lessons .hdr .sp,.wrong .pills{flex:1 1 100%;width:auto}
+  .lessons .hdr{display:none}
+  .targets .st,.targets .row>b,.before .lab,.after .lab{flex:1 1 100%;width:auto}
+  .before .step,.after .step{flex:1 1 200px}
+  .before .time,.after .time{flex:1 1 100%;width:auto}
+  .wrong .row{flex-wrap:wrap;gap:16px}
+  .annot .slice{height:470px}
+  /* three 290px screens stop fitting one row here */
+  .hero .screens{flex-wrap:wrap;padding:48px 24px}
+  .hero .screens figure{flex:1 1 240px;width:auto;min-width:0;max-width:290px}
+  .hero .screens .sh{width:100%;height:auto;aspect-ratio:290/560}
+  .hero .screens .sh img{position:static;width:100%;height:auto}
+}
+@media (max-width:900px){
+  /* brand + links + toggle + resume stop fitting the 76px nav row here */
+  .nav .links{display:none}
+  /* the longer labels stop insisting on one line */
+  .own .chips span,.ocard .chips span,.wrong .pills span,.scard .k,
+  .stages .top span,.nextcase .kind,.hero .chips span,.targets .st span,
+  .rlist .li,.pos .ship{white-space:normal}
+  /* nine day cells and the three-part position row stop fitting one line */
+  .inset .mem .days{flex-wrap:wrap}
+  .inset .mem .days>div{flex:1 1 76px}
+  .pos{flex-direction:column;align-items:stretch;gap:20px}
+  .pos>.side.r{text-align:left}
+  .pos .ship{align-items:flex-start;padding:12px 20px;border-radius:8px}
+}
+@media (max-width:640px){
+  :root{--px:20px}
+  .stage{padding:32px 16px 24px}
+  .stage figure,.stage .sh{width:100%;flex:1 1 100%}
+  .stage .sh{height:auto;aspect-ratio:280/606}
+  .stage .sh img{position:static;width:100%;height:auto}
+  .hero .screens{height:auto;padding:32px 16px;flex-wrap:wrap}
+  .hero .screens .sh{width:100%;flex:1 1 100%;height:auto;aspect-ratio:290/560}
+  .hero .screens .sh img{position:static;width:100%;height:auto}
+  .annot{flex-wrap:wrap;padding:20px}
+  .annot .slice{width:100%;height:auto;aspect-ratio:404/470}
+  .annot .slice .sh{position:relative;left:0;width:100%;height:auto;aspect-ratio:360/470}
+  .annot .slice .sh img{position:static;width:100%;height:auto}
+  .annot .slice .pin,.annot .slice .tick{display:none}
+  .tlink,.nav .cv{min-height:44px;align-items:center}
+  .hold b,.t-h-m{font-size:24px;line-height:29px}
+  .srail{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js [data-rev],.js .ln>span{opacity:1!important;transform:none!important;clip-path:none!important}
+  .js .sh img.fades{opacity:1}
 }
 </style>
-</head>
-<body>
-<a class="skip" href="#problem">Skip to the case study</a>
-<header class="nav" id="nav">
-  <div class="nav-in">
-    <a class="brand" href="index.html" aria-label="Deep Vyas — home"><img class="mark" src="d-logo.svg" alt="" width="28" height="28"> Deep Vyas</a>
-    <nav class="nav-links" aria-label="Sections">
-      <a href="index.html#work">Work</a>
+</head><body>
+<a class="skip" href="#contribution">Skip to the case study</a>
+<div class="page">
+
+<header class="nav" id="top">
+  <a class="brand" href="index.html" aria-label="Deep Vyas — home">
+    <img src="fl-assets/0b678.svg" alt="" width="35" height="35" decoding="async">
+    <span class="t-title-m">Deep Vyas</span>
+  </a>
+  <div class="right">
+    <nav class="links" aria-label="Sections">
+      <a href="index.html#work" aria-current="page">Work</a>
+      <a href="index.html#how">How I work</a>
       <a href="index.html#about">About</a>
+      <a href="index.html#mentoring">Mentoring</a>
       <a href="index.html#contact">Contact</a>
     </nav>
-    <div class="nav-act">
-      <button class="icon-btn" id="theme" aria-label="Switch colour theme">
-        <svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg>
-      </button>
-      <a class="nav-cv" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">CV &nearr;</a>
-    </div>
-    <div class="prog" id="prog" aria-hidden="true"></div>
+    <button class="toggle" id="theme" type="button" aria-label="Switch colour theme">
+      <span class="btn"><svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg></span>
+    </button>
+    <a class="cv t-label" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">Résumé <span class="arw up">↗</span></a>
   </div>
+  <span class="strip" aria-hidden="true"><span style="background:#2E6470"></span><span style="background:#45918C"></span><span style="background:#428F4F"></span><span style="background:#9DBB55"></span><span style="background:#EEB846"></span><span style="background:#DD833E"></span><span style="background:#D45C37"></span></span>
 </header>
-<main id="top">
-<div class="back wrap"><a href="index.html#work">&larr; All work</a></div>
-<header class="chero wrap">
-  <div class="kick rv"><span class="label">Flint Group</span><span class="dot"></span><span class="label">B2B portal · Self-serve</span><span class="dot"></span><span class="label">6 months, 2024</span></div>
-  <h1 class="rv">Replacing email chaos with a self-serve portal for a <em>global B2B supply chain</em>.</h1>
-  <p class="sum rv">Flint Group supplies printing inks and coatings in 100+ countries. To get a certificate, an order update or support, its customers emailed their account manager and waited a day or two. I led the design of Flint-Link, a self-serve portal organised around the order rather than the document. All three success criteria passed acceptance testing at four customer organisations.</p>
-  <dl class="meta rv"><div><dt>Role on this project</dt><dd>Lead UI/UX Designer · End to end, incl. acceptance testing</dd></div><div><dt>Project type</dt><dd>B2B customer portal</dd></div><div><dt>Domain</dt><dd>Printing inks and coatings</dd></div><div><dt>Timeline</dt><dd>6 months (2024)</dd></div></dl>
-  <figure class="chero-fig rv"><img src="img/flintlink-hero.jpg" alt="Flint-Link customer portal dashboard" width="1000" height="562" loading="eager" decoding="async"><figcaption>Illustrative data. Customer names are anonymised.</figcaption></figure>
-</header>
-<section class="ch wrap" id="problem">
-  <div class="ch-head rv"><span class="idx">01</span><span class="ttl">The problem</span><h2>Every urgent request went through an account manager.</h2></div>
-  <div class="ch-body rv"><div class="prose"><p>I asked 14 people to walk me through the last time they urgently needed something from Flint. <strong>Every answer was a person's name, never a system.</strong></p><p>Documents, deliveries, invoices and support all funnelled through account managers by email — six to ten hours a week of retrieval for them, a day or two of waiting for the customer.</p></div><div class="side"><div class="signals"><div class="signal"><p class="n">14</p><p class="c">People asked to walk through their last urgent request</p></div><div class="signal"><p class="n">Every one</p><p class="c">Answered with a person's name, never a system</p></div><div class="signal"><p class="n">6&ndash;10 hrs</p><p class="c">Per week per account manager, spent retrieving documents</p></div></div></div></div>
-  <figure class="art wide rv"><img src="img/flint-problem.jpg" alt="Before: every request went to an account manager, who found the document and emailed it back a day or two later." width="1600" height="493" loading="lazy" decoding="async"><figcaption>Before: every request went to an account manager, who found the document and emailed it back a day or two later.</figcaption></figure>
-  <div class="finds rv"><div class="find"><span class="n">01</span><h3>The portal category didn't match the mental model</h3><p>Every competitor had a document-type IA, so I built one too. It fell apart the first time someone looked for a document tied to a delivery.</p></div><div class="find"><span class="n">02</span><h3>Consignment updates took four or more touchpoints</h3><p>A single stock update meant several rounds with an account manager before anything was confirmed.</p></div><div class="find"><span class="n">03</span><h3>Unresolved issues became account-manager work</h3><p>A customer with a common printing problem had nowhere to get an answer, so every question turned into an email.</p></div><div class="find"><span class="n">04</span><h3>Customers kept shadow spreadsheets</h3><p>They couldn't count on a document coming back in time, so they kept their own parallel records.</p></div></div>
+
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="text">
+    <div class="chips" data-rev="fade">
+      <span>B2B portal</span><span>Desktop and mobile web</span><span>Print and packaging</span><span>Flint Group</span>
+    </div>
+    <h1 class="t-display">
+      <span class="ln" style="--i:0"><span>Flint-Link: A customer portal that</span></span>
+      <span class="ln" style="--i:1"><span>answers before anyone has to email</span></span>
+    </h1>
+    <p class="sub t-body-l" data-rev="rise" style="--i:0">Flint-Link is Flint Group&rsquo;s portal for printers and packaging converters. Customers use it to track orders, manage consignment stock, and get invoices, certificates, and support in one place.</p>
+  </div>
+  <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="fl-assets/14afe.svg" alt="" width="15" height="15"></span><span class="k">My role</span><span class="v">Lead UI/UX Designer,<br>agency side</span></div><div><span class="ic"><img src="fl-assets/c2195.svg" alt="" width="15" height="15"></span><span class="k">Client</span><span class="v">Flint Group</span></div><div><span class="ic"><img src="fl-assets/7eb63.svg" alt="" width="15" height="15"></span><span class="k">Platforms</span><span class="v">Desktop and mobile web</span></div><div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Scope</span><span class="v">Research, information architecture, interaction design, usability testing, and engineering flow reviews</span></div><div><span class="ic"><img src="fl-assets/c04c4.svg" alt="" width="15" height="15"></span><span class="k">Deliverables</span><span class="v">A launched portal for desktop and mobile, then maintenance releases</span></div></div>
+  <div class="screens wide">
+    <div class="sh lg" data-rev="lift" style="--i:0"><img src="fl-assets/11637.png" alt="The Flint-Link dashboard: open and closed invoice totals, a spend breakdown, recent orders, open invoices and consignment history." width="1520" height="898" loading="lazy" decoding="async"></div>
+    <div class="sh sm" data-rev="lift" style="--i:1"><img src="fl-assets/f2f84.png" alt="The Invoices screen on mobile, filtered by site and status." width="340" height="1959" loading="lazy" decoding="async"></div>
+    <div class="sh sm" data-rev="lift" style="--i:2"><img src="fl-assets/70e56.png" alt="Consignment details on mobile, confirming deliveries line by line." width="340" height="2142" loading="lazy" decoding="async"></div>
+  </div>
 </section>
-<section class="ch wrap" id="research">
-  <div class="ch-head rv"><span class="idx">02</span><span class="ttl">Research</span><h2>14 interviews, two site visits, and one printed folder that explained everything.</h2></div>
-  <div class="ch-body rv"><div class="prose"><p>The research question wasn't 'what features do you want.' It was 'walk me through the last time you urgently needed something' — a question that surfaces the workaround rather than the wish list.</p></div></div>
-  <div class="methods rv"><div class="method"><span class="k">Discover</span><h3>14 interviews across 3 regions</h3><p>Customers, account managers and internal support, spread deliberately so the answer wasn't one market's habit.</p></div><div class="method"><span class="k">Discover</span><h3>Two site visits</h3><p>Seeing the printed CoA folder on someone's desk is what made the trust problem concrete.</p></div><div class="method"><span class="k">Validate</span><h3>Two rounds of usability testing</h3><p>Round 1 exposed the IA failure. Round 2 confirmed the rebuild.</p></div><div class="method"><span class="k">Validate</span><h3>Customer acceptance testing</h3><p>12 participants across four customer organisations, tested against three criteria agreed up front.</p></div></div>
-  <figure class="art wide rv"><img src="img/flint-research.jpg" alt="All 14 interviewees raised document retrieval unprompted, across three regions and two site visits." width="1600" height="432" loading="lazy" decoding="async"><figcaption>All 14 interviewees raised document retrieval unprompted, across three regions and two site visits.</figcaption></figure>
-  <blockquote class="quote rv"><p>&ldquo;I keep a printed folder of CoA emails because I can't count on getting them back in time.&rdquo;</p><cite>QA Lead · Site visit</cite></blockquote>
+
+<!-- ═══ 01 · My contribution ═══ -->
+<section class="sec-8" id="contribution" aria-labelledby="h-contribution">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">01 &middot; My contribution</p>
+    <div class="hd">
+      <h2 class="t-h-l w668" id="h-contribution" data-rev="rise">I led the design on the agency side, from research to launch</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">I worked on this as the lead designer at the agency, with Flint Group and their engineers on the other side. Here&rsquo;s who owned what.</p>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">Who owned what</p>
+    <div class="crow">
+      <div class="ocard" data-rev="rise" style="--i:0">
+        <span class="ic"><img src="fl-assets/9e2d6.svg" alt="" width="19" height="19"></span>
+        <h3>I designed</h3>
+        <p>The information architecture, and the screen and interaction design, from research through launch.</p>
+        <div class="chips"><span>Research and usability testing</span><span>Information architecture</span><span>Desktop and mobile screens</span><span>Interaction states</span></div>
+      </div>
+      <div class="ocard" data-rev="rise" style="--i:1">
+        <span class="ic"><img src="fl-assets/8d3f6.svg" alt="" width="19" height="19"></span>
+        <p class="lab">I led</p>
+        <p>The case for adding support to the portal, and the flow reviews with engineering.</p>
+        <div class="chips"><span>Support business case</span><span>Flow reviews with engineering</span></div>
+      </div>
+      <div class="ocard" data-rev="rise" style="--i:2">
+        <span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span>
+        <h3>The team owned</h3>
+        <p>What I worked with, but didn&rsquo;t own.</p>
+        <p class="tl">Flint Group</p><p class="sl">Business rules, data and sign-off</p><p class="tl">Engineering</p><p class="sl">The build and the integrations with Flint&rsquo;s systems</p><p class="tl">Account managers and support</p><p class="sl">What customers actually ask for</p>
+      </div>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">How the project ran</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/63ac9.svg" alt="" width="19" height="19"></span><h3>Understand</h3><p>14 interviews, 2 site visits, and a review of 5 competitor portals</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1e752.svg" alt="" width="19" height="19"></span><h3>Map the journey</h3><p>11 friction points, all of them after the order</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><h3>Co-design</h3><p>3 sessions with customers</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/f8e87.svg" alt="" width="19" height="19"></span><h3>Design and test</h3><p>2 usability rounds, then acceptance testing</p></div><div class="ocard" data-rev="rise" style="--i:4"><span class="ic"><img src="fl-assets/d1d9a.svg" alt="" width="19" height="19"></span><h3>Rebuild</h3><p>The structure was rebuilt around the order after Round 1</p></div><div class="ocard" data-rev="rise" style="--i:5"><span class="ic"><img src="fl-assets/fd0f7.svg" alt="" width="19" height="19"></span><h3>Ship</h3><p>Launched, followed by maintenance releases</p></div></div>
+  </div>
 </section>
-<section class="ch wrap" id="strategy">
-  <div class="ch-head rv"><span class="idx">03</span><span class="ttl">Strategy</span><h2>Give customers a single place to find everything about an order, without asking a person.</h2></div>
-  <div class="ch-body rv"><div class="prose"><p>The moves that mattered were structural: reframe the portal around the order rather than the document type, pin down the three criteria acceptance testing would run against, and argue one unbudgeted module into scope.</p></div><div class="side"><ol class="crit"><li>A customer can find any document tied to a specific delivery without contacting anyone.</li><li>Consignment stock updates and delivery confirmation happen on one screen, in a single pass.</li><li>All three criteria signed off in customer acceptance testing at four organisations.</li></ol></div></div>
-  <figure class="art wide rv"><img src="img/flint-goal.jpg" alt="The five things customers used to email an account manager for, and where each one now lives in the portal." width="1600" height="467" loading="lazy" decoding="async"><figcaption>The five things customers used to email an account manager for, and where each one now lives in the portal.</figcaption></figure>
+
+<!-- ═══ 02 · The problem ═══ -->
+<section class="inset" id="problem" aria-labelledby="h-problem">
+  <div class="head">
+    <p class="lab" data-rev="fade" style="color:#B7DFBF">02 &middot; The problem</p>
+    <div class="hd">
+      <h2 class="t-h-xl" id="h-problem" data-rev="rise">When a press was waiting on a certificate, the customer was waiting on an email</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Placing an order was easy. Everything after it, from certificates and order updates to invoices and stock counts, meant emailing an account manager and waiting, sometimes while a press stood still.</p>
+    </div>
+  </div>
+  <div class="pstmt"><div data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/d6974.svg" alt="" width="19" height="19"></span><span class="k">Who</span><p>Printers and packaging converters who order, stock and pay for ink.</p></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/afd12.svg" alt="" width="19" height="19"></span><span class="k">What went wrong</span><p>Every certificate, order update, invoice and stock count went through an account manager.</p></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/06719.svg" alt="" width="19" height="19"></span><span class="k">Why it mattered</span><p>A compliance document took 24 to 48 hours. On one site visit, production stopped 3 times in 2 hours while the team waited for a certificate.</p></div><div class="ux" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/647c7.svg" alt="" width="19" height="19"></span><span class="k">The UX challenge</span><p>Let customers answer their own questions after they&rsquo;ve placed an order, starting from the order they hold.</p></div></div>
+  <p class="k" data-rev="fade" style="font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:rgba(246,245,240,.9)">The loop</p>
+  <div class="loop"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/a66d6.svg" alt="" width="19" height="19"></span><b>Needs a certificate</b><span>Or an order update, or an invoice copy</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Emails the account manager</b><span>Then calls to chase it</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/83bbf.svg" alt="" width="19" height="19"></span><b>Account manager searches</b><span>Internal systems and inboxes</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Reply by email</b><span>A PDF or a status update</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:4"><span class="big">24 to 48 h</span><span>for one compliance document</span></div></div>
+  <p class="note" data-rev="fade">Every request took account-manager time away from other work.</p>
 </section>
-<section class="ch wrap" id="design">
-  <div class="ch-head rv"><span class="idx">04</span><span class="ttl">Design</span><h2>The decisions, and what each one cost.</h2></div>
-  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 01 · IA</span><div class="b"><h3>Rebuild the information architecture mid-project</h3><p>'Find the CoA for your last delivery' was the most-failed task in Round 1 — every participant failed it. I proposed rebuilding the IA around the order; the PM agreed the same day. In Round 2, every participant completed it. <strong>Not everyone was sold beforehand, so we tested it instead of arguing about it.</strong></p><figure class="art"><img src="img/flint-decision1.jpg" alt="Before: a document library browsed by type, where nothing connected to a delivery. After: everything about an order in one place." width="1600" height="992" loading="lazy" decoding="async"><figcaption>Before: a document library browsed by type, where nothing connected to a delivery. After: everything about an order in one place.</figcaption></figure></div></div></article>
-  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 02 · Consignment</span><div class="b"><h3>Stock updates and delivery confirmation on one screen</h3><p>Four or more touchpoints with an account manager became one pass: update stock, submit, confirm delivery.</p><figure class="art"><img src="img/flint-decision2.jpg" alt="The consignment screen, in a single pass." width="1600" height="974" loading="lazy" decoding="async"><figcaption>The consignment screen, in a single pass.</figcaption></figure></div></div></article>
-  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 03 · Scope</span><div class="b"><h3>Argue the Support Hub into scope</h3><p>It wasn't in the brief. My case was simple: every unresolved issue turns into account-manager work — the exact cost the project existed to remove. A chat now answers common printing problems and hands off to a ticket when it can't. In pilot feedback it was the most-mentioned feature.</p><figure class="art"><img src="img/flint-decision3.jpg" alt="The support flow, escalating to a ticket only when the chat can&#x27;t answer." width="1600" height="564" loading="lazy" decoding="async"><figcaption>The support flow, escalating to a ticket only when the chat can't answer.</figcaption></figure></div></div></article>
-  <article class="dec rv"><div class="dec-grid"><span class="k">Decision 04 · States</span><div class="b"><h3>Design the failure states alongside the main flows</h3><p>Download progress, success and failure states came out of an engineering review, not a polish pass at the end. In a portal whose whole promise is 'you'll get the document,' a silent failure breaks the product.</p><figure class="art"><img src="img/flint-engineer.jpg" alt="In progress, complete, and failed with retry." width="1600" height="650" loading="lazy" decoding="async"><figcaption>In progress, complete, and failed with retry.</figcaption></figure></div></div></article>
-  <div class="gal rv"><figure><img src="img/flint-orders.jpg" alt="Flint-Link orders view" width="1400" height="826" loading="lazy" decoding="async"><figcaption><b>Orders</b>The spine of the rebuilt IA.</figcaption></figure><figure><img src="img/flint-documents.jpg" alt="Flint-Link certificates of analysis" width="1400" height="826" loading="lazy" decoding="async"><figcaption><b>Certificates of analysis</b>The most-failed task in Round 1, now reached through the order rather than a document-type folder.</figcaption></figure><figure><img src="img/flint-invoices.jpg" alt="Flint-Link invoices" width="1400" height="826" loading="lazy" decoding="async"><figcaption><b>Invoices</b>One of six report categories, now in one portal instead of six email threads.</figcaption></figure><figure><img src="img/flint-downloads.jpg" alt="Flint-Link download centre" width="1400" height="930" loading="lazy" decoding="async"><figcaption><b>Download centre</b>The download states, designed alongside the flow rather than after it.</figcaption></figure></div>
+
+<!-- ═══ 03 · Research ═══ -->
+<section class="sec-3" id="research" aria-labelledby="h-research">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">03 &middot; Research</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-research" data-rev="rise">Research on the factory floor, not just in meeting rooms</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">To design the right portal, I needed to see what happened after an order was placed. Interviews showed what customers asked for. Site visits showed what happened when they didn&rsquo;t get it. And two usability rounds showed which structure actually worked.</p>
+    </div>
+  </div>
+  <div class="methods"><div data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><b>14 interviews</b><span>Customers, after the order</span></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/bc392.svg" alt="" width="19" height="19"></span><b>2 site visits</b><span>On the factory floor</span></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/bca1e.svg" alt="" width="19" height="19"></span><b>5 competitor portals</b><span>Reviewed before design</span></div><div data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/1e752.svg" alt="" width="19" height="19"></span><b>Journey map</b><span>11 friction points</span></div><div data-rev="rise" style="--i:4"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><b>3 co-design sessions</b><span>With customers</span></div><div data-rev="rise" style="--i:5"><span class="ic"><img src="fl-assets/f8e87.svg" alt="" width="19" height="19"></span><b>2 usability rounds</b><span>Then acceptance testing</span></div></div>
+  <div class="eid g12">
+    <div class="hdr"><span>Evidence</span><span>Insight</span><span>Design decision</span></div>
+      <div class="row" data-rev="wipe" style="--i:0">
+        <div class="ev"><p>14 of 14 customers raised documents and order status without being asked.</p><span>Interviews</span></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="ins"><p>The real work starts after the order is placed.</p></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="dec"><p>Five self-serve jobs at the center of the portal: orders, consignment stock, invoices, certificates, and support.</p><span>The strategy</span></div>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:1">
+        <div class="ev"><p>Nobody found their last certificate in the library.</p><span>Usability, Round 1</span></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="ins"><p>Customers think in orders, not document types.</p></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="dec"><p>Start from the order.</p><span>Decision 01</span></div>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:2">
+        <div class="ev"><p>A typical thread about one consignment ran past 20 emails.</p><span>Interviews and journey map</span></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="ins"><p>A stock update was one job, split across many messages.</p></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="dec"><p>One screen, one submit, a status per product.</p><span>Decision 02</span></div>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:3">
+        <div class="ev"><p>4 of 12 participants named support first, without being asked.</p><span>Testing feedback</span></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="ins"><p>A problem on the press can&rsquo;t wait for an email.</p></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="dec"><p>Chat answers plus tracked tickets.</p><span>Decision 03</span></div>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:4">
+        <div class="ev"><p>Large PDFs on slow, shared factory networks.</p><span>Engineering flow review</span></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="ins"><p>A download that sits at zero looks broken.</p></div>
+        <img src="fl-assets/0c9c3.svg" alt="leading to" width="16" height="16">
+        <div class="dec"><p>Three download states on every file.</p><span>Decision 04</span></div>
+      </div>
+  </div>
 </section>
-<section class="ch wrap" id="impact">
-  <div class="ch-head rv"><span class="idx">05</span><span class="ttl">Impact</span><h2>All three success criteria signed off.</h2></div>
-  <div class="ch-body rv"><div class="prose"><p>Acceptance testing ran with 12 participants across four customer organisations. Early pilot feedback showed fewer document requests reaching account managers, and the Support Hub came up more often than anything else.</p></div></div>
-  <div class="outs rv" style="margin-top:clamp(30px,3.6vw,46px)"><div class="out"><p class="n">0 → 100%</p><p class="c">The most-failed task, now unanimous</p></div><div class="out"><p class="n">6–10 hrs/week</p><p class="c">Account manager time freed up</p></div><div class="out"><p class="n">3 of 4</p><p class="c">Pilot orgs dropped their shadow spreadsheets</p></div></div>
-  <figure class="art wide rv"><img src="img/flint-outcomes.jpg" alt="All three criteria, signed off." width="1600" height="647" loading="lazy" decoding="async"><figcaption>All three criteria, signed off.</figcaption></figure>
+
+<!-- ═══ 04 · Design direction ═══ -->
+<section class="sec-4" id="direction" aria-labelledby="h-direction" style="--ptint:rgba(66,143,79,.1)">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">04 &middot; Design direction</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-direction" data-rev="rise">Make the order the way in</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The research all pointed the same way: customers think in terms of what they already have, an order or a delivery, not a document type. So the design starts there, keeps the five after-order jobs one step from the order, and shows the status of every request, so nobody has to email to ask.</p>
+    </div>
+  </div>
+  <div class="princ" data-rev="lift">
+    <div class="in">
+      <p class="k">The principle</p>
+      <h3 class="t-h-l">Start from what the customer already holds: an order, a shipment, a batch.</h3>
+    </div>
+  </div>
+  <div class="after">
+    <p class="k" data-rev="fade">The journey we designed for</p>
+    <p class="lab on" data-rev="fade">The portal</p>
+    <div class="wrap" style="padding:24px 0">
+      <div class="row"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/f5282.svg" alt="" width="19" height="19"></span><b>Needs a certificate</b><span>The same questions</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/fb212.svg" alt="" width="19" height="19"></span><b>Opens the order</b><span>Orders, stock, invoices, support</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/f5282.svg" alt="" width="19" height="19"></span><b>Requests or downloads it</b><span>By site, product and batch</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Follows the status</b><span>Requests and tickets show progress</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step sel" data-rev="rise" style="--i:4"><span class="big">Self-serve</span><span>no account manager in the loop</span></div></div>
+    </div>
+  </div>
 </section>
-<section class="ch wrap" id="reflection">
-  <div class="ch-head rv"><span class="idx">06</span><span class="ttl">Reflection</span><h2>What it taught me.</h2></div>
-  <div class="lessons rv"><div class="lesson"><h3>Watching one person fail beats any report</h3><p>I built a document-type IA because every competitor had one. A single test session — one person hunting for a delivery's certificate — was worth more than the entire competitive audit.</p></div><div class="lesson"><h3>Test the disagreement instead of winning it</h3><p>Rebuilding the IA mid-project wasn't a popular proposal. Putting it in front of users settled it in a day, for less than the argument would have cost.</p></div></div>
-  <p class="caveat rv"><b>What I&rsquo;d do differently</b>Put customers from different industries in the same co-design session, so the tension between pharma packaging and commercial print surfaces early instead of turning up in acceptance testing.</p>
+
+<!-- ═══ 05 · Decision 1 of 4 · Information architecture ═══ -->
+<section class="dsec paper" id="d1" aria-labelledby="h-d1">
+  <div class="shead">
+    <p class="lab" data-rev="fade"><b>05</b> &middot; Decision 1 of 4 &middot; Information architecture</p>
+    <div class="hd">
+      <h2 class="t-h-l w716" id="h-d1" data-rev="rise">Starting from the order, not a document library</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The brief asked for a document library. But in Round 1, nobody could find the certificate for their last delivery in it. Customers knew their order, not the document type, so I rebuilt the structure around the order.</p>
+    </div>
+  </div>
+  <div class="dstrip t18" data-rev="rise">
+    <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>The document library from the brief &middot; a structure built around the order</p></div>
+    <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>Make the order the way in. Documents live on the shipment they came with.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>Three sprints of rework, late in the project. The library stayed only for documents not tied to an order.</p></div>
+    <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Round 1: nobody found the certificate for their last delivery. Round 2: everyone did.</p></div>
+  </div>
+  <div class="iacmp">
+    <div data-rev="rise" style="--i:0">
+      <p class="k">Round 1 &middot; What the brief asked for</p>
+      <span class="sp"></span>
+      <div class="root"><span>Documents</span></div>
+      <div class="lv"><span class="br">&#9492;</span><p>Certificates of Analysis</p></div>
+      <div class="lv"><span class="br">&#9492;</span><p>Safety Data Sheets</p></div>
+      <div class="lv"><span class="br">&#9492;</span><p>Technical Data Sheets</p></div>
+      <div class="lv d2"><span class="br">&#9492;</span><p>Find it by product code and batch</p></div>
+      <span class="sp lg"></span>
+      <div class="num"><b>0%</b><span>found the certificate for their last delivery</span></div>
+    </div>
+    <div data-rev="rise" style="--i:1">
+      <p class="k">Round 2 &middot; Start from the order</p>
+      <span class="sp"></span>
+      <div class="root"><span>Orders</span></div>
+      <div class="lv"><span class="br">&#9492;</span><p>Order 0004779279</p></div>
+      <div class="lv d2"><span class="br">&#9492;</span><p>Shipment 8003006002 &amp;middot; View PDF, Download, Track</p></div>
+      <div class="lv"><span class="br">&#9492;</span><p>Certificates of Analysis</p></div>
+      <div class="lv d2"><span class="br">&#9492;</span><p>Request by site &amp;rsaquo; product &amp;rsaquo; batch</p></div>
+      <span class="sp lg"></span>
+      <div class="num"><b>100%</b><span>found it in Round 2</span></div>
+    </div>
+  </div>
+  <div class="shot" data-rev="lift">
+    <img src="fl-assets/46830.png" alt="The Flint-Link Order Details screen: the product and its Picked status, order metadata, and a list of delivery shipments each with View PDF, Download and Track." width="2496" height="1473" loading="lazy" decoding="async">
+    <span class="mk" style="left:1106px;top:160.47px">1</span>
+    <span class="mk" style="left:215.07px;top:546.13px">2</span>
+    <span class="mk" style="left:854.67px;top:547px">3</span>
+  </div>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="top"><span class="mk">1</span><b>Status on the order</b></span><p>The status sits beside the product name.</p></div>
+    <div data-rev="rise" style="--i:1"><span class="top"><span class="mk">2</span><b>Shipments under the order</b></span><p>One order, several deliveries, each with its own row.</p></div>
+    <div data-rev="rise" style="--i:2"><span class="top"><span class="mk">3</span><b>Documents where the delivery is</b></span><p>View PDF, Download and Track live on the shipment.</p></div>
+  </div>
 </section>
-<nav class="nextnav wrap" aria-label="More work">
-  <div><span class="lbl">Previous</span><a class="big" href="teleconsult.html">myAster</a></div>
-  <div class="r"><span class="lbl">Next case study</span><a class="big" href="pettrackr.html">PetTrackr <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+
+<!-- ═══ 05 · Decision 2 of 4 · Consignment stock ═══ -->
+<section class="dsec paper-2" id="d2" aria-labelledby="h-d2">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">05 &middot; Decision 2 of 4 &middot; Consignment stock</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d2" data-rev="rise">Updating consignment stock on one screen</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Consignment stock is ink that sits at the customer&rsquo;s site until it&rsquo;s used. Keeping Flint&rsquo;s count up to date used to take a long email thread, so I put the whole job on one screen with a single submit.</p>
+    </div>
+  </div>
+  <div class="dstrip t18" data-rev="rise">
+    <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>The email thread as it was &middot; one screen with one submit</p></div>
+    <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>Both counts side by side, one figure per product, and one submit for everything.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>A dense screen. The per-product status and the full history carry that weight.</p></div>
+    <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Not measured on its own.</p></div>
+  </div>
+  <div class="annot2">
+    <div class="shot" style="width:820px;height:749px" data-rev="lift">
+      <img src="fl-assets/5bb53.png" alt="The Consignment Stocks screen: calculated stock beside the customer&rsquo;s usage, a product table with per-row delivery icons, submitted status and a single Submit Consignments action." width="2036" height="1793" style="left:-190.86px;top:-106.03px;width:1017.931px;height:896.345px" loading="lazy" decoding="async">
+      <span class="mk" style="left:9.21px;top:108.17px">1</span>
+      <span class="mk" style="left:606.53px;top:288.43px">2</span>
+      <span class="mk" style="left:722.47px;top:212.79px">3</span>
+      <span class="mk" style="left:300.45px;top:388.81px">4</span>
+      <span class="mk" style="left:716px;top:389px">5</span>
+      <span class="mk" style="left:571.19px;top:154.83px">6</span>
+    </div>
+    <div class="legend" style="padding-top:96px">
+      <div data-rev="rise" style="--i:0"><span class="top"><span class="mk">1</span><b>Two numbers side by side</b></span><p>Flint&rsquo;s calculated stock beside the customer&rsquo;s usage, so gaps show early.</p></div>
+      <div data-rev="rise" style="--i:1"><span class="top"><span class="mk">2</span><b>Say what you&rsquo;re entering</b></span><p>Stock levels or usage, then one figure per product.</p></div>
+      <div data-rev="rise" style="--i:2"><span class="top"><span class="mk">3</span><b>One submit for everything</b></span><p>Every product goes to Flint in one action.</p></div>
+      <div data-rev="rise" style="--i:3"><span class="top"><span class="mk">4</span><b>Deliveries in the same row</b></span><p>An icon per row, with a legend above.</p></div>
+      <div data-rev="rise" style="--i:4"><span class="top"><span class="mk">5</span><b>Status per product</b></span><p>Submitted or Not Submitted, in words as well as color.</p></div>
+      <div data-rev="rise" style="--i:5"><span class="top"><span class="mk">6</span><b>History for disputes</b></span><p>Every change, with who made it and when.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 · Decision 3 of 4 · Scope ═══ -->
+<section class="dsec paper" id="d3" aria-labelledby="h-d3">
+  <div class="shead">
+    <p class="lab" data-rev="fade"><b>05</b> &middot; Decision 3 of 4 &middot; Scope</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d3" data-rev="rise">Making the case for support, which wasn&rsquo;t in the brief</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">In the brief, support stayed with account managers. But in testing, 4 of 12 participants brought it up first, without being asked. A problem on the press can&rsquo;t wait for an email, so I wrote a business case for bringing support into the portal.</p>
+    </div>
+  </div>
+  <div class="dstrip t18" data-rev="rise">
+    <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>Leave support with account managers, as briefed &middot; chat answers plus tracked tickets</p></div>
+    <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>A Technical Support Agent for common problems, and a Support Hub for tracked tickets.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>More scope, added late, and answers Flint&rsquo;s team must keep current.</p></div>
+    <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Signed off in acceptance testing.</p></div>
+  </div>
+  <div class="seq">
+    <figure data-rev="lift" style="--i:0">
+      <div class="shot" style="width:580px;height:341px">
+        <img src="fl-assets/87491.png" alt="The Technical Support Agent: a chat that opens with four common printing problems to choose from, and a free-text box." width="1404" height="829" style="left:-121.85px;top:-34.12px;width:701.849px;height:414.286px" loading="lazy" decoding="async">
+      </div>
+      <figcaption>1. Ask the agent. Common printing problems come first.</figcaption>
+    </figure>
+    <div class="gap" data-rev="fade">
+      <img src="fl-assets/5399b.svg" alt="then" width="20" height="20">
+      <span>Not solved?</span>
+    </div>
+    <figure data-rev="lift" style="--i:1">
+      <div class="shot" style="width:580px;height:340px">
+        <img src="fl-assets/aecbd.png" alt="The Support Hub: a list of tickets with category, creation date and a Resolved status, plus Schedule a Call and Raise Ticket actions." width="1404" height="748" style="left:-121.85px;top:-34.12px;width:701.849px;height:373.832px" loading="lazy" decoding="async">
+      </div>
+      <figcaption>2. Not solved? Raise a ticket and follow it to resolved.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ 05 · Decision 4 of 4 · Downloads ═══ -->
+<section class="dsec paper-2" id="d4" aria-labelledby="h-d4">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">05 &middot; Decision 4 of 4 &middot; Downloads</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d4" data-rev="rise">Making large downloads look alive on slow networks</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Before the build, the engineering lead pointed out something I&rsquo;d missed: on slow factory networks, a large PDF looks stuck at zero. A download that looks stuck looks broken, so every download got the same three clear states.</p>
+    </div>
+  </div>
+  <div class="dstrip t18" data-rev="rise">
+    <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>No visible state, as first designed &middot; three explicit states</p></div>
+    <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>Downloading, Downloaded, and Failed with Try again, on every file.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>Three more states to design and build for every download.</p></div>
+    <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>After launch, the fix customers praised most.</p></div>
+  </div>
+  <div class="states">
+    <div class="box start" data-rev="rise" style="--i:0">
+      <span class="ic"><img src="fl-assets/6f021.svg" alt="" width="19" height="19"></span>
+      <span class="k">Start</span><b>Tap Download</b>
+      <p>On any certificate, data sheet or invoice</p>
+    </div>
+    <img class="arw-i" src="fl-assets/13233.svg" alt="then" width="20" height="20">
+    <div class="box now" data-rev="rise" style="--i:1">
+      <span class="ic"><img src="fl-assets/b065a.svg" alt="" width="19" height="19"></span>
+      <span class="k">State 1 &middot; Downloading</span><b>CoA_5055461.pdf</b>
+      <p>Progress keeps moving, so it never looks stuck.</p>
+      <span class="bar"><i></i></span>
+    </div>
+    <img class="arw-i" src="fl-assets/13233.svg" alt="then" width="20" height="20">
+    <div class="pair">
+      <div class="box ok" data-rev="rise" style="--i:2">
+        <span class="ic"><img src="fl-assets/68a45.svg" alt="" width="19" height="19"></span>
+        <span class="k">State 2 &middot; Downloaded</span><b>Done, with the file name</b>
+        <p>A clear confirmation, so nobody clicks twice.</p>
+      </div>
+      <div class="box bad" data-rev="rise" style="--i:3">
+        <span class="ic"><img src="fl-assets/d4589.svg" alt="" width="19" height="19"></span>
+        <span class="k">State 3 &middot; Failed</span><b>Says what went wrong, then Try again</b>
+        <p>Try again goes straight back to Downloading. Nothing stalls silently.</p>
+        <span class="retry"><img src="fl-assets/33801.svg" alt="" width="14" height="14"><span>Try again &rarr; back to Downloading</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06 · Testing and iteration ═══ -->
+<section class="sec-7" id="testing" aria-labelledby="h-testing">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Testing and iteration</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-testing" data-rev="rise">What changed after testing, and what&rsquo;s still open</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The decisions above show what usability testing changed. Some things only showed up later, once the portal was in use. Here&rsquo;s what we changed, and what still needs fixing.</p>
+    </div>
+  </div>
+  <div class="dfir v2">
+    <div class="hdr"><span>Design</span><span>Finding</span><span>Design response</span><span>Result</span></div>
+    <div class="row" data-rev="wipe" style="--i:0">
+      <p class="d">One delivery to confirm per product</p>
+      <p>Real sites get several deliveries for one product.</p>
+      <p>Each delivery is confirmed on its own.</p>
+      <p class="r">Reworked in a maintenance release.</p>
+    </div>
+  </div>
+  <div class="block">
+    <p class="k" data-rev="fade" style="color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px">What remained unresolved</p>
+    <div class="issues">
+      <div class="hdr"><span class="a">Issue</span><span class="b">What&rsquo;s wrong</span><span class="c">Status</span></div>
+      <div class="row" data-rev="wipe" style="--i:0"><b>Status tag contrast</b><p>Every tag has a word, so color is never the only signal. But none reach 4.5:1: Not Submitted 2.4:1, Open 2.9:1, Closed 2.7:1, Submitted 3.0:1. The proposed colors reach 4.9:1 to 5.4:1.</p><span>Not fixed</span></div>
+      <div class="row" data-rev="wipe" style="--i:1"><b>Download button contrast</b><p>White on #25B67C is 2.6:1, while #17805A reaches 4.9:1. Icon-only buttons also need accessible names, and download states should be announced to screen readers.</p><span>Not fixed</span></div>
+      <div class="row" data-rev="wipe" style="--i:2"><b>Account approval wait</b><p>New accounts can wait 48 hours or more for approval. I designed a waiting state, but the wait itself wasn&rsquo;t solved.</p><span>Not solved</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 · Results and measurement limits ═══ -->
+<section class="sec-8" id="results" aria-labelledby="h-results">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">07 &middot; Results and measurement limits</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-results" data-rev="rise">What was signed off, and what nobody measured</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Customers signed off all three success criteria in acceptance testing, so the portal does the jobs it was built for. What nobody tracked is whether fewer requests reached account managers after launch.</p>
+    </div>
+  </div>
+  <div class="sot">
+    <div class="hdr"><span class="a">Status</span><span class="b">Target</span><span class="c">Outcome</span></div>
+    <div class="row" data-rev="wipe" style="--i:0"><span class="st">Signed off</span><b>Documents without asking</b><p>Customers get a Certificate of Analysis or a Safety Data Sheet without contacting Flint.</p></div>
+    <div class="row" data-rev="wipe" style="--i:1"><span class="st">Signed off</span><b>Orders and stock without emailing</b><p>Customers check orders, deliveries, and consignment stock themselves.</p></div>
+    <div class="row" data-rev="wipe" style="--i:2"><span class="st">Signed off</span><b>Support with a status</b><p>Customers raise a ticket and follow it until it&rsquo;s resolved, inside the portal.</p></div>
+    <div class="row" data-rev="wipe" style="--i:3"><span class="st">Observed</span><b>Invoice spreadsheets retired</b><p>3 of 4 pilot organizations stopped keeping their own within 30 days.</p></div>
+    <div class="row" data-rev="wipe" style="--i:4"><span class="st">Not tracked</span><b>Fewer requests reaching account managers</b><p>Never tracked after launch.</p></div>
+  </div>
+  <div class="block">
+    <p class="k" data-rev="fade" style="color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px">What I would measure next</p>
+    <div class="unproven" style="padding:0">
+      <div class="cols"><div data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Requests that skip the account manager</b><span>Share of document and status requests that never reach one. Baseline: one month of tagged inboxes.</span></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Order-first structure</b><span>Time from order opened to PDF downloaded.</span></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Download states</b><span>Failed vs completed downloads, by site.</span></div><div data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Mobile at the press</b><span>Moderated test: 6 customers at 3 sites.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 · Reflection ═══ -->
+<section class="sec-9" id="reflection" aria-labelledby="h-reflection">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">08 &middot; Reflection</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-reflection" data-rev="rise">Three things I took away from this project</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The best idea in this portal came from a test that failed. These are the lessons from that, and from what I missed.</p>
+    </div>
+  </div>
+  <div class="lessons v2">
+    <div class="hdr"><span class="a">Lesson</span><span class="b">Then, on this project</span><span class="c">Now</span></div>
+    <div class="row" data-rev="wipe" style="--i:0"><b>01 &middot; Start from what the customer holds</b><p class="then">The library from the brief failed in Round 1, because customers think in orders, not document types.</p><p class="now">I start every structure from what the customer already holds: an order, a shipment, a batch.</p></div>
+    <div class="row" data-rev="wipe" style="--i:1"><b>02 &middot; Walk a real week on site visits</b><p class="then">We assumed one delivery per product. Real sites get several, and a maintenance release had to fix it.</p><p class="now">On site visits, I walk through a real week of deliveries, not a single order.</p></div>
+    <div class="row" data-rev="wipe" style="--i:2"><b>03 &middot; Set the after-launch number on day one</b><p class="then">Whether fewer requests reached account managers was never tracked.</p><p class="now">I agree the after-launch number and its baseline at kickoff.</p></div>
+  </div>
+  <h3 class="t-h-s" data-rev="rise" style="color:var(--ink);font-size:24px;line-height:28px;letter-spacing:-.48px">A future direction: the first two days</h3>
+  <p class="t-body-l" data-rev="rise" style="color:var(--muted);width:746px;max-width:100%">New accounts can wait 48 hours or more for approval. These concepts let customers complete their profile while they wait, and show how far approval has got, with a way to raise a request.</p>
+  <div class="wides">
+    <figure data-rev="lift" style="--i:0">
+      <div class="shot" style="width:612px;height:322px"><img src="fl-assets/5ee61.png" alt="The dashboard with a Complete Profile banner at 50%, above the invoice totals and recent orders." width="1224" height="644" style="left:0;top:0;width:612px;height:322.15px" loading="lazy" decoding="async"></div>
+      <figcaption>Complete the profile while the account is being approved.</figcaption>
+    </figure>
+    <figure data-rev="lift" style="--i:1">
+      <div class="shot" style="width:612px;height:322px"><img src="fl-assets/fceb8.png" alt="The My Profile screen with a three-step approval tracker: Data Received, In Review, Access Granted, and a Raise a Request action." width="1224" height="652" style="left:0;top:0;width:612px;height:325.975px" loading="lazy" decoding="async"></div>
+      <figcaption>A waiting state that says how far approval has got, with a way to raise a request.</figcaption>
+    </figure>
+  </div>
+  <p class="k" data-rev="fade" style="color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px">Concept designs, not shipped work.</p>
+</section>
+
+<!-- ═══ Next case study ═══ -->
+<section class="nextcase" aria-labelledby="h-next">
+  <p class="k" id="h-next" data-rev="fade">Next case study</p>
+  <a class="card" href="apex.html" aria-label="Apex Insights — Every facility&rsquo;s numbers, and a nudge when one slips">
+    <div class="body" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m" style="--bar:rgba(221,131,62,0.55)"><span>04</span></span>
+        <h2 class="name t-title-strong" id="h-nextcase">Apex Insights</h2>
+        <p class="kind t-body-s">Reporting portal &middot; Desktop web and Power BI</p>
+      </div>
+      <p class="ptitle t-h-m w488">Every facility&rsquo;s numbers, and a nudge when one slips</p>
+      <p class="pdesc t-body-l">The brief named features like Alerts and File storage without saying what they were for. I put my questions on the first wireframes, used the client&rsquo;s answers to set the scope, and gave every report the same actions and layout.</p>
+      <div class="out"><p>Teams access reports, monitor staffing alerts, and schedule updates from one portal.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">&rarr;</span></span></span>
+    </div>
+    <div class="thumb" data-rev="rise" style="--tint:rgba(221,131,62,0.1)">
+      <figure style="left:5.625%;top:9%;width:85.625%;height:100.75%"><img src="fl-assets/8dee3.png" alt="The Apex Insights census dashboard: occupancy, census against budget, a facility table and admissions charts." width="1096" height="806" loading="lazy" decoding="async"></figure>
+      <figure style="left:49.375%;top:49%;width:46.875%;height:53.25%"><img src="fl-assets/46aeb.png" alt="A My Dashboard panel with admissions by payer, revenue breakdown and a trailing-twelve-months chart." width="600" height="426" loading="lazy" decoding="async"></figure>
+    </div>
+  </a>
+</section>
+
+<footer class="foot">
+  <p class="t-body-xs">&copy; 2026 Deep Vyas</p>
+  <a class="tlink" href="#top"><span class="in"><span class="lbl">Back to top</span><span class="sp"> </span><span class="arw up">&uarr;</span></span></a>
+</footer>
+
+</div><!-- /.page -->
+
+<nav class="srail" aria-label="Sections in this case study">
+  <a href="#contribution" aria-label="01 &middot; My contribution">01<span class="lbl" aria-hidden="true">My contribution</span></a>
+  <a href="#problem" aria-label="02 &middot; The problem">02<span class="lbl" aria-hidden="true">The problem</span></a>
+  <a href="#research" aria-label="03 &middot; Research">03<span class="lbl" aria-hidden="true">Research</span></a>
+  <a href="#direction" aria-label="04 &middot; Design direction">04<span class="lbl" aria-hidden="true">Design direction</span></a>
+  <a href="#d1" aria-label="05 &middot; Design decisions">05<span class="lbl" aria-hidden="true">Design decisions</span></a>
+  <a href="#testing" aria-label="06 &middot; Testing and iteration">06<span class="lbl" aria-hidden="true">Testing and iteration</span></a>
+  <a href="#results" aria-label="07 &middot; Results and measurement limits">07<span class="lbl" aria-hidden="true">Results and measurement limits</span></a>
+  <a href="#reflection" aria-label="08 &middot; Reflection">08<span class="lbl" aria-hidden="true">Reflection</span></a>
 </nav>
-</main>
-<footer>
-<div class="wrap foot-in"><span>&copy; 2026 Deep Vyas &mdash; Flint-Link &middot; Flint Group</span><a href="index.html#contact">Have a role in mind? &rarr;</a><a href="#top">Back to top &uarr;</a></div></footer>
-<script src="js/system.js" defer></script>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement, btn=document.getElementById("theme");
+  function syncThemeColor(){
+    var m=document.querySelector('meta[name="theme-color"]');
+    if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m);}
+    m.content=root.getAttribute("data-theme")==="dark"?"#16191A":"#F6F5F0";
+  }
+  syncThemeColor();
+  if(btn) btn.addEventListener("click",function(){
+    var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("dv26-theme",next);}catch(e){}
+    syncThemeColor();
+  });
+
+  /* below-the-fold images fade in over 150ms once they arrive; done from
+     script so a failed script leaves them visible rather than blank */
+  document.querySelectorAll('.sh img').forEach(function(img){
+    if(img.complete) return;
+    img.classList.add('fades');
+    img.addEventListener('load',function(){img.classList.add('is-loaded');},{once:true});
+    img.addEventListener('error',function(){img.classList.add('is-loaded');},{once:true});
+  });
+
+  /* ── entrances ──────────────────────────────────────────────────
+     An observer, with a scroll-driven sweep behind it so nothing can be
+     left hidden if a callback never arrives. */
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  var targets = [].slice.call(document.querySelectorAll('[data-rev]'));
+  var pending = [];
+
+  function showAll(){ targets.forEach(function(el){el.classList.add("is-in");});
+    document.querySelectorAll('.ln').forEach(function(l){l.classList.add("is-in");}); }
+  function reveal(el){ el.classList.add("is-in");
+    var i=pending.indexOf(el); if(i>-1) pending.splice(i,1); }
+  function sweep(){
+    if(!pending.length) return;
+    var vh=innerHeight,
+        atEnd = scrollY + vh >= document.documentElement.scrollHeight - 2;
+    pending.slice().forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(atEnd ? r.top < vh : r.top < vh*0.88 && r.bottom > 0) reveal(el);
+    });
+  }
+  try{
+  if(reduce.matches || !("IntersectionObserver" in window)){
+    showAll();
+  } else {
+    pending = targets.slice();
+    window.__revIO = new IntersectionObserver(function(entries,obs){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        reveal(e.target); obs.unobserve(e.target);
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:0.01});
+    targets.forEach(function(el){ window.__revIO.observe(el); });
+    sweep();
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      document.querySelectorAll('.hero .ln').forEach(function(l){l.classList.add("is-in");});
+      sweep();
+    });});
+  }
+  }catch(err){ showAll(); pending.length = 0; }
+
+  /* ── the brand strip doubles as read progress, and the rail names
+        the section being read ─────────────────────────────────────── */
+  var strip = document.querySelector('.strip'),
+      links = [].slice.call(document.querySelectorAll('.srail a')),
+      secs  = links.map(function(a){return document.querySelector(a.getAttribute("href"));}),
+      rafId = 0;
+
+  function onScroll(){
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function(){
+      rafId = 0;
+      if(strip){
+        var h = document.documentElement.scrollHeight - innerHeight;
+        strip.style.setProperty("--unread",
+          String(1 - (h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 1)));
+      }
+      sweep();
+      var cur = -1, line = scrollY + 140;
+      secs.forEach(function(sec,i){ if(sec && sec.offsetTop <= line) cur = i; });
+      links.forEach(function(a,i){
+        if(i === cur) a.setAttribute("aria-current","true");
+        else a.removeAttribute("aria-current");
+      });
+    });
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll, {passive:true});
+  onScroll();
+
+  if(reduce.addEventListener) reduce.addEventListener("change", function(){
+    if(reduce.matches){ showAll(); pending.length = 0; }
+  });
+})();
+</script>
 </body>
 </html>

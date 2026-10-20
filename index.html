@@ -3,550 +3,963 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Deep Vyas — Senior UI/UX Designer</title>
-<meta name="description" content="Deep Vyas, Senior UI/UX Designer and design lead. 10+ years making complex B2B enterprise systems and B2C consumer products feel obvious — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce.">
-<meta name="theme-color" content="#FCFCFD">
-<meta property="og:title" content="Deep Vyas — Senior UI/UX Designer">
-<meta property="og:description" content="10+ years across B2B enterprise systems and B2C consumer products — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce. Measured in deltas, not screenshots.">
+<title>Deep Vyas — Lead UI/UX Designer</title>
+<meta name="description" content="Deep Vyas, Lead UI/UX Designer with 10+ years in mobile apps, websites and complex web platforms. I turn research into a clear design direction and stay with it through build.">
+<meta name="theme-color" content="#F6F5F0">
+<meta property="og:title" content="Deep Vyas — Lead UI/UX Designer">
+<meta property="og:description" content="I design and lead UI/UX work, from first research to final build. Four recent case studies across healthcare, consumer apps, logistics and reporting.">
 <meta property="og:type" content="website">
 <link rel="icon" href="d-logo.svg">
-<script>/* set theme before paint — no flash */
-/* light is the default; the OS preference does not decide it. a stored
-   choice from the toggle always wins. */
-try{var t=localStorage.getItem("dv26-theme");
-if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300..700;1,400&family=Newsreader:ital,opsz,wght@1,6..72,400..500&family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="css/system.css">
+<script>/* light is the default; the OS preference does not decide it. a stored choice from the toggle always wins. */
+try{var t=localStorage.getItem("dv26-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}
+document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <style>
-/* ── 5. Hero ───────────────────────────────────────────────────── */
-/* Sized so the headline AND the metric rail clear the fold at 1440x900. */
-/* the hero owns the first screen: Selected work begins below the fold.
-   svh (not vh) so mobile browser chrome doesn't push it off. */
-.hero{position:relative;padding-top:clamp(22px,3vw,40px);padding-bottom:clamp(12px,1.6vh,22px);
-  min-height:calc(100vh - var(--nav-h));
-  min-height:calc(100svh - var(--nav-h));
-  display:flex;flex-direction:column;justify-content:flex-start;gap:0}
-/* The block sits just above centre: display type this large reads as low
-   when it is optically centred, so the trailing spacer takes the surplus. */
-.hero::before{content:"";flex:1 1 0}
-.hero::after{content:"";flex:1.2 1 0}
-.hero-say{margin-top:clamp(26px,3.4vw,42px)}
-.hero-top{flex:0 0 auto}
-.hero-h{font-size:clamp(32px,5.2vw,72px);font-weight:600;line-height:1.02;letter-spacing:-.042em;
-  max-width:21ch;text-wrap:balance}
-.hero-h em{font-family:var(--display);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--accent)}
-.hero-say{flex:0 0 auto}
-.hero-say p{font-size:clamp(16px,1.3vw,18px);line-height:1.6;color:var(--muted);max-width:62ch}
-.hero-say strong{color:var(--ink);font-weight:500}
-.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(22px,2.6vw,32px)}
-
-/* Selected work opens directly below the fold, so it takes a much smaller
-   top padding than --sec: the hero's trailing whitespace already separates them. */
-#work{padding-top:clamp(20px,2.4vw,36px);--pad-top:clamp(20px,2.4vw,36px)}
-
-/* ── 6. Selected work — a typographic index ────────────────────
-   Six rows in a ledger on the left; the hovered or focused row's
-   screenshot sticks alongside on the right. Below 900px the same
-   <figure> falls in beneath its own row — one set of images, no
-   duplication, and nothing important depends on hover. */
-.idx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.86fr);
-  grid-template-rows:repeat(6,auto);column-gap:clamp(30px,4.4vw,72px)}
-
-.idx-row{grid-column:1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;
-  gap:6px clamp(14px,2vw,26px);align-items:baseline;position:relative;
-  padding:clamp(22px,2.5vw,32px) 0;border-bottom:1px solid var(--line-2)}
-/* the wash sits on a pseudo-element so the row's own box — and therefore the
-   hairline rules between rows — stay aligned with the rest of the grid */
-.idx-row::after{content:"";position:absolute;left:-22px;right:-22px;top:0;bottom:0;z-index:-1;
-  background:var(--accent-soft);border-radius:0 var(--r-sm) var(--r-sm) 0;
-  opacity:0;transition:opacity .34s var(--ease)}
-.idx-row.is-on::after{opacity:1}
-.idx-row::before{content:"";position:absolute;left:-22px;top:-1px;bottom:-1px;width:2px;
-  background:var(--accent);transform:scaleY(0);transform-origin:center;
-  transition:transform .38s var(--ease)}
-.idx-row.is-on::before{transform:scaleY(1)}
-.idx-row .ix{grid-column:1;grid-row:1;font-family:var(--mono);font-size:var(--t-label);
-  letter-spacing:.12em;color:var(--faint);transition:color .25s var(--ease)}
-.idx-row .nm{grid-column:2;grid-row:1;font-size:clamp(24px,2.9vw,38px);font-weight:600;
-  letter-spacing:-.038em;line-height:1.04;transition:color .25s var(--ease)}
-.idx-row .d{grid-column:3;grid-row:1;justify-self:end;font-family:var(--mono);font-weight:500;
-  font-size:clamp(15px,1.6vw,21px);letter-spacing:-.04em;white-space:nowrap;color:var(--ink)}
-.idx-row .d b{color:var(--accent);font-weight:500}
-.idx-row .meta{grid-column:2;grid-row:2;display:flex;flex-direction:column;gap:5px;margin-top:2px}
-.idx-row .co{font-family:var(--display);font-style:italic;font-size:16.5px;color:var(--muted)}
-.idx-row .cat{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
-.idx-row .dc{grid-column:3;grid-row:2;justify-self:end;text-align:right;font-family:var(--mono);
-  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.idx-row.is-on .ix{color:var(--accent)}
-.idx-row.is-on .nm{color:var(--accent-tint)}
-/* the wash lightens the effective background, so the faintest label is
-   lifted a step to stay above 4.5:1 — and it reads as a nice hover detail */
-.idx-row.is-on .cat{color:var(--muted)}
-
-.idx-fig{grid-column:2;grid-row:1/-1;position:sticky;top:104px;align-self:start;margin:0;
-  opacity:0;visibility:hidden;transition:opacity .42s var(--ease),visibility .42s var(--ease)}
-.idx-fig.on{opacity:1;visibility:visible}
-.idx-fig img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top center;
-  border-radius:var(--r);border:1px solid var(--line-2);background:var(--raise)}
-.idx-fig figcaption{padding-top:18px}
-.idx-fig .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--accent)}
-.idx-fig .pb{margin-top:12px;font-size:16px;line-height:1.55;color:var(--ink-2);max-width:46ch}
-.pv{margin-top:16px;padding-top:15px;border-top:1px solid var(--line-2)}
-.pv-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.pv-nums{font-family:var(--mono);font-weight:500;font-size:clamp(20px,2.1vw,27px);letter-spacing:-.045em;
-  display:inline-flex;align-items:baseline;gap:8px;white-space:nowrap;color:var(--ink)}
-.pv-from{color:var(--muted)}
-.pv-arw{color:var(--accent);font-size:.78em;transform:translateY(-1px)}
-.pv-tag{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line);border-radius:999px;padding:4px 10px;white-space:nowrap}
-.pv-cap{margin-top:9px;font-size:14px;line-height:1.55;color:var(--muted);max-width:48ch}
-@media(max-width:480px){.pv-head{flex-wrap:wrap;gap:8px}}
-.idx-fig .ff{margin-top:15px;padding-top:13px;border-top:1px solid var(--line-2);
-  font-size:14px;line-height:1.58;color:var(--muted);max-width:50ch}
-.idx-fig .ff b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--faint);font-weight:400;margin-bottom:5px}
-.idx-fig .go{margin-top:18px}
-
-/* ── 9. About ─────────────────────────────────────────────────── */
-.about-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
-.about-body{grid-column:1/7}
-.about-body p{font-size:16.5px;line-height:1.66;color:var(--muted)}
-.about-body p+p{margin-top:1em}
-.about-grid .pull{grid-column:8/-1;margin:0;font-family:var(--display);font-style:italic;
-  font-size:clamp(22px,2.4vw,30px);line-height:1.26;letter-spacing:-.015em;color:var(--ink);
-  padding-left:20px;border-left:2px solid var(--accent)}
-.cv-list{margin-top:clamp(44px,5vw,72px);border-top:1px solid var(--line)}
-.cv-row{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,2.6fr) auto;gap:clamp(16px,3vw,40px);
-  align-items:baseline;padding:19px 0;border-bottom:1px solid var(--line-2);transition:color .25s var(--ease)}
-/* the last row's rule would sit a blank 88px above the Contact section's own
-   top rule — two hairlines with nothing between them, so drop this one */
-.cv-row:last-child{border-bottom:0}
-.cv-row:hover{color:var(--accent)}
-.cv-row .r{font-size:16px;font-weight:500;letter-spacing:-.02em}
-.cv-row .o{font-size:15px;color:var(--muted)}
-.cv-row .y{font-family:var(--mono);font-size:14px;color:var(--faint);white-space:nowrap}
-.cv-row:hover .o,.cv-row:hover .y{color:inherit}
-
-/* ── 9b. Mentoring ─────────────────────────────────────────────
-   Same parts as the rest of the page: a divider grid for the numbers, the
-   cv-row rhythm for the badges, and the About pull-quote for the testimonial. */
-.ment-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);align-items:start}
-.ment-body{grid-column:1/6}
-.ment-body p{font-size:16.5px;line-height:1.66;color:var(--muted)}
-.ment-body p strong{color:var(--ink);font-weight:500}
-.ment-body .btn{margin-top:clamp(22px,2.6vw,30px)}
-.ment-side{grid-column:7/-1;min-width:0}
-.ment-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;
-  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
-.ment-num{background:var(--bg);padding:clamp(18px,2vw,24px)}
-.ment-num .n{font-family:var(--mono);font-weight:500;font-size:clamp(21px,2.4vw,30px);
-  letter-spacing:-.045em;word-spacing:-.2em;color:var(--accent);line-height:1.05}
-.ment-num .c{margin-top:9px;font-size:13.5px;line-height:1.5;color:var(--muted)}
-.badges{margin-top:clamp(22px,2.6vw,32px);border-top:1px solid var(--line-2)}
-.badge{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 20px;align-items:baseline;
-  padding:13px 0;border-bottom:1px solid var(--line-2)}
-.badge:last-child{border-bottom:0}
-.badge .t{font-size:15px;font-weight:500;letter-spacing:-.018em}
-.badge .d{font-family:var(--mono);font-size:13px;color:var(--faint);white-space:nowrap}
-.testi{margin:clamp(42px,5vw,70px) 0 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap)}
-.testi blockquote{grid-column:2/10;margin:0;font-family:var(--display);font-style:italic;
-  font-size:clamp(20px,2.2vw,28px);line-height:1.32;letter-spacing:-.015em;color:var(--ink);
-  padding-left:20px;border-left:2px solid var(--accent)}
-.testi figcaption{grid-column:2/10;margin-top:15px;padding-left:22px;font-family:var(--mono);
-  font-size:12.5px;letter-spacing:.06em;color:var(--faint)}
-.testi figcaption b{color:var(--ink-2);font-weight:500}
-@media(max-width:980px){
-  .ment-body,.ment-side{grid-column:1/-1}
-  .ment-side{margin-top:clamp(26px,3.4vw,36px)}
-  .testi blockquote,.testi figcaption{grid-column:1/-1}
+/* The Figma file is set in Inter 3.x. Google Fonts now serves Inter 4, which is
+   about 5% narrower at regular, so paragraphs break a line earlier than the file
+   draws them. These are the four weights the file uses, pinned. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-600-normal.woff2) format("woff2")}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   Home — written against Figma frame 74:2
+   "Claude design v2 · Desktop 1440", 1440 × 7499.
+   Its own document: no shared stylesheet, every value from the file.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#1C2628; --body:#3D4A4B; --muted:#5F6A69; --accent:#2E6470;
+  --line:#DAD5CB; --line-2:#CFC9BD; --line-ink:#1C2628;
+  --paper:#F6F5F0; --paper-2:#EDEBE4; --surface:#F6F5F0;
+  --c-teal:#45918C; --c-amber:#EEB846; --c-green:#428F4F; --c-orange:#DD833E;
+  --hair:rgba(0,0,0,.08);
+  /* interaction states, from "Interaction states · motion · handoff" */
+  --accent-hover:#275560;   /* fill one step darker  */
+  --accent-active:#1F4850;  /* two steps darker      */
+  --accent-visited:#1F4850; /* 7.9:1 on #F6F5F0      */
+  --err:#B4472A;
+  --ease-out:cubic-bezier(.2,0,0,1);
+  /* motion system — hover and press stay on the sheet's 170ms/ease-out;
+     the entrance curve is a confident decelerate used only for reveals */
+  --d-micro:170ms; --d-base:320ms; --d-enter:520ms; --d-signature:580ms;
+  --ease-enter:cubic-bezier(.22,1,.36,1);
+  --rise:14px; --stagger:70ms;
+  --px:80px;
 }
-@media(max-width:620px){.ment-nums{grid-template-columns:1fr}}
+/* The file is drawn light-only. These carry its hues across so the toggle in
+   the nav — which the frame does include — doesn't leave the page half-lit. */
+html[data-theme="dark"]{
+  --ink:#F2F0EA; --body:#C3C9C6; --muted:#8E938F; --accent:#7FB5B6;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.12); --line-ink:rgba(255,255,255,.55);
+  --paper:#16191A; --paper-2:#1C2021; --surface:#202425;
+  --hair:rgba(255,255,255,.10);
+  /* the sheet notes dark tokens are still to be designed, so these lighten
+     rather than darken and are mine, not the file's */
+  --accent-hover:#96C7C8; --accent-active:#B0D6D6; --accent-visited:#A8CFD0;
+  --err:#E08B6E;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+/* the sticky nav is 76px, so anchors stop clear of it */
+section[id],header[id]{scroll-margin-top:76px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-synthesis-weight:none;-webkit-font-smoothing:antialiased}
+img{display:block}
+p,figure,blockquote,figcaption{margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:500}
+.page{max-width:1440px;margin:0 auto}
+/* 2px teal ring, 2px offset — the sheet draws it on the 8px-radius wrapper */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+/* on a teal fill the ring goes to paper so it stays visible */
+.btn:focus-visible{outline-color:var(--accent)}
+.btn:focus-visible .in{box-shadow:inset 0 0 0 2px var(--paper)}
+.skip{position:absolute;left:-9999px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip:focus{left:16px;top:16px;z-index:60;background:var(--accent);color:#fff;
+  padding:10px 14px;border-radius:4px;font-size:14px}
 
-/* ── 10. Contact ──────────────────────────────────────────────── */
-.contact{padding-top:var(--sec);padding-bottom:clamp(56px,6vw,88px)}
-.contact-in{border-top:1px solid var(--line);padding-top:clamp(38px,4.6vw,66px)}
-#contact{--pad-top:calc(var(--sec) + clamp(38px,4.6vw,66px))}   /* .contact + .contact-in */
-/* the statement runs at --t-statement, so its line box carries far more space
-   above the cap than a 32px lede does; pull the margin back to keep the optical
-   gap to the heading the same as the other sections */
-.contact .sec-head .lede{font-size:var(--t-statement);font-weight:600;letter-spacing:-.04em;
-  line-height:1.02;max-width:16ch;margin-top:2px}
-.contact .sec-head .lede em{font-family:var(--display);font-style:italic;font-weight:400;
-  color:var(--accent);letter-spacing:-.01em}
-.contact-sub{margin-top:18px;font-size:16.5px;line-height:1.58;color:var(--muted);max-width:52ch}
-.mail{display:inline-flex;align-items:center;gap:14px;margin-top:clamp(26px,3.2vw,40px);
-  font-family:var(--mono);font-size:clamp(17px,2.3vw,28px);letter-spacing:-.035em;color:var(--ink);
-  padding-bottom:9px;border-bottom:1px solid var(--line);transition:color .25s var(--ease),border-color .25s var(--ease)}
-.mail:hover{color:var(--accent);border-color:var(--accent)}
-.mail .cp{font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-  border:1px solid var(--line);border-radius:999px;padding:5px 11px;transition:all .22s var(--ease)}
-.mail:hover .cp{color:var(--accent);border-color:var(--accent-line)}
-.links{margin-top:clamp(34px,4vw,56px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;
-  background:var(--line-2);border:1px solid var(--line-2);border-radius:var(--r);overflow:hidden}
-.link{background:var(--bg);padding:clamp(20px,2.2vw,28px);display:flex;flex-direction:column;gap:7px;
-  transition:background-color .3s var(--ease)}
-.link:hover{background:var(--surface)}
-.link .t{display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:500;letter-spacing:-.02em}
-.link .t svg{width:14px;height:14px;color:var(--muted);transition:transform .3s var(--ease),color .3s var(--ease)}
-.link:hover .t svg{transform:translate(3px,-3px);color:var(--accent)}
-.link .d{font-size:14px;color:var(--muted)}
+/* ── type scale, straight from the file's styles ─────────────────── */
+.t-display{font-weight:500;font-size:72px;line-height:76px;letter-spacing:-2.88px}
+.t-h-xl  {font-weight:500;font-size:56px;line-height:60px;letter-spacing:-1.96px}
+.t-h-l   {font-weight:500;font-size:44px;line-height:48px;letter-spacing:-1.32px}
+.t-h-m   {font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.t-n-xl  {font-weight:500;font-size:120px;line-height:120px;letter-spacing:-4.8px}
+.t-n-m   {font-weight:500;font-size:40px;line-height:44px;letter-spacing:-1.2px}
+.t-title-strong{font-weight:600;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-title-m{font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-title-s{font-weight:500;font-size:16px;line-height:22px}
+.t-body-l{font-weight:400;font-size:18px;line-height:28px}
+.t-body-s{font-weight:400;font-size:14px;line-height:21px}
+.t-body-xs{font-weight:400;font-size:13px;line-height:20px}
+.t-label{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 
-/* ── 11. Responsive ───────────────────────────────────────────── */
-@media(max-width:1080px){
-  .links{grid-template-columns:repeat(2,minmax(0,1fr))}
+/* ── nav ──────────────────────────────────────────────────────────── */
+.nav{height:76px;padding:0 var(--px);display:flex;align-items:center;
+  justify-content:space-between;
+  position:sticky;top:0;z-index:50;background:var(--paper)}
+.nav .brand{display:flex;gap:12px;align-items:center}
+.nav .brand img{width:35px;height:35px}
+.nav .brand span{color:var(--ink)}
+.nav .right{display:flex;gap:40px;align-items:center}
+.nav .links{display:flex;gap:32px;align-items:flex-start;
+  font-size:14px;line-height:21px;color:var(--body);white-space:nowrap}
+.nav .links a{min-height:24px;display:flex;align-items:center;
+  transition:color .17s var(--ease-out)}
+.nav .links a:hover{color:var(--ink)}
+.nav .cv{padding:4px 0;color:var(--ink);white-space:nowrap}
+.nav .cv:hover{color:var(--accent)}
+.nav .cv{transition:color .17s var(--ease-out)}
+.toggle{width:48px;height:48px;flex:0 0 48px;border:0;background:none;padding:0;
+  border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--muted);transition:color .2s cubic-bezier(.2,.6,.2,1)}
+.toggle:hover{color:var(--ink)}
+.toggle .btn{width:40px;height:40px;border-radius:999px;background:var(--surface);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;
+  transition:background .2s ease}
+.toggle:hover .btn{background:var(--paper-2)}
+.toggle svg{width:24px;height:24px;display:block}
+/* ── Theme toggle: a diya ───────────────────────────────────────
+   Ported verbatim from css/system.css, so this page's lamp behaves exactly
+   like the one on every other page.
+   Light theme  — the lamp is lit; the flame leans and flickers.
+   Clicking it  — the flame bends in the draught, shrinks, goes out, the warm
+                  glow fades, and a thread of grey smoke curls off the wick
+                  while the page crosses to the dark theme.
+   Dark theme   — the lamp rests extinguished, smoke drifting on a 2.4s loop.
+   Clicking back — the flame relights with a small pop and the flicker resumes. */
+.toggle .diya{width:24px;height:24px;overflow:visible}   /* let the glow and smoke spill past the 24-unit box */
+
+/* ── lit state ─────────────────────────────────────────────── */
+.diya .flame{transform-box:fill-box;transform-origin:50% 100%;will-change:transform;
+  animation:flame 1.25s ease-in-out infinite}
+.diya .f-out{animation:flame-glow 1.9s ease-in-out infinite}
+.diya .f-core{transform-box:fill-box;transform-origin:50% 100%;
+  animation:flame-core .82s ease-in-out infinite}
+html:not([data-theme="dark"]) .diya .flame{
+  animation:relight .45s cubic-bezier(.34,1.32,.64,1) backwards,
+            flame 1.25s .45s ease-in-out infinite}
+
+/* Deliberately large: at 24px a 2% wobble is invisible. The lean does most of
+   the work (±5°, readable at any size); the stretch stays mild so the flame
+   keeps its point instead of squashing into a blob. */
+@keyframes flame{
+  0%,100%{transform:scale(1,1)     translate(0,0)        rotate(0deg)}
+  18%    {transform:scale(.92,1.13) translate(-.8px,-.5px) rotate(-5deg)}
+  40%    {transform:scale(1.08,.94) translate(.7px,.1px)   rotate(4deg)}
+  62%    {transform:scale(.94,1.09) translate(-.6px,-.35px) rotate(-3deg)}
+  82%    {transform:scale(1.04,.98) translate(.4px,0)      rotate(1.5deg)}
 }
-@media(max-width:900px){
-  .about-body,.about-grid .pull{grid-column:1/-1}
-  .about-grid .pull{margin-top:clamp(22px,3vw,32px)}
-  /* once the card stacks, flex-basis governs HEIGHT — reset it or the media
-     box stretches and the image floats in a void */
-  /* the preview stops being a preview and becomes the row's own image */
-  .idx{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
-  .idx-row{border-bottom:0;padding-bottom:14px}
-  .idx-row::before,.idx-row::after{display:none}
-  .idx-fig{grid-column:1;grid-row:auto;position:static;opacity:1;visibility:visible;
-    padding-bottom:clamp(34px,5.5vw,52px);margin-bottom:clamp(34px,5.5vw,52px);
-    border-bottom:1px solid var(--line-2)}
-  .idx-fig:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
+@keyframes flame-glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(255,150,30,.5))}
+  30%    {filter:drop-shadow(0 0 8px rgba(255,170,50,.95))}
+  62%    {filter:drop-shadow(0 0 3px rgba(255,150,30,.62))}
 }
-@media(max-width:760px){
-  .idx-fig .pb,.idx-fig .ff{max-width:none}
-  .sec-head{grid-template-columns:minmax(0,1fr);gap:0}
-  .sec-head .idx{grid-column:1;grid-row:1;padding-top:0;margin-bottom:10px}
-  .sec-head h2{grid-column:1;grid-row:2}
-  .sec-head .lede{grid-column:1;grid-row:3;max-width:none}
-  .sec-head .aside{grid-column:1;grid-row:4;align-self:start;margin-top:14px;max-width:none}
-  .cv-row{grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}
-  .cv-row .o{grid-column:1/-1;order:3}
-  .idx-fig img{aspect-ratio:16/11;object-fit:contain;background:var(--raise)}
+@keyframes flame-core{
+  0%,100%{transform:scale(1,1);opacity:1}
+  45%    {transform:scale(1.08,.72);opacity:.58}
 }
-@media(max-width:480px){
-  .links{grid-template-columns:minmax(0,1fr)}
-  .mail{flex-wrap:wrap;gap:10px}
-  .idx-row{grid-template-columns:auto minmax(0,1fr)}
-  .idx-row .nm{grid-column:2;grid-row:1}
-  .idx-row .d{grid-column:2;grid-row:2;justify-self:start;margin-top:8px}
-  .idx-row .dc{grid-column:2;grid-row:3;justify-self:start;text-align:left;margin-top:3px}
-  .idx-row .meta{grid-column:2;grid-row:4;margin-top:11px}
+@keyframes relight{
+  0%  {transform:scale(.35,0);opacity:0}
+  48% {transform:scale(.94,1.1);opacity:1}
+  100%{transform:scale(1,1);opacity:1}
 }
-@media print{.nav{display:none}}
+
+/* ── snuffed state ─────────────────────────────────────────── */
+.diya .smoke path{transform-box:fill-box;transform-origin:50% 100%;opacity:0;
+  stroke-dasharray:13;stroke-dashoffset:13}
+html[data-theme="dark"] .diya .flame{animation:snuff .62s cubic-bezier(.4,0,.25,1) forwards}
+html[data-theme="dark"] .diya .f-out{animation:glow-out .62s ease-out forwards}
+html[data-theme="dark"] .diya .f-core{animation:none}
+html[data-theme="dark"] .diya .s1{animation:smoke 2.4s .42s ease-out infinite}
+html[data-theme="dark"] .diya .s2{animation:smoke 2.4s 1.26s ease-out infinite}
+
+@keyframes snuff{
+  0%  {transform:scale(1,1)    rotate(0deg); opacity:1}
+  30% {transform:scale(.9,1.1)  rotate(-10deg);opacity:1}   /* bends in the draught */
+  58% {transform:scale(.74,.48) rotate(6deg);  opacity:.8}  /* then drops away fast */
+  100%{transform:scale(.4,0)    rotate(0deg);  opacity:0}
+}
+@keyframes glow-out{
+  0%  {filter:drop-shadow(0 0 7px rgba(255,165,45,.9))}
+  55% {filter:drop-shadow(0 0 3px rgba(255,150,30,.4))}
+  100%{filter:drop-shadow(0 0 0 rgba(255,150,30,0))}
+}
+/* the dash offset draws the wisp from the wick upward, so it reads as rising
+   rather than simply fading in */
+@keyframes smoke{
+  0%  {opacity:0;  stroke-dashoffset:13;transform:translateY(1px) scale(.8,.6) rotate(0deg)}
+  18% {opacity:.62}
+  55% {opacity:.5; stroke-dashoffset:0; transform:translateY(-1.5px) scale(1,1) rotate(2deg)}
+  100%{opacity:0;  stroke-dashoffset:0; transform:translateY(-5px) scale(1.25,1.2) rotate(-3deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .diya .flame,.diya .f-out,.diya .f-core,.diya .smoke path{animation:none!important}
+  .diya .f-out{filter:drop-shadow(0 0 4px rgba(255,155,35,.65))}
+  html[data-theme="dark"] .diya .flame{opacity:0}
+  html[data-theme="dark"] .diya .smoke path{opacity:.55;stroke-dashoffset:0}
+}
+
+/* ── section shell ────────────────────────────────────────────────── */
+.sec{padding:120px var(--px)}
+.sec.ruled{box-shadow:inset 0 1px 0 0 var(--line)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;width:100%}
+.sec-head .lab{width:416px;flex:0 0 416px;display:flex;gap:12px;
+  white-space:nowrap;color:var(--ink)}
+.sec-head .lab .n{color:var(--accent)}
+.sec-head .stmt{width:746px;flex:0 0 746px;color:var(--ink)}
+
+/* ── hero ─────────────────────────────────────────────────────────── */
+.hero{padding:120px var(--px);display:flex;flex-direction:column;gap:80px;align-items:flex-start}
+.hero .rolehead{display:flex;flex-direction:column;gap:32px;width:100%}
+.hero .role{color:var(--body)}
+.hero .role b{font-weight:500;color:var(--accent)}
+.hero h1{color:var(--ink)}
+.hero .introrow{display:flex;gap:24px;align-items:flex-start;width:100%}
+.hero .gutter{width:510px;flex:0 0 510px;height:28px}
+.hero .intro{display:flex;flex-direction:column;gap:40px;align-items:flex-start}
+.hero .intro p{width:526px;color:var(--body)}
+.ctas{display:flex;gap:32px;align-items:center}
+.btn{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer;color:inherit}
+.btn .in{background:var(--accent);color:#fff;border-radius:4px;padding:12px 20px;
+  display:flex;align-items:center;white-space:pre;
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:background-color .17s var(--ease-out),color .17s var(--ease-out)}
+.btn:hover .in{background:var(--accent-hover)}
+.btn:active .in{background:var(--accent-active)}
+/* buttons carry no visited style: visited reads as default */
+html[data-theme="dark"] .btn .in{color:#10191A}
+.tlink{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer}
+.tlink .in{padding:4px 0;display:flex;white-space:pre;color:var(--accent);
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:color .17s var(--ease-out)}
+/* the rule sits on the label alone, so it never runs under the arrow */
+.tlink .in .lbl{text-decoration:underline 1px transparent;text-underline-offset:3px;
+  transition:text-decoration-color .17s var(--ease-out)}
+.tlink:hover .in .lbl,a:hover > .tlink .in .lbl{text-decoration-color:currentColor}
+.tlink:active .in,a:active .tlink .in{color:var(--accent-active)}
+.tlink:active .in .lbl,a:active .tlink .in .lbl{text-decoration-color:currentColor}
+a.tlink:visited .in,a:visited .tlink .in{color:var(--accent-visited)}
+
+/* ── 01 · selected work ───────────────────────────────────────────── */
+.work{padding:120px 0}
+.work .sec-head{padding:0 var(--px)}
+.projects{display:flex;flex-direction:column;gap:160px;margin-top:96px}
+.proj{display:flex;gap:80px;align-items:center;padding-left:var(--px);
+  color:inherit}
+/* the thumbnail: a tinted 16:10 plate with the screens laid over it */
+.thumb{width:673px;flex:0 0 673px;aspect-ratio:673/421;border-radius:4px;
+  position:relative;overflow:hidden;background:var(--surface)}
+.thumb .tint{position:absolute;inset:0;background:var(--tint)}
+.thumb figure{position:absolute;margin:0;border-radius:4px;overflow:hidden;
+  background:var(--tint);
+  box-shadow:inset 0 0 0 var(--hw,.75px) var(--hair),var(--sh,0 0 0 0 transparent)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb img.fades{opacity:0;transition:opacity .15s var(--ease-out)}
+.thumb img.is-loaded{opacity:1}
+.pbody{width:551px;flex:0 0 551px;display:flex;flex-direction:column;gap:20px;
+  align-items:flex-start}
+.pbody .meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+/* the case number sits on a bar of that project's colour */
+.pnum{position:relative;display:inline-flex;color:var(--accent)}
+.pnum::before{content:"";position:absolute;left:-4px;top:22px;height:16px;
+  width:100%;background:var(--bar)}
+.pnum span{position:relative}
+.pbody .name{color:var(--ink)}
+.pbody .kind{color:var(--muted);white-space:nowrap}
+.pbody .space{height:8px;width:1px}
+.pbody .ptitle{color:var(--ink)}
+.pbody .ptitle.cap{max-width:545px}
+.pbody .pdesc{color:var(--body);width:100%}
+.outcome{width:100%;padding:4px 0 4px 16px;border-left:3px solid var(--edge);
+  display:flex;align-items:flex-start}
+.outcome p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.proj:hover .tlink .in .lbl{text-decoration-color:currentColor}
+.proj:active .tlink .in{color:var(--accent-active)}
+.proj:active .tlink .in .lbl{text-decoration-color:currentColor}
+.proj:visited .tlink .in{color:var(--accent-visited)}
+
+/* ── 02 · how I lead and design ───────────────────────────────────── */
+.ledger{display:flex;align-items:flex-start;justify-content:space-between;width:100%}
+.ledger .head{width:416px;flex:0 0 416px;display:flex;flex-direction:column;gap:16px}
+.ledger .head .n{color:var(--accent)}
+.ledger .head h2{width:288px;color:var(--ink)}
+.grid{width:746px;flex:0 0 746px;display:flex;flex-direction:column}
+.grid .row{display:flex;gap:24px;align-items:flex-start;padding:32px 0;
+  border-top:1px solid var(--line);width:100%}
+.grid .row:last-child{border-bottom:1px solid var(--line)}
+.grid .row h3{width:250px;flex:0 0 250px;color:var(--ink);align-self:stretch}
+.grid .row p{flex:1 1 0;min-width:0;color:var(--body);align-self:stretch}
+
+/* ── 03 · about ───────────────────────────────────────────────────── */
+.about{display:flex;flex-direction:column;gap:96px;align-items:flex-start}
+.about .body{display:flex;align-items:flex-start;justify-content:space-between;width:100%}
+.about .copy{width:636px;flex:0 0 636px;display:flex;flex-direction:column;gap:20px}
+.about .copy p{width:600px;color:var(--body)}
+.exp{width:526px;flex:0 0 526px;display:flex;flex-direction:column}
+.exp .row{padding:20px 0;display:flex;flex-direction:column;gap:4px;width:100%;
+  box-shadow:inset 0 1px 0 0 var(--line)}
+.exp .row:last-child{box-shadow:inset 0 1px 0 0 var(--line),inset 0 -1px 0 0 var(--line)}
+.exp .top{display:flex;align-items:flex-start;justify-content:space-between;width:100%}
+.exp .role{color:var(--ink);white-space:nowrap}
+.exp .years,.exp .co{color:var(--muted);white-space:nowrap}
+
+/* ── 04 · mentoring ───────────────────────────────────────────────── */
+.mentoring{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:96px;align-items:flex-end}
+.mentoring .sec-head .stmt{line-height:59px}
+.mbody{display:flex;align-items:flex-start;justify-content:space-between;width:100%}
+.mbody .left{width:416px;flex:0 0 416px;display:flex;flex-direction:column;gap:32px;
+  align-items:flex-start}
+.mbody .left p{color:var(--body);width:100%}
+.mbody .right{width:746px;flex:0 0 746px;display:flex;flex-direction:column;gap:40px}
+.stat{display:flex;flex-direction:column;gap:4px;align-items:flex-start;white-space:nowrap}
+.stat .n{color:#D45C37}
+html[data-theme="dark"] .stat .n{color:#E88A68}
+.stat .cap{color:var(--body)}
+.badges{display:flex;flex-direction:column;width:100%;white-space:nowrap}
+.badges .row{padding:16px 0;display:flex;align-items:flex-start;justify-content:space-between;
+  width:100%;box-shadow:inset 0 1px 0 0 var(--line-2)}
+.badges .row:last-child{box-shadow:inset 0 1px 0 0 var(--line-2),inset 0 -1px 0 0 var(--line-2)}
+.badges .row b{color:var(--ink)}
+.badges .row span{color:var(--muted)}
+.quote{width:746px;flex:none;display:flex;gap:32px;align-items:flex-start}
+.quote .bar{width:2px;flex:0 0 2px;background:var(--accent);align-self:stretch}
+.quote .in{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:20px}
+.quote blockquote{margin:0;color:var(--accent)}
+.quote figcaption{color:var(--muted);white-space:nowrap}
+
+/* ── 05 · contact ─────────────────────────────────────────────────── */
+.contact{display:flex;flex-direction:column;gap:80px;align-items:flex-end}
+.contact .stmt .lt{color:var(--accent)}
+.cbody{width:746px;flex:none;display:flex;flex-direction:column;gap:40px;
+  align-items:flex-start}
+.cbody .lead{width:526px;color:var(--body)}
+.email{display:flex;gap:20px;align-items:baseline}
+.email a{color:var(--ink);white-space:nowrap}
+.email a:hover{color:var(--accent)}
+.copybtn{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer}
+.copybtn .in{padding:4px 0;display:flex;align-items:center;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;white-space:nowrap;
+  text-decoration:underline 1px transparent;text-underline-offset:3px;
+  transition:color .17s var(--ease-out),text-decoration-color .17s var(--ease-out)}
+.copybtn:hover .in{color:var(--accent);text-decoration-color:currentColor}
+.copybtn:active .in{color:var(--accent)}
+.copybtn[data-state="copied"] .in{color:var(--accent);text-decoration-color:transparent}
+.copybtn[data-state="error"] .in{color:var(--err);text-decoration-color:transparent}
+.clinks{display:flex;gap:24px;align-items:flex-start;width:100%}
+.clinks a{flex:1 1 0;min-width:0;padding-top:20px;border-top:1px solid var(--line-ink);
+  display:flex;flex-direction:column;gap:4px}
+.clinks .top{display:flex;gap:8px;align-items:flex-start;width:100%}
+.clinks .top b{color:var(--ink);white-space:nowrap}
+.clinks .top svg{width:16px;height:16px;flex:0 0 16px;display:block;color:var(--muted)}
+.clinks .sub{color:var(--muted)}
+.clinks a:hover .top b{color:var(--accent)}
+
+/* ── brand strip and footer ───────────────────────────────────────── */
+.strip{display:flex;height:6px;width:100%}
+.strip span{flex:1 1 0}
+/* The same strip, holding the nav's bottom edge, at 2px. It doubles as the
+   read-progress indicator: a paper veil sits over it and retracts from the
+   left as you scroll, so the palette fills in rather than a bar growing from
+   nothing — the nav keeps a visible edge at the top of the page. */
+.strip.at-nav{position:absolute;left:0;right:0;bottom:0;width:auto;height:2px}
+.strip.at-nav::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--paper);opacity:.8;
+  transform:scaleX(var(--unread,1));transform-origin:100% 50%;
+  will-change:transform}
+.foot{padding:32px var(--px);display:flex;align-items:flex-start;
+  justify-content:space-between;box-shadow:inset 0 1px 0 0 var(--line)}
+.foot p{color:var(--muted);white-space:nowrap}
+
+/* ════════════ motion ════════════
+   Entrances are opacity and transform only, so nothing reflows. Every initial
+   state is scoped to .js: without script the page renders fully visible. */
+.js [data-rev]{will-change:opacity,transform}
+.js [data-rev].is-in{will-change:auto}
+
+/* rise — section statements, body copy, project text */
+.js [data-rev="rise"]{opacity:0;transform:translate3d(0,var(--rise),0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="rise"].is-in{opacity:1;transform:none}
+
+/* fade — the CV list and the mentoring badges, which should stay quiet */
+.js [data-rev="fade"]{opacity:0;transition:opacity var(--d-base) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 60ms)}
+.js [data-rev="fade"].is-in{opacity:1}
+
+/* wipe — the ledger rows read as a table filling in, left to right */
+.js [data-rev="wipe"]{opacity:0;clip-path:inset(0 100% 0 0);
+  transition:opacity var(--d-base) var(--ease-out),
+             clip-path var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="wipe"].is-in{opacity:1;clip-path:inset(0 0 0 0)}
+
+/* lift — the screens inside a thumbnail assemble in z-order */
+.js [data-rev="lift"]{opacity:0;transform:translate3d(0,16px,0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.js [data-rev="lift"].is-in{opacity:1;transform:none}
+
+/* draw — the quote's rule grows down from the top */
+.js [data-rev="draw"]{transform:scaleY(0);transform-origin:50% 0;
+  transition:transform var(--d-enter) var(--ease-enter)}
+.js [data-rev="draw"].is-in{transform:none}
+
+/* mask — the one signature device, on the hero headline and the 150+ */
+.ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.ln.flush{padding-bottom:0;margin-bottom:0}
+.ln>span{display:block}
+.js .ln>span{transform:translate3d(0,105%,0);
+  transition:transform var(--d-signature) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 90ms)}
+.js .ln.is-in>span,.js .is-in .ln>span{transform:none}
+
+/* ── nav: the current section ────────────────────────────────────── */
+.nav{position:sticky}
+.nav .links a{position:relative}
+.nav .links a::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:0 50%;
+  transition:transform var(--d-micro) var(--ease-out)}
+.nav .links a:hover::after{transform:scaleX(1)}
+.nav .links a[aria-current="true"]{color:var(--ink)}
+.nav .links a[aria-current="true"]::after{transform:scaleX(1);background:var(--accent)}
+
+/* ── project rows ────────────────────────────────────────────────── */
+/* a contained zoom inside each frame, and the top screen lifts off the plate */
+.thumb img{transition:transform var(--d-enter) var(--ease-out)}
+.proj:hover .thumb img{transform:scale(1.025)}
+.thumb figure{transition:box-shadow var(--d-base) var(--ease-out)}
+.proj:hover .thumb figure:last-of-type{
+  box-shadow:inset 0 0 0 var(--hw,.75px) var(--hair),0 18px 40px -18px rgba(28,38,40,.28)}
+html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
+  box-shadow:inset 0 0 0 var(--hw,.75px) var(--hair),0 18px 40px -18px rgba(0,0,0,.6)}
+
+/* ── arrows answer the pointer ───────────────────────────────────── */
+.arw{display:inline-block;transition:transform var(--d-micro) var(--ease-out)}
+.btn:hover .arw,.tlink:hover .arw,.proj:hover .arw{transform:translateX(3px)}
+.arw.up{transition:transform var(--d-micro) var(--ease-out)}
+.btn:hover .arw.up,.tlink:hover .arw.up{transform:translate(2px,-2px)}
+.tlink:hover .arw.top{transform:translateY(-3px)}
+.clinks a:hover .arw{transform:translate(2px,-2px)}
+.clinks a{transition:border-color var(--d-micro) var(--ease-out)}
+.clinks a:hover{border-top-color:var(--accent)}
+
+/* ════════════ responsive ════════════
+   The frame is drawn at 1440 and every column width above is the file's.
+   Below that the fixed columns start to give, then the rows stack. */
+@media (max-width:1439px){
+  .proj{padding-right:var(--px)}
+  .thumb{flex:0 1 673px}
+  .pbody{flex:0 1 551px}
+  .sec-head .lab{flex:0 1 416px}
+  .sec-head .stmt{flex:0 1 746px}
+  .hero .gutter{flex:0 1 510px}
+  .hero .intro{flex:1 1 0;min-width:0}
+  .hero .intro p{width:100%;max-width:526px}
+  .ledger .head{flex:0 1 416px}
+  .grid,.mbody .right{flex:0 1 746px}
+  .quote,.cbody{width:min(746px,100%)}
+  .about .copy{flex:0 1 636px}
+  .about .copy p{width:100%;max-width:600px}
+  .exp{flex:0 1 526px}
+  .mbody .left{flex:0 1 416px}
+  .cbody .lead{width:100%;max-width:526px}
+}
+@media (max-width:1240px){
+  :root{--px:56px}
+  .t-display{font-size:clamp(44px,5.6vw,72px);letter-spacing:-.04em}
+  .t-h-xl{font-size:clamp(36px,4.4vw,56px);letter-spacing:-.035em}
+  .t-n-xl{font-size:clamp(72px,9.6vw,120px)}
+  .proj{gap:48px}
+  .projects{gap:120px}
+  .grid .row h3{flex:0 1 250px}
+}
+@media (max-width:1024px){
+  .sec,.hero,.mentoring{padding-top:88px;padding-bottom:88px}
+  .work{padding:88px 0}
+  .sec-head{flex-wrap:wrap;gap:20px}
+  .sec-head .lab,.sec-head .stmt{flex:1 1 100%;width:auto}
+  .hero{gap:56px}
+  .hero .introrow{gap:0}
+  .hero .gutter{display:none}
+  .ledger,.about .body,.mbody{flex-wrap:wrap;gap:40px}
+  .ledger .head,.grid,.about .copy,.exp,.mbody .left,.mbody .right{flex:1 1 100%;width:auto}
+  .quote,.cbody{width:100%}
+  .ledger .head h2{width:auto}
+  .mentoring{align-items:flex-start}
+  .contact{align-items:flex-start}
+  .projects{margin-top:56px;gap:88px}
+}
+@media (max-width:860px){
+  .proj{flex-wrap:wrap;gap:32px}
+  .thumb,.pbody{flex:1 1 100%;width:auto}
+  /* the thumbnail comes first on narrow screens whichever side it sat on */
+  .proj .thumb{order:-1}
+  .t-h-m{font-size:26px}
+  .clinks{flex-wrap:wrap;gap:20px}
+  .clinks a{flex:1 1 40%}
+}
+/* the sheet asks for 24×24 targets on desktop and 44×44 on mobile */
+@media (max-width:640px){
+  .tlink,.copybtn,.nav .cv{min-height:44px;align-items:center}
+  .tlink .in,.copybtn .in,.nav .cv{display:flex;align-items:center;min-height:36px}
+}
+/* "remove every non-essential transition and smooth scrolling;
+    state changes switch instantly" */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .thumb img.fades,.thumb img.fades.is-loaded{opacity:1}
+  .js [data-rev],.js .ln>span{opacity:1!important;transform:none!important;
+    clip-path:none!important}
+  .nav .links a[aria-current="true"]::after{transform:scaleX(1)!important}
+}
+@media (max-width:640px){
+  :root{--px:20px}
+  .sec,.hero,.mentoring{padding-top:64px;padding-bottom:64px}
+  .work{padding:64px 0}
+  .nav .links{display:none}
+  .nav{gap:12px}
+  .t-body-l{font-size:16px}
+  .t-h-m{font-size:24px;letter-spacing:-.02em}
+  .ctas{flex-wrap:wrap;gap:16px 24px}
+  .email{flex-wrap:wrap;gap:8px}
+  .email a{font-size:clamp(24px,7.2vw,40px);white-space:normal;word-break:break-word}
+  .exp .role,.badges .row,.exp .top{white-space:normal}
+  .exp .top{gap:12px}
+  .grid .row{flex-wrap:wrap;gap:8px}
+  .grid .row h3{flex:1 1 100%;width:auto}
+  .clinks a{flex:1 1 100%}
+  .quote{gap:20px}
+  .quote figcaption,.pbody .kind,.foot p,.sec-head .lab,.stat{white-space:normal}
+}
 </style>
 </head>
 <body>
-<a class="skip" href="#work">Skip to the work</a>
+<a class="skip" href="#work">Skip to selected work</a>
+<div class="page">
 
-<!-- ══ Nav ══ -->
-<header class="nav" id="nav">
-  <div class="nav-in">
-    <a class="brand" href="#top" aria-label="Deep Vyas — home"><img class="mark" src="d-logo.svg" alt="" width="28" height="28"> Deep Vyas</a>
-    <nav class="nav-links" aria-label="Sections">
-      <a href="#work" data-nav>Work</a>
-      <a href="#about" data-nav>About</a>
-      <a href="#mentoring" data-nav>Mentoring</a>
-      <a href="#contact" data-nav>Contact</a>
+<header class="nav" id="top">
+    <span class="strip at-nav" aria-hidden="true"><span style="--i:0;background:#2E6470"></span><span style="--i:1;background:#45918C"></span><span style="--i:2;background:#428F4F"></span><span style="--i:3;background:#9DBB55"></span><span style="--i:4;background:#EEB846"></span><span style="--i:5;background:#DD833E"></span><span style="--i:6;background:#D45C37"></span></span>
+  <a class="brand" href="index.html" aria-label="Deep Vyas — home">
+    <img src="home-assets/3b772.svg" alt="" width="35" height="35" decoding="async">
+    <span class="t-title-strong">Deep Vyas</span>
+  </a>
+  <div class="right">
+    <nav class="links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#how">How I work</a>
+      <a href="#about">About</a>
+      <a href="#mentoring">Mentoring</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="nav-act">
-      <button class="icon-btn" id="theme" aria-label="Switch colour theme">
+    <button class="toggle" id="theme" type="button" aria-label="Switch colour theme">
+      <span class="btn">
         <svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg>
-      </button>
-      <a class="nav-cv" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">CV ↗</a>
-    </div>
-    <div class="prog" id="prog" aria-hidden="true"></div>
+      </span>
+    </button>
+    <a class="cv t-label" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">Résumé ↗</a>
   </div>
 </header>
 
-<main id="top">
-
-<!-- ══ 01 · Hero ══ -->
-<section class="hero wrap" aria-labelledby="hero-h">
-
-  <div class="hero-top">
-  <h1 class="hero-h rv" id="hero-h">I ask <em>boring</em> questions until the product gets simple.</h1>
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="rolehead">
+    <p class="role t-label" data-rev="fade">Lead UI/&#8288;UX Designer · <b>10+</b> years</p>
+    <h1 class="t-display" id="hero-h1">
+      <span class="ln" style="--i:0"><span>I design and lead UI/&#8288;UX work,</span></span>
+      <span class="ln" style="--i:1"><span>from first research</span></span>
+      <span class="ln" style="--i:2"><span>to final build.</span></span>
+    </h1>
   </div>
-
-    <div class="hero-say rv">
-      <p>Lead designer for complex <strong>B2B enterprise systems and B2C consumer products</strong> — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce. 10+ years, mostly in regulated, messy systems.</p>
-      <div class="hero-cta">
-        <a class="btn btn-fill" href="#work">See the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">View CV</a>
+  <div class="introrow">
+    <div class="gutter" aria-hidden="true"></div>
+    <div class="intro">
+      <p class="t-body-l" data-rev="rise" style="--i:0">I’m Deep Vyas, a UI/&#8288;UX designer with more than ten years of experience in mobile apps, websites and complex web platforms. I turn research into a clear design direction, work through the interaction and visual details, and keep the experience consistent while engineering builds it.</p>
+      <div class="ctas" data-rev="rise" style="--i:1">
+        <a class="btn" href="#work"><span class="in">View selected work   <span class="arw">→</span></span></a>
+        <a class="tlink" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer"><span class="in"><span class="lbl">Download résumé</span><span class="sp">  </span><span class="arw up">↗</span></span></a>
       </div>
     </div>
-</section>
-
-<!-- ══ 02 · Selected work ══ -->
-<section class="sec wrap" id="work" aria-labelledby="work-h">
-  <div class="sec-head rv">
-    <span class="idx">02</span>
-    <h2 id="work-h">Selected work</h2>
-    <p class="lede">Six products. Each one is a delta.</p>
-  </div>
-
-  <div class="idx rv" id="idx">
-  <a class="idx-row is-on" href="teleconsult.html" data-i="0">
-    <span class="ix">01</span>
-    <span class="nm">myAster</span>
-    <span class="d"><b>297</b></span>
-    <span class="meta"><span class="co">Aster DM</span><span class="cat">Native app · Six services · Team of four</span></span>
-    <span class="dc">screens across six services</span>
-  </a>
-  <figure class="idx-fig on" data-i="0">
-    <img src="img/myaster-thumb.jpg" width="990" height="618" alt="myAster healthcare app" loading="eager" decoding="async">
-    <figcaption>
-      <span class="k">Native app · Six services · Team of four</span>
-      <p class="pb">Six services, six accounts, six checkouts — and a patient who should only have to set up their family, ID and insurance once.</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-from">6 services</span><span class="pv-arw">→</span><span class="pv-to">1</span></span><span class="pv-tag">Delivered</span></div>
-        <p class="pv-cap">One account, one checkout and one identity model serving all six services.</p>
-      </div>
-      <p class="ff"><b>What failed first</b>[placeholder — what you tried first on myAster]</p>
-      <a class="go" href="teleconsult.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
-  <a class="idx-row" href="flintlink.html" data-i="1">
-    <span class="ix">02</span>
-    <span class="nm">Flint-Link</span>
-    <span class="d"><b>3</b> of 4</span>
-    <span class="meta"><span class="co">Flint Group</span><span class="cat">B2B portal · Self-serve</span></span>
-    <span class="dc">pilot orgs dropped spreadsheets</span>
-  </a>
-  <figure class="idx-fig" data-i="1">
-    <img src="img/flintlink-thumb.jpg" width="990" height="618" alt="Flint-Link supplier portal" loading="lazy" decoding="async">
-    <figcaption>
-      <span class="k">B2B portal · Self-serve</span>
-      <p class="pb">The portal was organised around documents; customers think in orders.</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-to">6–10 hrs/week</span></span><span class="pv-tag">Production</span></div>
-        <p class="pv-cap">Account manager time returned, per person, previously spent retrieving documents.</p>
-      </div>
-      <p class="ff"><b>What failed first</b>I built a document-type IA because every competitor had one. It fell apart the first time someone looked for a document tied to a delivery.</p>
-      <a class="go" href="flintlink.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
-  <a class="idx-row" href="pettrackr.html" data-i="2">
-    <span class="ix">03</span>
-    <span class="nm">PetTrackr</span>
-    <span class="d">22s <b>→</b> 7s</span>
-    <span class="meta"><span class="co">Universal Biosensors</span><span class="cat">Mobile · iOS &amp; Android · Hardware-connected</span></span>
-    <span class="dc">chart comprehension</span>
-  </a>
-  <figure class="idx-fig" data-i="2">
-    <img src="img/pettrackr-thumb.jpg" width="990" height="618" alt="PetTrackr mobile app" loading="lazy" decoding="async">
-    <figcaption>
-      <span class="k">Mobile · iOS &amp; Android · Hardware-connected</span>
-      <p class="pb">The analyser holds seven days of readings. Miss a week of syncing and the data is gone.</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-from">3–5 min</span><span class="pv-arw">→</span><span class="pv-to">&lt;30s</span></span><span class="pv-tag">Usability test</span></div>
-        <p class="pv-cap">Time to log one glucose reading, one-handed, with the pet and time pre-filled.</p>
-      </div>
-      <p class="ff"><b>What failed first</b>I designed a seven-step onboarding and believed in it. Most people never reached the end.</p>
-      <a class="go" href="pettrackr.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
-  <a class="idx-row" href="kidneylink.html" data-i="3">
-    <span class="ix">04</span>
-    <span class="nm">KidneyLink</span>
-    <span class="d"><b>3×</b></span>
-    <span class="meta"><span class="co">U.S. Renal Care</span><span class="cat">Clinical · Enterprise UX</span></span>
-    <span class="dc">faster morning review</span>
-  </a>
-  <figure class="idx-fig" data-i="3">
-    <img src="img/kidneylink-thumb.jpg" width="990" height="618" alt="KidneyLink clinical portal" loading="lazy" decoding="async">
-    <figcaption>
-      <span class="k">Clinical · Enterprise UX</span>
-      <p class="pb">Patient data sat across disconnected systems and arrived without context, so risk was discovered after admission instead of before it.</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-from">38%</span><span class="pv-arw">→</span><span class="pv-to">91%</span></span><span class="pv-tag">Usability test</span></div>
-        <p class="pv-cap">Comprehension on the eGFR task, after one plain-language line replaced the detailed chart.</p>
-      </div>
-      <p class="ff"><b>What failed first</b>My first design failed round one of testing.</p>
-      <a class="go" href="kidneylink.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
-  <a class="idx-row" href="rxagile.html" data-i="4">
-    <span class="ix">05</span>
-    <span class="nm">RxAgile</span>
-    <span class="d"><b>4.6</b>/5</span>
-    <span class="meta"><span class="co">Pharmacy Benefits</span><span class="cat">PBM · Greenfield · Complex domain</span></span>
-    <span class="dc">operator satisfaction</span>
-  </a>
-  <figure class="idx-fig" data-i="4">
-    <img src="img/rxagile-thumb.jpg" width="990" height="742" alt="RxAgile pharmacy benefits platform" loading="lazy" decoding="async">
-    <figcaption>
-      <span class="k">PBM · Greenfield · Complex domain</span>
-      <p class="pb">A pharmacy-benefits administration platform built from scratch, in a domain I had to learn before I could design anything in it. Errors measured from [baseline].</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-to">60% fewer</span></span><span class="pv-tag">Production</span></div>
-        <p class="pv-cap">Client onboarding errors after launch, measured against [baseline].</p>
-      </div>
-      <p class="ff"><b>What failed first</b>Six weeks and eight interviews in, one sentence revealed an entire user type I had designed nothing for.</p>
-      <a class="go" href="rxagile.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
-  <a class="idx-row" href="aip.html" data-i="5">
-    <span class="ix">06</span>
-    <span class="nm">Apex Insights Portal</span>
-    <span class="d"><b>~$100k</b></span>
-    <span class="meta"><span class="co">LTC Analytics</span><span class="cat">Analytics · 0 → 1 · 126 screens</span></span>
-    <span class="dc">won pre-production</span>
-  </a>
-  <figure class="idx-fig" data-i="5">
-    <img src="img/apex-thumb.jpg" width="990" height="618" alt="Apex Insights analytics portal" loading="lazy" decoding="async">
-    <figcaption>
-      <span class="k">Analytics · 0 → 1 · 126 screens</span>
-      <p class="pb">Executives made staffing decisions from reports an analyst assembled by hand across four systems, arriving three days late.</p>
-      <div class="pv">
-        <div class="pv-head"><span class="pv-nums"><span class="pv-from">3+ days</span><span class="pv-arw">→</span><span class="pv-to">same day</span></span><span class="pv-tag">Production</span></div>
-        <p class="pv-cap">Report turnaround at the pilot client, previously assembled by hand across four systems.</p>
-      </div>
-      <p class="ff"><b>What failed first</b>Our first IA grouped reports by data source. In testing, nobody could find anything.</p>
-      <a class="go" href="aip.html">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </figcaption>
-  </figure>
   </div>
 </section>
 
-<!-- ══ 05 · About ══ -->
-<section class="sec wrap" id="about" aria-labelledby="about-h">
-  <div class="sec-head rv">
-    <span class="idx">03</span>
-    <h2 id="about-h">About</h2>
-    <p class="lede">Self-taught, still curious, mostly patient.</p>
+<!-- ═══ 01 · Selected work ═══ -->
+<section class="work" id="work" aria-labelledby="h-work">
+  <div class="sec-head">
+    <p class="lab t-label" data-rev="fade"><span class="n">01</span><span>Selected work</span></p>
+    <h2 class="stmt t-h-xl" id="h-work" data-rev="rise">Four recent case studies</h2>
   </div>
-
-  <div class="about-grid">
-    <div class="about-body rv">
-      <p>I'm Deep, a self-taught Senior UI/UX Designer based in Ahmedabad, India. I came up through graphic design and got pulled into UI/UX when I got more interested in why people use things than in how they look.</p>
-      <p>Ten years, and the industries keep changing: healthcare, EV charging, print and delivery logistics, fintech, e-commerce. Enterprise B2B one quarter, consumer apps the next, on web, iOS and Android. What stays the same is the job: learn the business fast, then design something the client's engineers can build.</p>
-      <p>That means running client conversations, aligning stakeholders who want different things, turning a rough brief into a product strategy, and leading a team through to developer handoff. I build scalable design systems, prototype in code to shorten the path from idea to release, and keep the work close enough to engineering that what I design is what actually ships.</p>
+  <div class="projects">
+  <a class="proj" href="myaster.html" style="--bar:rgba(69,145,140,0.35);--edge:#45918C;--tint:rgba(69,145,140,0.1)" aria-label="myAster — Telling patients what their insurance allows before they book, not after">
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;left:12.7786%;top:17.1021%;width:33.4324%;height:117.3990%;--hw:.75px"><img src="home-assets/38cab.png" alt="The myAster Book Consultation screen, offering an instant consultation or a scheduled one with a list of doctors." width="414" height="909" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;left:57.0579%;top:17.1021%;width:33.4324%;height:101.7221%;--hw:.75px"><span style="position:absolute;inset:0;overflow:hidden;border-radius:4px"><img src="home-assets/5ce43.png" alt="The slot picker, showing a week of dates and the appointment times open on each." style="position:absolute;left:0;top:-13.64%;width:100%;height:113.64%" width="414" height="896" loading="lazy" decoding="async"></span></figure>
+      <figure data-rev="lift" style="--i:2;left:32.6895%;top:8.5511%;width:37.8900%;height:157.3040%;--hw:.75px"><img src="home-assets/ad3bf.png" alt="The checkout screen with appointment details, the choice between self-pay and paying via insurance, and payment options." width="414" height="1075" loading="lazy" decoding="async"></figure>
     </div>
-    <p class="pull rv">I'd rather look slow for two weeks than design confidently in the wrong direction for two months.</p>
+    <div class="pbody" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m"><span>01</span></span>
+        <h3 class="name t-title-strong">myAster</h3>
+        <p class="kind t-body-s">Patient app · iOS and Android</p>
+      </div>
+      <p class="ptitle cap t-h-m">Telling patients what their insurance allows before they book, not after</p>
+      <p class="pdesc t-body-l">Insured patients only found out at checkout that they couldn’t book. As lead designer in a team of four, I designed the parts every service shares first, from patient profiles and insurance states to one checkout, so each rule is checked while the patient can still act on it.</p>
+      <div class="outcome"><p>Patients book appointments, manage family profiles, and access care through one app.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
+    </div>
+  </a>
+  <a class="proj" href="pettrackr.html" style="--bar:rgba(238,184,70,0.55);--edge:#EEB846;--tint:rgba(238,184,70,0.1)" aria-label="PetTrackr — Making daily pet diabetes tracking easier">
+    <div class="pbody" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m"><span>02</span></span>
+        <h3 class="name t-title-strong">PetTrackr</h3>
+        <p class="kind t-body-s">Mobile app · iOS and Android</p>
+      </div>
+      <div class="space" aria-hidden="true"></div>
+      <p class="ptitle cap t-h-m">Making daily pet diabetes tracking easier</p>
+      <p class="pdesc t-body-l">Owners test their pet’s glucose at 7 a.m. while holding a restless animal. As the only designer, I ran in-home interviews and a 14-day diary study, then rebuilt onboarding after the first usability round showed setup stopping people before their first reading.</p>
+      <div class="outcome"><p>Pet owners can now log readings, track glucose trends, and share reports with their vet.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
+    </div>
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;left:57.9495%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/361d4.png" alt="The Chart screen, plotting a pet’s blood glucose readings over a selected week." width="428" height="926" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;left:14.2645%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/4a543.png" alt="The Home screen, with the latest blood glucose reading, meals and insulin, and today’s reminders." width="428" height="926" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:2;left:33.8782%;top:11.4014%;width:32.3180%;height:111.6983%;--hw:.75px"><img src="home-assets/66f26.png" alt="The Add Blood Glucose screen, with the pet’s photo, date and time, the reading in mg/dL, and a notes field." width="428" height="926" loading="lazy" decoding="async"></figure>
+    </div>
+  </a>
+  <a class="proj" href="flintlink.html" style="--bar:rgba(66,143,79,0.35);--edge:#428F4F;--tint:rgba(66,143,79,0.1)" aria-label="Flint-Link — A customer portal that answers before anyone has to email">
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;--hw:.62px;left:22.7340%;top:9.5012%;width:71.3224%;height:67.2209%"><img src="home-assets/e2648.png" alt="The Flint-Link dashboard, with open and closed invoice totals, a spend breakdown, recent orders and open invoices." width="1440" height="850" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;--hw:.62px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:39.9050%;width:53.4918%;height:50.5938%"><img src="home-assets/00392.png" alt="An order details panel, listing the line items and delivery documents attached to a single order." width="1440" height="850" loading="lazy" decoding="async"></figure>
+    </div>
+    <div class="pbody" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m"><span>03</span></span>
+        <h3 class="name t-title-strong">Flint-Link</h3>
+        <p class="kind t-body-s">Customer portal · Desktop and mobile web</p>
+      </div>
+      <div class="space" aria-hidden="true"></div>
+      <p class="ptitle t-h-m">A customer portal that answers before anyone has to email</p>
+      <p class="pdesc t-body-l">The brief asked for a document library, but in the first usability round people couldn’t find their most recent certificate in it. Working from 14 customer interviews and two site visits, I rebuilt the information architecture around the order and designed responsive workflows on top of it.</p>
+      <div class="outcome"><p>Customers can now access documents, check orders, and manage consignment stock without emailing an account manager.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
+    </div>
+  </a>
+  <a class="proj" href="apex.html" style="--bar:rgba(221,131,62,0.55);--edge:#DD833E;--tint:rgba(221,131,62,0.1)" aria-label="Apex Insights — Every facility’s numbers, and a nudge when one slips">
+    <div class="pbody" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m"><span>04</span></span>
+        <h3 class="name t-title-strong">Apex Insights</h3>
+        <p class="kind t-body-s">Reporting portal · Desktop web and Power BI</p>
+      </div>
+      <div class="space" aria-hidden="true"></div>
+      <p class="ptitle t-h-m">Every facility’s numbers, and a nudge when one slips</p>
+      <p class="pdesc t-body-l">The brief named features like Alerts and File storage without saying what they were for. I put my questions on the first wireframes, used the client’s answers to set the scope, and gave every report the same actions and layout.</p>
+      <div class="outcome"><p>Teams access reports, monitor staffing alerts, and schedule updates from one portal.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
+    </div>
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;--hw:.7px;left:22.7340%;top:9.5012%;width:71.3224%;height:83.8480%"><img src="home-assets/8dee3.png" alt="The Census daily summary report, with occupancy, census against budget, an expandable facilities table and a trailing twelve-month chart." width="1440" height="1060" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;--hw:.7px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:32.3040%;width:53.4918%;height:60.8076%"><img src="home-assets/46aeb.png" alt="A custom dashboard holding pinned charts: payroll comparison, overtime trend, hours breakdown and an HPPD trend." width="1440" height="1024" loading="lazy" decoding="async"></figure>
+    </div>
+  </a>
   </div>
-
-  <div class="cv-list rv">
-    <div class="cv-row"><span class="r">Senior UI/UX Designer (design lead, team of 4)</span><span class="o">Apexon — enterprise healthcare, analytics and B2B platforms.</span><span class="y">2022 — now</span></div>
-    <div class="cv-row"><span class="r">Senior UI/UX Designer</span><span class="o">TNM Media — consumer apps, e-commerce and brand systems.</span><span class="y">2018 — 2022</span></div>
-    <div class="cv-row"><span class="r">UI/UX Designer</span><span class="o">Infostretch — web platforms and early enterprise product work.</span><span class="y">2016 — 2018</span></div>
-    <div class="cv-row"><span class="r">UI/UX &amp; Graphic Designer</span><span class="o">Azilen Technologies — where the switch from graphics to product happened.</span><span class="y">2014 — 2016</span></div>
-  </div>
-
 </section>
 
-<!-- ══ 06 · Mentoring ══ -->
-<section class="sec wrap" id="mentoring" aria-labelledby="mentoring-h">
-  <div class="sec-head rv">
-    <span class="idx">04</span>
-    <h2 id="mentoring-h">Mentoring</h2>
-    <p class="lede">150+ designers, on portfolio reviews, career growth and craft.</p>
-  </div>
-
-  <div class="ment-grid">
-    <div class="ment-body rv">
-      <p>Outside client work I mentor designers around the world. I'm in the <strong>top 1% on ADPList</strong>, where I've mentored 150+ designers on portfolio reviews, career growth and improving their craft.</p>
-      <a class="btn btn-fill" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer">Book a session on ADPList <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+<!-- ═══ 02 · How I lead and design ═══ -->
+<section class="sec ruled" id="how" aria-labelledby="h-how">
+  <div class="ledger">
+    <div class="head">
+      <p class="n t-label" data-rev="fade">02</p>
+      <h2 class="t-h-l" id="h-how" data-rev="rise">How I lead and design</h2>
     </div>
+    <div class="grid">
+      <div class="row" data-rev="wipe" style="--i:0">
+        <h3 class="t-title-m">Understanding people</h3>
+        <p class="t-body-l">I use research to understand what people need, what gets in their way, and which problems deserve attention.</p>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:1">
+        <h3 class="t-title-m">Setting a direction</h3>
+        <p class="t-body-l">I turn those insights into clear priorities, weighing user needs, business goals, and technical constraints with the team.</p>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:2">
+        <h3 class="t-title-m">Shaping the experience</h3>
+        <p class="t-body-l">I design flows, interfaces, and interactions, using prototypes and feedback to refine how the experience works and feels.</p>
+      </div>
+      <div class="row" data-rev="wipe" style="--i:3">
+        <h3 class="t-title-m">Leading through delivery</h3>
+        <p class="t-body-l">I guide designers, work closely with stakeholders and engineers, and stay involved through reviews, handoff, and implementation.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <div class="ment-side rv">
-      <div class="ment-nums">
-        <div class="ment-num"><p class="n">150+</p><p class="c">Designers mentored</p></div>
-        <div class="ment-num"><p class="n">Top 1%</p><p class="c">Mentor on ADPList</p></div>
-        <div class="ment-num"><p class="n">24</p><p class="c">ADPList achievements</p></div>
+<!-- ═══ 03 · About ═══ -->
+<section class="sec ruled about" id="about" aria-labelledby="h-about">
+  <div class="sec-head">
+    <p class="lab t-label" data-rev="fade"><span class="n">03</span><span>About</span></p>
+    <h2 class="stmt t-h-xl" id="h-about" data-rev="rise">An engineer by training,<br>working in UI/&#8288;UX since 2014.</h2>
+  </div>
+  <div class="body">
+    <div class="copy">
+      <p class="t-body-l" data-rev="rise" style="--i:0">I’m Deep, and I’m based in Ahmedabad, India. I studied electronics and communications engineering, started out designing graphics and interfaces, and have worked in UI/&#8288;UX ever since, mostly on client projects for companies in very different fields.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Changing domains every few projects taught me to ask good questions early and to lean on the people who know the domain best: users, client teams and engineers. I’d rather we get to the right answer together than have me guess it alone.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:2">Outside client work, I run @the.deep.ux, a UX community of more than 20,000 people.</p>
+    </div>
+    <div class="exp">
+      <div class="row" data-rev="fade" style="--i:0"><div class="top"><p class="role t-title-s">Senior UI/&#8288;UX Designer</p><p class="years t-body-s">2022 – present</p></div><p class="co t-body-s">Apexon</p></div>
+      <div class="row" data-rev="fade" style="--i:1"><div class="top"><p class="role t-title-s">Senior UI/&#8288;UX Designer</p><p class="years t-body-s">2018 – 2022</p></div><p class="co t-body-s">TNM Media</p></div>
+      <div class="row" data-rev="fade" style="--i:2"><div class="top"><p class="role t-title-s">UI/&#8288;UX Designer</p><p class="years t-body-s">2016 – 2018</p></div><p class="co t-body-s">Infostretch</p></div>
+      <div class="row" data-rev="fade" style="--i:3"><div class="top"><p class="role t-title-s">UI/&#8288;UX and Graphics Designer</p><p class="years t-body-s">2014 – 2016</p></div><p class="co t-body-s">Azilen Technologies</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 · Mentoring ═══ -->
+<section class="mentoring" id="mentoring" aria-labelledby="h-mentoring">
+  <div class="sec-head">
+    <p class="lab t-label" data-rev="fade"><span class="n">04</span><span>Mentoring</span></p>
+    <h2 class="stmt t-h-xl" id="h-mentoring" data-rev="rise">150+ designers mentored on ADPList</h2>
+  </div>
+  <div class="mbody">
+    <div class="left" data-rev="rise">
+      <p class="t-body-l">Outside client work, I mentor designers through portfolio reviews, design feedback and interview preparation. It’s one-to-one, and it keeps me close to how designers early in their careers think about the work.</p>
+      <a class="btn" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer"><span class="in">Book a session on ADPList  <span class="arw up">↗</span></span></a>
+    </div>
+    <div class="right">
+      <div class="stat">
+        <p class="n t-n-xl ln flush"><span>150+</span></p>
+        <p class="cap t-label" data-rev="fade" style="--i:1">Designers mentored on ADPList</p>
       </div>
       <div class="badges">
-        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Sep 2025</span></div>
-        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Jun 2025</span></div>
-        <div class="badge"><span class="t">Top 10 Mentor &middot; UX Engineering</span><span class="d">Mar 2025</span></div>
+        <div class="row" data-rev="fade" style="--i:0"><b class="t-title-s">Top 10 Mentor, UX Engineering</b><span class="t-body-s">Sep 2025</span></div>
+        <div class="row" data-rev="fade" style="--i:1"><b class="t-title-s">Top 10 Mentor, UX Engineering</b><span class="t-body-s">Jun 2025</span></div>
+        <div class="row" data-rev="fade" style="--i:2"><b class="t-title-s">Top 10 Mentor, UX Engineering</b><span class="t-body-s">Mar 2025</span></div>
       </div>
     </div>
   </div>
-
-  <figure class="testi rv">
-    <blockquote>Deep provided outstanding guidance on my resume and portfolio, offering specific feedback and examples that will enhance my work. He was able to understand my background experience and guide me through the next steps in my career. I highly recommend booking with him for an exceptional experience!</blockquote>
-    <figcaption><b>Manali Gortekar</b> &middot; Product Designer, Cisco Meraki</figcaption>
+  <figure class="quote">
+    <span class="bar" data-rev="draw" aria-hidden="true"></span>
+    <div class="in" data-rev="rise" style="--i:1">
+      <blockquote class="t-h-m">Deep provided outstanding guidance on my resume and portfolio, offering specific feedback and examples that will enhance my work. He was able to understand my background experience and guide me through the next steps in my career. I highly recommend booking with him for an exceptional experience!</blockquote>
+      <figcaption class="t-label">Manali Gortekar · Product Designer, Cisco Meraki</figcaption>
+    </div>
   </figure>
 </section>
 
-<!-- ══ 07 · Contact ══ -->
-<section class="contact wrap" id="contact" aria-labelledby="contact-h">
-  <div class="contact-in">
-    <div class="sec-head rv">
-      <span class="idx">05</span>
-      <h2 id="contact-h">Contact</h2>
-      <p class="lede">Have a role in mind? <em>Let's talk.</em></p>
+<!-- ═══ 05 · Contact ═══ -->
+<section class="sec ruled contact" id="contact" aria-labelledby="h-contact">
+  <div class="sec-head">
+    <p class="lab t-label" data-rev="fade"><span class="n">05</span><span>Contact</span></p>
+    <h2 class="stmt t-h-xl" id="h-contact" data-rev="rise">Hiring a UI/&#8288;UX Lead<br>or a Senior UI/&#8288;UX Designer?<br><span class="lt">Let’s talk.</span></h2>
+  </div>
+  <div class="cbody">
+    <p class="lead t-body-l" data-rev="rise">I’d be glad to hear about your team and what you’re building. Email is the quickest way to reach me.</p>
+    <div class="email" data-rev="fade" style="--i:1">
+      <a class="t-h-xl" href="mailto:thedeepvyas@gmail.com">thedeepvyas@gmail.com</a>
+      <button class="copybtn" id="copy" type="button" data-copy="thedeepvyas@gmail.com"><span class="in">Copy</span></button>
+      <span id="copy-status" class="sr-only" role="status" aria-live="polite"></span>
     </div>
-    <p class="contact-sub rv">Open to Senior and Lead roles across B2B enterprise systems and B2C consumer products — healthcare, pharmacy benefits, EV charging, logistics, fintech and e-commerce — remote or relocating anywhere in India.</p>
-
-    <a class="mail rv" href="mailto:thedeepvyas@gmail.com" id="mail" data-mail="thedeepvyas@gmail.com">thedeepvyas@gmail.com <span class="cp" id="cp">Copy</span></a>
-
-    <div class="links rv">
-      <a class="link" href="https://www.instagram.com/the.deep.ux/" target="_blank" rel="noopener noreferrer"><span class="t">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">@the.deep.ux</span></a>
-      <a class="link" href="https://www.linkedin.com/in/the-deep-vyas" target="_blank" rel="noopener noreferrer"><span class="t">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">/in/the-deep-vyas</span></a>
-      <a class="link" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer"><span class="t">ADPList <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">Top 1% mentor · 150+ mentored</span></a>
-      <a class="link" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer"><span class="t">Résumé <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span><span class="d">PDF · one page</span></a>
+    <div class="clinks">
+      <a data-rev="rise" style="--i:0" href="https://www.linkedin.com/in/the-deep-vyas" target="_blank" rel="noopener noreferrer">
+        <span class="top"><b class="t-title-s">LinkedIn</b><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arw up"><path d="M4.66667 4.66667H11.3333V11.3333"/><path d="M4.66667 11.3333L11.3333 4.66667"/></svg></span>
+        <span class="sub t-body-s">/in/the-deep-vyas</span>
+      </a>
+      <a data-rev="rise" style="--i:1" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">
+        <span class="top"><b class="t-title-s">Résumé</b><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arw up"><path d="M4.66667 4.66667H11.3333V11.3333"/><path d="M4.66667 11.3333L11.3333 4.66667"/></svg></span>
+        <span class="sub t-body-s">PDF · one page</span>
+      </a>
+      <a data-rev="rise" style="--i:2" href="https://adplist.org/mentors/deep-ux" target="_blank" rel="noopener noreferrer">
+        <span class="top"><b class="t-title-s">ADPList</b><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arw up"><path d="M4.66667 4.66667H11.3333V11.3333"/><path d="M4.66667 11.3333L11.3333 4.66667"/></svg></span>
+        <span class="sub t-body-s">150+ designers mentored</span>
+      </a>
+      <a data-rev="rise" style="--i:3" href="https://www.instagram.com/the.deep.ux/" target="_blank" rel="noopener noreferrer">
+        <span class="top"><b class="t-title-s">Instagram</b><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arw up"><path d="M4.66667 4.66667H11.3333V11.3333"/><path d="M4.66667 11.3333L11.3333 4.66667"/></svg></span>
+        <span class="sub t-body-s">@the.deep.ux</span>
+      </a>
     </div>
   </div>
 </section>
-</main>
 
-<footer>
-  <div class="wrap foot-in">
-    <span>© 2026 Deep Vyas</span>
-    <a href="#top">Back to top ↑</a>
-  </div>
+<footer class="foot">
+  <p class="t-body-xs">© 2026 Deep Vyas</p>
+  <a class="tlink" href="#top"><span class="in"><span class="lbl">Back to top</span><span class="sp"> </span><span class="arw top">↑</span></span></a>
 </footer>
 
-<div class="toast" id="toast" role="status" aria-live="polite">Email copied</div>
+</div><!-- /.page -->
+<script>
+(function(){
+  /* theme — same storage key as the rest of the site, so the choice carries */
+  var root=document.documentElement, btn=document.getElementById("theme");
+  function syncThemeColor(){
+    var m=document.querySelector('meta[name="theme-color"]');
+    if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m);}
+    m.content=root.getAttribute("data-theme")==="dark"?"#16191A":"#F6F5F0";
+  }
+  syncThemeColor();
+  if(btn) btn.addEventListener("click",function(){
+    var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("dv26-theme",next);}catch(e){}
+    syncThemeColor();
+  });
+  /* copy the address: "Copied ✓" for 2s, then back to Default. If the
+     clipboard refuses, say so and select the address so it can be taken by
+     hand. Focus stays on the button either way. */
+  var c=document.getElementById("copy"), status=document.getElementById("copy-status"),
+      addr=document.querySelector('.email a'), timer;
+  function reset(){ c.removeAttribute("data-state"); c.querySelector(".in").textContent="Copy"; }
+  function settle(state,text,say){
+    clearTimeout(timer);
+    c.setAttribute("data-state",state);
+    c.querySelector(".in").textContent=text;
+    if(status) status.textContent=say;
+    if(state==="copied") timer=setTimeout(reset,2000);
+  }
+  function selectAddress(){
+    if(!addr) return;
+    try{ var r=document.createRange(); r.selectNodeContents(addr);
+      var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }catch(e){}
+  }
+  if(c) c.addEventListener("click",function(){
+    var text=c.dataset.copy;
+    function fail(){ settle("error","Copy failed — select the address",
+      "Copy failed. The email address has been selected so you can copy it."); selectAddress(); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        settle("copied","Copied ✓","Email address copied");
+      }, fail);
+    } else fail();
+  });
 
-<script src="js/system.js" defer></script>
-<script defer>
-addEventListener("DOMContentLoaded",function(){
-  "use strict";
-  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  /* ── Selected work: the index drives the sticky preview ────── */
-  var idxRows = [].slice.call(document.querySelectorAll(".idx-row"));
-  var idxFigs = [].slice.call(document.querySelectorAll(".idx-fig"));
+  /* below-the-fold images fade in over 150ms once they arrive; until then the
+     box shows the case tint at its final aspect ratio. Done from script so a
+     failed script leaves the images visible rather than blank. */
+  document.querySelectorAll('.thumb img').forEach(function(img){
+    if(img.complete) return;
+    img.classList.add('fades');
+    img.addEventListener('load',function(){img.classList.add('is-loaded');},{once:true});
+    img.addEventListener('error',function(){img.classList.add('is-loaded');},{once:true});
+  });
 
-  if(idxRows.length && idxRows.length === idxFigs.length){
-    var active = 0;
-    function showCase(i){
-      if(i === active) return;
-      idxRows[active].classList.remove("is-on");
-      idxFigs[active].classList.remove("on");
-      idxRows[i].classList.add("is-on");
-      idxFigs[i].classList.add("on");
-      active = i;
-    }
-    idxRows.forEach(function(row, i){
-      /* pointerenter, not mouseover: no repeat firing as the cursor
-         crosses the row's own children */
-      row.addEventListener("pointerenter", function(){ showCase(i); });
-      row.addEventListener("focus", function(){ showCase(i); });
+  /* ── entrances ──────────────────────────────────────────────────
+     One observer, unobserving as it goes, so nothing accumulates. Anything
+     already in view on load resolves on the next frame rather than animating
+     from nowhere. */
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  var targets = [].slice.call(document.querySelectorAll('[data-rev]'));
+
+  function showAll(){ targets.forEach(function(el){el.classList.add("is-in");});
+    document.querySelectorAll('.ln').forEach(function(l){l.classList.add("is-in");}); }
+
+  var pending = [];
+
+  function reveal(el){
+    el.classList.add("is-in");
+    var i = pending.indexOf(el);
+    if(i > -1) pending.splice(i,1);
+  }
+  /* the safety net: anything already inside the viewport is revealed, whatever
+     the observer did or didn't deliver. Costs nothing once pending is empty. */
+  function sweep(){
+    if(!pending.length) return;
+    var vh = innerHeight,
+        /* at the end of the document, or on a viewport tall enough that the page
+           cannot scroll, there is no later scroll to wait for */
+        atEnd = scrollY + vh >= document.documentElement.scrollHeight - 2;
+    pending.slice().forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if(atEnd ? r.top < vh : r.top < vh * 0.88 && r.bottom > 0) reveal(el);
     });
   }
 
-  /* ── Copy email ────────────────────────────────────────────── */
-  var mail = document.getElementById("mail"), cp = document.getElementById("cp"), toast = document.getElementById("toast");
-  cp.addEventListener("click", function(ev){
-    ev.preventDefault(); ev.stopPropagation();
-    var addr = mail.dataset.mail;
-    function done(){
-      cp.textContent = "Copied";
-      toast.classList.add("on");
-      setTimeout(function(){ cp.textContent = "Copy"; toast.classList.remove("on"); }, 1900);
-    }
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(addr).then(done, function(){ location.href = "mailto:" + addr; });
-    } else {
-      var ta = document.createElement("textarea");
-      ta.value = addr; ta.setAttribute("readonly",""); ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.select();
-      try{ document.execCommand("copy"); done(); }catch(e){ location.href = "mailto:" + addr; }
-      document.body.removeChild(ta);
-    }
+  try{
+  if(reduce.matches || !("IntersectionObserver" in window)){
+    showAll();
+  } else {
+    pending = targets.slice();
+    /* the observer stays on window so nothing can collect it early */
+    window.__revIO = new IntersectionObserver(function(entries,obs){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        reveal(e.target);
+        obs.unobserve(e.target);           /* entrances run once */
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:0.01});
+    targets.forEach(function(el){ window.__revIO.observe(el); });
+    sweep();
+
+    /* the hero headline is the one thing that plays on load, not on scroll */
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      document.querySelectorAll('#hero-h1 .ln').forEach(function(l){l.classList.add("is-in");});
+      sweep();
+    });});
+  }
+  }catch(err){ showAll(); pending.length = 0; }
+  /* the 150+ mask rides its section */
+  var stat = document.querySelector('.stat .ln');
+  if(stat){
+    var sIO = ("IntersectionObserver" in window) && !reduce.matches
+      ? new IntersectionObserver(function(es,o){es.forEach(function(e){
+          if(e.isIntersecting){e.target.classList.add("is-in");o.unobserve(e.target);}});},
+          {threshold:0.6})
+      : null;
+    sIO ? sIO.observe(stat) : stat.classList.add("is-in");
+  }
+
+  /* ── nav: name the section being read ───────────────────────────── */
+  var strip = document.querySelector('.strip.at-nav'),
+      links = [].slice.call(document.querySelectorAll('.nav .links a')),
+      secs = links.map(function(a){return document.querySelector(a.getAttribute("href"));}),
+      rafId = 0;
+
+  /* cancel-and-reschedule rather than a boolean latch: a dropped frame can
+     never leave the handler permanently wedged */
+  function onScroll(){
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function(){
+      rafId = 0;
+      if(strip){
+        var h = document.documentElement.scrollHeight - innerHeight;
+        strip.style.setProperty("--unread",
+          String(1 - (h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 1)));
+      }
+      sweep();
+      /* the current section is the last one whose top has passed the nav */
+      var cur = -1, line = scrollY + 90;
+      secs.forEach(function(sec,i){ if(sec && sec.offsetTop <= line) cur = i; });
+      links.forEach(function(a,i){
+        if(i === cur) a.setAttribute("aria-current","true");
+        else a.removeAttribute("aria-current");
+      });
+    });
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll, {passive:true});
+  onScroll();
+
+  /* if the motion preference changes mid-visit, stop holding anything back */
+  if(reduce.addEventListener) reduce.addEventListener("change", function(){
+    if(reduce.matches){ showAll(); pending.length = 0; }
   });
-});
+})();
 </script>
 </body>
 </html>
