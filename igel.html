@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>IGEL Licence Portal — a portal for admins who open it twice a year · Deep Vyas</title>
+<meta name="description" content="A redesign of IGEL’s ten-year-old licence portal: a home that tells admins what to do next, guided tasks, and a Licence Copilot for partners. Case study by Deep Vyas.">
+<meta name="theme-color" content="#F6F5F0">
+<meta property="og:title" content="IGEL Licence Portal — a portal for admins who open it twice a year">
+<meta property="og:description" content="IGEL had already done its UX research. I led Apexon’s response and took it further: a portal that tells you what to do next, and a Copilot for the partners who use it every day.">
+<meta property="og:type" content="article">
+<link rel="icon" href="d-logo.svg">
+<script>/* light is the default; the OS preference does not decide it. a stored choice from the toggle always wins. */
+try{var t=localStorage.getItem("dv26-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}
+document.documentElement.className+=" js";</script>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<style>
+/* The Figma file is set in Inter 3.x. Google Fonts now serves Inter 4, which is
+   about 5% narrower at regular, so paragraphs break a line earlier than the file
+   draws them. These are the four weights the file uses, pinned. */
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:swap;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-600-normal.woff2) format("woff2")}
+</style>
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   IGEL Licence Portal case study — written against Figma frame 260:338
+   "Case study · 05 · IGEL Licence Portal · Option B · Conversational
+   rewrite · Desktop 1440", 1440 × 28646.
+   Same design language as the home page; its own stylesheet.
+   ═══════════════════════════════════════════════════════════════════ */
+:root{
+  --ink:#1C2628; --body:#3D4A4B; --muted:#5F6A69; --accent:#2E6470;
+  --line:#DAD5CB; --line-2:#CFC9BD; --line-ink:#1C2628;
+  --paper:#F6F5F0; --paper-2:#EDEBE4; --surface:#FFFFFF;
+  --case:#DD833E;                     /* IGEL's colour in the logo palette */
+  --tint:rgba(221,131,62,.1);
+  --hair:rgba(0,0,0,.08);
+  --accent-hover:#275560; --accent-active:#1F4850; --accent-visited:#1F4850;
+  --err:#B4472A;
+  --ease-out:cubic-bezier(.2,0,0,1);
+  --d-micro:170ms; --d-base:320ms; --d-enter:520ms; --d-signature:580ms;
+  --ease-enter:cubic-bezier(.22,1,.36,1);
+  --rise:14px; --stagger:70ms;
+  --px:80px;
+}
+html[data-theme="dark"]{
+  --ink:#F2F0EA; --body:#C3C9C6; --muted:#8E938F; --accent:#7FB5B6;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.12); --line-ink:rgba(255,255,255,.55);
+  --paper:#16191A; --paper-2:#1C2021; --surface:#202425;
+  --hair:rgba(255,255,255,.10);
+  --accent-hover:#96C7C8; --accent-active:#B0D6D6; --accent-visited:#A8CFD0;
+  --err:#E08B6E;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+section[id],header[id]{scroll-margin-top:92px}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-synthesis-weight:none;-webkit-font-smoothing:antialiased}
+img{display:block}
+p,figure,blockquote,figcaption{margin:0}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-weight:500}
+.page{max-width:1440px;margin:0 auto}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:60;background:var(--accent);color:#fff;
+  padding:10px 14px;border-radius:4px;font-size:14px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ── type scale, on the file's whole-pixel line boxes ────────────── */
+.t-display{font-weight:500;font-size:72px;line-height:76px;letter-spacing:-2.88px}
+.t-h-xl  {font-weight:500;font-size:56px;line-height:60px;letter-spacing:-1.96px}
+.t-h-l   {font-weight:500;font-size:44px;line-height:48px;letter-spacing:-1.32px}
+.t-h-m   {font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.t-n-m   {font-weight:500;font-size:40px;line-height:44px;letter-spacing:-1.2px}
+.t-title-strong{font-weight:600;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-title-m{font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.t-body-l{font-weight:400;font-size:18px;line-height:28px}
+.t-body-s{font-weight:400;font-size:14px;line-height:21px}
+.t-body-xs{font-weight:400;font-size:13px;line-height:20px}
+.t-label{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+
+/* ── nav ──────────────────────────────────────────────────────────── */
+.nav{height:76px;padding:0 var(--px);display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:50;background:var(--paper)}
+.nav .brand{display:flex;gap:12px;align-items:center}
+.nav .brand img{width:35px;height:35px}
+.nav .right{display:flex;gap:40px;align-items:center}
+.nav .links{display:flex;gap:32px;align-items:flex-start;white-space:nowrap}
+.nav .links a{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  color:var(--body);min-height:24px;display:flex;align-items:center;
+  transition:color var(--d-micro) var(--ease-out)}
+.nav .links a:hover{color:var(--ink)}
+.nav .links a[aria-current="page"]{color:var(--accent);
+  text-decoration:underline;text-underline-offset:3px}
+.nav .cv{padding:4px 0;color:var(--ink);white-space:nowrap;
+  transition:color var(--d-micro) var(--ease-out)}
+.nav .cv:hover{color:var(--accent)}
+/* the brand strip holds the nav's bottom edge and doubles as read progress */
+.strip{display:flex;height:2px;position:absolute;left:0;right:0;bottom:0}
+.strip span{flex:1 1 0}
+.strip::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:var(--paper);opacity:.8;
+  transform:scaleX(var(--unread,1));transform-origin:100% 50%;will-change:transform}
+.toggle{width:48px;height:48px;flex:0 0 48px;border:0;background:none;padding:0;
+  border-radius:999px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  color:var(--muted);transition:color .2s var(--ease-out)}
+.toggle:hover{color:var(--ink)}
+.toggle .btn{width:40px;height:40px;border-radius:999px;background:var(--surface);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;
+  transition:background .2s var(--ease-out)}
+html[data-theme="light"] .toggle .btn{background:var(--paper)}
+.toggle:hover .btn{background:var(--paper-2)}
+
+/* ── Theme toggle: a diya ───────────────────────────────────────
+   Ported verbatim from css/system.css, so this page's lamp behaves exactly
+   like the one on every other page.
+   Light theme  — the lamp is lit; the flame leans and flickers.
+   Clicking it  — the flame bends in the draught, shrinks, goes out, the warm
+                  glow fades, and a thread of grey smoke curls off the wick
+                  while the page crosses to the dark theme.
+   Dark theme   — the lamp rests extinguished, smoke drifting on a 2.4s loop.
+   Clicking back — the flame relights with a small pop and the flicker resumes. */
+.toggle .diya{width:24px;height:24px;overflow:visible}   /* let the glow and smoke spill past the 24-unit box */
+
+/* ── lit state ─────────────────────────────────────────────── */
+.diya .flame{transform-box:fill-box;transform-origin:50% 100%;will-change:transform;
+  animation:flame 1.25s ease-in-out infinite}
+.diya .f-out{animation:flame-glow 1.9s ease-in-out infinite}
+.diya .f-core{transform-box:fill-box;transform-origin:50% 100%;
+  animation:flame-core .82s ease-in-out infinite}
+html:not([data-theme="dark"]) .diya .flame{
+  animation:relight .45s cubic-bezier(.34,1.32,.64,1) backwards,
+            flame 1.25s .45s ease-in-out infinite}
+
+/* Deliberately large: at 24px a 2% wobble is invisible. The lean does most of
+   the work (±5°, readable at any size); the stretch stays mild so the flame
+   keeps its point instead of squashing into a blob. */
+@keyframes flame{
+  0%,100%{transform:scale(1,1)     translate(0,0)        rotate(0deg)}
+  18%    {transform:scale(.92,1.13) translate(-.8px,-.5px) rotate(-5deg)}
+  40%    {transform:scale(1.08,.94) translate(.7px,.1px)   rotate(4deg)}
+  62%    {transform:scale(.94,1.09) translate(-.6px,-.35px) rotate(-3deg)}
+  82%    {transform:scale(1.04,.98) translate(.4px,0)      rotate(1.5deg)}}
+@keyframes flame-glow{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(255,150,30,.5))}
+  30%    {filter:drop-shadow(0 0 8px rgba(255,170,50,.95))}
+  62%    {filter:drop-shadow(0 0 3px rgba(255,150,30,.62))}}
+@keyframes flame-core{
+  0%,100%{transform:scale(1,1);opacity:1}
+  45%    {transform:scale(1.08,.72);opacity:.58}}
+@keyframes relight{
+  0%  {transform:scale(.35,0);opacity:0}
+  48% {transform:scale(.94,1.1);opacity:1}
+  100%{transform:scale(1,1);opacity:1}}
+
+/* ── snuffed state ─────────────────────────────────────────── */
+.diya .smoke path{transform-box:fill-box;transform-origin:50% 100%;opacity:0;
+  stroke-dasharray:13;stroke-dashoffset:13}
+html[data-theme="dark"] .diya .flame{animation:snuff .62s cubic-bezier(.4,0,.25,1) forwards}
+html[data-theme="dark"] .diya .f-out{animation:glow-out .62s ease-out forwards}
+html[data-theme="dark"] .diya .f-core{animation:none}
+html[data-theme="dark"] .diya .s1{animation:smoke 2.4s .42s ease-out infinite}
+html[data-theme="dark"] .diya .s2{animation:smoke 2.4s 1.26s ease-out infinite}
+
+@keyframes snuff{
+  0%  {transform:scale(1,1)    rotate(0deg); opacity:1}
+  30% {transform:scale(.9,1.1)  rotate(-10deg);opacity:1}   /* bends in the draught */
+  58% {transform:scale(.74,.48) rotate(6deg);  opacity:.8}  /* then drops away fast */
+  100%{transform:scale(.4,0)    rotate(0deg);  opacity:0}}
+@keyframes glow-out{
+  0%  {filter:drop-shadow(0 0 7px rgba(255,165,45,.9))}
+  55% {filter:drop-shadow(0 0 3px rgba(255,150,30,.4))}
+  100%{filter:drop-shadow(0 0 0 rgba(255,150,30,0))}}
+/* the dash offset draws the wisp from the wick upward, so it reads as rising
+   rather than simply fading in */
+@keyframes smoke{
+  0%  {opacity:0;  stroke-dashoffset:13;transform:translateY(1px) scale(.8,.6) rotate(0deg)}
+  18% {opacity:.62}
+  55% {opacity:.5; stroke-dashoffset:0; transform:translateY(-1.5px) scale(1,1) rotate(2deg)}
+  100%{opacity:0;  stroke-dashoffset:0; transform:translateY(-5px) scale(1.25,1.2) rotate(-3deg)}}
+
+@media (prefers-reduced-motion:reduce){
+  .diya .flame,.diya .f-out,.diya .f-core,.diya .smoke path{animation:none!important}
+  .diya .f-out{filter:drop-shadow(0 0 4px rgba(255,155,35,.65))}
+  html[data-theme="dark"] .diya .flame{opacity:0}
+  html[data-theme="dark"] .diya .smoke path{opacity:.55;stroke-dashoffset:0}}
+
+/* ════════════ motion ════════════
+   Entrances are opacity and transform only, so nothing reflows. Every initial
+   state is scoped to .js: without script the page renders fully visible. */
+.js [data-rev]{will-change:opacity,transform}
+.js [data-rev].is-in{will-change:auto}
+
+/* rise — section statements, body copy, project text */
+.js [data-rev="rise"]{opacity:0;transform:translate3d(0,var(--rise),0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="rise"].is-in{opacity:1;transform:none}
+
+/* fade — the CV list and the mentoring badges, which should stay quiet */
+.js [data-rev="fade"]{opacity:0;transition:opacity var(--d-base) var(--ease-out);
+  transition-delay:calc(var(--i,0) * 60ms)}
+.js [data-rev="fade"].is-in{opacity:1}
+
+/* wipe — the ledger rows read as a table filling in, left to right */
+.js [data-rev="wipe"]{opacity:0;clip-path:inset(0 100% 0 0);
+  transition:opacity var(--d-base) var(--ease-out),
+             clip-path var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * var(--stagger))}
+.js [data-rev="wipe"].is-in{opacity:1;clip-path:inset(0 0 0 0)}
+
+/* lift — the screens inside a thumbnail assemble in z-order */
+.js [data-rev="lift"]{opacity:0;transform:translate3d(0,16px,0);
+  transition:opacity var(--d-enter) var(--ease-enter),transform var(--d-enter) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 80ms)}
+.js [data-rev="lift"].is-in{opacity:1;transform:none}
+
+/* draw — the quote's rule grows down from the top */
+.js [data-rev="draw"]{transform:scaleY(0);transform-origin:50% 0;
+  transition:transform var(--d-enter) var(--ease-enter)}
+.js [data-rev="draw"].is-in{transform:none}
+
+/* mask — the one signature device, on the hero headline and the 150+ */
+.ln{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
+.ln>span{display:block}
+.js .ln>span{transform:translate3d(0,105%,0);
+  transition:transform var(--d-signature) var(--ease-enter);
+  transition-delay:calc(var(--i,0) * 90ms)}
+.js .ln.is-in>span,.js .is-in .ln>span{transform:none}
+
+/* ── shared components ────────────────────────────────────────────── */
+.btn{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer;color:inherit}
+.btn .in{background:var(--accent);color:#fff;border-radius:4px;padding:12px 20px;
+  display:flex;align-items:center;white-space:pre;
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:background-color var(--d-micro) var(--ease-out)}
+.btn:hover .in{background:var(--accent-hover)}
+.btn:active .in{background:var(--accent-active)}
+html[data-theme="dark"] .btn .in{color:#10191A}
+.tlink{display:inline-flex;padding:4px;border-radius:8px;border:0;background:none;
+  font:inherit;cursor:pointer}
+.tlink .in{padding:4px 0;display:flex;white-space:pre;color:var(--accent);
+  font-weight:500;font-size:16px;line-height:22px;
+  transition:color var(--d-micro) var(--ease-out)}
+/* the rule sits on the label alone, so it never runs under the arrow */
+.tlink .in .lbl{text-decoration:underline 1px transparent;text-underline-offset:3px;
+  transition:text-decoration-color var(--d-micro) var(--ease-out)}
+.tlink:hover .in .lbl,a:hover > .tlink .in .lbl{text-decoration-color:currentColor}
+.tlink:active .in,a:active .tlink .in{color:var(--accent-active)}
+.tlink:active .in .lbl,a:active .tlink .in .lbl{text-decoration-color:currentColor}
+a.tlink:visited .in,a:visited .tlink .in{color:var(--accent-visited)}
+.arw{display:inline-block;transition:transform var(--d-micro) var(--ease-out)}
+.btn:hover .arw,.tlink:hover .arw,a:hover .arw{transform:translateX(3px)}
+.btn:hover .arw.up,.tlink:hover .arw.up,a:hover .arw.up{transform:translate(2px,-2px)}
+.col{width:746px;flex:0 0 746px;min-width:0}
+
+/* a screen: the frame carries the hairline, the image fills it */
+.sh{background:var(--surface);border-radius:6px;overflow:hidden;position:relative;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.sh img{position:absolute;max-width:none}
+.js .sh img.fades{opacity:0;transition:opacity .15s var(--ease-out)}
+.js .sh img.is-loaded{opacity:1}
+
+/* ── the sticky section index ─────────────────────────────────────── */
+.srail{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:40;display:none;
+  flex-direction:column;gap:4px;padding:5px;border-radius:999px;
+  background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.srail a{position:relative;width:32px;height:32px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+/* hover fills the pill; the current section keeps the accent either way */
+.srail a:hover,.srail a:focus-visible{background:var(--paper-2);color:var(--ink)}
+.srail a[aria-current="true"],
+.srail a[aria-current="true"]:hover,
+.srail a[aria-current="true"]:focus-visible{background:var(--accent);color:#F6F5F0}
+/* the section title, shown beside the number on hover or keyboard focus */
+.srail .lbl{position:absolute;left:42px;top:2px;transform:translateX(-4px);
+  padding:6px 10px;border-radius:6px;white-space:nowrap;pointer-events:none;
+  background:var(--ink);color:#F6F5F0;
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:normal;
+  opacity:0;transition:opacity var(--d-micro) var(--ease-out),
+                       transform var(--d-micro) var(--ease-out)}
+html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line)}
+.srail a:hover .lbl,.srail a:focus-visible .lbl{opacity:1;transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.srail .lbl{transform:none}}
+@media (min-width:1180px){.srail{display:flex}}
+
+/* ── next case study ──────────────────────────────────────────────── */
+.nextcase{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.nextcase>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.nextcase .card{display:flex;gap:80px;align-items:center;width:100%;color:inherit}
+.nextcase .thumb{width:640px;flex:0 0 640px;height:400px;border-radius:4px;position:relative;
+  overflow:hidden;background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+.nextcase .thumb figure{position:absolute;margin:0;border-radius:8px;overflow:hidden;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.nextcase .thumb img{width:100%;height:100%;object-fit:cover;
+  transition:transform var(--d-enter) var(--ease-out)}
+.nextcase .card:hover .thumb img{transform:scale(1.025)}
+.nextcase .body{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:20px}
+.nextcase .meta{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.nextcase .pnum{position:relative;display:inline-flex;color:var(--ink)}
+.nextcase .pnum::before{content:"";position:absolute;left:-4px;top:22px;height:16px;
+  width:100%;background:rgba(66,143,79,0.35)}
+.nextcase .pnum span{position:relative}
+.nextcase .name{color:var(--ink)}
+.nextcase .kind{color:var(--muted);white-space:nowrap}
+.nextcase .ptitle{color:var(--ink)}
+.nextcase .pdesc{color:var(--body)}
+.nextcase .out{padding:4px 0;width:100%}
+.nextcase .out p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.nextcase .card:hover .tlink .in .lbl{text-decoration-color:currentColor}
+
+/* ── footer ───────────────────────────────────────────────────────── */
+.foot{padding:32px 96px;display:flex;align-items:flex-start;justify-content:space-between;
+  box-shadow:inset 0 1px 0 0 var(--line)}
+.foot p{color:var(--muted);white-space:nowrap}
+
+/* ── a section head: label left, heading column right ─────────────── */
+/* the label and the heading sit on a 120px gutter, both starting at the top */
+.shead{display:flex;align-items:flex-start;gap:120px;width:100%}
+.shead .lab{width:380px;flex:0 0 380px;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.shead .lab b{font-weight:500;color:var(--accent)}
+.shead .lab.acc{color:var(--accent)}
+.shead .hd{width:746px;flex:0 0 746px;display:flex;flex-direction:column;gap:20px}
+.shead .hd h2{color:var(--ink)}
+.shead .hd p{color:var(--muted);width:746px;max-width:100%}
+
+/* ── 03 · research and insights ───────────────────────────────────── */
+.sec-3{background:var(--paper);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+/* evidence → insight → decision */
+.eid{display:flex;flex-direction:column;width:100%}
+.eid .hdr{display:flex;gap:24px;align-items:flex-start;padding-bottom:16px;width:100%}
+.eid .hdr>span{flex:none;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.eid .hdr>span:last-child{color:var(--accent)}
+.eid .row{display:flex;gap:24px;align-items:flex-start;padding:20px 0;width:100%;
+  border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .eid .row{border-top-color:var(--line)}
+.eid .row>div{flex:none;display:flex;flex-direction:column;gap:4px}
+/* the evidence column is wider than the two it feeds */
+.eid .hdr>span:first-child,.eid .ev{width:480px}
+.eid .hdr>span:nth-child(2),.eid .hdr>span:nth-child(3),.eid .ins,.eid .dec{width:376px}
+.eid .ev p{font-weight:400;font-size:15px;line-height:23px;color:var(--body)}
+.eid .ev span{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:var(--muted)}
+.eid .ins p{font-weight:500;font-size:15px;line-height:23px;color:var(--ink)}
+.eid .dec p{font-weight:500;font-size:15px;line-height:23px;color:var(--accent)}
+.eid .dec span{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:var(--muted)}
+.eid .row>img{width:16px;height:16px;flex:0 0 16px;align-self:flex-start;margin-top:3px}
+
+/* ── 04 · UX strategy ─────────────────────────────────────────────── */
+.sec-4{background:var(--paper-2);padding:120px var(--px);
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.princ{background:linear-gradient(var(--ptint,var(--tint)),var(--ptint,var(--tint))),var(--paper);
+  border-radius:12px;padding:40px 48px;width:100%;display:flex;align-items:center}
+.princ .in{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.princ .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.princ h3{width:100%;color:var(--ink)}
+
+/* ── the six decision sections share these three pieces ───────────── */
+.dsec{padding:120px var(--px);display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.dsec.paper{background:var(--paper)}
+/* the decision strip: one card, four ruled columns, the decision tinted */
+.dstrip{display:flex;align-items:stretch;width:100%;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.dstrip>div{flex:1 1 0;min-width:0;padding:24px;display:flex;flex-direction:column;gap:8px}
+.dstrip>div+div{border-left:1px solid var(--line)}
+.dstrip .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .dstrip .ic{background:rgba(125,195,208,.12)}
+.dstrip .ic img{width:16px;height:16px}
+.dstrip .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.dstrip .dec .k,.dstrip .res .k{color:var(--accent)}
+.dstrip p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.dstrip .dec{background:rgba(46,100,112,.06)}
+html[data-theme="dark"] .dstrip .dec{background:rgba(125,195,208,.08)}
+.dstrip .dec p,.dstrip .res p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.mk{width:24px;height:24px;border-radius:12px;background:var(--accent);flex:none;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.notes{display:flex;gap:24px;align-items:flex-start;width:100%}
+.notes>div{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:8px}
+.notes>div>b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.notes>div>p{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* ── hero ─────────────────────────────────────────────────────────── */
+.hero{background:var(--paper);padding:96px var(--px) 160px;
+  display:flex;flex-direction:column;gap:32px;align-items:flex-start}
+.hero .chips{display:flex;gap:20px;align-items:flex-start}
+.hero .chips span{padding:4px 0;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;white-space:nowrap}
+.hero h1{width:1010px;max-width:100%;color:var(--ink)}
+.hero .sub{width:640px;max-width:100%;color:var(--muted)}
+/* the meta row is ruled: hairlines drawn inside, so they add no height */
+/* on this page the two rules add to the row's height */
+.hero .meta{display:flex;align-items:stretch;width:100%;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero .meta>div{flex:1 1 0;min-width:0;padding:20px 24px;
+  display:flex;flex-direction:column;gap:8px}
+.hero .meta>div:first-child{padding-left:0;padding-right:24px}
+.hero .meta>div+div{box-shadow:inset 1px 0 0 0 var(--line)}
+.hero .meta .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(46,100,112,.08)}
+.hero .meta .ic img{width:16px;height:16px}
+html[data-theme="dark"] .hero .meta .ic{background:rgba(125,195,208,.12)}
+.hero .meta .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+.hero .meta .v{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.hero .chips span{padding:0 12px}
+/* the slider and the prototype invitation are one block under the hero copy */
+.hero .heromedia{display:flex;flex-direction:column;gap:64px;width:100%}
+/* a plain 13/20 line under a block, naming where it came from */
+.cap{width:100%;color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+
+/* four counts from the handover */
+.stats{display:flex;gap:16px;align-items:stretch;width:100%}
+.stats>div{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:8px;color:var(--accent)}
+.stats b{font-weight:500;font-size:56px;line-height:59px;letter-spacing:-1.96px}
+.stats span{font-weight:500;font-size:16px;line-height:22px}
+
+/* the two personas IGEL wrote, each ending on the quote from its sheet */
+.pcards{display:flex;gap:16px;align-items:stretch;width:100%}
+.pcard{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:28px;
+  display:flex;flex-direction:column;gap:12px}
+.pcard .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .pcard .ic{background:rgba(125,195,208,.12)}
+.pcard .ic img{width:16px;height:16px}
+.pcard h3{color:var(--ink);font-weight:500;font-size:24px;line-height:28px;letter-spacing:-.48px}
+.pcard .r{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.pcard>p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.pcard blockquote{margin:0;width:100%;padding:4px 0 4px 16px;
+  border-left:2px solid var(--accent);
+  color:var(--ink);font-weight:500;font-size:16px;line-height:24px}
+
+/* the panel that names what changed my thinking */
+.changed{width:100%;border-radius:12px;padding:40px 48px;
+  background:linear-gradient(var(--tint),var(--tint)),var(--paper);
+  display:flex;flex-direction:column;gap:8px}
+.changed .k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.changed h3{color:var(--ink);font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.changed p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+
+/* the same screen three times, on one tinted plate */
+.trio{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
+.trio .pl{display:flex;gap:24px;align-items:flex-start;padding:32px;border-radius:4px;
+  width:100%;overflow:hidden;background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+.trio .col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.trio .col>span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.trio .col.mine>span{color:var(--accent)}
+.trio .sh{width:100%;height:var(--sh);flex:none;border-radius:12px;
+  box-shadow:none;border:1px solid #E6E2DC}
+html[data-theme="dark"] .trio .sh{border-color:var(--line)}
+.trio .sh img{inset:0;width:100%;height:100%;object-fit:cover}
+/* a screen taller than its slot is cropped from the bottom, not the middle */
+.trio .sh.top img{object-position:top}
+.trio figcaption{width:100%;color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+
+/* the seven audit moves, kept as IGEL wrote them */
+.moves{display:flex;flex-direction:column;gap:20px;width:100%}
+.moves>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.moves .row{display:flex;gap:16px;align-items:stretch;width:100%}
+.moves .m{width:308px;flex:none;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.moves .m .n{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.moves .m p{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+
+/* the recorded walkthrough, standing in as its poster frame */
+.vidblock{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
+.vidblock>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.vidblock .pl{padding:48px;border-radius:4px;width:100%;overflow:hidden;
+  display:flex;align-items:flex-start;justify-content:center;
+  background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+.vid{position:relative;width:1184px;height:666px;flex:none;border-radius:12px;
+  overflow:hidden;border:1px solid #E6E2DC;background:var(--surface)}
+html[data-theme="dark"] .vid{border-color:var(--line)}
+/* the file itself, behind the poster the frame draws. Without script the
+   facade stays hidden and this is what the page shows, controls and all. */
+.vid .vfile{position:absolute;left:-1px;top:-1px;display:block;border:0;
+  width:calc(100% + 2px);height:calc(100% + 2px);
+  background:#1C2628;object-fit:cover;object-position:top}
+.vid .vcover{position:absolute;inset:0;display:none;cursor:pointer;
+  margin:0;padding:0;border:0;background:none;text-align:left;
+  font:inherit;color:inherit;-webkit-appearance:none;appearance:none}
+.js .vid .vcover{display:block}
+.vid.is-playing .vcover{display:none}
+.vid .poster{position:absolute;left:-1px;top:-1px;width:1184px;height:1870.573px;max-width:none}
+.vid .scrim{position:absolute;left:-1px;top:-1px;width:1184px;height:666px;
+  background:linear-gradient(180deg,rgba(28,38,40,.15) 0%,rgba(28,38,40,.3) 50%,
+    rgba(28,38,40,.8) 78%,rgba(28,38,40,.95) 100%)}
+.vid .pbtn{position:absolute;left:518px;top:267px;width:144px;height:144px}
+.vid .pico{position:absolute;left:578px;top:313px;width:32px;height:36px}
+.vid .vlab{position:absolute;left:38px;top:569px;display:flex;flex-direction:column;
+  gap:6px;white-space:nowrap}
+.vid .vlab b{color:#fff;font-weight:500;font-size:24px;line-height:28px;letter-spacing:-.48px}
+.vid .vlab span{color:rgba(255,255,255,.85);font-weight:400;font-size:15px;line-height:21px}
+.vid .dur{position:absolute;left:1081px;top:594px;background:rgba(28,38,40,.7);
+  border-radius:999px;padding:6px 12px;color:#fff;font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px;white-space:nowrap}
+.vidblock figcaption{width:100%;color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+
+/* the seven pages in the side menu, plus the Copilot */
+.pmap{display:flex;flex-direction:column;gap:20px;width:100%}
+.pmap>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.pmap .row{display:flex;gap:16px;align-items:stretch;width:100%}
+.pmap .p{flex:1 1 0;min-width:0;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.pmap .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .pmap .ic{background:rgba(125,195,208,.12)}
+.pmap .ic img{width:16px;height:16px}
+.pmap h3{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.pmap .p>p{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* the invitation to open the prototype */
+.proto{width:100%;background:var(--accent);border-radius:16px;padding:40px 48px;
+  display:flex;flex-direction:column;gap:28px;color:#F6F5F0}
+html[data-theme="dark"] .proto{background:#13343C}
+.proto .in{display:flex;flex-direction:column;gap:12px;width:100%}
+.proto h2{color:#F6F5F0;font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
+.proto .in p{color:rgba(246,245,240,.85);font-weight:400;font-size:16px;line-height:25px}
+.proto p.k{color:#F6CEAC;font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.proto .try{display:flex;gap:16px;align-items:stretch;width:100%}
+.proto .try>div{flex:1 1 0;min-width:0;background:rgba(255,255,255,.08);border-radius:12px;
+  padding:16px;display:flex;flex-direction:column;gap:6px}
+.proto .try b{color:#F6F5F0;font-weight:500;font-size:15px;line-height:21px}
+.proto .try span{color:rgba(246,245,240,.8);font-weight:400;font-size:13px;line-height:20px}
+.proto .btn{align-self:flex-start;background:var(--paper);border-radius:999px;padding:14px 22px;
+  color:var(--accent);font-weight:500;font-size:16px;line-height:22px;white-space:pre;
+  transition:background var(--d-micro) var(--ease-out),color var(--d-micro) var(--ease-out)}
+.proto a.btn:hover{background:#fff;color:var(--accent-hover)}
+.proto a.btn:active{color:var(--accent-active)}
+/* the page's accent outline would sink into the teal panel */
+.proto a.btn:focus-visible{outline-color:#F6CEAC}
+
+/* a strip of counts, ruled into four */
+.sumstrip{display:flex;align-items:stretch;width:100%;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sumstrip>div{flex:1 1 0;min-width:0;padding:20px 24px;display:flex;flex-direction:column;gap:4px}
+.sumstrip>div+div{border-left:1px solid var(--line)}
+.sumstrip b{color:var(--accent);font-weight:500;font-size:32px;line-height:35px;letter-spacing:-.64px}
+.sumstrip span{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
+
+/* the old menu mapped onto the new one, row by row */
+.maptbl{width:100%;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.maptbl .mhd{display:flex;gap:24px;align-items:flex-start;padding:16px 24px;width:100%;
+  background:var(--paper);color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.maptbl .mhd>span:nth-child(3){color:var(--accent)}
+.maptbl .r{display:flex;gap:24px;align-items:center;padding:14px 24px;width:100%;
+  border-top:1px solid #D9D4C9}
+html[data-theme="dark"] .maptbl .r{border-top-color:var(--line)}
+.maptbl .c1{width:500px;flex:none;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}
+.maptbl .c1 span{background:var(--paper-2);border-radius:8px;padding:6px 12px;
+  color:var(--body);font-weight:400;font-size:14px;line-height:20px;white-space:nowrap}
+.maptbl .c1 em{font-style:normal;color:rgba(95,106,105,.7);
+  font-weight:400;font-size:14px;line-height:20px;white-space:nowrap}
+html[data-theme="dark"] .maptbl .c1 em{color:var(--muted)}
+.maptbl .c2{width:40px;flex:none;text-align:center;color:var(--muted);
+  font-weight:400;font-size:18px;line-height:25px}
+.maptbl .c3{width:360px;flex:none;display:flex;gap:12px;align-items:center}
+.maptbl .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .maptbl .ic{background:rgba(125,195,208,.12)}
+.maptbl .ic img{width:16px;height:16px}
+.maptbl .c3 .tx{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:2px}
+.maptbl .c3 b{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.maptbl .c3 i{font-style:normal;color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+.maptbl .c4{width:180px;flex:none;display:flex;align-items:flex-start}
+.maptbl .tag{border-radius:999px;padding:4px 10px;white-space:nowrap;
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  background:var(--paper-2);color:var(--muted)}
+.maptbl .tag.merged{background:#F6E7CC;color:#8A5A14}
+.maptbl .tag.moved{background:#E3EEEF;color:var(--accent)}
+.maptbl .tag.new{background:var(--accent);color:#fff}
+
+/* what was checked, and what is still open, on fixed columns */
+.vtbl{display:flex;flex-direction:column;width:100%}
+.vtbl .vhd{display:flex;gap:24px;align-items:flex-start;padding-bottom:16px;width:100%;
+  overflow:hidden;color:var(--muted);
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.vtbl .vhd>span{flex:none}
+.vtbl .r{display:flex;gap:24px;align-items:flex-start;padding:20px 0;width:100%;
+  border-top:1px solid #D9D4C9;overflow:hidden}
+html[data-theme="dark"] .vtbl .r{border-top-color:var(--line)}
+.vtbl .a,.vtbl .vhd>span:nth-child(1){width:260px}
+.vtbl .b,.vtbl .c,.vtbl .vhd>span:nth-child(2),.vtbl .vhd>span:nth-child(3){width:380px}
+.vtbl .d,.vtbl .vhd>span:nth-child(4){width:188px}
+.vtbl .a{flex:none;color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.vtbl .b,.vtbl .c{flex:none;color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
+.vtbl .d{flex:none;color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+/* the second table runs one wide column where the first runs two */
+.vtbl.wide .b,.vtbl.wide .vhd>span:nth-child(2){width:788px}
+.vtbl.wide .vhd>span:nth-child(3){width:188px}
+/* the reflection table drops the status column altogether */
+.vtbl.two .a,.vtbl.two .vhd>span:nth-child(1){width:360px}
+.vtbl.two .b,.vtbl.two .vhd>span:nth-child(2){width:896px}
+
+/* ── 01 · ownership and process, drawn as cards ───────────────────── */
+.ownership{display:flex;flex-direction:column;gap:20px;width:100%}
+.ownership>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.crow{display:flex;gap:16px;align-items:stretch;width:100%}
+.ocard{flex:1 1 0;min-width:0;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;padding:24px;
+  display:flex;flex-direction:column;gap:12px}
+.ocard .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(46,100,112,.08)}
+html[data-theme="dark"] .ocard .ic{background:rgba(125,195,208,.12)}
+.ocard .ic img{width:16px;height:16px}
+.ocard h3{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.ocard .lab{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.ocard .tl{color:var(--ink);font-weight:500;font-size:16px;line-height:22px}
+.ocard .sl{color:var(--muted);font-weight:400;font-size:13px;line-height:20px}
+/* a name and its one line sit closer than the card’s own rhythm */
+.ocard .pair{display:flex;flex-direction:column;gap:4px;width:100%}
+.ocard>p{color:var(--body);font-weight:400;font-size:16px;line-height:25px}
+.ocard .chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%}
+.ocard .chips span{background:var(--paper-2);border-radius:999px;padding:6px 12px;
+  color:var(--muted);font-weight:500;font-size:13px;line-height:18px;
+  letter-spacing:.13px;white-space:nowrap}
+
+/* ── 01 · the problem, set in the brand teal ──────────────────────── */
+.inset{background:var(--accent);padding:160px var(--px);color:#F6F5F0;
+  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+html[data-theme="dark"] .inset{background:#13343C}
+.inset .in{padding:0 var(--px);display:flex;flex-direction:column;gap:40px;width:100%}
+.inset .head{display:flex;align-items:flex-start;gap:120px;width:100%}
+.inset .head .lab{width:380px;flex:0 0 380px;
+  font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;
+  color:rgba(246,245,240,.9)}
+.inset .head .lab b{font-weight:500;color:#F6CEAC}
+.inset .head .hd{width:746px;flex:0 0 746px;display:flex;flex-direction:column;gap:20px}
+.inset .head .hd h2{color:#F6F5F0}
+/* the intro runs the full width of the heading column */
+.inset .head .hd p{width:746px;max-width:100%;color:rgba(246,245,240,.85)}
+.pstmt{display:flex;gap:16px;align-items:stretch;width:100%}
+/* these four carry a real stroke, which the frame counts in its height */
+.pstmt>div{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  display:flex;flex-direction:column;gap:12px;color:rgba(246,245,240,.9)}
+.pstmt .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1)}
+.pstmt .ic img{width:16px;height:16px}
+.pstmt .k{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.pstmt p{font-weight:400;font-size:16px;line-height:25px;color:#F6F5F0}
+.pstmt .ux{background:rgba(238,184,70,.14);box-shadow:inset 0 0 0 1px rgba(244,209,134,.45)}
+.pstmt .ux .k{color:#F6CEAC}
+.pstmt .ux p{color:#F6F5F0;font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
+.pstmt .ux .ic{background:rgba(255,255,255,.1)}
+/* where the old route stalled: four steps, the last one called out */
+.stalled{padding:32px 0;display:flex;flex-direction:column;gap:24px;width:100%;align-items:flex-start}
+.stalled .steps{display:flex;gap:16px;align-items:stretch;width:100%}
+.stalled .step{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
+  display:flex;flex-direction:column;gap:12px}
+.stalled .step.stop{background:rgba(255,255,255,.06)}
+.stalled .ic{width:32px;height:32px;border-radius:10px;flex:none;
+  display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1)}
+.stalled .ic img{width:16px;height:16px}
+.stalled .k{font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:rgba(246,245,240,.9)}
+.stalled .step.stop .k{color:#FCECE0}
+.stalled .step.stop .k.on{color:#F6F5F0}
+.stalled b{font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px;color:#F6F5F0}
+.stalled .d{font-weight:400;font-size:14px;line-height:21px;color:rgba(246,245,240,.9)}
+.stalled .step.stop .d{color:#F6F5F0}
+.stalled .t{width:100%;font-weight:500;font-size:13px;
+  line-height:18px;letter-spacing:.13px;color:rgba(246,245,240,.9)}
+.stalled .step.stop .t{color:#F6F5F0}
+.stalled .outcome{width:100%;padding:20px 0 16px;display:flex;align-items:center}
+.stalled .outcome p{width:100%;font-weight:500;font-size:16px;line-height:22px;color:#F6F5F0}
+.stalled .src{width:100%;font-weight:400;font-size:13px;
+  line-height:20px;color:rgba(246,245,240,.9)}
+
+/* a screenshot on a tinted plate, captioned underneath */
+.figshot{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
+.figshot .pl{background:linear-gradient(var(--tint),var(--tint)),var(--paper);
+  border-radius:4px;padding:48px;width:100%;
+  display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
+.figshot .sh{width:var(--sw);height:var(--sh);flex:none;border-radius:12px;
+  box-shadow:none;border:1px solid #E6E2DC}
+html[data-theme="dark"] .figshot .sh{border-color:var(--line)}
+.figshot .sh img{inset:0;width:100%;height:100%;object-fit:cover}
+.figshot figcaption{width:100%;font-weight:400;font-size:13px;
+  line-height:20px;color:var(--muted)}
+
+/* ── the hero's before/after slider ───────────────────────────────── */
+/* two renders stacked; the top one is clipped, never resized, so nothing
+   shifts under the handle as it moves */
+.ba{position:relative;width:1184px;height:740px;flex:none;
+  border-radius:12px;overflow:hidden;touch-action:pan-y}
+.ba .after,.ba .bfr{position:absolute;left:0;top:0;width:100%;height:100%}
+.ba .after{border:1px solid #E6E2DC;border-radius:12px;overflow:hidden}
+html[data-theme="dark"] .ba .after{border-color:var(--line)}
+.ba .after img{position:absolute;left:-1px;top:-1px;
+  width:1184px;height:1870.573px;max-width:none}
+.ba .bfr{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba .bfr img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;max-width:none}
+.ba .dvd{position:absolute;top:0;left:calc(var(--p) - 1.5px);width:3px;height:100%;
+  background:#fff;box-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none}
+.ba .hdl{position:absolute;top:50%;margin-top:-28px;left:calc(var(--p) - 28px);
+  width:56px;height:56px;border-radius:28px;background:#fff;
+  box-shadow:0 4px 16px rgba(0,0,0,.28);pointer-events:none;
+  display:flex;gap:6px;align-items:center;justify-content:center}
+.ba .hdl img{width:10px;height:16px}
+.ba .lab,.ba .hint{position:absolute;border-radius:999px;padding:8px 14px;
+  font-weight:600;font-size:13px;line-height:16px;letter-spacing:.26px;
+  white-space:nowrap;pointer-events:none}
+.ba .lab.l,.ba .hint{background:rgba(18,23,26,.82);color:#fff}
+.ba .lab.r{background:rgba(255,255,255,.94);color:#12171A}
+.ba .lab{top:20px}
+.ba .lab.l{left:20px}
+.ba .lab.r{right:20px}
+.ba .hint{left:50%;transform:translateX(-50%);bottom:20px}
+/* a range input stretched over the whole slider: drag, click-to-jump and
+   arrow keys all come for free, and it holds the value without script */
+.ba .rng{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;
+  opacity:0;cursor:ew-resize;background:none;border:0;
+  -webkit-appearance:none;appearance:none}
+.ba .rng::-webkit-slider-thumb{-webkit-appearance:none;width:56px;height:56px}
+.ba .rng::-moz-range-thumb{width:56px;height:56px;border:0;background:none}
+.ba .rng:focus-visible ~ .hdl{box-shadow:0 4px 16px rgba(0,0,0,.28),0 0 0 3px var(--accent)}
+
+/* ════════════ responsive ════════════
+   The frame is drawn at 1440; every column width above is the file's. Below
+   that the fixed columns give first, then the rows stack. */
+@media (max-width:1439px){
+  /* this page's fixed columns give way first */
+  .stalled .steps{flex-wrap:wrap;gap:16px}
+  .stalled .step{width:auto;flex:1 1 240px}
+  .shead .lab{flex:0 1 380px}
+  .shead .hd{flex:0 1 746px}
+  .inset .head .lab{flex:0 1 380px}
+  .inset .head .hd{flex:0 1 746px}
+  .hero h1,.hero .sub,.princ h3,.shead .hd p,.inset .head .hd p{max-width:100%}
+  .nextcase .thumb{flex:0 1 640px}
+  /* every fixed table column becomes a share of what is left */
+  .eid .hdr>span:first-child,.eid .ev{width:auto;flex:480 1 0;min-width:0}
+  .eid .hdr>span:nth-child(2),.eid .hdr>span:nth-child(3),
+  .eid .ins,.eid .dec{width:auto;flex:376 1 0;min-width:0}
+  .vtbl .a,.vtbl .vhd>span:nth-child(1){width:auto;flex:260 1 0;min-width:0}
+  .vtbl .b,.vtbl .c,
+  .vtbl .vhd>span:nth-child(2),.vtbl .vhd>span:nth-child(3){width:auto;flex:380 1 0;min-width:0}
+  .vtbl .d,.vtbl .vhd>span:nth-child(4){width:auto;flex:188 1 0;min-width:0}
+  .vtbl.wide .b,.vtbl.wide .vhd>span:nth-child(2){flex:788 1 0}
+  .vtbl.wide .vhd>span:nth-child(3){flex:188 1 0}
+  .vtbl.two .a,.vtbl.two .vhd>span:nth-child(1){flex:360 1 0}
+  .vtbl.two .b,.vtbl.two .vhd>span:nth-child(2){flex:896 1 0}
+  .maptbl .c1{width:auto;flex:500 1 0;min-width:0}
+  .maptbl .c2{flex:0 0 40px}
+  .maptbl .c3{width:auto;flex:360 1 0;min-width:0}
+  .maptbl .c4{width:auto;flex:180 1 0;min-width:0}
+  .moves .m{width:auto;flex:0 1 308px;min-width:0}
+  /* the screens keep their slot's ratio instead of a pixel height */
+  .trio .sh,.figshot .sh{width:100%;max-width:100%;height:auto;aspect-ratio:var(--ar)}
+  .ba{width:100%;height:auto;aspect-ratio:1184/740}
+  .ba .after img{width:calc(100% + 2px);height:auto}
+  .vid{width:100%;height:auto;aspect-ratio:1184/666}
+  .vid .poster{left:-1px;top:-1px;width:calc(100% + 2px);height:auto}
+  .vid .scrim{left:-1px;top:-1px;width:calc(100% + 2px);height:calc(100% + 2px)}
+  .vid .pbtn{left:43.75%;top:40.09%;width:12.1622%;height:auto}
+  .vid .pico{left:48.8176%;top:46.997%;width:2.7027%;height:auto}
+  .vid .vlab{left:3.2%;top:auto;bottom:9%}
+  .vid .dur{left:auto;right:3.2%;top:auto;bottom:7.4%}}
+@media (max-width:1240px){
+  :root{--px:56px}
+  .t-display{font-size:clamp(44px,5.6vw,72px);letter-spacing:-.04em}
+  .t-h-xl{font-size:clamp(34px,4.2vw,56px);letter-spacing:-.035em}
+  .t-h-l{font-size:clamp(30px,3.4vw,44px);letter-spacing:-.03em}
+  .foot{padding-left:var(--px);padding-right:var(--px)}
+  .nextcase .card{gap:48px}
+  .srail{left:12px}}
+@media (max-width:1024px){.sec-3,.sec-4,.dsec,.nextcase{
+    padding-top:88px;padding-bottom:88px;gap:48px}
+  .hero{padding-top:72px;padding-bottom:96px}
+  .hero .heromedia{gap:48px}
+  .inset{padding:88px 0}
+  .shead,.inset .head{flex-wrap:wrap;gap:20px}
+  .shead .lab,.shead .hd,.inset .head .lab,.inset .head .hd{flex:1 1 100%;width:auto;min-width:0}
+  /* a fixed width would otherwise set the flex item's automatic minimum */
+  .shead .hd p,.inset .head .hd p,.hero .sub,.hero h1,.princ h3{width:100%}
+  .hero .meta,.pstmt,.dstrip,.nextcase .card,
+  .crow{flex-wrap:wrap;gap:16px}
+  .notes{flex-wrap:wrap}
+  .hero .meta,.nextcase .card{gap:32px}
+  .hero .meta>div,.pstmt>div,.dstrip>div,
+  .ocard{flex:1 1 240px}
+  /* the meta row and the decision strip rule between columns; once they wrap,
+     the rule has to run along the top instead */
+  .hero .meta{box-shadow:none}
+  .hero .meta>div{padding-left:0;padding-right:0;box-shadow:inset 0 1px 0 0 var(--line)!important}
+  .hero .meta>div:first-child{box-shadow:none!important}
+  .dstrip>div+div{border-left:0;border-top:1px solid var(--line)}.nextcase .thumb{flex:1 1 100%;width:auto}
+  .nextcase .thumb{height:auto;aspect-ratio:640/400}
+  .eid .row{flex-wrap:wrap;gap:12px}
+  .eid .row>img{display:none}
+  .eid .row>div{flex:1 1 240px}
+  /* the card rows wrap once four across stops fitting */
+  .stats,.sumstrip,.pcards,.pmap .row,.moves .row,.proto .try,.trio .pl{flex-wrap:wrap;gap:16px}
+  .stats>div,.sumstrip>div,.pcard,.pmap .p,.proto .try>div,.moves .m{flex:1 1 240px}
+  .trio .col{flex:1 1 280px;min-width:0}
+  .sumstrip>div+div{border-left:0;border-top:1px solid var(--line)}
+  /* and the tables become stacked blocks rather than columns */
+  .eid .hdr,.vtbl .r,.vtbl .vhd,.maptbl .r,.maptbl .mhd{flex-wrap:wrap;gap:12px 24px}
+  .eid .hdr>span,.eid .row>div,
+  .vtbl .a,.vtbl .b,.vtbl .c,.vtbl .d,.vtbl .vhd>span,
+  .maptbl .c1,.maptbl .c3,.maptbl .c4,.maptbl .mhd>span{flex:1 1 240px;width:auto;min-width:0}
+  .maptbl .c2{flex:0 0 100%;text-align:left}
+  .notes>div{flex:1 1 240px}}
+@media (max-width:900px){
+  /* brand + links + toggle + resume stop fitting the 76px nav row here */
+  .nav .links{display:none}.ocard .chips span,.nextcase .kind,.hero .chips span{white-space:normal}}
+@media (max-width:640px){
+  :root{--px:20px}
+  .tlink,.nav .cv{min-height:44px;align-items:center}.t-h-m{font-size:24px;line-height:29px}
+  .srail{display:none}
+  .figshot .pl,.trio .pl,.vidblock .pl{padding:16px}
+  .changed,.proto{padding:32px 24px}
+  .dstrip>div,.pstmt>div,.ocard,.pcard,.stats>div,.pmap .p{padding:20px}
+  /* the poster caption and pill have no room left to be legible */
+  .vid .vlab,.vid .dur{display:none}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .js [data-rev],.js .ln>span{opacity:1!important;transform:none!important;clip-path:none!important}
+  .js .sh img.fades{opacity:1}}</style>
+</head><body>
+<a class="skip" href="#contribution">Skip to the case study</a>
+<div class="page">
+
+<header class="nav" id="top">
+  <a class="brand" href="index.html" aria-label="Deep Vyas — home">
+    <img src="ig-assets/0b678.svg" alt="" width="35" height="35" decoding="async">
+    <span class="t-title-m">Deep Vyas</span>
+  </a>
+  <div class="right">
+    <nav class="links" aria-label="Sections">
+      <a href="index.html#work" aria-current="page">Work</a>
+      <a href="index.html#how">How I work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#mentoring">Mentoring</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <button class="toggle" id="theme" type="button" aria-label="Switch colour theme">
+      <span class="btn"><svg class="diya" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><defs><linearGradient id="dvFlame" x1="12" y1="2.8" x2="12" y2="13.7" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#FF5A12"/><stop offset=".45" stop-color="#FF9A15"/><stop offset="1" stop-color="#FFD948"/></linearGradient></defs><g class="flame"><path class="f-out" d="M12 2.8c2.7 3.4 4 5.1 4 6.9a4 4 0 0 1-8 0c0-1.8 1.3-3.5 4-6.9z" fill="url(#dvFlame)" stroke="none"/><path class="f-core" d="M12 7.2c1.3 1.7 1.9 2.5 1.9 3.3a1.9 1.9 0 0 1-3.8 0c0-.8.6-1.6 1.9-3.3z" fill="#FFF6D6" stroke="none"/></g><g class="smoke" stroke="#9AA0AC" stroke-width="1.25" fill="none" stroke-linecap="round"><path class="s1" d="M12 13.4c-1.7-1.7-1.7-3.2 0-4.6s1.7-2.9 0-4.6"/><path class="s2" d="M12 13.4c1.5-1.4 1.6-2.7.2-3.9"/></g><path d="M12 15.1v-1.1"/><path d="M20.4 15.1a8.4 4.6 0 0 1-16.8 0z"/></svg></span>
+    </button>
+    <a class="cv t-label" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer">Résumé <span class="arw up">↗</span></a>
+  </div>
+  <span class="strip" aria-hidden="true"><span style="background:#2E6470"></span><span style="background:#45918C"></span><span style="background:#428F4F"></span><span style="background:#9DBB55"></span><span style="background:#EEB846"></span><span style="background:#DD833E"></span><span style="background:#D45C37"></span></span>
+</header>
+
+
+<!-- ═══ Hero ═══ -->
+<section class="hero">
+  <div class="chips" data-rev="fade">
+    <span>Enterprise licensing</span><span>B2B desktop web</span><span>End-user computing</span><span>RFP response</span>
+  </div>
+  <h1 class="t-display">
+    <span class="ln" style="--i:0"><span>IGEL Licence Portal: A portal</span></span>
+    <span class="ln" style="--i:1"><span>for admins who open it</span></span>
+    <span class="ln" style="--i:2"><span>twice a year</span></span>
+  </h1>
+  <p class="sub t-body-l" data-rev="rise" style="--i:0">IGEL&rsquo;s licence portal is ten years old, and most customers open it about once a year to renew. IGEL had already done its UX research. I led Apexon&rsquo;s response and took it further: a portal that tells you what to do next, and a Copilot for the partners who use it every day.</p>
+  <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="ig-assets/6192e.svg" alt="" width="16" height="16"></span><span class="k">My role</span><span class="v">Design Lead. I led the project for Apexon</span></div><div><span class="ic"><img src="ig-assets/fe185.svg" alt="" width="16" height="16"></span><span class="k">Client</span><span class="v">IGEL Technology</span></div><div><span class="ic"><img src="ig-assets/51d6d.svg" alt="" width="16" height="16"></span><span class="k">Platform</span><span class="v">Desktop web, with basic tablet and mobile</span></div><div><span class="ic"><img src="ig-assets/af725.svg" alt="" width="16" height="16"></span><span class="k">Scope</span><span class="v">The redesign, a clickable prototype of 14 screens, the Licence Copilot concept and the walkthrough, built on IGEL&rsquo;s own research</span></div><div><span class="ic"><img src="ig-assets/2ffcf.svg" alt="" width="16" height="16"></span><span class="k">Outcome</span><span class="v">Won the engagement. IGEL is going ahead with the redesign</span></div></div>
+  <div class="heromedia">
+    <figure class="figshot">
+      <div class="pl">
+        <div class="ba" data-rev="lift" style="--i:0;--p:50%">
+          <div class="after"><img src="ig-assets/a005e.png" alt="After: the redesigned home, with a banner for subscription issues, licence health tiles, usage by product and a next-best-actions panel." width="2880" height="4550" decoding="async"></div>
+          <div class="bfr"><img src="ig-assets/acdd3.png" alt="Before: the live portal, with boxed panels, a dense palette and a licence table of abbreviated product codes." width="1569" height="1010" decoding="async"></div>
+          <span class="dvd" aria-hidden="true"></span>
+          <span class="lab l">Before &middot; live portal</span>
+          <span class="lab r">After &middot; my redesign</span>
+          <span class="hint">Drag to compare</span>
+          <input class="rng" type="range" min="0" max="100" step="0.1" value="50" aria-label="Compare the live portal with my redesign">
+          <span class="hdl" aria-hidden="true"><img src="ig-assets/4316a.svg" alt="" width="10" height="16"><img src="ig-assets/e726f.svg" alt="" width="10" height="16"></span>
+        </div>
+      </div>
+      <figcaption>Drag to compare. Left: the live portal before the project, with boxed components, a busy palette, small charts and tables that expect you to know what BOOKED_ILP means. Right: my redesigned Home. Customer details blurred; figures are sample data.</figcaption>
+    </figure>
+    <div class="proto" data-rev="rise">
+      <div class="in">
+        <p class="k">Clickable prototype &middot; 14 screens</p>
+        <h2>Click through the prototype yourself</h2>
+        <p>Use the arrows at the bottom right to follow the nine&#8209;step tour, or click around freely. Sample data throughout.</p>
+      </div>
+      <p class="k">Things to try</p>
+      <div class="try"><div><b>Renew an expired pack</b><span>Home &rarr; Licences &rarr; the pack &rarr; Review &rarr; Done</span></div><div><b>Get started as Maria</b><span>Sign&#8209;in link &rarr; Guided tasks</span></div><div><b>Redeem a purchase</b><span>Orders &rarr; Redeem &rarr; Licences</span></div><div><b>Convert an OS10 pack</b><span>The pack &rarr; More actions &rarr; Convert</span></div><div><b>Clean up devices</b><span>Home &rarr; Devices &rarr; Release licence</span></div></div>
+      <a class="btn" href="https://claude.ai/artifact/K2xFrULHHjcHotZtoNF9Br" target="_blank" rel="noopener noreferrer">Open the prototype  &#8599;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 01 · Walkthrough ═══ -->
+<section class="sec-3" id="walkthrough" aria-labelledby="h-walkthrough">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">01 &middot; Walkthrough</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-walkthrough" data-rev="rise">See it working</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">I presented the redesign to IGEL as the clickable prototype above and this recorded walkthrough. The walkthrough shows how the screens fit together. The decisions that follow explain each one.</p>
+    </div>
+  </div>
+  <figure class="vidblock">
+    <p class="k" data-rev="fade">Watch the walkthrough</p>
+    <div class="pl">
+      <div class="vid" data-rev="lift" style="--i:0">
+        <video class="vfile" src="ig-assets/igel-redesign.mp4" poster="ig-assets/a005e.png" controls preload="none" playsinline>
+          <p>Your browser can&rsquo;t play this video. <a href="ig-assets/igel-redesign.mp4">Download the walkthrough</a> instead.</p>
+        </video>
+        <button class="vcover" type="button" aria-label="Play the walkthrough IGEL saw, 4 minutes 29 seconds">
+          <img class="poster" src="ig-assets/a005e.png" alt="" width="2880" height="4550" loading="lazy" decoding="async">
+          <span class="scrim" aria-hidden="true"></span>
+          <img class="pbtn" src="ig-assets/8351c.svg" alt="" width="144" height="144" aria-hidden="true">
+          <img class="pico" src="ig-assets/ffdb0.svg" alt="" width="32" height="36" aria-hidden="true">
+          <span class="vlab"><b>The walkthrough IGEL saw</b><span>Home &middot; Licence health &middot; Next best actions</span></span>
+          <span class="dur">4:29</span>
+        </button>
+      </div>
+    </div>
+    <figcaption>The recorded walkthrough I presented to IGEL, moving through Home, licence health and the prioritised actions. Sample data throughout.</figcaption>
+  </figure>
+  <div class="pmap">
+    <p class="k" data-rev="fade">The portal map</p>
+    <div class="row"><div class="p" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/1fabd.svg" alt="" width="16" height="16"></span><h3>Licence Copilot</h3><p>Ask in plain English, get a table or chart back</p></div><div class="p" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/fe544.svg" alt="" width="16" height="16"></span><h3>Home</h3><p>What needs attention, and the next best actions</p></div><div class="p" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span><h3>Licences</h3><p>Every product pack, its status, usage and expiry</p></div><div class="p" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/910a2.svg" alt="" width="16" height="16"></span><h3>Redeem</h3><p>Enter a delivery token to unlock new packs</p></div></div>
+    <div class="row"><div class="p" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/938e5.svg" alt="" width="16" height="16"></span><h3>UMS IDs</h3><p>Servers, their assigned packs and Auto Assign</p></div><div class="p" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/51d6d.svg" alt="" width="16" height="16"></span><h3>Devices</h3><p>Which device holds which licence, and which don&rsquo;t</p></div><div class="p" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/9f30d.svg" alt="" width="16" height="16"></span><h3>Orders</h3><p>Purchases, quotes and tokens ready to redeem</p></div><div class="p" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/a138b.svg" alt="" width="16" height="16"></span><h3>Reports</h3><p>Utilisation, renewals by quarter, CSV downloads</p></div></div>
+    <p class="cap" data-rev="fade">Seven pages in the side menu, plus the Copilot. The company switcher, Global Account ID and &ldquo;Browse guide&rdquo; sit in the header on every page.</p>
+  </div>
+</section>
+
+<!-- ═══ 02 · My contribution ═══ -->
+<section class="sec-3" id="contribution" aria-labelledby="h-contribution">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">02 &middot; My contribution</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-contribution" data-rev="rise">IGEL had done the research.<br>My job was to take it further</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">In June 2026, IGEL asked vendors to rebuild its licence portal. Apexon answered, and I led the project. IGEL handed us its own groundwork: personas, a UX audit and a first draft of version 2.0. On our call, IGEL&rsquo;s CIO said even that draft had room to grow. We had about two weeks between that call and the deadline.</p>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">Who owned what</p>
+    <div class="crow">
+      <div class="ocard" data-rev="rise" style="--i:0">
+        <span class="ic"><img src="ig-assets/ff669.svg" alt="" width="16" height="16"></span>
+        <h3>I designed</h3>
+        <p>The redesign, the guided tasks, a clickable prototype with a nine&#8209;step tour, the Licence Copilot concept, and the walkthrough video.</p>
+        <div class="chips"><span>Clickable prototype</span><span>Licence Copilot</span><span>Walkthrough video</span></div>
+      </div>
+      <div class="ocard" data-rev="rise" style="--i:1">
+        <span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span>
+        <p class="lab">IGEL&rsquo;s UX lead had already done</p>
+        <p>The workshops, two personas, five use cases, a 23&#8209;page UX audit with seven recommendations, and a first 2.0 design. All of it in 2025, a year before the RFP.</p>
+        <div class="chips"><span>Personas</span><span>23&#8209;page audit</span><span>2.0 draft</span></div>
+      </div>
+      <div class="ocard" data-rev="rise" style="--i:2">
+        <span class="ic"><img src="ig-assets/f97b8.svg" alt="" width="16" height="16"></span>
+        <h3>The team owned</h3>
+        <p>What I worked with, but didn&rsquo;t own.</p>
+        <div class="pair"><p class="tl">Apexon&rsquo;s account lead</p><p class="sl">The client relationship and the RFP itself</p></div>
+        <div class="pair"><p class="tl">Apexon&rsquo;s engineering and QA leads</p><p class="sl">Architecture, migration, testing and the estimate</p></div>
+        <div class="pair"><p class="tl">IGEL&rsquo;s CIO</p><p class="sl">The brief, the two phases, and the answers to our questions</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">How the project ran</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span><h3>Read the handover</h3><p>IGEL&rsquo;s personas, audit, support feedback and 2.0 draft</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/46e0b.svg" alt="" width="16" height="16"></span><h3>Ask</h3><p>An hour with IGEL&rsquo;s CIO on June 8, and 46 written questions</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/fcd50.svg" alt="" width="16" height="16"></span><h3>Design</h3><p>A clickable prototype of 14 screens and five flows, on top of the seven audit moves</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/c5e65.svg" alt="" width="16" height="16"></span><h3>Present</h3><p>The clickable prototype and a recorded walkthrough, as part of Apexon&rsquo;s response</p></div></div>
+  </div>
+</section>
+
+<!-- ═══ 03 · The problem ═══ -->
+<section class="inset" id="problem" aria-labelledby="h-problem">
+  <div class="head">
+    <p class="lab" data-rev="fade" style="color:#F6CEAC">03 &middot; The problem</p>
+    <div class="hd">
+      <h2 class="t-h-xl" id="h-problem" data-rev="rise">A ten&#8209;year&#8209;old portal, used at very different speeds</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Customers and partners use the licence portal to activate keys, assign product packs and keep track of their licences. It&rsquo;s a ten&#8209;year&#8209;old Java application with fewer than 30 pages. It works, but little of it is documented, and it doesn&rsquo;t work on a tablet. An earlier attempt to replace it had failed, so IGEL froze it and split the rebuild into two phases. Phase 1 was a new front end, with no change to the business logic underneath.</p>
+    </div>
+  </div>
+  <div class="pstmt"><div data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/f04f7.svg" alt="" width="16" height="16"></span><span class="k">Customers</span><p>Open it about once a year, to renew. Many never become fluent, and some are covering for a colleague.</p></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/2773f.svg" alt="" width="16" height="16"></span><span class="k">Partners and MSPs</span><p>Use it many times a day. Reporting means an Excel export, which IGEL&rsquo;s CIO called &ldquo;very cumbersome&rdquo;.</p></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/2708c.svg" alt="" width="16" height="16"></span><span class="k">IGEL&rsquo;s own team</span><p>Power users who can change any licence for any customer, and need a record of who changed what.</p></div><div class="ux" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/ad019.svg" alt="" width="16" height="16"></span><span class="k">The UX challenge</span><p>Make it clear for the once&#8209;a&#8209;year customer, without slowing down the partner who lives in it.</p></div></div>
+  <div class="stalled">
+    <p class="k" data-rev="fade">A renewal, before the redesign</p>
+    <div class="steps"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/3bd8b.svg" alt="" width="16" height="16"></span><span class="k">Step 1</span><b>A renewal is due</b><p class="d">An email says a subscription is about to expire. Joachim last logged in months ago.</p><span class="k on">What it took</span><span class="t">Remember the portal exists</span><span class="t">Find the login</span></div><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/a503d.svg" alt="" width="16" height="16"></span><span class="k">Step 2</span><b>Find the right company</b><p class="d">Switching company in the old portal means a right&#8209;click menu, which few people expect on a website.</p><span class="k on">What it took</span><span class="t">Find the company</span><span class="t">Check the Global Account ID</span></div><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/0c5c6.svg" alt="" width="16" height="16"></span><span class="k">Step 3 &middot; where it slowed</span><b>Read the packs</b><p class="d">Packs show as codes like EMP, TER and WE, with statuses such as BOOKED and BOOKED_ILP.</p><span class="k on">What it took</span><span class="t">Decode the abbreviations</span><span class="t">Guess what each status means</span></div><div class="step stop" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/b430d.svg" alt="" width="16" height="16"></span><span class="k">Step 4 &middot; where it stopped</span><b>Act on it</b><p class="d">Every row has the same small arrow. Nothing says which pack needs renewing first.</p><span class="k on">What it took</span><span class="t">No clear next step</span><span class="t">Risk of a duplicate licence</span></div></div>
+    <div class="outcome"><p>A once&#8209;a&#8209;year admin could finish a renewal still unsure whether they&rsquo;d done it right.</p></div>
+    <p class="src" data-rev="fade">Pieced together from the old portal, IGEL&rsquo;s personas and its support team&rsquo;s feedback. The right&#8209;click menu comes from IGEL&rsquo;s CIO, who walked us through the portal on our call.</p>
+  </div>
+</section>
+
+<!-- ═══ 04 · What I started from ═══ -->
+<section class="sec-3" id="research" aria-labelledby="h-research">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">04 &middot; What I started from</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-research" data-rev="rise">I started from IGEL&rsquo;s<br>own research</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">IGEL&rsquo;s UX lead had already run workshops, written two personas, mapped five use cases and audited the portal in 23 pages. He was open that none of it had been tested with users; it came from internal sources. Two more inputs filled the gaps: a page&#8209;by&#8209;page list of fixes from IGEL&rsquo;s support team, and the CIO&rsquo;s answers on our call.</p>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">What IGEL handed over</p>
+    <div class="stats"><div data-rev="rise" style="--i:0"><b>2</b><span>admin personas, both infrequent users</span></div><div data-rev="rise" style="--i:1"><b>5</b><span>core use cases mapped into flows</span></div><div data-rev="rise" style="--i:2"><b>23</b><span>pages of UX audit findings</span></div><div data-rev="rise" style="--i:3"><b>7</b><span>recommendations, all kept</span></div></div>
+    <p class="cap" data-rev="fade">From IGEL&rsquo;s UX audit and persona sheet, June 2025.</p>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">Three inputs</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span><h3>IGEL&rsquo;s UX audit</h3><p>23 pages and seven recommendations, built from internal sources. Not tested with users.</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/5bb75.svg" alt="" width="16" height="16"></span><h3>IGEL support&rsquo;s feedback</h3><p>A page&#8209;by&#8209;page list of fixes, from section names to colour rules for expiry dates.</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/46e0b.svg" alt="" width="16" height="16"></span><h3>The CIO, on our call</h3><p>Who uses the portal and how often, what reporting lacks, and what Phase 1 can and can&rsquo;t change.</p></div></div>
+  </div>
+  <figure class="figshot">
+    <div class="pl"><div class="sh" data-rev="lift" style="--i:0;--sw:1093px;--sh:898px;--ar:1093/898"><img src="ig-assets/f69a4.png" alt="IGEL&rsquo;s annotated wireflow for the 2.0 home page, with numbered callouts over a sketched layout." width="1093" height="898" loading="lazy" decoding="async"></div></div>
+    <figcaption>Part of what we were handed: IGEL&rsquo;s annotated wireflow for the 2.0 home page, from its UX lead&rsquo;s project deck.</figcaption>
+  </figure>
+  <div class="ownership">
+    <p class="k" data-rev="fade">The two people IGEL designed for</p>
+    <div class="pcards">
+      <div class="pcard" data-rev="rise" style="--i:0">
+        <span class="ic"><img src="ig-assets/6192e.svg" alt="" width="16" height="16"></span>
+        <h3>Maria</h3>
+        <p class="r">Fills in for two weeks</p>
+        <p>An IT admin who has never used IGEL products. She&rsquo;s covering while Joachim is on leave, doesn&rsquo;t know where to find anything, and isn&rsquo;t even aware she needs to do more than press &ldquo;remove device&rdquo;.</p>
+        <blockquote>&ldquo;I just need something that shows me what to do, step by step, so I don&rsquo;t miss anything while I&rsquo;m filling in.&rdquo;</blockquote>
+      </div>
+      <div class="pcard" data-rev="rise" style="--i:1">
+        <span class="ic"><img src="ig-assets/6192e.svg" alt="" width="16" height="16"></span>
+        <h3>Joachim</h3>
+        <p class="r">Rarely uses the portal</p>
+        <p>An IGEL admin who opens the portal so rarely he never becomes fluent in it. He licenses devices, swaps damaged hardware and runs renewals, and has to avoid creating duplicate licences.</p>
+        <blockquote>&ldquo;I need a system that tells me exactly what to do next, alerts me when something needs my attention, and helps me avoid mistakes, because I don&rsquo;t use this every day.&rdquo;</blockquote>
+      </div>
+    </div>
+    <p class="cap" data-rev="fade">IGEL&rsquo;s personas, from its 2025 workshops. Quotes as written on the persona sheet.</p>
+  </div>
+  <div class="eid">
+    <div class="hdr"><span>Evidence</span><span>Insight</span><span>Design decision</span></div>
+    <div class="row" data-rev="wipe" style="--i:0">
+      <div class="ev"><p>&ldquo;Customers won&rsquo;t understand BOOKED and BOOKED_ILP&rdquo;</p><span>IGEL support</span></div>
+      <div class="ins"><p>Status codes have to become words people already use</p></div>
+      <div class="dec"><p>Plain names for statuses and actions</p><span>Decision 3</span></div>
+    </div>
+    <div class="row" data-rev="wipe" style="--i:1">
+      <div class="ev"><p>Joachim needs &ldquo;to see when he needs to do something out of the ordinary&rdquo;</p><span>Persona</span></div>
+      <div class="ins"><p>Home should show what needs doing, not just numbers</p></div>
+      <div class="dec"><p>Home as a to&#8209;do list</p><span>Decision 1</span></div>
+    </div>
+    <div class="row" data-rev="wipe" style="--i:2">
+      <div class="ev"><p>Maria &ldquo;isn&rsquo;t even aware that she needs to do anything but press remove device&rdquo;</p><span>Persona</span></div>
+      <div class="ins"><p>She needs the steps, not a cleaner screen</p></div>
+      <div class="dec"><p>Guided tasks</p><span>Decision 2</span></div>
+    </div>
+    <div class="row" data-rev="wipe" style="--i:3">
+      <div class="ev"><p>Support asked for &ldquo;days left&rdquo; and colour bands for expiry and usage</p><span>IGEL support</span></div>
+      <div class="ins"><p>Urgency should be visible without reading dates</p></div>
+      <div class="dec"><p>Renew weighted by urgency</p><span>Decision 4</span></div>
+    </div>
+    <div class="row" data-rev="wipe" style="--i:4">
+      <div class="ev"><p>Partners export to Excel to do basic reporting</p><span>IGEL&rsquo;s CIO</span></div>
+      <div class="ins"><p>The people who use the portal most get the least from it</p></div>
+      <div class="dec"><p>The Licence Copilot</p><span>Decision 6</span></div>
+    </div>
+  </div>
+  <div class="changed" data-rev="rise">
+    <p class="k">What changed my thinking</p>
+    <h3>The draft was cleaner. It wasn&rsquo;t smarter.</h3>
+    <p>IGEL&rsquo;s 2.0 draft applied the audit well: a neutral palette, the company in the header, a table for licences. But it still showed you numbers and left you to work out what they meant. The CIO asked for something &ldquo;more intelligent&rdquo; than endless lists. That became the brief I gave myself.</p>
+  </div>
+</section>
+
+<!-- ═══ 05 · Design direction ═══ -->
+<section class="sec-4" id="direction" aria-labelledby="h-direction">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">05 &middot; Design direction</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-direction" data-rev="rise">Keep IGEL&rsquo;s audit,<br>and add the next step</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The seven audit moves were right, and Phase 1 couldn&rsquo;t touch the business logic anyway. So I kept every move and every feature. What I added was a layer on top: a portal that notices what needs doing and says so, in words a once&#8209;a&#8209;year admin understands.</p>
+    </div>
+  </div>
+  <div class="princ" data-rev="rise">
+    <div class="in">
+      <p class="k">The principle</p>
+      <h3 class="t-h-l">Design for how often people actually use it.</h3>
+    </div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col" data-rev="rise" style="--i:0"><span>Live portal &middot; v1</span><div class="sh" style="--sh:250px;--ar:389.3333/250"><img src="ig-assets/acdd3.png" alt="The live portal home, with boxed panels and small charts." width="1569" height="1010" loading="lazy" decoding="async"></div></div>
+      <div class="col" data-rev="rise" style="--i:1"><span>IGEL&rsquo;s 2.0 draft &middot; 2025</span><div class="sh" style="--sh:357px;--ar:389.3333/357"><img src="ig-assets/e7222.png" alt="IGEL&rsquo;s own 2.0 draft of home: a neutral palette, the company in the header, and a licence table." width="800" height="734" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:2"><span>My redesign &middot; 2026</span><div class="sh" style="--sh:243px;--ar:389.3333/243"><img src="ig-assets/70630.png" alt="My redesign of home: an issues banner, licence health tiles, usage by product, and next best actions." width="1440" height="900" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Home, three times: the live portal, IGEL&rsquo;s own 2.0 draft from 2025, and my redesign for the RFP. The draft cleaned it up. The redesign adds what to do next. Figures are sample data.</figcaption>
+  </figure>
+  <div class="moves">
+    <p class="k" data-rev="fade">The seven audit moves, from IGEL&rsquo;s audit, all kept</p>
+    <div class="row"><div class="m" data-rev="rise" style="--i:0"><span class="n">01</span><p>Cut the palette back to neutrals, and strip the legacy glows and shadows</p></div><div class="m" data-rev="rise" style="--i:1"><span class="n">02</span><p>Keep icons only where they help someone find their way</p></div><div class="m" data-rev="rise" style="--i:2"><span class="n">03</span><p>One clear system of primary, secondary and tertiary actions</p></div><div class="m" data-rev="rise" style="--i:3"><span class="n">04</span><p>A title and subheader on every page, so you always know where you are</p></div></div>
+    <div class="row"><div class="m" data-rev="rise" style="--i:0"><span class="n">05</span><p>Plain language instead of jargon and abbreviations</p></div><div class="m" data-rev="rise" style="--i:1"><span class="n">06</span><p>Drill&#8209;down tables instead of accordions and modals, where they fit the task</p></div><div class="m" data-rev="rise" style="--i:2"><span class="n">07</span><p>Order components by importance, not by the old layout</p></div></div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">What Phase 1 allowed</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/fc834.svg" alt="" width="16" height="16"></span><h3>Front end only</h3><p>No change to the business logic, the database or the APIs underneath</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/51d6d.svg" alt="" width="16" height="16"></span><h3>Desktop first</h3><p>About 90% of use is on 14 to 24&#8209;inch screens. Tablets and phones get the basics</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/27bb8.svg" alt="" width="16" height="16"></span><h3>Four languages</h3><p>English, German, Spanish and French, so labels need room to grow</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/02c46.svg" alt="" width="16" height="16"></span><h3>WCAG AA</h3><p>IGEL&rsquo;s accessibility target, so colour can never be the only signal</p></div></div>
+    <p class="cap" data-rev="fade">From IGEL&rsquo;s answers to our written questions and the CIO&rsquo;s call.</p>
+  </div>
+</section>
+
+<!-- ═══ 06 · Decision 1 of 6 · Home ═══ -->
+<section class="dsec paper" id="d1" aria-labelledby="h-d1">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 1 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d1" data-rev="rise">Turn Home into a to&#8209;do list</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">IGEL&rsquo;s draft opened on three bar charts: used, available and expiring licences. Accurate, but it left Joachim to work out what to do about them. I kept the numbers and added an alert at the top that says in plain words what needs attention, and a &ldquo;Next best actions&rdquo; panel that turns each problem into one button. Below them, keys expiring in the next 120 days are ordered by urgency, with days left instead of a date, which is what IGEL support asked for.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>Charts only, as in the draft &middot; a separate alerts page &middot; alerts and actions on Home</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>A plain&#8209;language alert at the top of Home, and Next best actions beside the usage</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>Someone has to decide which action ranks first, and those rules aren&rsquo;t defined yet</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>Presented in the RFP response. Not yet tested with admins</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col" data-rev="rise" style="--i:0"><span>IGEL&rsquo;s 2.0 draft</span><div class="sh" style="--sh:547px;--ar:596/547"><img src="ig-assets/e7222.png" alt="IGEL&rsquo;s 2.0 draft of home, opening on three bar charts for used, available and expiring licences." width="800" height="734" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>My redesign, in the prototype</span><div class="sh top" style="--sh:745px;--ar:596/745"><img src="ig-assets/a005e.png" alt="My redesign of home: an alert about subscription issues, licence health tiles, usage by product, and a next-best-actions panel." width="2880" height="4550" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>The same account, before and after. The draft shows three charts. The redesign leads with what needs attention and puts the fix next to it. Figures are sample data.</figcaption>
+  </figure>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="mk">1</span><b>An alert in plain words</b><p>&ldquo;2 subscription keys have expired&rdquo;, not a status code</p></div>
+    <div data-rev="rise" style="--i:1"><span class="mk">2</span><b>Next best actions</b><p>Each problem comes with the button that fixes it, from renewals to inactive devices</p></div>
+    <div data-rev="rise" style="--i:2"><span class="mk">3</span><b>Expiring keys, by urgency</b><p>120 days or less, days left instead of dates, as IGEL support asked</p></div>
+    <div data-rev="rise" style="--i:3"><span class="mk">4</span><b>Orders and overview</b><p>Latest orders and their token status, one click from Home</p></div>
+  </div>
+</section>
+
+<!-- ═══ 06 · Decision 2 of 6 · Guided tasks ═══ -->
+<section class="dsec paper" id="d2" aria-labelledby="h-d2">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 2 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d2" data-rev="rise">Walk rare users through rare tasks</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Maria&rsquo;s persona says she &ldquo;isn&rsquo;t even aware that she needs to do anything but press remove device&rdquo;. A cleaner screen doesn&rsquo;t fix that. She needs the steps. So guided tasks get a page of their own, one for each job admins do rarely, from licensing a new device to converting an old pack. Each says how long it takes, and Maria can find them before she even signs in, from a link on the login page.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>A tour on first login &middot; articles in the Knowledge Base &middot; guides inside the portal</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>A Guided tasks page, with each task in plain English and a rough time to complete</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>Someone has to keep every guide in step with the portal as it changes</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>Presented in the RFP response. The guide content would be written with IGEL support</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col" data-rev="rise" style="--i:0"><span>The way in: the login page</span><div class="sh" style="--sh:373px;--ar:596/373"><img src="ig-assets/6b8f6.png" alt="The sign-in page, with a &ldquo;New to the portal? Browse guided tasks&rdquo; link under the form." width="2880" height="1800" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>Guided tasks</span><div class="sh" style="--sh:444px;--ar:596/444"><img src="ig-assets/e9f2d.png" alt="The Guided tasks page: six rare jobs in plain English, each with a time to complete, the first one expanded into its steps." width="2880" height="2144" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Left: &ldquo;New to the portal? Browse guided tasks&rdquo; on the sign&#8209;in page. Right: six rare jobs in plain English, each with a time to complete. The first is open, with a button to the page it needs.</figcaption>
+  </figure>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="mk">1</span><b>Starts from the job</b><p>Each guide is named after what the admin is trying to do, not after a page in the portal</p></div>
+    <div data-rev="rise" style="--i:1"><span class="mk">2</span><b>Says how long it takes</b><p>A rough time to complete, so a covering admin knows whether to start now</p></div>
+    <div data-rev="rise" style="--i:2"><span class="mk">3</span><b>One step at a time</b><p>Each step says what to do and where, so nothing is missed</p></div>
+    <div data-rev="rise" style="--i:3"><span class="mk">4</span><b>Ends in the portal</b><p>&ldquo;Open UMS IDs&rdquo; takes you straight to the page the step needs</p></div>
+  </div>
+</section>
+
+<!-- ═══ 06 · Decision 3 of 6 · Language and hierarchy ═══ -->
+<section class="dsec paper" id="d3" aria-labelledby="h-d3">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 3 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d3" data-rev="rise">Say it plainly, and make<br>the next step obvious</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">IGEL&rsquo;s support team put it bluntly: &ldquo;Customers won&rsquo;t understand BOOKED and BOOKED_ILP.&rdquo; The audit asked for the same thing. I replaced codes and abbreviations with plain names, kept the flat, neutral look the audit recommended, and gave every button a clear rank, so the most important action is always the most visible one.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>Tooltips to explain the codes &middot; rename everything &middot; rename what people act on</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>Plain names for navigation, statuses and actions, with the product name shown under every code</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>Support staff who know the old codes have to learn the new names</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>Presented in the RFP response. The wording still needs checking with real admins</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col" data-rev="rise" style="--i:0"><span>Before</span><div class="sh" style="--sh:384px;--ar:596/384"><img src="ig-assets/acdd3.png" alt="The old portal: a blue, boxed layout with status codes in the licence table." width="1569" height="1010" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>After, in the prototype</span><div class="sh top" style="--sh:384px;--ar:596/384"><img src="ig-assets/a005e.png" alt="The redesign: a flat, neutral layout with plain-language navigation and one clear primary action per panel." width="2880" height="4550" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Before and after. A blue, boxed portal with status codes becomes a flat, neutral one with plain&#8209;language navigation and a clear order of actions.</figcaption>
+  </figure>
+  <div class="ownership">
+    <p class="k" data-rev="fade">Navigation, before and after</p>
+    <div class="sumstrip" data-rev="rise">
+      <div><b>9 &rarr; 7</b><span>menu items, plus the Copilot</span></div>
+      <div><b>5 &rarr; 2</b><span>overlapping items merged</span></div>
+      <div><b>3</b><span>new pages in the menu</span></div>
+      <div><b>1</b><span>moved to the header</span></div>
+    </div>
+    <div class="maptbl">
+      <div class="mhd"><span class="c1">Before &middot; old menu</span><span class="c2"></span><span class="c3">After &middot; new menu</span><span class="c4">Change</span></div>
+      <div class="r" data-rev="wipe" style="--i:0"><div class="c1"><span>Home</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/fe544.svg" alt="" width="16" height="16"></span><span class="tx"><b>Home</b></span></div><div class="c4"><span class="tag">Kept</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:1"><div class="c1"><span>Subscription Keys</span><span>Product Packs</span><span>Archived packs</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span><span class="tx"><b>Licences</b><i>Three lists of the same thing become one, with status filters</i></span></div><div class="c4"><span class="tag merged">Merged</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:2"><div class="c1"><span>&ldquo;Register Delivery Token&rdquo; link on Home</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/910a2.svg" alt="" width="16" height="16"></span><span class="tx"><b>Redeem</b><i>A buried link becomes a page in the menu</i></span></div><div class="c4"><span class="tag moved">Promoted</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:3"><div class="c1"><span>UMS ID</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/938e5.svg" alt="" width="16" height="16"></span><span class="tx"><b>UMS IDs</b></span></div><div class="c4"><span class="tag moved">Renamed</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:4"><div class="c1"><span>Search hardware</span><span>Multi&#8209;licensed hardware</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/51d6d.svg" alt="" width="16" height="16"></span><span class="tx"><b>Devices</b><i>Search and clean&#8209;up now happen on one list</i></span></div><div class="c4"><span class="tag merged">Merged</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:5"><div class="c1"><span>Orders</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/9f30d.svg" alt="" width="16" height="16"></span><span class="tx"><b>Orders</b></span></div><div class="c4"><span class="tag">Kept</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:6"><div class="c1"><em>Not in the old menu</em></div><div class="c2">+</div><div class="c3"><span class="ic"><img src="ig-assets/a138b.svg" alt="" width="16" height="16"></span><span class="tx"><b>Reports</b><i>Reporting used to mean an Excel export</i></span></div><div class="c4"><span class="tag new">New</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:7"><div class="c1"><em>Not in the old menu</em></div><div class="c2">+</div><div class="c3"><span class="ic"><img src="ig-assets/1fabd.svg" alt="" width="16" height="16"></span><span class="tx"><b>Licence Copilot</b><i>Concept: ask a question, get the view</i></span></div><div class="c4"><span class="tag new">New</span></div></div>
+      <div class="r" data-rev="wipe" style="--i:8"><div class="c1"><span>IGEL Knowledge Base</span></div><div class="c2">&rarr;</div><div class="c3"><span class="ic"><img src="ig-assets/dd931.svg" alt="" width="16" height="16"></span><span class="tx"><b>&ldquo;Browse guide&rdquo; in the header</b><i>Help sits on every page, outside the menu</i></span></div><div class="c4"><span class="tag">Moved</span></div></div>
+    </div>
+    <p class="cap" data-rev="fade">Mapped from the before and after screens. Archived packs are assumed to live under Licences as a status, and multi&#8209;licensed hardware under Devices.</p>
+  </div>
+</section>
+
+<!-- ═══ 06 · Decision 4 of 6 · Licence table ═══ -->
+<section class="dsec paper" id="d4" aria-labelledby="h-d4">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 4 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d4" data-rev="rise">Show urgency without<br>making people read dates</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The audit had already swapped accordions for a table, and IGEL&rsquo;s draft used one. Support asked for more: days left instead of dates, and colour bands for expiry and usage. I built on that. Status filters sit at the top, usage sits beside each pack, and the Renew button changes weight with urgency: solid when a pack has expired, outlined when it&rsquo;s expiring, gone when it&rsquo;s active.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>Colour the dates &middot; a separate expiring list &middot; urgency built into each row</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>Status filters, a usage bar on every pack, and a Renew button weighted by urgency</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>Colour carries meaning, so every status also needs a word, for WCAG AA</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>Presented in the RFP response. Not yet tested with admins</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col" data-rev="rise" style="--i:0"><span>IGEL&rsquo;s 2.0 draft</span><div class="sh" style="--sh:370px;--ar:596/370"><img src="ig-assets/1d60a.png" alt="IGEL&rsquo;s 2.0 draft of the licence list: a plain table of product packs." width="946" height="587" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>My redesign, in the prototype</span><div class="sh" style="--sh:527px;--ar:596/527"><img src="ig-assets/ec79d.png" alt="The redesigned Licences page: status filters across the top, a usage bar on every pack, and Renew buttons weighted by urgency." width="2880" height="2548" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Licences, before and after. The draft already used a table. The redesign adds status filters, usage bars and a Renew button that tells you how urgent it is. Figures are sample data.</figcaption>
+  </figure>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="mk">1</span><b>Status filters</b><p>New, activated, expiring and expired packs are one click apart</p></div>
+    <div data-rev="rise" style="--i:1"><span class="mk">2</span><b>Usage beside the pack</b><p>Licences used sit in the same row, so packs can be compared</p></div>
+    <div data-rev="rise" style="--i:2"><span class="mk">3</span><b>Renew by urgency</b><p>Solid when a pack has expired, outlined when it&rsquo;s expiring, gone when it&rsquo;s active</p></div>
+    <div data-rev="rise" style="--i:3"><span class="mk">4</span><b>Names, not just codes</b><p>Every pack code has its product name under it, such as Workspace Edition</p></div>
+  </div>
+  <figure class="figshot">
+    <div class="pl"><div class="sh" data-rev="lift" style="--i:0;--sw:1184px;--sh:968px;--ar:1184/968"><img src="ig-assets/bb0b7.png" alt="A single product pack&rsquo;s page: what the pack is, how many devices it covers, the consequence of its expiry in plain words, and Renew as the first action." width="2880" height="2356" loading="lazy" decoding="async"></div></div>
+    <figcaption>One click deeper: the pack&rsquo;s own page. It explains the consequence in plain words, &ldquo;These 4 devices are unlicensed because this pack has expired. Renewing restores their licences on next check&#8209;in&rdquo;, and puts Renew first.</figcaption>
+  </figure>
+</section>
+
+<!-- ═══ 06 · Decision 5 of 6 · Confirm and continue ═══ -->
+<section class="dsec paper" id="d5" aria-labelledby="h-d5">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 5 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d5" data-rev="rise">Slow down the risky steps,<br>then point to what&rsquo;s next</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Renewing changes what a customer pays for. Converting an OS10 pack can&rsquo;t be undone. So neither is a one&#8209;click button. Renewal gets a review page that shows the new expiry date before you confirm. Conversion spells out what happens to each device and asks you to tick that you understand. Once a renewal is done, the success page points to the next expired pack, so Joachim doesn&rsquo;t have to go looking.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>A one&#8209;click button in the table &middot; a confirmation pop&#8209;up &middot; a full review page</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>A review page for renewals and conversions, and a success page that suggests the next step</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>One extra page per renewal, which a partner doing several a day may find slow</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>In the clickable prototype. Not yet tested with admins</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col mine" data-rev="rise" style="--i:0"><span>Review the renewal</span><div class="sh" style="--sh:306px;--ar:389.3333/306"><img src="ig-assets/835d0.png" alt="The renewal review page: a 12, 24 or 36 month term, the new expiry date, and a note field before confirming." width="2880" height="2264" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>Convert, with a safeguard</span><div class="sh" style="--sh:292px;--ar:389.3333/292"><img src="ig-assets/ac60d.png" alt="The conversion page: a red warning that the conversion is permanent, and a checkbox that unlocks the button." width="2880" height="2164" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:2"><span>Done, and what&rsquo;s next</span><div class="sh" style="--sh:254px;--ar:389.3333/254"><img src="ig-assets/cb354.png" alt="The success page: the new expiry date, and a prompt to renew the other expired pack." width="2880" height="1882" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Left: pick 12, 24 or 36 months and see the new expiry before confirming; pricing is confirmed by an IGEL representative. Middle: &ldquo;This conversion is permanent&rdquo;, with a checkbox before the button unlocks. Right: the new date, and a nudge to renew the other expired pack.</figcaption>
+  </figure>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="mk">1</span><b>See the result first</b><p>The new expiry date is shown before anything is confirmed</p></div>
+    <div data-rev="rise" style="--i:1"><span class="mk">2</span><b>Say what can&rsquo;t be undone</b><p>Conversion names the risk in red and needs a tick to continue</p></div>
+    <div data-rev="rise" style="--i:2"><span class="mk">3</span><b>Room for a note</b><p>An optional comment, such as who approved the renewal</p></div>
+    <div data-rev="rise" style="--i:3"><span class="mk">4</span><b>Never a dead end</b><p>Every success page offers the next sensible step</p></div>
+  </div>
+</section>
+
+<!-- ═══ 06 · Decision 6 of 6 · Reports and Copilot ═══ -->
+<section class="dsec paper" id="d6" aria-labelledby="h-d6">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">06 &middot; Decision 6 of 6</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-d6" data-rev="rise">Give partners answers,<br>not exports</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Partners and MSPs use the portal many times a day, and reporting was its weakest part: an Excel export the CIO called &ldquo;very cumbersome&rdquo;. IGEL asked for exports and in&#8209;app dashboards, so Reports has both: utilisation by product, renewals by quarter and five CSV downloads. Then I went one step further with a Licence Copilot. You ask a question in plain English, and it builds the table or chart that answers it, from your own data. It suggests actions, but never takes them.</p>
+    </div>
+  </div>
+  <div class="dstrip" data-rev="rise">
+    <div><span class="ic"><img src="ig-assets/97044.svg" alt="" width="16" height="16"></span><span class="k">Options</span><p>Better exports &middot; a fixed set of dashboards &middot; ask a question, get the view</p></div>
+    <div class="dec"><span class="ic"><img src="ig-assets/767b5.svg" alt="" width="16" height="16"></span><span class="k">Decision</span><p>A Copilot layer on the redesigned portal, alongside exports and dashboards</p></div>
+    <div><span class="ic"><img src="ig-assets/b5ef0.svg" alt="" width="16" height="16"></span><span class="k">Trade&#8209;off</span><p>Answers have to be right every time, and IGEL&rsquo;s legal and security teams would need to approve it</p></div>
+    <div class="res"><span class="ic"><img src="ig-assets/3c826.svg" alt="" width="16" height="16"></span><span class="k">Result</span><p>A concept, built into the clickable prototype. Not part of the agreed build</p></div>
+  </div>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col mine" data-rev="rise" style="--i:0"><span>Reports: what IGEL asked for</span><div class="sh" style="--sh:500px;--ar:596/500"><img src="ig-assets/0d453.png" alt="The Reports page: utilisation by product, renewals by quarter, and a list of CSV downloads." width="2880" height="2416" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>Copilot: one step further</span><div class="sh" style="--sh:373px;--ar:596/373"><img src="ig-assets/1f618.png" alt="The Licence Copilot&rsquo;s starting point: three suggested questions and a note that it never changes anything on its own." width="2880" height="1800" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Left: Reports, with utilisation, renewals by quarter and CSV downloads. Right: the Copilot&rsquo;s starting point, with three suggested questions and a promise that it never changes anything on its own.</figcaption>
+  </figure>
+  <figure class="trio">
+    <div class="pl">
+      <div class="col mine" data-rev="rise" style="--i:0"><span>Asked how to cut licence spend</span><div class="sh" style="--sh:482px;--ar:596/482"><img src="ig-assets/0e951.png" alt="The Copilot answering a question about licence spend, with three suggestions and the reasoning beside each." width="1440" height="1165" loading="lazy" decoding="async"></div></div>
+      <div class="col mine" data-rev="rise" style="--i:1"><span>Asked for a chart</span><div class="sh" style="--sh:319px;--ar:596/319"><img src="ig-assets/e6a4c.png" alt="The Copilot drawing a chart in answer to a question, with the pack nearest capacity flagged." width="1440" height="770" loading="lazy" decoding="async"></div></div>
+    </div>
+    <figcaption>Concept work. Left: it suggests reclaiming idle seats, right&#8209;sizing a pack and renewing before a price rise. Right: it draws the chart for that question and flags the pack near capacity. Figures are sample data.</figcaption>
+  </figure>
+  <div class="notes">
+    <div data-rev="rise" style="--i:0"><span class="mk">1</span><b>Ask in plain English</b><p>No fixed reports to hunt through, and no query language</p></div>
+    <div data-rev="rise" style="--i:1"><span class="mk">2</span><b>The view is built for you</b><p>The table or chart the question needs, not a page that half answers it</p></div>
+    <div data-rev="rise" style="--i:2"><span class="mk">3</span><b>It never acts alone</b><p>Nothing changes until you choose to, which is what Joachim asked for</p></div>
+    <div data-rev="rise" style="--i:3"><span class="mk">4</span><b>Same portal underneath</b><p>The same company bar and plain language. The full portal is still there</p></div>
+  </div>
+</section>
+
+<!-- ═══ 07 · Validation ═══ -->
+<section class="sec-3" id="testing" aria-labelledby="h-testing">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">07 &middot; Validation</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-testing" data-rev="rise">What was checked, and<br>what still needs testing</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">This was an RFP response, so IGEL judged the design, not admins. Before the deadline, our team sent IGEL 46 written questions and had an hour with their CIO, and his answers shaped the brief. Then we presented the clickable prototype and a recorded walkthrough. That tells me the reasoning held up. It doesn&rsquo;t tell me Maria can run a renewal without help.</p>
+    </div>
+  </div>
+  <div class="vtbl">
+    <div class="vhd"><span>Design</span><span>How it was checked</span><span>What came back</span><span>Result</span></div>
+    <div class="r" data-rev="wipe" style="--i:0"><p class="a">The brief</p><p class="b">An hour with IGEL&rsquo;s CIO and 46 written questions</p><p class="c">Three user groups, Phase 1 front end only, four languages, WCAG AA</p><p class="d">Used as the brief</p></div>
+    <div class="r" data-rev="wipe" style="--i:1"><p class="a">The clickable prototype</p><p class="b">IGEL clicked through the prototype and saw the recorded walkthrough</p><p class="c">IGEL chose our proposal and is going ahead with the redesign</p><p class="d">Engagement won</p></div>
+    <div class="r" data-rev="wipe" style="--i:2"><p class="a">Plain names, guided tasks and the Copilot</p><p class="b">Not yet checked with admins or partners</p><p class="c">No evidence yet that they work better for Maria, Joachim or a partner</p><p class="d">Not tested</p></div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">What remained unresolved</p>
+    <div class="vtbl wide">
+      <div class="vhd"><span>Issue</span><span>What&rsquo;s open</span><span>Status</span></div>
+      <div class="r" data-rev="wipe" style="--i:0"><p class="a">Wording</p><p class="b">The new names were agreed inside the team, not with the admins who will read them</p><p class="d">Test in the build</p></div>
+      <div class="r" data-rev="wipe" style="--i:1"><p class="a">Guide content</p><p class="b">The steps for each guided task still need writing and checking with IGEL support</p><p class="d">Open</p></div>
+      <div class="r" data-rev="wipe" style="--i:2"><p class="a">Next best actions</p><p class="b">The rules for which action shows first, and why, aren&rsquo;t defined yet</p><p class="d">Open</p></div>
+      <div class="r" data-rev="wipe" style="--i:3"><p class="a">Copilot</p><p class="b">Needs approval from IGEL&rsquo;s legal and security teams before any AI touches customer data</p><p class="d">Concept only</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 · Results and measurement limits ═══ -->
+<section class="sec-3" id="results" aria-labelledby="h-results">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">08 &middot; Results and measurement limits</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-results" data-rev="rise">We won the work. The numbers<br>come after the build.</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">IGEL chose us, and they&rsquo;re going ahead with the redesigned portal. I think four things won it, below. There are no usage numbers yet, because nothing has shipped, and I&rsquo;m not going to guess at them.</p>
+    </div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">Why I think we won</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/ae6b8.svg" alt="" width="16" height="16"></span><h3>Built on their research</h3><p>We started from IGEL&rsquo;s own personas and audit, and said so. Nothing they&rsquo;d done was thrown away.</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/5c9b2.svg" alt="" width="16" height="16"></span><h3>Answers to their brief</h3><p>Every screen traced back to a persona need, a support request or something the CIO said on our call.</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/605b0.svg" alt="" width="16" height="16"></span><h3>Phase 1 respected</h3><p>No change to the business logic, as Phase 1 required. Ambitious on the surface, careful underneath.</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/1fabd.svg" alt="" width="16" height="16"></span><h3>One step further</h3><p>Next best actions, guided tasks and the Copilot showed what &ldquo;more intelligent&rdquo; could look like.</p></div></div>
+  </div>
+  <div class="ownership">
+    <p class="k" data-rev="fade">What I would measure once it ships</p>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ig-assets/5cf22.svg" alt="" width="16" height="16"></span><h3>Renewals without help</h3><p>How many renewals finish without a support ticket</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ig-assets/bfcb4.svg" alt="" width="16" height="16"></span><h3>Duplicate licences</h3><p>How many duplicates are created each quarter, before and after</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ig-assets/e5947.svg" alt="" width="16" height="16"></span><h3>Time per guided task</h3><p>Whether the rough times on each guide hold up in practice</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="ig-assets/a138b.svg" alt="" width="16" height="16"></span><h3>Partner reporting time</h3><p>How long a partner takes to answer a common licence question</p></div></div>
+  </div>
+</section>
+
+<!-- ═══ 09 · Reflection ═══ -->
+<section class="sec-3" id="reflection" aria-labelledby="h-reflection">
+  <div class="shead">
+    <p class="lab acc" data-rev="fade">09 &middot; Reflection</p>
+    <div class="hd">
+      <h2 class="t-h-l" id="h-reflection" data-rev="rise">Three things I took away<br>from this RFP</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">One thing I&rsquo;d change: I&rsquo;d ask for even three short sessions with real admins and partners before the deadline. IGEL&rsquo;s personas were good, but they came from internal sources, and the whole redesign leans on them.</p>
+    </div>
+  </div>
+  <div class="vtbl two">
+    <div class="vhd"><span>Lesson</span><span>What it means for the next project</span></div>
+    <div class="r" data-rev="wipe" style="--i:0"><p class="a">Design for how often people use it</p><p class="b">A once&#8209;a&#8209;year tool and an every&#8209;day tool are different products, even with the same features. Here they were the same portal, so it had to work at both speeds.</p></div>
+    <div class="r" data-rev="wipe" style="--i:1"><p class="a">Credit the groundwork</p><p class="b">Starting from IGEL&rsquo;s own research, and saying so, made the proposal easier to trust. Evidence sells better than taste.</p></div>
+    <div class="r" data-rev="wipe" style="--i:2"><p class="a">Modernise, don&rsquo;t restart</p><p class="b">Phase 1 couldn&rsquo;t touch the logic, and it didn&rsquo;t need to. Refactoring around the task did more, faster and with less risk than a rebuild would have.</p></div>
+  </div>
+</section>
+
+<!-- ═══ Next case study ═══ -->
+<section class="nextcase" aria-labelledby="h-next">
+  <p class="k" id="h-next" data-rev="fade">Next case study</p>
+  <a class="card" href="myaster.html" aria-label="myAster — Telling patients what their insurance allows before they book, not after">
+    <div class="thumb" data-rev="rise" style="--tint:rgba(69,145,140,0.1)">
+      <figure style="left:21.8750%;top:18.0000%;width:26.8750%;height:94.5000%"><img src="ig-assets/38cab.png" alt="The Book Consultation screen: instant-consultation options and a list of available doctors." width="344" height="756" loading="lazy" decoding="async"></figure>
+      <figure style="left:64.0625%;top:18.0000%;width:26.8750%;height:93.0000%"><img src="ig-assets/5ce43.png" alt="The slot picker: a date strip with morning and afternoon appointment times." width="344" height="744" loading="lazy" decoding="async"></figure>
+      <figure style="left:40.9375%;top:9.0000%;width:30.6250%;height:127.2500%"><img src="ig-assets/ad3bf.png" alt="The checkout screen: appointment details, Self Pay or Pay via Insurance, and payment options." width="392" height="1018" loading="lazy" decoding="async"></figure>
+    </div>
+    <div class="body" data-rev="rise" style="--i:1">
+      <div class="meta">
+        <span class="pnum t-n-m" style="--bar:rgba(69,145,140,0.35)"><span>01</span></span>
+        <h2 class="name t-title-strong" id="h-nextcase">myAster</h2>
+        <p class="kind t-body-s">Patient app &middot; iOS and Android</p>
+      </div>
+      <p class="ptitle t-h-m">Telling patients what their insurance allows before they book, not after</p>
+      <p class="pdesc t-body-l">Insured patients only found out at checkout that they couldn&rsquo;t book. As lead designer in a team of four, I designed the parts every service shares first, from patient profiles and insurance states to one checkout, so each rule is checked while the patient can still act on it.</p>
+      <div class="out"><p>Patients book appointments, manage family profiles, and access care through one app.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">&rarr;</span></span></span>
+    </div>
+  </a>
+</section>
+
+<footer class="foot">
+  <p class="t-body-xs">&copy; 2026 Deep Vyas</p>
+  <a class="tlink" href="#top"><span class="in"><span class="lbl">Back to top</span><span class="sp"> </span><span class="arw up">&uarr;</span></span></a>
+</footer>
+
+</div><!-- /.page -->
+
+<nav class="srail" aria-label="Sections in this case study">
+  <a href="#walkthrough" aria-label="01 &middot; Walkthrough">01<span class="lbl" aria-hidden="true">Walkthrough</span></a>
+  <a href="#contribution" aria-label="02 &middot; My contribution">02<span class="lbl" aria-hidden="true">My contribution</span></a>
+  <a href="#problem" aria-label="03 &middot; The problem">03<span class="lbl" aria-hidden="true">The problem</span></a>
+  <a href="#research" aria-label="04 &middot; What I started from">04<span class="lbl" aria-hidden="true">What I started from</span></a>
+  <a href="#direction" aria-label="05 &middot; Design direction">05<span class="lbl" aria-hidden="true">Design direction</span></a>
+  <a href="#d1" aria-label="06 &middot; Design decisions">06<span class="lbl" aria-hidden="true">Design decisions</span></a>
+  <a href="#testing" aria-label="07 &middot; Validation">07<span class="lbl" aria-hidden="true">Validation</span></a>
+  <a href="#results" aria-label="08 &middot; Results and measurement limits">08<span class="lbl" aria-hidden="true">Results and measurement limits</span></a>
+  <a href="#reflection" aria-label="09 &middot; Reflection">09<span class="lbl" aria-hidden="true">Reflection</span></a>
+</nav>
+
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement, btn=document.getElementById("theme");
+  function syncThemeColor(){
+    var m=document.querySelector('meta[name="theme-color"]');
+    if(!m){m=document.createElement("meta");m.name="theme-color";document.head.appendChild(m);}
+    m.content=root.getAttribute("data-theme")==="dark"?"#16191A":"#F6F5F0";
+  }
+  syncThemeColor();
+  if(btn) btn.addEventListener("click",function(){
+    var next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("dv26-theme",next);}catch(e){}
+    syncThemeColor();
+  });
+
+  /* the before/after slider: the range input owns the value, the drawn parts
+     only read it, so dragging, clicking the track and arrow keys all work */
+  document.querySelectorAll('.ba').forEach(function(ba){
+    var rng=ba.querySelector('.rng');
+    if(!rng) return;
+    function sync(){ba.style.setProperty('--p',rng.value+'%');}
+    rng.addEventListener('input',sync);
+    sync();
+  });
+
+  /* the walkthrough: the frame's poster is a facade over the real file, so the
+     35MB download only starts when someone asks for it */
+  document.querySelectorAll('.vid').forEach(function(box){
+    var cover=box.querySelector('.vcover'), film=box.querySelector('video');
+    if(!cover||!film) return;
+    cover.addEventListener('click',function(){
+      box.classList.add('is-playing');
+      film.preload='auto';
+      var p=film.play();
+      if(p&&p.catch) p.catch(function(){});
+      film.focus();
+    });
+  });
+
+  /* below-the-fold images fade in over 150ms once they arrive; done from
+     script so a failed script leaves them visible rather than blank */
+  document.querySelectorAll('.sh img').forEach(function(img){
+    if(img.complete) return;
+    img.classList.add('fades');
+    img.addEventListener('load',function(){img.classList.add('is-loaded');},{once:true});
+    img.addEventListener('error',function(){img.classList.add('is-loaded');},{once:true});
+  });
+
+  /* ── entrances ──────────────────────────────────────────────────
+     An observer, with a scroll-driven sweep behind it so nothing can be
+     left hidden if a callback never arrives. */
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)");
+  var targets = [].slice.call(document.querySelectorAll('[data-rev]'));
+  var pending = [];
+
+  function showAll(){ targets.forEach(function(el){el.classList.add("is-in");});
+    document.querySelectorAll('.ln').forEach(function(l){l.classList.add("is-in");}); }
+  function reveal(el){ el.classList.add("is-in");
+    var i=pending.indexOf(el); if(i>-1) pending.splice(i,1); }
+  function sweep(){
+    if(!pending.length) return;
+    var vh=innerHeight,
+        atEnd = scrollY + vh >= document.documentElement.scrollHeight - 2;
+    pending.slice().forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(atEnd ? r.top < vh : r.top < vh*0.88 && r.bottom > 0) reveal(el);
+    });
+  }
+  try{
+  if(reduce.matches || !("IntersectionObserver" in window)){
+    showAll();
+  } else {
+    pending = targets.slice();
+    window.__revIO = new IntersectionObserver(function(entries,obs){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        reveal(e.target); obs.unobserve(e.target);
+      });
+    }, {rootMargin:"0px 0px -12% 0px", threshold:0.01});
+    targets.forEach(function(el){ window.__revIO.observe(el); });
+    sweep();
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      document.querySelectorAll('.hero .ln').forEach(function(l){l.classList.add("is-in");});
+      sweep();
+    });});
+  }
+  }catch(err){ showAll(); pending.length = 0; }
+
+  /* ── the brand strip doubles as read progress, and the rail names
+        the section being read ─────────────────────────────────────── */
+  var strip = document.querySelector('.strip'),
+      links = [].slice.call(document.querySelectorAll('.srail a')),
+      secs  = links.map(function(a){return document.querySelector(a.getAttribute("href"));}),
+      rafId = 0;
+
+  function onScroll(){
+    if(rafId) cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(function(){
+      rafId = 0;
+      if(strip){
+        var h = document.documentElement.scrollHeight - innerHeight;
+        strip.style.setProperty("--unread",
+          String(1 - (h > 0 ? Math.min(1, Math.max(0, scrollY / h)) : 1)));
+      }
+      sweep();
+      var cur = -1, line = scrollY + 140;
+      secs.forEach(function(sec,i){ if(sec && sec.offsetTop <= line) cur = i; });
+      links.forEach(function(a,i){
+        if(i === cur) a.setAttribute("aria-current","true");
+        else a.removeAttribute("aria-current");
+      });
+    });
+  }
+  addEventListener("scroll", onScroll, {passive:true});
+  addEventListener("resize", onScroll, {passive:true});
+  onScroll();
+
+  if(reduce.addEventListener) reduce.addEventListener("change", function(){
+    if(reduce.matches){ showAll(); pending.length = 0; }
+  });
+})();
+</script>
+</body>
+</html>

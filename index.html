@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Deep Vyas — Lead UI/UX Designer</title>
-<meta name="description" content="Deep Vyas, Lead UI/UX Designer with 10+ years in mobile apps, websites and complex web platforms. I turn research into a clear design direction and stay with it through build.">
+<meta name="description" content="Deep Vyas, Lead UI/UX Designer with 10+ years in mobile apps, websites and complex web platforms. I run the research, set the design direction, and stay with it through build.">
 <meta name="theme-color" content="#F6F5F0">
 <meta property="og:title" content="Deep Vyas — Lead UI/UX Designer">
-<meta property="og:description" content="I design and lead UI/UX work, from first research to final build. Four recent case studies across healthcare, consumer apps, logistics and reporting.">
+<meta property="og:description" content="Research → strategy → screens. I own the whole chain, not just the last step. Five recent case studies across enterprise licensing, healthcare, consumer apps, logistics and reporting.">
 <meta property="og:type" content="website">
 <link rel="icon" href="d-logo.svg">
 <script>/* light is the default; the OS preference does not decide it. a stored choice from the toggle always wins. */
@@ -28,7 +28,7 @@ document.documentElement.className+=" js";</script>
 <style>
 /* ═══════════════════════════════════════════════════════════════════
    Home — written against Figma frame 74:2
-   "Claude design v2 · Desktop 1440", 1440 × 7499.
+   "Claude design v2 · Desktop 1440", 1440 × 8155.
    Its own document: no shared stylesheet, every value from the file.
    ═══════════════════════════════════════════════════════════════════ */
 :root{
@@ -264,6 +264,8 @@ a.tlink:visited .in,a:visited .tlink .in{color:var(--accent-visited)}
   background:var(--tint);
   box-shadow:inset 0 0 0 var(--hw,.75px) var(--hair),var(--sh,0 0 0 0 transparent)}
 .thumb img{width:100%;height:100%;object-fit:cover}
+/* a screen taller than its box is cropped from the top, not the middle */
+.thumb img.top{object-position:top}
 .thumb img.fades{opacity:0;transition:opacity .15s var(--ease-out)}
 .thumb img.is-loaded{opacity:1}
 .pbody{width:551px;flex:0 0 551px;display:flex;flex-direction:column;gap:20px;
@@ -579,15 +581,15 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
   <div class="rolehead">
     <p class="role t-label" data-rev="fade">Lead UI/&#8288;UX Designer · <b>10+</b> years</p>
     <h1 class="t-display" id="hero-h1">
-      <span class="ln" style="--i:0"><span>I design and lead UI/&#8288;UX work,</span></span>
-      <span class="ln" style="--i:1"><span>from first research</span></span>
-      <span class="ln" style="--i:2"><span>to final build.</span></span>
+      <span class="ln" style="--i:0"><span>Research &rarr; strategy &rarr; screens.</span></span>
+      <span class="ln" style="--i:1"><span>I own the whole chain, not just</span></span>
+      <span class="ln" style="--i:2"><span>the last step.</span></span>
     </h1>
   </div>
   <div class="introrow">
     <div class="gutter" aria-hidden="true"></div>
     <div class="intro">
-      <p class="t-body-l" data-rev="rise" style="--i:0">I’m Deep Vyas, a UI/&#8288;UX designer with more than ten years of experience in mobile apps, websites and complex web platforms. I turn research into a clear design direction, work through the interaction and visual details, and keep the experience consistent while engineering builds it.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:0">I’m Deep Vyas, a UI/&#8288;UX designer with more than ten years of experience in mobile apps, websites and complex web platforms. I run the research, set the design direction, work through the interaction and visual details, and keep the experience consistent while engineering builds it.</p>
       <div class="ctas" data-rev="rise" style="--i:1">
         <a class="btn" href="#work"><span class="in">View selected work   <span class="arw">→</span></span></a>
         <a class="tlink" href="cv-deep-vyas-uiux.pdf" target="_blank" rel="noopener noreferrer"><span class="in"><span class="lbl">Download résumé</span><span class="sp">  </span><span class="arw up">↗</span></span></a>
@@ -600,19 +602,32 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
 <section class="work" id="work" aria-labelledby="h-work">
   <div class="sec-head">
     <p class="lab t-label" data-rev="fade"><span class="n">01</span><span>Selected work</span></p>
-    <h2 class="stmt t-h-xl" id="h-work" data-rev="rise">Four recent case studies</h2>
+    <h2 class="stmt t-h-xl" id="h-work" data-rev="rise">Five recent case studies</h2>
   </div>
   <div class="projects">
-  <a class="proj" href="myaster.html" style="--bar:rgba(69,145,140,0.35);--edge:#45918C;--tint:rgba(69,145,140,0.1)" aria-label="myAster — Telling patients what their insurance allows before they book, not after">
+  <a class="proj" href="igel.html" style="--bar:#9DBB55;--edge:#428F4F;--tint:rgba(157,187,85,0.1)" aria-label="IGEL Licence Portal — A portal for admins who open it twice a year">
     <div class="thumb">
       <span class="tint" aria-hidden="true"></span>
-      <figure data-rev="lift" style="--i:0;left:12.7786%;top:17.1021%;width:33.4324%;height:117.3990%;--hw:.75px"><img src="home-assets/38cab.png" alt="The myAster Book Consultation screen, offering an instant consultation or a scheduled one with a list of doctors." width="414" height="909" loading="lazy" decoding="async"></figure>
-      <figure data-rev="lift" style="--i:1;left:57.0579%;top:17.1021%;width:33.4324%;height:101.7221%;--hw:.75px"><span style="position:absolute;inset:0;overflow:hidden;border-radius:4px"><img src="home-assets/5ce43.png" alt="The slot picker, showing a week of dates and the appointment times open on each." style="position:absolute;left:0;top:-13.64%;width:100%;height:113.64%" width="414" height="896" loading="lazy" decoding="async"></span></figure>
-      <figure data-rev="lift" style="--i:2;left:32.6895%;top:8.5511%;width:37.8900%;height:157.3040%;--hw:.75px"><img src="home-assets/ad3bf.png" alt="The checkout screen with appointment details, the choice between self-pay and paying via insurance, and payment options." width="414" height="1075" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:0;--hw:.62px;left:22.7340%;top:9.5012%;width:71.3224%;height:67.2209%"><img class="top" src="home-assets/a005e.png" alt="The redesigned IGEL Home, with a banner for subscription issues, licence health tiles, usage by product and a next best actions panel." width="2880" height="4550" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;--hw:.62px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:39.9050%;width:53.4918%;height:50.5938%"><img class="top" src="home-assets/ec79d.png" alt="The redesigned Licences table, listing every product pack with its status, licences used, expiry date and a Renew action." width="2880" height="2548" loading="lazy" decoding="async"></figure>
     </div>
     <div class="pbody" data-rev="rise">
       <div class="meta">
         <span class="pnum t-n-m"><span>01</span></span>
+        <h3 class="name t-title-strong">IGEL Licence Portal</h3>
+        <p class="kind t-body-s">Licence portal · Desktop web · RFP response</p>
+      </div>
+      <div class="space" aria-hidden="true"></div>
+      <p class="ptitle t-h-m">A portal for admins who<br>open it twice a year</p>
+      <p class="pdesc t-body-l">As design lead on Apexon’s response, I redesigned the portal around what admins need to do next: a Home that flags what to renew, licence states in plain language, and a Copilot for partners. IGEL clicked through the prototype, and we won the engagement.</p>
+      <div class="outcome"><p>IGEL is going ahead with the redesign, built from our prototype.</p></div>
+      <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
+    </div>
+  </a>
+  <a class="proj" href="myaster.html" style="--bar:rgba(69,145,140,0.35);--edge:#45918C;--tint:rgba(69,145,140,0.1)" aria-label="myAster — Telling patients what their insurance allows before they book, not after">
+    <div class="pbody" data-rev="rise">
+      <div class="meta">
+        <span class="pnum t-n-m"><span>02</span></span>
         <h3 class="name t-title-strong">myAster</h3>
         <p class="kind t-body-s">Patient app · iOS and Android</p>
       </div>
@@ -621,11 +636,23 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
       <div class="outcome"><p>Patients book appointments, manage family profiles, and access care through one app.</p></div>
       <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
     </div>
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;left:12.7786%;top:17.1021%;width:33.4324%;height:117.3990%;--hw:.75px"><img src="home-assets/38cab.png" alt="The myAster Book Consultation screen, offering an instant consultation or a scheduled one with a list of doctors." width="414" height="909" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;left:57.0579%;top:17.1021%;width:33.4324%;height:101.7221%;--hw:.75px"><span style="position:absolute;inset:0;overflow:hidden;border-radius:4px"><img src="home-assets/5ce43.png" alt="The slot picker, showing a week of dates and the appointment times open on each." style="position:absolute;left:0;top:-13.64%;width:100%;height:113.64%" width="414" height="896" loading="lazy" decoding="async"></span></figure>
+      <figure data-rev="lift" style="--i:2;left:32.6895%;top:8.5511%;width:37.8900%;height:157.3040%;--hw:.75px"><img src="home-assets/ad3bf.png" alt="The checkout screen with appointment details, the choice between self-pay and paying via insurance, and payment options." width="414" height="1075" loading="lazy" decoding="async"></figure>
+    </div>
   </a>
   <a class="proj" href="pettrackr.html" style="--bar:rgba(238,184,70,0.55);--edge:#EEB846;--tint:rgba(238,184,70,0.1)" aria-label="PetTrackr — Making daily pet diabetes tracking easier">
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;left:57.9495%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/361d4.png" alt="The Chart screen, plotting a pet’s blood glucose readings over a selected week." width="428" height="926" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;left:14.2645%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/4a543.png" alt="The Home screen, with the latest blood glucose reading, meals and insulin, and today’s reminders." width="428" height="926" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:2;left:33.8782%;top:11.4014%;width:32.3180%;height:111.6983%;--hw:.75px"><img src="home-assets/66f26.png" alt="The Add Blood Glucose screen, with the pet’s photo, date and time, the reading in mg/dL, and a notes field." width="428" height="926" loading="lazy" decoding="async"></figure>
+    </div>
     <div class="pbody" data-rev="rise">
       <div class="meta">
-        <span class="pnum t-n-m"><span>02</span></span>
+        <span class="pnum t-n-m"><span>03</span></span>
         <h3 class="name t-title-strong">PetTrackr</h3>
         <p class="kind t-body-s">Mobile app · iOS and Android</p>
       </div>
@@ -635,22 +662,11 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
       <div class="outcome"><p>Pet owners can now log readings, track glucose trends, and share reports with their vet.</p></div>
       <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
     </div>
-    <div class="thumb">
-      <span class="tint" aria-hidden="true"></span>
-      <figure data-rev="lift" style="--i:0;left:57.9495%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/361d4.png" alt="The Chart screen, plotting a pet’s blood glucose readings over a selected week." width="428" height="926" loading="lazy" decoding="async"></figure>
-      <figure data-rev="lift" style="--i:1;left:14.2645%;top:22.8029%;width:27.8603%;height:96.3777%;--hw:.75px"><img src="home-assets/4a543.png" alt="The Home screen, with the latest blood glucose reading, meals and insulin, and today’s reminders." width="428" height="926" loading="lazy" decoding="async"></figure>
-      <figure data-rev="lift" style="--i:2;left:33.8782%;top:11.4014%;width:32.3180%;height:111.6983%;--hw:.75px"><img src="home-assets/66f26.png" alt="The Add Blood Glucose screen, with the pet’s photo, date and time, the reading in mg/dL, and a notes field." width="428" height="926" loading="lazy" decoding="async"></figure>
-    </div>
   </a>
   <a class="proj" href="flintlink.html" style="--bar:rgba(66,143,79,0.35);--edge:#428F4F;--tint:rgba(66,143,79,0.1)" aria-label="Flint-Link — A customer portal that answers before anyone has to email">
-    <div class="thumb">
-      <span class="tint" aria-hidden="true"></span>
-      <figure data-rev="lift" style="--i:0;--hw:.62px;left:22.7340%;top:9.5012%;width:71.3224%;height:67.2209%"><img src="home-assets/e2648.png" alt="The Flint-Link dashboard, with open and closed invoice totals, a spend breakdown, recent orders and open invoices." width="1440" height="850" loading="lazy" decoding="async"></figure>
-      <figure data-rev="lift" style="--i:1;--hw:.62px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:39.9050%;width:53.4918%;height:50.5938%"><img src="home-assets/00392.png" alt="An order details panel, listing the line items and delivery documents attached to a single order." width="1440" height="850" loading="lazy" decoding="async"></figure>
-    </div>
     <div class="pbody" data-rev="rise">
       <div class="meta">
-        <span class="pnum t-n-m"><span>03</span></span>
+        <span class="pnum t-n-m"><span>04</span></span>
         <h3 class="name t-title-strong">Flint-Link</h3>
         <p class="kind t-body-s">Customer portal · Desktop and mobile web</p>
       </div>
@@ -660,11 +676,21 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
       <div class="outcome"><p>Customers can now access documents, check orders, and manage consignment stock without emailing an account manager.</p></div>
       <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
     </div>
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;--hw:.62px;left:22.7340%;top:9.5012%;width:71.3224%;height:67.2209%"><img src="home-assets/e2648.png" alt="The Flint-Link dashboard, with open and closed invoice totals, a spend breakdown, recent orders and open invoices." width="1440" height="850" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;--hw:.62px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:39.9050%;width:53.4918%;height:50.5938%"><img src="home-assets/00392.png" alt="An order details panel, listing the line items and delivery documents attached to a single order." width="1440" height="850" loading="lazy" decoding="async"></figure>
+    </div>
   </a>
   <a class="proj" href="apex.html" style="--bar:rgba(221,131,62,0.55);--edge:#DD833E;--tint:rgba(221,131,62,0.1)" aria-label="Apex Insights — Every facility’s numbers, and a nudge when one slips">
+    <div class="thumb">
+      <span class="tint" aria-hidden="true"></span>
+      <figure data-rev="lift" style="--i:0;--hw:.7px;left:22.7340%;top:9.5012%;width:71.3224%;height:83.8480%"><img src="home-assets/8dee3.png" alt="The Census daily summary report, with occupancy, census against budget, an expandable facilities table and a trailing twelve-month chart." width="1440" height="1060" loading="lazy" decoding="async"></figure>
+      <figure data-rev="lift" style="--i:1;--hw:.7px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:32.3040%;width:53.4918%;height:60.8076%"><img src="home-assets/46aeb.png" alt="A custom dashboard holding pinned charts: payroll comparison, overtime trend, hours breakdown and an HPPD trend." width="1440" height="1024" loading="lazy" decoding="async"></figure>
+    </div>
     <div class="pbody" data-rev="rise">
       <div class="meta">
-        <span class="pnum t-n-m"><span>04</span></span>
+        <span class="pnum t-n-m"><span>05</span></span>
         <h3 class="name t-title-strong">Apex Insights</h3>
         <p class="kind t-body-s">Reporting portal · Desktop web and Power BI</p>
       </div>
@@ -673,11 +699,6 @@ html[data-theme="dark"] .proj:hover .thumb figure:last-of-type{
       <p class="pdesc t-body-l">The brief named features like Alerts and File storage without saying what they were for. I put my questions on the first wireframes, used the client’s answers to set the scope, and gave every report the same actions and layout.</p>
       <div class="outcome"><p>Teams access reports, monitor staffing alerts, and schedule updates from one portal.</p></div>
       <span class="tlink"><span class="in"><span class="lbl">View case study</span><span class="sp">  </span><span class="arw">→</span></span></span>
-    </div>
-    <div class="thumb">
-      <span class="tint" aria-hidden="true"></span>
-      <figure data-rev="lift" style="--i:0;--hw:.7px;left:22.7340%;top:9.5012%;width:71.3224%;height:83.8480%"><img src="home-assets/8dee3.png" alt="The Census daily summary report, with occupancy, census against budget, an expandable facilities table and a trailing twelve-month chart." width="1440" height="1060" loading="lazy" decoding="async"></figure>
-      <figure data-rev="lift" style="--i:1;--hw:.7px;--sh:0 8px 24px 0 rgba(28,38,41,.12);left:5.9435%;top:32.3040%;width:53.4918%;height:60.8076%"><img src="home-assets/46aeb.png" alt="A custom dashboard holding pinned charts: payroll comparison, overtime trend, hours breakdown and an HPPD trend." width="1440" height="1024" loading="lazy" decoding="async"></figure>
     </div>
   </a>
   </div>
