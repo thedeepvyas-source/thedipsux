@@ -326,7 +326,7 @@ html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
 
 /* ── next case study ──────────────────────────────────────────────── */
 .nextcase{background:var(--paper-2);padding:120px var(--px);
-  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+  display:flex;flex-direction:column;gap:20px;align-items:flex-start}
 .nextcase>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .nextcase .card{display:flex;gap:80px;align-items:center;width:100%;color:inherit}
 .nextcase .ptitle.w488{width:488px;max-width:100%}
@@ -459,9 +459,9 @@ html[data-theme="dark"] .eid .row{border-top-color:var(--line)}
   display:flex;flex-direction:column;gap:16px}
 .six .n{color:var(--accent);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .six h3{color:var(--ink)}
-.after{display:flex;flex-direction:column;gap:12px;width:100%}
+.after{display:flex;flex-direction:column;gap:20px;width:100%}
 .after>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
-.after .wrap{padding:24px 0;width:100%;display:flex;flex-direction:column;align-items:flex-start}
+.after .wrap{padding:0 0 24px;width:100%;display:flex;flex-direction:column;align-items:flex-start}
 .after .lab{width:100%;color:var(--accent);font-weight:500;font-size:13px;
   line-height:18px;letter-spacing:.13px}
 .after .row{display:flex;gap:12px;align-items:stretch;width:100%}
@@ -907,7 +907,7 @@ html[data-theme="dark"] .hero .meta .ic{background:rgba(125,195,208,.12)}
 .hero .screens.wide .sh.lg{width:760px}
 .hero .screens.wide .sh.sm{width:170px}
 .hero .screens.wide .sh.lg img{left:-1px;top:-1px;width:760px;height:448.611px}
-.hero .screens.wide .sh.sm img{left:-1px;top:-1px;width:170px}
+.hero .screens.wide .sh.sm img{left:-1px;top:-1px;width:170px;height:var(--ih)}
 
 /* ── hero stage, this version: captioned screens on a padded plate ── */
 .hero .screens{height:auto;padding:64px 0;display:flex;gap:40px;
@@ -919,7 +919,11 @@ html[data-theme="dark"] .hero .meta .ic{background:rgba(125,195,208,.12)}
 .hero .screens figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
 
 /* ── 01 · ownership and process, drawn as cards ───────────────────── */
-.ownership{display:flex;flex-direction:column;gap:16px;width:100%}
+.ownership{display:flex;flex-direction:column;gap:20px;width:100%}
+/* a block the frame groups with the one above it, not with the section rhythm */
+.cap16{margin-top:-48px}
+.cap20{margin-top:-44px}
+#testing .block,#results .block{gap:20px}
 .ownership>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .crow{display:flex;gap:16px;align-items:stretch;width:100%}
 .ocard{flex:1 1 0;min-width:0;background:var(--surface);
@@ -982,7 +986,7 @@ html[data-theme="dark"] .inset{background:#13343C}
 .pstmt .ux .k{color:#B7DFBF}
 .pstmt .ux p{color:#F6F5F0;font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px}
 /* the loop a request used to take, ending on the time it cost */
-.loop{padding:24px 0;display:flex;gap:12px;align-items:stretch;width:100%}
+.loop{padding:0;display:flex;gap:12px;align-items:stretch;width:100%}
 .loop .step{flex:1 1 0;min-width:0;padding:24px;border-radius:12px;
   background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
   display:flex;flex-direction:column;gap:12px}
@@ -1171,13 +1175,13 @@ html[data-theme="dark"] .inset{background:#13343C}
       <span class="ln" style="--i:0"><span>Flint-Link: A customer portal that</span></span>
       <span class="ln" style="--i:1"><span>answers before anyone has to email</span></span>
     </h1>
-    <p class="sub t-body-l" data-rev="rise" style="--i:0">Flint-Link is Flint Group&rsquo;s portal for printers and packaging converters. Customers use it to track orders, manage consignment stock, and get invoices, certificates, and support in one place.</p>
+    <p class="sub t-body-l" data-rev="rise" style="--i:0">Flint Group supplies ink to printers and packaging companies. Flint&#8209;Link is the portal they use after ordering: to track orders, manage the ink stored on their site, and get invoices, certificates and support in one place.</p>
   </div>
-  <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="fl-assets/14afe.svg" alt="" width="15" height="15"></span><span class="k">My role</span><span class="v">Lead UI/UX Designer,<br>agency side</span></div><div><span class="ic"><img src="fl-assets/c2195.svg" alt="" width="15" height="15"></span><span class="k">Client</span><span class="v">Flint Group</span></div><div><span class="ic"><img src="fl-assets/7eb63.svg" alt="" width="15" height="15"></span><span class="k">Platforms</span><span class="v">Desktop and mobile web</span></div><div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Scope</span><span class="v">Research, information architecture, interaction design, usability testing, and engineering flow reviews</span></div><div><span class="ic"><img src="fl-assets/c04c4.svg" alt="" width="15" height="15"></span><span class="k">Deliverables</span><span class="v">A launched portal for desktop and mobile, then maintenance releases</span></div></div>
+  <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="fl-assets/14afe.svg" alt="" width="15" height="15"></span><span class="k">My role</span><span class="v">Lead UI/UX Designer</span></div><div><span class="ic"><img src="fl-assets/c2195.svg" alt="" width="15" height="15"></span><span class="k">Client</span><span class="v">Flint Group</span></div><div><span class="ic"><img src="fl-assets/7eb63.svg" alt="" width="15" height="15"></span><span class="k">Platforms</span><span class="v">Desktop and mobile web</span></div><div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Scope</span><span class="v">Research, information architecture, interaction design, usability testing, and engineering flow reviews</span></div><div><span class="ic"><img src="fl-assets/c04c4.svg" alt="" width="15" height="15"></span><span class="k">Deliverables</span><span class="v">A launched portal for desktop and mobile, then maintenance releases</span></div></div>
   <div class="screens wide">
     <div class="sh lg" data-rev="lift" style="--i:0"><img src="fl-assets/11637.png" alt="The Flint-Link dashboard: open and closed invoice totals, a spend breakdown, recent orders, open invoices and consignment history." width="1520" height="898" loading="lazy" decoding="async"></div>
-    <div class="sh sm" data-rev="lift" style="--i:1"><img src="fl-assets/f2f84.png" alt="The Invoices screen on mobile, filtered by site and status." width="340" height="1959" loading="lazy" decoding="async"></div>
-    <div class="sh sm" data-rev="lift" style="--i:2"><img src="fl-assets/70e56.png" alt="Consignment details on mobile, confirming deliveries line by line." width="340" height="2142" loading="lazy" decoding="async"></div>
+    <div class="sh sm" data-rev="lift" style="--i:1;--ih:979.2px"><img src="fl-assets/f2f84.png" alt="The Invoices screen on mobile, filtered by site and status." width="340" height="1959" loading="lazy" decoding="async"></div>
+    <div class="sh sm" data-rev="lift" style="--i:2;--ih:1070.773px"><img src="fl-assets/70e56.png" alt="Consignment details on mobile, confirming deliveries line by line." width="340" height="2142" loading="lazy" decoding="async"></div>
   </div>
 </section>
 
@@ -1186,8 +1190,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">01 &middot; My contribution</p>
     <div class="hd">
-      <h2 class="t-h-l w668" id="h-contribution" data-rev="rise">I led the design on the agency side, from research to launch</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">I worked on this as the lead designer at the agency, with Flint Group and their engineers on the other side. Here&rsquo;s who owned what.</p>
+      <h2 class="t-h-l w668" id="h-contribution" data-rev="rise">I led the design, from research to launch</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">I was the lead designer over about nine months, working with a second designer and a project manager. Flint Group owned the business rules and sign&#8209;off, and engineering built it. Here&rsquo;s how the work was split.</p>
     </div>
   </div>
   <div class="ownership">
@@ -1215,7 +1219,7 @@ html[data-theme="dark"] .inset{background:#13343C}
   </div>
   <div class="ownership">
     <p class="k" data-rev="fade">How the project ran</p>
-    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/63ac9.svg" alt="" width="19" height="19"></span><h3>Understand</h3><p>14 interviews, 2 site visits, and a review of 5 competitor portals</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1e752.svg" alt="" width="19" height="19"></span><h3>Map the journey</h3><p>11 friction points, all of them after the order</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><h3>Co-design</h3><p>3 sessions with customers</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/f8e87.svg" alt="" width="19" height="19"></span><h3>Design and test</h3><p>2 usability rounds, then acceptance testing</p></div><div class="ocard" data-rev="rise" style="--i:4"><span class="ic"><img src="fl-assets/d1d9a.svg" alt="" width="19" height="19"></span><h3>Rebuild</h3><p>The structure was rebuilt around the order after Round 1</p></div><div class="ocard" data-rev="rise" style="--i:5"><span class="ic"><img src="fl-assets/fd0f7.svg" alt="" width="19" height="19"></span><h3>Ship</h3><p>Launched, followed by maintenance releases</p></div></div>
+    <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/63ac9.svg" alt="" width="19" height="19"></span><h3>Understand</h3><p>14 interviews, 2 site visits, and a review of 5 competitor portals</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1e752.svg" alt="" width="19" height="19"></span><h3>Map the journey</h3><p>11 places where things broke down, all after the order</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><h3>Co-design</h3><p>3 sessions with customers</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/f8e87.svg" alt="" width="19" height="19"></span><h3>Design and test</h3><p>2 usability rounds, then acceptance testing</p></div><div class="ocard" data-rev="rise" style="--i:4"><span class="ic"><img src="fl-assets/d1d9a.svg" alt="" width="19" height="19"></span><h3>Rebuild</h3><p>The structure was rebuilt around the order after Round 1</p></div><div class="ocard" data-rev="rise" style="--i:5"><span class="ic"><img src="fl-assets/fd0f7.svg" alt="" width="19" height="19"></span><h3>Ship</h3><p>Launched, followed by maintenance releases</p></div></div>
   </div>
 </section>
 
@@ -1225,13 +1229,13 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab" data-rev="fade" style="color:#B7DFBF">02 &middot; The problem</p>
     <div class="hd">
       <h2 class="t-h-xl" id="h-problem" data-rev="rise">When a press was waiting on a certificate, the customer was waiting on an email</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Placing an order was easy. Everything after it, from certificates and order updates to invoices and stock counts, meant emailing an account manager and waiting, sometimes while a press stood still.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Ordering ink was the easy part. Everything after it meant emailing an account manager and waiting: certificates, order updates, invoices, stock counts. Sometimes a printing press sat idle in the meantime.</p>
     </div>
   </div>
   <div class="pstmt"><div data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/d6974.svg" alt="" width="19" height="19"></span><span class="k">Who</span><p>Printers and packaging converters who order, stock and pay for ink.</p></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/afd12.svg" alt="" width="19" height="19"></span><span class="k">What went wrong</span><p>Every certificate, order update, invoice and stock count went through an account manager.</p></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/06719.svg" alt="" width="19" height="19"></span><span class="k">Why it mattered</span><p>A compliance document took 24 to 48 hours. On one site visit, production stopped 3 times in 2 hours while the team waited for a certificate.</p></div><div class="ux" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/647c7.svg" alt="" width="19" height="19"></span><span class="k">The UX challenge</span><p>Let customers answer their own questions after they&rsquo;ve placed an order, starting from the order they hold.</p></div></div>
   <p class="k" data-rev="fade" style="font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px;color:rgba(246,245,240,.9)">The loop</p>
-  <div class="loop"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/a66d6.svg" alt="" width="19" height="19"></span><b>Needs a certificate</b><span>Or an order update, or an invoice copy</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Emails the account manager</b><span>Then calls to chase it</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/83bbf.svg" alt="" width="19" height="19"></span><b>Account manager searches</b><span>Internal systems and inboxes</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Reply by email</b><span>A PDF or a status update</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:4"><span class="big">24 to 48 h</span><span>for one compliance document</span></div></div>
-  <p class="note" data-rev="fade">Every request took account-manager time away from other work.</p>
+  <div class="loop cap20"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/a66d6.svg" alt="" width="19" height="19"></span><b>Needs a certificate</b><span>Or an order update, or an invoice copy</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Emails the account manager</b><span>Then calls to chase it</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/83bbf.svg" alt="" width="19" height="19"></span><b>Account manager searches</b><span>Internal systems and inboxes</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/1ad5c.svg" alt="" width="19" height="19"></span><b>Reply by email</b><span>A PDF or a status update</span></div><img class="arw-i" src="fl-assets/ea91e.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:4"><span class="big">24 to 48 h</span><span>for one compliance document</span></div></div>
+  <p class="note cap20" data-rev="fade">Every request took account-manager time away from other work.</p>
 </section>
 
 <!-- ═══ 03 · Research ═══ -->
@@ -1239,8 +1243,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">03 &middot; Research</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-research" data-rev="rise">Research on the factory floor, not just in meeting rooms</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">To design the right portal, I needed to see what happened after an order was placed. Interviews showed what customers asked for. Site visits showed what happened when they didn&rsquo;t get it. And two usability rounds showed which structure actually worked.</p>
+      <h2 class="t-h-l" id="h-research" data-rev="rise">I went to the factory floor, not just meeting rooms</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The first thing I wanted to understand was what happens after an order is placed. Interviews told me what customers asked for. Site visits showed me what happened when they didn&rsquo;t get it. Two usability rounds then showed which structure actually worked. Each round had six customer participants.</p>
     </div>
   </div>
   <div class="methods"><div data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><b>14 interviews</b><span>Customers, after the order</span></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/bc392.svg" alt="" width="19" height="19"></span><b>2 site visits</b><span>On the factory floor</span></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/bca1e.svg" alt="" width="19" height="19"></span><b>5 competitor portals</b><span>Reviewed before design</span></div><div data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/1e752.svg" alt="" width="19" height="19"></span><b>Journey map</b><span>11 friction points</span></div><div data-rev="rise" style="--i:4"><span class="ic"><img src="fl-assets/77fbf.svg" alt="" width="19" height="19"></span><b>3 co-design sessions</b><span>With customers</span></div><div data-rev="rise" style="--i:5"><span class="ic"><img src="fl-assets/f8e87.svg" alt="" width="19" height="19"></span><b>2 usability rounds</b><span>Then acceptance testing</span></div></div>
@@ -1290,7 +1294,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">04 &middot; Design direction</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-direction" data-rev="rise">Make the order the way in</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The research all pointed the same way: customers think in terms of what they already have, an order or a delivery, not a document type. So the design starts there, keeps the five after-order jobs one step from the order, and shows the status of every request, so nobody has to email to ask.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Everything pointed the same way. Customers don&rsquo;t think in document types. They think about what they already have: an order or a delivery. So the design starts there. The five after&#8209;order jobs sit one step from the order, and every request shows its status, so nobody has to email to ask.</p>
     </div>
   </div>
   <div class="princ" data-rev="lift">
@@ -1302,7 +1306,7 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="after">
     <p class="k" data-rev="fade">The journey we designed for</p>
     <p class="lab on" data-rev="fade">The portal</p>
-    <div class="wrap" style="padding:24px 0">
+    <div class="wrap" style="padding:0 0 24px">
       <div class="row"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="fl-assets/f5282.svg" alt="" width="19" height="19"></span><b>Needs a certificate</b><span>The same questions</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="fl-assets/fb212.svg" alt="" width="19" height="19"></span><b>Opens the order</b><span>Orders, stock, invoices, support</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:2"><span class="ic"><img src="fl-assets/f5282.svg" alt="" width="19" height="19"></span><b>Requests or downloads it</b><span>By site, product and batch</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="fl-assets/b5db8.svg" alt="" width="19" height="19"></span><b>Follows the status</b><span>Requests and tickets show progress</span></div><img class="arw-i" src="fl-assets/5399b.svg" alt="then" width="20" height="20"><div class="step sel" data-rev="rise" style="--i:4"><span class="big">Self-serve</span><span>no account manager in the loop</span></div></div>
     </div>
   </div>
@@ -1314,13 +1318,13 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab" data-rev="fade"><b>05</b> &middot; Decision 1 of 4 &middot; Information architecture</p>
     <div class="hd">
       <h2 class="t-h-l w716" id="h-d1" data-rev="rise">Starting from the order, not a document library</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The brief asked for a document library. But in Round 1, nobody could find the certificate for their last delivery in it. Customers knew their order, not the document type, so I rebuilt the structure around the order.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The brief asked for a document library, so that&rsquo;s what we tested first. In Round 1, nobody could find the certificate for their last delivery in it. People knew their order, not the document type. So I rebuilt the structure around the order.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
     <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>The document library from the brief &middot; a structure built around the order</p></div>
     <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>Make the order the way in. Documents live on the shipment they came with.</p></div>
-    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>Three sprints of rework, late in the project. The library stayed only for documents not tied to an order.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>It cost three sprints of rework, late in the project. The library stayed, but only for documents not tied to an order.</p></div>
     <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Round 1: nobody found the certificate for their last delivery. Round 2: everyone did.</p></div>
   </div>
   <div class="iacmp">
@@ -1340,9 +1344,9 @@ html[data-theme="dark"] .inset{background:#13343C}
       <span class="sp"></span>
       <div class="root"><span>Orders</span></div>
       <div class="lv"><span class="br">&#9492;</span><p>Order 0004779279</p></div>
-      <div class="lv d2"><span class="br">&#9492;</span><p>Shipment 8003006002 &amp;middot; View PDF, Download, Track</p></div>
+      <div class="lv d2"><span class="br">&#9492;</span><p>Shipment 8003006002 &middot; View PDF, Download, Track</p></div>
       <div class="lv"><span class="br">&#9492;</span><p>Certificates of Analysis</p></div>
-      <div class="lv d2"><span class="br">&#9492;</span><p>Request by site &amp;rsaquo; product &amp;rsaquo; batch</p></div>
+      <div class="lv d2"><span class="br">&#9492;</span><p>Request by site &rsaquo; product &rsaquo; batch</p></div>
       <span class="sp lg"></span>
       <div class="num"><b>100%</b><span>found it in Round 2</span></div>
     </div>
@@ -1365,14 +1369,14 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">05 &middot; Decision 2 of 4 &middot; Consignment stock</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-d2" data-rev="rise">Updating consignment stock on one screen</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Consignment stock is ink that sits at the customer&rsquo;s site until it&rsquo;s used. Keeping Flint&rsquo;s count up to date used to take a long email thread, so I put the whole job on one screen with a single submit.</p>
+      <h2 class="t-h-l" id="h-d2" data-rev="rise">Stock updates on one screen</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Consignment stock is ink that sits at the customer&rsquo;s site until it&rsquo;s used. Keeping Flint&rsquo;s count up to date meant email threads that often ran past 20 messages. So I put the whole job on one screen, with a single submit.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
     <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>The email thread as it was &middot; one screen with one submit</p></div>
     <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>Both counts side by side, one figure per product, and one submit for everything.</p></div>
-    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>A dense screen. The per-product status and the full history carry that weight.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>The screen is dense. A status on every product and a full change history help people keep track.</p></div>
     <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Not measured on its own.</p></div>
   </div>
   <div class="annot2">
@@ -1402,13 +1406,13 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab" data-rev="fade"><b>05</b> &middot; Decision 3 of 4 &middot; Scope</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-d3" data-rev="rise">Making the case for support, which wasn&rsquo;t in the brief</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">In the brief, support stayed with account managers. But in testing, 4 of 12 participants brought it up first, without being asked. A problem on the press can&rsquo;t wait for an email, so I wrote a business case for bringing support into the portal.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Support wasn&rsquo;t in the brief. It was meant to stay with account managers, and Flint&rsquo;s sales team worried about losing that contact. But in testing, 4 of 12 participants brought it up first, without being asked. A problem on the press can&rsquo;t wait for an email. So I wrote a business case that kept account managers in the loop on every request.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
     <div><span class="ic"><img src="fl-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Options</span><p>Leave support with account managers, as briefed &middot; chat answers plus tracked tickets</p></div>
     <div class="dec"><span class="ic"><img src="fl-assets/8e786.svg" alt="" width="15" height="15"></span><span class="k">Decision</span><p>A Technical Support Agent for common problems, and a Support Hub for tracked tickets.</p></div>
-    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>More scope, added late, and answers Flint&rsquo;s team must keep current.</p></div>
+    <div><span class="ic"><img src="fl-assets/a011b.svg" alt="" width="15" height="15"></span><span class="k">Trade-off</span><p>It added scope late, and Flint&rsquo;s team has to keep the answers current.</p></div>
     <div class="res"><span class="ic"><img src="fl-assets/0aa97.svg" alt="" width="15" height="15"></span><span class="k">Result</span><p>Signed off in acceptance testing.</p></div>
   </div>
   <div class="seq">
@@ -1437,7 +1441,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">05 &middot; Decision 4 of 4 &middot; Downloads</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-d4" data-rev="rise">Making large downloads look alive on slow networks</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Before the build, the engineering lead pointed out something I&rsquo;d missed: on slow factory networks, a large PDF looks stuck at zero. A download that looks stuck looks broken, so every download got the same three clear states.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Before the build, the engineering lead pointed out something I&rsquo;d missed. On slow factory networks, a large PDF can sit at zero for a while, and a download that looks stuck looks broken. So I gave every download the same three clear states.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
@@ -1482,7 +1486,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">06 &middot; Testing and iteration</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-testing" data-rev="rise">What changed after testing, and what&rsquo;s still open</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The decisions above show what usability testing changed. Some things only showed up later, once the portal was in use. Here&rsquo;s what we changed, and what still needs fixing.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Most of what testing changed is in the decisions above. Some problems only showed up once the portal was in real use. Here&rsquo;s what we changed, and what still needs fixing.</p>
     </div>
   </div>
   <div class="dfir v2">
@@ -1511,7 +1515,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">07 &middot; Results and measurement limits</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-results" data-rev="rise">What was signed off, and what nobody measured</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Customers signed off all three success criteria in acceptance testing, so the portal does the jobs it was built for. What nobody tracked is whether fewer requests reached account managers after launch.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Customers signed off all three success criteria in acceptance testing, so the portal does the jobs it was built for. What nobody tracked after launch is whether fewer requests reached account managers. That&rsquo;s the number I&rsquo;d most like to have.</p>
     </div>
   </div>
   <div class="sot">
@@ -1535,8 +1539,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">08 &middot; Reflection</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-reflection" data-rev="rise">Three things I took away from this project</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The best idea in this portal came from a test that failed. These are the lessons from that, and from what I missed.</p>
+      <h2 class="t-h-l" id="h-reflection" data-rev="rise">Three things I took away</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The best idea in this portal came from a test that failed. Looking back, these are the lessons from that, and from the things I missed.</p>
     </div>
   </div>
   <div class="lessons v2">
@@ -1557,7 +1561,7 @@ html[data-theme="dark"] .inset{background:#13343C}
       <figcaption>A waiting state that says how far approval has got, with a way to raise a request.</figcaption>
     </figure>
   </div>
-  <p class="k" data-rev="fade" style="color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px">Concept designs, not shipped work.</p>
+  <p class="k cap16" data-rev="fade" style="color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px">Concept designs, not shipped work.</p>
 </section>
 
 <!-- ═══ Next case study ═══ -->

@@ -326,8 +326,9 @@ html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
 
 /* ── next case study ──────────────────────────────────────────────── */
 .nextcase{background:var(--paper-2);padding:120px var(--px);
-  display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+  display:flex;flex-direction:column;gap:20px;align-items:flex-start}
 .nextcase>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+#testing .block,#results .block{gap:20px}
 .nextcase .card{display:flex;gap:80px;align-items:center;width:100%;color:inherit}
 .nextcase .ptitle.w488{width:488px;max-width:100%}
 .nextcase .thumb{width:640px;flex:0 0 640px;height:400px;border-radius:4px;position:relative;
@@ -1195,7 +1196,12 @@ html[data-theme="dark"] .hero .meta .ic{background:rgba(125,195,208,.12)}
 .hero .screens figcaption{color:var(--muted);font-weight:400;font-size:14px;line-height:21px}
 
 /* ── 01 · ownership and process, drawn as cards ───────────────────── */
-.ownership{display:flex;flex-direction:column;gap:16px;width:100%}
+.ownership{display:flex;flex-direction:column;gap:20px;width:100%}
+/* the first row under "Checked here" is padded on the bottom only */
+.stalled .step .k.on + .chip,.stalled .step .k.on + .line{padding-top:0}
+/* a caption that belongs to the block above it, not to the section rhythm */
+.cap16{margin-top:-48px}
+.cap20{margin-top:-44px}
 .ownership>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .crow{display:flex;gap:16px;align-items:stretch;width:100%}
 .ocard{flex:1 1 0;min-width:0;background:var(--surface);
@@ -1528,7 +1534,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <span class="ln" style="--i:1"><span>their insurance allows before</span></span>
     <span class="ln" style="--i:2"><span>they book, not after</span></span>
   </h1>
-  <p class="sub t-body-l" data-rev="rise" style="--i:0">Aster&rsquo;s patient app in the UAE. Patients use one account to book consultations, order medicines, buy health packages and view records, and many of them pay with insurance.</p>
+  <p class="sub t-body-l" data-rev="rise" style="--i:0">myAster is Aster&rsquo;s patient app in the UAE. With one account, patients book doctors, order medicines, buy health packages and see their records. Many of them pay with insurance.</p>
   <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="ma-assets/14afe.svg" alt="" width="15" height="15"></span><span class="k">My role</span><span class="v">Lead UI/UX Designer, leading a team of four for 10 months</span></div><div><span class="ic"><img src="ma-assets/c2195.svg" alt="" width="15" height="15"></span><span class="k">Client</span><span class="v">Aster DM Healthcare, UAE</span></div><div><span class="ic"><img src="ma-assets/7eb63.svg" alt="" width="15" height="15"></span><span class="k">Platforms</span><span class="v">iOS and Android</span></div><div><span class="ic"><img src="ma-assets/79ce3.svg" alt="" width="15" height="15"></span><span class="k">Scope</span><span class="v">The shared layer, design reviews, handoff and build QA</span></div><div><span class="ic"><img src="ma-assets/c04c4.svg" alt="" width="15" height="15"></span><span class="k">Deliverables</span><span class="v">297 screens, 161 shared components</span></div></div>
   <div class="screens wide">
     <figure data-rev="lift" style="--i:0"><div class="sh"><img src="ma-assets/f161c.png" alt="The General Medicine doctor list: filters for today and video consultation, with each doctor&rsquo;s languages, clinic and next slot." width="500" height="1650" style="height:825px" loading="lazy" decoding="async"></div><figcaption>Find a doctor</figcaption></figure>
@@ -1543,8 +1549,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">01 &middot; My contribution</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-contribution" data-rev="rise">Leading a team of four, starting with the parts everyone shares</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Six services were about to be designed at the same time by four designers. My job was to make sure they all followed the same rules, so I started with the parts every service would share.</p>
+      <h2 class="t-h-l" id="h-contribution" data-rev="rise">I led four designers, and started with what they&rsquo;d all share</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Four designers were about to work on six services at the same time. My job was to keep them all following the same rules. So before anyone started a service, I designed the parts they&rsquo;d all share. Every week I ran a review where we checked new screens against those rules. When someone hit a case the rules didn&rsquo;t cover, we fixed the rule first, then the screen.</p>
     </div>
   </div>
   <div class="ownership">
@@ -1581,11 +1587,11 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="head">
     <p class="lab" data-rev="fade" style="color:#B4DDDA">02 &middot; The problem</p>
     <div class="hd">
-      <h2 class="t-h-xl" id="h-problem" data-rev="rise">Insured patients picked a doctor and a time, then found out they couldn&rsquo;t book</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Many patients book with insurance, but the app only checked the hospital&rsquo;s rules after a doctor and a time were already chosen. Some of those checks ended in a dead end, with a phone call as the only way forward.</p>
+      <h2 class="t-h-xl" id="h-problem" data-rev="rise">Patients picked a doctor and a time, and only then found out they couldn&rsquo;t book</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">A lot of patients book with insurance. But the app only checked the hospital&rsquo;s rules after they&rsquo;d already chosen a doctor and a time. Some of those checks were dead ends, and the only way forward was a phone call.</p>
     </div>
   </div>
-  <div class="pstmt"><div data-rev="rise" style="--i:0"><span class="ic"><img src="ma-assets/d6974.svg" alt="" width="19" height="19"></span><span class="k">Who</span><p>Patients booking for themselves or family, many paying with insurance.</p></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="ma-assets/afd12.svg" alt="" width="19" height="19"></span><span class="k">What went wrong</span><p>Rules about the policy, Emirates ID, profile and referrals only showed up after a time was picked. The price only showed up after booking.</p></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="ma-assets/06719.svg" alt="" width="19" height="19"></span><span class="k">Why it mattered</span><p>Many blocked bookings ended in &ldquo;Please contact our call center.&rdquo; Unverified policies risked rejected claims.</p></div><div class="ux" data-rev="rise" style="--i:3"><span class="ic"><img src="ma-assets/647c7.svg" alt="" width="19" height="19"></span><span class="k">The UX challenge</span><p>Show the hospital&rsquo;s booking rules while the patient can still change their choice.</p></div></div>
+  <div class="pstmt"><div data-rev="rise" style="--i:0"><span class="ic"><img src="ma-assets/d6974.svg" alt="" width="19" height="19"></span><span class="k">Who</span><p>Patients booking for themselves or family, many paying with insurance.</p></div><div data-rev="rise" style="--i:1"><span class="ic"><img src="ma-assets/afd12.svg" alt="" width="19" height="19"></span><span class="k">What went wrong</span><p>Rules about the policy, Emirates ID, profile and referrals only showed up after a time was picked. The price only showed up after booking.</p></div><div data-rev="rise" style="--i:2"><span class="ic"><img src="ma-assets/06719.svg" alt="" width="19" height="19"></span><span class="k">Why it mattered</span><p>Many blocked bookings ended in &ldquo;Please contact our call center.&rdquo; Unverified policies risked rejected claims.</p></div><div class="ux" data-rev="rise" style="--i:3"><span class="ic"><img src="ma-assets/647c7.svg" alt="" width="19" height="19"></span><span class="k">The UX challenge</span><p>Show the hospital&rsquo;s rules while the patient can still change their mind.</p></div></div>
   <div class="stalled">
     <div class="steps"><div class="step" data-rev="rise" style="--i:0"><span class="ic"><img src="ma-assets/83bbf.svg" alt="" width="19" height="19"></span><span class="k">Step 1</span><b>Find a doctor</b><p class="d">Specialty, language, the next free slot.</p><span class="sp"></span><span class="k on">Checked here</span><span class="chip">Nothing checked yet</span></div><div class="step" data-rev="rise" style="--i:1"><span class="ic"><img src="ma-assets/06719.svg" alt="" width="19" height="19"></span><span class="k">Step 2</span><b>Pick a time</b><p class="d">The slot is held for 10 minutes while the patient pays.</p><span class="sp"></span><span class="k on">Checked here</span><span class="chip">Nothing checked yet</span></div><div class="step stop" data-rev="rise" style="--i:2"><span class="ic"><img src="ma-assets/ae04b.svg" alt="" width="19" height="19"></span><span class="k">Step 3 &middot; where it stopped</span><b>Checkout</b><p class="d">Patient, payment method, then Book.</p><span class="sp"></span><span class="k on">Checked here</span><span class="line">New policy still being verified</span><span class="line">Emirates ID has expired</span><span class="line">Profile blocked or under review</span><span class="line">Specialty needs a GP visit first</span></div><div class="step" data-rev="rise" style="--i:3"><span class="ic"><img src="ma-assets/254bd.svg" alt="" width="19" height="19"></span><span class="k">Step 4</span><b>After booking</b><p class="d">Booked, but the price isn&rsquo;t known yet.</p><span class="sp"></span><span class="k on">Checked here</span><span class="line late">Fee created only after the insurer replies</span></div></div>
     <p class="src" data-rev="fade" style="width:100%">Nothing was checked while the patient was still choosing. By the time a rule showed up, the doctor and time were already set, and some rules left only one option: call.</p>
@@ -1598,16 +1604,16 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">03 &middot; Audit and insights</p>
     <div class="hd">
       <h2 class="t-h-l w612" id="h-research" data-rev="rise">Each screen worked. The order didn&rsquo;t.</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">I didn&rsquo;t have usability sessions or analytics to work from, so I started with what I could check: every approved screen, and the people who owned the rules. The rules turned out to be split across three teams, and no one could see the whole booking.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">I had no usability sessions or analytics to work from. So I started with what I could check: every approved screen, and the people who owned the rules. That&rsquo;s when it clicked. The rules were split across three teams, and nobody could see the whole booking.</p>
     </div>
   </div>
   <div class="ownership">
     <p class="k" data-rev="fade">Who I worked with, and how</p>
     <div class="crow"><div class="ocard" data-rev="rise" style="--i:0"><span class="ic"><img src="ma-assets/20ac8.svg" alt="" width="19" height="19"></span><h3>Teleconsult team</h3><p>GP hours, and which specialties need a GP first</p></div><div class="ocard" data-rev="rise" style="--i:1"><span class="ic"><img src="ma-assets/b573b.svg" alt="" width="19" height="19"></span><h3>Insurance team</h3><p>Policy rules, and when a new policy is verified</p></div><div class="ocard" data-rev="rise" style="--i:2"><span class="ic"><img src="ma-assets/2e633.svg" alt="" width="19" height="19"></span><h3>Registration team</h3><p>When a profile goes into review or gets blocked</p></div><div class="ocard" data-rev="rise" style="--i:3"><span class="ic"><img src="ma-assets/ca104.svg" alt="" width="19" height="19"></span><h3>Scope discussions</h3><p>With all three teams</p></div><div class="ocard" data-rev="rise" style="--i:4"><span class="ic"><img src="ma-assets/9b516.svg" alt="" width="19" height="19"></span><h3>State audit</h3><p>Every approved state, screen by screen</p></div><div class="ocard" data-rev="rise" style="--i:5"><span class="ic"><img src="ma-assets/a9349.svg" alt="" width="19" height="19"></span><h3>Not available</h3><p>Usability sessions, analytics, call-center logs</p></div></div>
   </div>
-  <p style="color:var(--muted);font-weight:400;font-size:13px;line-height:20px" data-rev="fade">So the insights below come from the audit and those conversations, not from watching patients.</p>
+  <p class="cap16" style="color:var(--muted);font-weight:400;font-size:13px;line-height:20px" data-rev="fade">So the insights below come from the audit and those conversations, not from watching patients.</p>
   <p style="color:var(--ink);font-weight:500;font-size:18px;line-height:25px;letter-spacing:-.09px" data-rev="rise">What patients actually saw</p>
-  <p class="t-body-l" style="color:var(--muted);width:880px;max-width:100%" data-rev="rise">To see the problem the way patients did, I went through the approved screens. The red outline marks the message each one shows.</p>
+  <p class="t-body-l" style="color:var(--muted);width:880px;max-width:100%" data-rev="rise">I went through the approved screens as a patient would. The red outline marks the message each one shows.</p>
   <div class="saw" data-rev="lift">
     <div class="row">
       <figure data-rev="lift" style="--i:0">
@@ -1709,7 +1715,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">04 &middot; Design direction</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-direction" data-rev="rise">Check things while the patient can still choose</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The audit made one thing clear: the problem wasn&rsquo;t any single screen, it was when each rule showed up. So every decision started from the same question: what&rsquo;s the earliest point this check can still change the patient&rsquo;s choice?</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The audit made one thing clear. No single screen was broken. The problem was when each rule showed up. So I started every decision with one question: what&rsquo;s the earliest point this check can still change what the patient picks?</p>
     </div>
   </div>
   <div class="princ" data-rev="lift">
@@ -1729,8 +1735,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">05 &middot; Decision 1 of 4 &middot; Insurance status</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-d1" data-rev="rise">Telling patients what each insurance state means</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">A new policy can take hours for the insurer to verify, and that happens outside Aster. The risk depends on timing: a visit three days away leaves time for a reply, but a video call in the next hour doesn&rsquo;t. I proposed drawing the line by time until the visit, and Aster&rsquo;s insurance team set it at four hours, based on how long verification usually takes.</p>
+      <h2 class="t-h-l" id="h-d1" data-rev="rise">Four insurance states, each with a next step</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">An insurer can take hours to verify a new policy, and Aster can&rsquo;t speed that up. The insurance team&rsquo;s first instinct was to block every pending policy. I walked them through what that means for a patient booking a video call in the next hour, and proposed drawing the line by time until the visit instead. They set it at four hours, based on how long verification usually takes.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
@@ -1778,7 +1784,7 @@ html[data-theme="dark"] .inset{background:#13343C}
       </div>
     </div>
   </div>
-  <p style="color:var(--muted);font-weight:400;font-size:14px;line-height:21px" data-rev="fade">These are the four insurance states from the approved file. Every one ends with something the patient can do.</p>
+  <p class="cap16" style="color:var(--muted);font-weight:400;font-size:14px;line-height:21px" data-rev="fade">These are the four insurance states from the approved file. Every one ends with something the patient can do.</p>
 </section>
 
 <!-- ═══ 05 · Decision 2 of 4 · Blockers ═══ -->
@@ -1786,8 +1792,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">05 &middot; Decision 2 of 4 &middot; Blockers</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-d2" data-rev="rise">Giving each blocker the right next step</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">An expired ID, a blocked profile and a server failure all ended the booking the same way, but they aren&rsquo;t the same problem. One generic error would have sent patients to the phone for an ID they could update in a minute.</p>
+      <h2 class="t-h-l" id="h-d2" data-rev="rise">Sending each problem to whoever can fix it</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">An expired ID, a blocked profile and a server failure all ended the booking the same way. But they&rsquo;re very different problems. One generic error would send a patient to the phone over an ID they could update in a minute.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
@@ -1821,7 +1827,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">05 &middot; Decision 3 of 4 &middot; Checkout</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-d3" data-rev="rise">One checkout for every service</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">Consults came first, and five more services were about to start. Each needed to know who the booking was for, how they&rsquo;d pay, and what to do if insurance said no. If every team designed that separately, the rules would drift. So I designed checkout first, and the services built on top of it.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">Consults came first, and five more services were right behind. Each needed to know who the booking was for, how they&rsquo;d pay, and what happens if insurance says no. If every designer solved that alone, the rules would drift apart. So I designed checkout first, and every service built on it. The developers wanted to finish consults first and generalize later. I showed them what retrofitting five services would cost, and we agreed to build the shared checkout first.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
@@ -1881,8 +1887,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">05 &middot; Decision 4 of 4 &middot; Price</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-d4" data-rev="rise">Letting the price arrive after booking</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The hospital system only creates the fee after the insurer replies, so there&rsquo;s no price to show at checkout. Instead of blocking the booking, checkout shows the copay as Under Process, and notifications handle the rest. Patients still commit without knowing the amount, and that&rsquo;s the part I&rsquo;m least happy with.</p>
+      <h2 class="t-h-l" id="h-d4" data-rev="rise">When there&rsquo;s no price to show at checkout</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The hospital system only creates the fee after the insurer replies, so at checkout there&rsquo;s no price to show. Rather than block the booking, checkout says Under Process and notifications do the rest. Patients still book without knowing the amount. Honestly, that&rsquo;s the part I&rsquo;m least happy with.</p>
     </div>
   </div>
   <div class="dstrip t18" data-rev="rise">
@@ -1909,7 +1915,7 @@ html[data-theme="dark"] .inset{background:#13343C}
       <div class="outs" data-rev="fade"><span>Paid: the booking stands</span><span>Unpaid: canceled, slot released</span></div>
     </div>
   </div>
-  <p style="color:var(--muted);font-weight:400;font-size:14px;line-height:21px" data-rev="fade">Notification copy is shown exactly as approved, including its placeholder doctor name.</p>
+  <p class="cap20" style="color:var(--muted);font-weight:400;font-size:14px;line-height:21px" data-rev="fade">Notification copy is shown exactly as approved, including its placeholder doctor name.</p>
 </section>
 
 <!-- ═══ 06 · Validation ═══ -->
@@ -1917,8 +1923,8 @@ html[data-theme="dark"] .inset{background:#13343C}
   <div class="shead">
     <p class="lab acc" data-rev="fade">06 &middot; Validation</p>
     <div class="hd">
-      <h2 class="t-h-l" id="h-testing" data-rev="rise">What was checked, and what still needs testing</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">There was no usability testing on this project, so I want to be clear about what was checked instead: design reviews, build QA, and a contrast check. Here&rsquo;s what they found, and how I&rsquo;d test the rest.</p>
+      <h2 class="t-h-l" id="h-testing" data-rev="rise">No usability testing, so here&rsquo;s what we did check</h2>
+      <p class="t-body-l" data-rev="rise" style="--i:1">We didn&rsquo;t run usability testing on this project. Six services were shipping on one timeline, and the plan had no room for research sessions. What we did have was design reviews, build QA and a contrast check. Here&rsquo;s what they caught, what&rsquo;s still open, and how I&rsquo;d test the rest.</p>
     </div>
   </div>
   <div class="dfir v2">
@@ -1944,7 +1950,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">07 &middot; Results and measurement limits</p>
     <div class="hd">
       <h2 class="t-h-l w724" id="h-results" data-rev="rise">What shipped, and how I&rsquo;d know it worked</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">The app launched, but I didn&rsquo;t get access to post-launch data. So I keep what was delivered, what changed, and what I expected to happen clearly apart.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">The app launched, but I never got the post-launch data. So below I keep three things apart: what was delivered, what changed, and what I expected to happen.</p>
     </div>
   </div>
   <div class="sot">
@@ -1967,7 +1973,7 @@ html[data-theme="dark"] .inset{background:#13343C}
     <p class="lab acc" data-rev="fade">08 &middot; Reflection</p>
     <div class="hd">
       <h2 class="t-h-l" id="h-reflection" data-rev="rise">Three things I took away from this project</h2>
-      <p class="t-body-l" data-rev="rise" style="--i:1">This project taught me as much about how a team works as about the screens. These are the lessons I&rsquo;ve carried forward.</p>
+      <p class="t-body-l" data-rev="rise" style="--i:1">This project taught me as much about running a team as about the screens. These are the three lessons I still use.</p>
     </div>
   </div>
   <div class="lessons v2">
