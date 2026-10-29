@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>OG card source &mdash; PetTrackr</title>
+<!-- Render at 1200x630, device scale 2, then downscale to 1200 wide -> og-pettrackr.png -->
+<style>
+@font-face{font-family:Inter;font-style:normal;font-weight:400;font-display:block;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:500;font-display:block;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Inter;font-style:normal;font-weight:600;font-display:block;
+  src:url(https://cdn.jsdelivr.net/npm/@fontsource/inter@4.5.15/files/inter-latin-600-normal.woff2) format("woff2")}
+
+/* the site's own tokens, so the card and the page are the same object */
+:root{--ink:#1C2628; --muted:#5F6A69; --accent:#2E6470; --paper:#F6F5F0;
+  --case:#EEB846}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px}
+body{font-family:Inter,system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:72px 72px 82px;position:relative;overflow:hidden;
+  /* the case's own colour, washed in from the corner like the card tints */
+  background:radial-gradient(760px 520px at 100% 0%, rgba(238,184,70,0.16), rgba(238,184,70,0) 70%), var(--paper)}
+
+.brand{display:flex;align-items:center;gap:18px}
+.brand svg{display:block;width:48px;height:48px}
+.brand span{color:var(--ink);font-weight:600;font-size:28px;line-height:34px;letter-spacing:-.14px}
+
+/* rule, case, headline and platform read as one block sitting on the strip */
+.say{display:flex;flex-direction:column;align-items:flex-start;gap:26px}
+.rule{width:48px;height:4px;border-radius:2px;background:var(--case)}
+.case{color:var(--accent);font-weight:600;font-size:24px;line-height:30px;letter-spacing:-.12px}
+h1{color:var(--ink);font-weight:500;font-size:56px;line-height:62px;letter-spacing:-2.24px}
+.kind{color:var(--muted);font-weight:500;font-size:20px;line-height:26px;letter-spacing:.1px}
+
+/* the logo palette, full-bleed along the bottom edge, as on every page */
+.strip{position:absolute;left:0;right:0;bottom:0;height:10px;display:flex}
+.strip span{flex:1 1 0}
+</style></head>
+<body>
+
+<div class="brand">
+  <svg viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M23.3393 0.00195312H11.6694V11.6718H23.3393V0.00195312Z" fill="#45918C"/>
+    <path d="M34.9999 11.6699H23.3301V23.3398H34.9999V11.6699Z" fill="#9DBB55"/>
+    <path d="M23.3393 23.3301H11.6694V34.9999H23.3393V23.3301Z" fill="#DD833E"/>
+    <path d="M11.6698 34.9999H0L5.83056 29.1606L11.6698 23.3301V34.9999Z" fill="#D45C37"/>
+    <path d="M11.6698 0.00195312V11.6718L5.83056 5.83251L0 0.00195312H11.6698Z" fill="#2E6470"/>
+    <path d="M23.3301 23.3301H34.9999C34.9999 29.7716 29.7716 34.9999 23.3301 34.9999V23.3301Z" fill="#EEB846"/>
+    <path d="M23.3301 11.6699V8.10623e-05C29.7716 8.10623e-05 34.9999 5.22838 34.9999 11.6699H23.3301Z" fill="#428F4F"/>
+  </svg>
+  <span>Deep Vyas</span>
+</div>
+
+<div class="say">
+  <span class="rule" aria-hidden="true"></span>
+  <p class="case">PetTrackr</p>
+  <h1>Making daily pet diabetes<br>tracking easier</h1>
+  <p class="kind">Mobile app &middot; iOS and Android</p>
+</div>
+
+<span class="strip" aria-hidden="true"
+  ><span style="background:#2E6470"></span><span style="background:#45918C"></span
+  ><span style="background:#428F4F"></span><span style="background:#9DBB55"></span
+  ><span style="background:#EEB846"></span><span style="background:#DD833E"></span
+  ><span style="background:#D45C37"></span></span>
+
+</body></html>
