@@ -474,10 +474,10 @@ html[data-theme="dark"] .pcard .ic{background:rgba(125,195,208,.12)}
 .changed h3{color:var(--ink);font-weight:500;font-size:32px;line-height:37px;letter-spacing:-.64px}
 .changed p{color:var(--muted);font-weight:400;font-size:16px;line-height:25px}
 
-/* the same screen three times, on one tinted plate */
+/* the same screen three times, side by side on the page */
 .trio{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
 .trio .pl{display:flex;gap:24px;align-items:flex-start;padding:32px;border-radius:4px;
-  width:100%;overflow:hidden;background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+  width:100%;overflow:hidden}
 .trio .col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
 .trio .col>span{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .trio .col.mine>span{color:var(--accent)}
@@ -503,8 +503,7 @@ html[data-theme="dark"] .trio .sh{border-color:var(--line)}
 .vidblock{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
 .vidblock>.k{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
 .vidblock .pl{padding:48px;border-radius:4px;width:100%;overflow:hidden;
-  display:flex;align-items:flex-start;justify-content:center;
-  background:linear-gradient(var(--tint),var(--tint)),var(--paper)}
+  display:flex;align-items:flex-start;justify-content:center}
 .vid{position:relative;width:1184px;height:666px;flex:none;border-radius:12px;
   overflow:hidden;border:1px solid #E6E2DC;background:var(--surface)}
 html[data-theme="dark"] .vid{border-color:var(--line)}
@@ -705,10 +704,9 @@ html[data-theme="dark"] .inset{background:#13343C}
 .stalled .src{width:100%;font-weight:400;font-size:13px;
   line-height:20px;color:rgba(246,245,240,.9)}
 
-/* a screenshot on a tinted plate, captioned underneath */
+/* a screenshot straight on the page, captioned underneath */
 .figshot{display:flex;flex-direction:column;gap:16px;width:100%;margin:0}
-.figshot .pl{background:linear-gradient(var(--tint),var(--tint)),var(--paper);
-  border-radius:4px;padding:48px;width:100%;
+.figshot .pl{  border-radius:4px;padding:48px;width:100%;
   display:flex;align-items:flex-start;justify-content:center;overflow:hidden}
 .figshot .sh{width:var(--sw);height:var(--sh);flex:none;border-radius:12px;
   box-shadow:none;border:1px solid #E6E2DC}
