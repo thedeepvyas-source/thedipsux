@@ -50,7 +50,7 @@ document.documentElement.className+=" js";</script>
   --ink:#1C2628; --body:#3D4A4B; --muted:#5F6A69; --accent:#2E6470;
   --line:#DAD5CB; --line-2:#CFC9BD; --line-ink:#1C2628;
   --paper:#F6F5F0; --paper-2:#EDEBE4; --surface:#FFFFFF;
-  --case:#EEB846;                     /* PetTrackr's colour in the logo palette */
+  --case:#B5831F;                     /* PetTrackr's colour in the logo palette */
   --tint:rgba(238,184,70,0.1);
   --hair:rgba(0,0,0,.08);
   --accent-hover:#275560; --accent-active:#1F4850; --accent-visited:#1F4850;
@@ -62,6 +62,7 @@ document.documentElement.className+=" js";</script>
   --px:80px;
 }
 html[data-theme="dark"]{
+  --case:#EEB846;                     /* the full brand yellow holds up on a dark page */
   --ink:#F2F0EA; --body:#C3C9C6; --muted:#8E938F; --accent:#7FB5B6;
   --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.12); --line-ink:rgba(255,255,255,.55);
   --paper:#16191A; --paper-2:#1C2021; --surface:#202425;
@@ -369,6 +370,197 @@ html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
 .foot{padding:32px 96px;display:flex;align-items:flex-start;justify-content:space-between;
   box-shadow:inset 0 1px 0 0 var(--line)}
 .foot p{color:var(--muted);white-space:nowrap}
+/* ── the character, and the panel it opens ────────────────────
+   The character is a control, not decoration: it sits where a launcher
+   sits and opens a drawer that pushes the page across instead of
+   covering it. The page stays readable beside it, which makes this a
+   non-modal dialog, so focus is not trapped. Escape closes it and hands
+   focus back.
+
+   The same drawer, and the same CSS, on all six pages. */
+.avbtn{position:fixed;right:24px;bottom:24px;bottom:max(24px,env(safe-area-inset-bottom));
+  width:112px;height:112px;z-index:55;padding:0;border:0;background:none;cursor:pointer;
+  border-radius:999px;transition:opacity var(--d-base) var(--ease-out)}
+.avbtn:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+/* away: the footer wants that corner. hid: the panel has taken over. */
+.avbtn.away,.avbtn.hid{opacity:0;pointer-events:none}
+/* the sprite character is 77x128, not a disc, so it is centred in
+   the button rather than filling it. Frames are 128px tall and go soft
+   above that, so neither one is drawn larger. */
+.avmark{display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;--ink:var(--case)}
+
+.ask{position:fixed;top:0;right:0;bottom:0;width:360px;z-index:60;
+  display:flex;flex-direction:column;background:var(--paper);
+  box-shadow:inset 1px 0 0 0 var(--line);
+  transform:translateX(100%);transition:transform var(--d-enter) var(--ease-enter);
+  /* the pills and the input are a card lifted off the paper. The case
+     pages get that from --surface, which is white there; on the landing
+     page --surface equals --paper, so the same CSS came out flat. The
+     drawer carries its own value rather than inheriting a token that
+     differs per page, which is what kept the six pages from matching. */
+  --ask-card:#FFFFFF}
+html[data-theme="dark"] .ask{--ask-card:#202425}
+.ask.on{transform:none}
+.ask:focus{outline:none}
+body{transition:margin-right var(--d-enter) var(--ease-enter)}
+html.askopen body{margin-right:360px}
+
+.ask-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 0 28px}
+.ask-top p{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.ask-x{width:36px;height:36px;flex:0 0 36px;border:0;background:none;padding:0;cursor:pointer;
+  border-radius:999px;color:var(--muted);display:flex;align-items:center;justify-content:center;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+.ask-x:hover{color:var(--ink);background:var(--paper-2)}
+.ask-x:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.ask-face{height:172px;flex:0 0 172px;display:flex;align-items:center;justify-content:center}
+.ask-face .avmark{width:128px;height:128px}
+
+.ask-scroll{flex:1 1 auto;overflow-y:auto;padding:0 28px 8px}
+.ask-q{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;
+  box-shadow:inset 0 -1px 0 0 var(--line)}
+.ask-q>li{border-top:1px solid var(--line)}
+.ask-q>li>button{width:100%;text-align:left;border:0;background:none;cursor:pointer;font:inherit;
+  padding:14px 0;color:var(--ink);font-weight:500;font-size:15px;line-height:21px;
+  display:flex;gap:16px;align-items:baseline;justify-content:space-between;
+  transition:color var(--d-micro) var(--ease-out)}
+.ask-q>li>button:hover{color:var(--accent)}
+.ask-q>li>button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ask-q>li>button::after{content:"+";color:var(--muted);font-weight:400}
+.ask-q>li>button[aria-expanded="true"]::after{content:"−"}
+.ask-a{padding:0 0 18px}
+.ask-a p{color:var(--body);font-size:14px;line-height:22px}
+.ask-a p+p{margin-top:10px}
+.ask-a ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ask-a li{color:var(--muted);font-size:13px;line-height:19px}
+.ask-a a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.ask-a a:hover{color:var(--accent-hover)}
+
+/* the link at the foot of each answer, into the section it was condensed from */
+.ask-jump{margin-top:14px}
+.ask-jump a{font-weight:500;font-size:13px;line-height:19px}
+
+/* the three questions that are the same on every case study */
+.ask-lbl{color:var(--muted);font-weight:500;font-size:12px;line-height:16px;
+  letter-spacing:.6px;text-transform:uppercase;padding:28px 0 6px}
+
+.ask-foot{padding:14px 28px 22px;box-shadow:inset 0 1px 0 0 var(--line);
+  display:flex;flex-direction:column;gap:10px}
+.ask-foot p{color:var(--muted);font-size:13px;line-height:19px}
+/* "Looking…", "Answered.", "Cleared." are announcements, not reading
+   matter — a sighted reader already watches the dots and the answer appear.
+   So the status line keeps its live region and leaves the layout. */
+.ask-note{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.ask-foot a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+
+/* the field: it searches the answers above rather than asking anything */
+.ask-find{position:relative;display:flex}
+.ask-find input{flex:1 1 auto;width:100%;min-width:0;font:inherit;font-size:14px;
+  line-height:20px;color:var(--ink);background:var(--ask-card);border:0;border-radius:999px;
+  box-shadow:inset 0 0 0 1px var(--line),0 1px 2px rgba(0,0,0,.05);
+  padding:13px 50px 13px 18px;
+  -webkit-appearance:none;appearance:none;
+  transition:box-shadow var(--d-micro) var(--ease-out)}
+.ask-find input::placeholder{color:var(--muted)}
+.ask-find input:focus{outline:none;
+  box-shadow:inset 0 0 0 2px var(--accent),0 1px 2px rgba(0,0,0,.05)}
+.ask-find input::-webkit-search-cancel-button,
+.ask-find input::-webkit-search-decoration{-webkit-appearance:none;display:none}
+.ask-send{position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;display:grid;place-items:center;padding:0;
+  border:0;border-radius:50%;cursor:pointer;
+  color:var(--paper);background:var(--ink);
+  transition:background-color var(--d-micro) var(--ease-out),
+             opacity var(--d-micro) var(--ease-out)}
+.ask-send svg{display:block}
+.ask-send:hover{background:var(--accent)}
+.ask-send:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* nothing typed, nothing to send — the button says so without going away */
+.ask-find input:placeholder-shown~.ask-send{opacity:.3}
+
+/* the drawer is a conversation, not an accordion. The written
+   <ul class="ask-q"> stays in the page for anything that cannot run the
+   script, and is hidden the moment it can. */
+.js .ask-more{display:none}
+[hidden]{display:none!important}
+
+/* the face now scrolls with the conversation instead of sitting in a band
+   of its own: it is a greeting, not a header */
+.ask-scroll>.ask-face{flex:0 0 auto}
+.ask.talking .ask-face{height:0;flex-basis:0;opacity:0;overflow:hidden;
+  transition:height var(--d-base) var(--ease-out),opacity var(--d-micro) var(--ease-out)}
+
+/* the openers, and whatever is worth asking next: something to tap, which
+   is what every assistant anyone has used puts under an answer */
+.ask-start,.ask-more-q{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.ask-more-q{margin-top:20px}
+.ask-start-q{align-self:flex-start;max-width:100%;cursor:pointer;font:inherit;
+  text-align:left;margin:0;padding:8px 14px;border:0;border-radius:999px;
+  background:var(--ask-card);box-shadow:inset 0 0 0 1px var(--line);
+  color:var(--ink);font-size:13.5px;line-height:19px;
+  transition:box-shadow var(--d-micro) var(--ease-out),color var(--d-micro) var(--ease-out)}
+.ask-start-q:hover{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ask-start-q:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* when there is nothing left to suggest, say so rather than loop */
+.ask-spent{color:var(--muted);font-size:13px;line-height:19px}
+
+/* the conversation. What you asked is yours, so it gets a bubble on your
+   side; the answer is there to be read, so it is body text across the
+   column with nothing drawn round it. */
+.ask-log{display:flex;flex-direction:column}
+.ask-row{display:flex}
+.ask-you{justify-content:flex-end;margin-top:30px}
+.ask-you:first-child{margin-top:4px}
+.ask-you .ask-bub{max-width:85%;padding:9px 14px;border-radius:16px 16px 5px 16px;
+  background:var(--paper-2);color:var(--ink);font-size:14px;line-height:21px}
+.ask-reply{margin-top:14px}
+.ask-reply .ask-bub{width:100%}
+.ask-log p{color:var(--body);font-size:14px;line-height:22px}
+.ask-log p+p{margin-top:10px}
+.ask-log a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.ask-log a:hover{color:var(--accent-hover)}
+.ask-log ul{list-style:none;margin:10px 0 0;padding:0;
+  display:flex;flex-direction:column;gap:10px}
+.ask-log li{color:var(--muted);font-size:13px;line-height:19px}
+
+.ask-caret{display:inline-block;width:6px;height:13px;margin-left:1px;vertical-align:-2px;
+  background:var(--accent);border-radius:1px;animation:askcaret .9s steps(1) infinite}
+@keyframes askcaret{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.ask-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+.ask-dots{display:inline-flex;gap:4px;padding:6px 0}
+.ask-dots i{width:5px;height:5px;border-radius:999px;background:var(--muted);
+  animation:askdot 1.1s ease-in-out infinite}
+.ask-dots i:nth-child(2){animation-delay:.15s}
+.ask-dots i:nth-child(3){animation-delay:.3s}
+@keyframes askdot{0%,60%,100%{opacity:.25}30%{opacity:.9}}
+
+.ask-reset{width:36px;height:36px;flex:0 0 36px;border:0;background:none;padding:0;
+  cursor:pointer;border-radius:999px;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+.ask-reset:hover{color:var(--ink);background:var(--paper-2)}
+.ask-reset:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ask-top{gap:2px}
+.ask-top p{flex:1 1 auto}
+
+@media (prefers-reduced-motion:reduce){
+  .ask-caret{display:none}
+  .ask-dots i{animation:none;opacity:.5}
+  .ask.talking .ask-face{transition:none}
+}
+
+@media (max-width:860px){
+  .ask{width:100%}
+  html.askopen body{margin-right:0}
+  .avbtn{right:16px;bottom:16px;bottom:max(16px,env(safe-area-inset-bottom));width:76px;height:76px}
+  .ask-face{height:140px;flex-basis:140px}
+  .ask-face .avmark{width:108px;height:108px}
+}
+@media (prefers-reduced-motion:reduce){.ask,body,.avbtn{transition:none}}
 
 /* ── a section head: label left, heading column right ─────────────── */
 .shead{display:flex;align-items:baseline;justify-content:space-between;width:100%}
@@ -1462,7 +1654,7 @@ html[data-theme="dark"] .inset{background:#13343C}
   <a class="card" href="flintlink.html" aria-label="Flint-Link — A customer portal that answers before anyone has to email">
     <div class="thumb" data-rev="rise">
       <figure style="left:10%;top:11%;width:84.375%;height:79.75%"><img src="home-assets/e2648.png" alt="The Flint-Link dashboard, with open and closed invoice totals, a spend breakdown, recent orders and open invoices." width="1440" height="850" loading="lazy" decoding="async"></figure>
-      <figure style="left:4.375%;top:56%;width:39.0625%;height:37%"><img src="home-assets/00392.png" alt="An order details panel, listing the line items and delivery documents attached to a single order." width="1440" height="850" loading="lazy" decoding="async"></figure>
+      <figure style="left:4.375%;top:56%;width:39.0625%;height:37%"><img src="home-assets/00392.png" alt="An order details panel, listing the line items and delivery documents attached to a single order." width="520" height="307" loading="lazy" decoding="async"></figure>
     </div>
     <div class="body" data-rev="rise" style="--i:1">
       <div class="meta">
@@ -1686,6 +1878,126 @@ html[data-theme="dark"] .inset{background:#13343C}
     if(e.key === "Escape"){ close(); }
     else if(e.key === "Tab"){ e.preventDefault(); (document.activeElement === shut ? img : shut).focus(); }
   });
+})();
+</script>
+<button class="avbtn" aria-label="Ask about this project" aria-haspopup="dialog"
+        aria-expanded="false" aria-controls="ask">
+  <span class="avmark" data-avatar aria-hidden="true"></span>
+</button>
+
+<aside class="ask" id="ask" data-case="PetTrackr" role="dialog" aria-labelledby="ask-t" tabindex="-1" hidden>
+  <div class="ask-top">
+    <p id="ask-t">Ask about this project</p>
+    <button class="ask-x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  </div>
+  <div class="ask-face"><span class="avmark" data-avatar aria-hidden="true"></span></div>
+  <div class="ask-scroll">
+    <ul class="ask-q">
+      <li data-k="problem challenge brief need pain point goal context situation solving solve statement issue broken wrong before background purpose users struggle struggled friction stopped slowed waiting">
+        <button type="button" aria-expanded="false" aria-controls="ask-a5">What problem are you solving here?</button>
+        <div class="ask-a" id="ask-a5" hidden><p>The test took seconds. Keeping track of it didn&rsquo;t. Owners of a diabetic cat or dog test every morning and evening, then wrote the reading on paper, in phone notes, or in a spreadsheet &mdash; and said they spent 30+ minutes pulling it all together before a vet visit.</p><p>The analyzer keeps only seven days of readings, so readings a vet uses to adjust insulin could be overwritten. The design challenge: make readings quick to record, make it obvious when data needs syncing, and help owners hand the vet an organized history.</p><p class="ask-jump"><a href="#problem">The problem, in full &rarr;</a></p></div>
+      </li>
+      <li data-k="role responsibility responsible ownership owned own credit scope yours yourself contribution contributed part parts share involvement involved personally alone solo team teammates colleagues others did do made">
+        <button type="button" aria-expanded="false" aria-controls="ask-a1">What did you own here?</button>
+        <div class="ask-a" id="ask-a1" hidden><p>Everything on the design side, and I was the only designer: 10 in‑home interviews, a 14‑day diary study, a look at 4 competing apps, 3 vet interviews, three usability rounds of five people each, the iOS and Android screens — more than 100 of them — the design system, developer handoff and design QA. I also led the release‑scope conversations with Universal Biosensors and the development team.</p><p>I didn’t own the analyzer, the hardware constraints or product sign‑off, which were Universal Biosensors; or the implementation, Bluetooth synchronization and app store delivery, which were the development team.</p><p class="ask-jump"><a href="#contribution">Who owned what, in full →</a></p></div>
+      </li>
+      <li data-k="decision decisions decide decided choice choices call calls chose choose chosen option options alternative alternatives tradeoff trade-off tradeoffs why rationale reasoning reason judgement judgment thinking approach big main key important">
+        <button type="button" aria-expanded="false" aria-controls="ask-a15">What were your big decisions?</button>
+        <div class="ask-a" id="ask-a15" hidden><p>Six, each with its own section on the page:</p><ul>
+          <li><a href="#d1">First, get people to a reading</a></li>
+          <li><a href="#d2">Making logging a quick confirmation, not a form</a></li>
+          <li><a href="#d3">Making sync status impossible to miss</a></li>
+          <li><a href="#d4">Showing each reading against the pet&rsquo;s target range</a></li>
+          <li><a href="#d5">Reminders that say which pet and what&rsquo;s due</a></li>
+          <li><a href="#d6">Starting with a PDF the vet can actually use</a></li>
+      </ul></div>
+      </li>
+      <li data-k="hard difficult challenge struggle pushback disagreement argument tension call">
+        <button type="button" aria-expanded="false" aria-controls="ask-a2">What was the hardest call you made?</button>
+        <div class="ask-a" id="ask-a2" hidden><p>Rebuilding onboarding after Round 1 instead of trimming it. The original flow had seven steps — account, pet profile, species, target range, insulin dose, Bluetooth pairing, notifications — before anyone could log a single reading. 2 of 5 people didn’t finish it, and 4 of 5 got stuck on pairing.</p><p>I could have shortened every form, or made all setup optional. Instead I moved one useful action ahead of the rest: three skippable intro screens, then the account, because readings are saved in the cloud, then straight to logging a first reading. Pet details, pairing and reminders come later. The trade‑off is that setup is unfinished at first.</p><p class="ask-jump"><a href="#d1">Decision 1, in full →</a></p></div>
+      </li>
+      <li data-k="impact outcome success metric kpi number data proof evidence worked work">
+        <button type="button" aria-expanded="false" aria-controls="ask-a3">How do you know it worked?</button>
+        <div class="ask-a" id="ask-a3" hidden><p>Three of the four goals we agreed at kickoff were met in testing. Onboarding completion 8 of 9 (89%) in Rounds 2 and 3, up from 3 of 5 (60%) in Round 1. A reading logged in under 30 seconds, timed, down from 3–5 minutes on paper. A 14‑day vet PDF generated and shared in under a minute, timed, down from 30+ minutes.</p><p>The fourth — whether people keep tracking longer than they do on paper — was never measured. We never defined what to compare against, or what would count as success.</p><p class="ask-jump"><a href="#results">Results and measurement limits →</a></p></div>
+      </li>
+      <li data-k="learn lesson mistake regret improve again retrospective differently wrong change redo revisit hindsight">
+        <button type="button" aria-expanded="false" aria-controls="ask-a4">What would you do differently?</button>
+        <div class="ask-a" id="ask-a4" hidden><p>Agree how to measure retention before launch. It was a kickoff goal that ended without a number, and it’s the one I think about most. I’d settle with engineering what to track, what to compare against and what success looks like, before anything ships.</p><p>Reminders went out with no way to see whether care tasks actually got done — a well‑reasoned design still needs proof. And I pay attention now to where and when something gets used, not only to the screen: the diary study showed people were handling a pet and a device at the same time.</p><p class="ask-jump"><a href="#reflection">Reflection →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="usability test tested testing validate validation participants sessions owners users proof rounds">
+        <button type="button" aria-expanded="false" aria-controls="ask-a7">Was it tested with real users?</button>
+        <div class="ask-a" id="ask-a7" hidden><p>Yes — three rounds, five people each, on top of 10 in‑home interviews and a 14‑day diary study before any of it. Round 1 covered the original onboarding, Round 2 the rebuilt onboarding and the zone chart, Round 3 logging and reports.</p><p>What I’d flag: the changes made after Round 3 — a bigger reading field, and the report’s start date filling in from the time frame — were never retested.</p><p class="ask-jump"><a href="#testing">What testing changed →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="research discovery interviews insights methods diary learn understand findings vets">
+        <button type="button" aria-expanded="false" aria-controls="ask-a8">What research did you do?</button>
+        <div class="ask-a" id="ask-a8" hidden><p>10 in‑home interviews with owners, a 14‑day diary study with six of them, 3 veterinarian interviews, a look at 4 competing apps built for human diabetes, a journey map, and 3 usability rounds of five people each.</p><p>I started in people’s homes because I wanted to see what happens around a reading, not just the moment someone types a number in. The diary study is what told me entry had to be short: owners hold the analyzer in one hand and a restless pet in the other.</p><p class="ask-jump"><a href="#research">The research →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="team size people alone solo only designer colleagues how long duration timeline months">
+        <button type="button" aria-expanded="false" aria-controls="ask-a9">Who else was on it?</button>
+        <div class="ask-a" id="ask-a9" hidden><p>Nobody else on design. I was the only designer, from the first interviews to handoff, so most design calls were mine to make and to defend.</p><p>Universal Biosensors owned the analyzer, the hardware constraints and product sign‑off. The development team owned implementation, Bluetooth synchronization and app store delivery. And what the three vets told me shaped the charts and the vet report.</p><p class="ask-jump"><a href="#contribution">Who owned what →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="deliverable deliverables handover handoff output artefacts artifacts shipped gave produced files screens many count number system">
+        <button type="button" aria-expanded="false" aria-controls="ask-a10">What did you hand over?</button>
+        <div class="ask-a" id="ask-a10" hidden><p>More than 100 screens for iOS and Android, a design system, developer handoff and design QA.</p><p>One thing I’d flag: the design system went out with three typefaces — Roboto, Montserrat and Gilroy. I didn’t consolidate them before handoff, and it’s the first thing I’d clean up.</p><p class="ask-jump"><a href="#testing">What’s still open →</a></p></div>
+      </li>
+    </ul>
+    <p class="ask-lbl">Across all five</p>
+    <ul class="ask-q">
+      <li class="ask-more" data-k="research own yourself end to end full process strategy discovery just only screens visual">
+        <button type="button" aria-expanded="false" aria-controls="ask-a11">Do you do research yourself?</button>
+        <div class="ask-a" id="ask-a11" hidden><p>Myself. Research → strategy → screens — I own the whole chain, not just the last step.</p><p>It looks different on each project: 10 in‑home interviews and a 14‑day diary study on PetTrackr; 14 interviews and two factory‑floor site visits on Flint‑Link; a state audit and the three teams who owned the rules on myAster, where no sessions were available. Where there was no research, the case study says so.</p><p class="ask-jump"><a href="index.html#how">How I work →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="lead led leader leadership manage manager mentor senior principal head team people juniors direct reports">
+        <button type="button" aria-expanded="false" aria-controls="ask-a12">Have you led a team?</button>
+        <div class="ask-a" id="ask-a12" hidden><p>Yes. On myAster I led four designers for 10 months — I assigned the service flows, reviewed every screen against the shared patterns, and approved what went to engineering. On Flint‑Link I was the lead designer with a second designer and a project manager. On IGEL I led the design for Apexon’s RFP response.</p><p>And on PetTrackr I was the only designer, which is its own kind of lead: every call was mine to make, and to defend.</p><p class="ask-jump"><a href="index.html#work">All five projects →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="mobile desktop ios android app native web responsive platform phone tablet device">
+        <button type="button" aria-expanded="false" aria-controls="ask-a13">Do you design for mobile or desktop?</button>
+        <div class="ask-a" id="ask-a13" hidden><p>Both. PetTrackr is a native app for iOS and Android, more than 100 screens. myAster is a patient app. Flint‑Link is desktop and mobile, because customers use it standing at a press on the factory floor.</p><p>IGEL and Apex Insights are desktop portals — on Apex the Power BI tables needed every pixel of width they could get, which is why navigation collapsed to an icon rail.</p></div>
+      </li>
+      <li class="ask-more" data-k="contact email hire hiring available availability reach touch linkedin resume cv freelance recruiter talk call message write notice start">
+        <button type="button" aria-expanded="false" aria-controls="ask-a14">How do I reach you?</button>
+        <div class="ask-a" id="ask-a14" hidden><p>Email is the surest way: <a href="mailto:thedeepvyas@gmail.com">thedeepvyas@gmail.com</a>.</p><p>I’m also on <a href="https://www.linkedin.com/in/the-deep-vyas" target="_blank" rel="noopener">LinkedIn</a>.</p></div>
+      </li>
+          <li class="ask-more" data-k="b2b b2c enterprise consumer business industry domain sector saas client type">
+        <button type="button" aria-expanded="false" aria-controls="ask-a16">Do you work B2B or B2C?</button>
+        <div class="ask-a" id="ask-a16" hidden><p>Both, and not one more than the other. IGEL, Flint‑Link and Apex Insights are B2B — portals for admins, partners and facility leaders. myAster and PetTrackr are B2C — a patient app and a pet‑owner app.</p><p>What carries across is the chain: research → strategy → screens. I own the whole of it, not just the last step.</p><p class="ask-jump"><a href="index.html#work">All five projects →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="portfolio case study studies more examples other projects browse">
+        <button type="button" aria-expanded="false" aria-controls="ask-a17">Which other projects should I look at?</button>
+        <div class="ask-a" id="ask-a17" hidden><ul>
+          <li><a href="igel.html">IGEL Licence Portal</a> — a portal for admins who open it twice a year</li>
+    </ul>
+  </div>
+  <div class="ask-foot">
+    <form class="ask-find" role="search">
+      <label class="sr-only" for="ask-find">Ask about this project</label>
+      <input id="ask-find" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Ask me anything">
+      <button class="ask-send" type="submit" aria-label="Send"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3.6"/><path d="M3.9 7.7L8 3.6l4.1 4.1"/></svg></button>
+    </form>
+    <p class="ask-hint">Anything these don’t cover is better over <a href="mailto:thedeepvyas@gmail.com">email</a>.</p>
+    <p class="ask-note" role="status" aria-live="polite"></p>
+  </div>
+</aside>
+<script src="clippy/clippy-eyes.js" defer></script>
+<script src="clippy/dv-clippy.js" defer></script>
+<script src="dv-clippy-mount.js" defer></script>
+<script src="dv-ask-chat.js" defer></script>
+<script>
+/* the sphere floats over the bottom right corner, which is where the footer
+   keeps its own link, so it clears out while the footer is on screen */
+(function(){
+  var b = document.querySelector(".avbtn"), f = document.querySelector(".foot");
+  if (!b || !f || !window.IntersectionObserver) return;
+  new IntersectionObserver(function(es){
+    var hide = es[0].isIntersecting;
+    b.classList.toggle("away", hide);
+    /* fixed means its own observer always reads it as on screen, so tell it
+       directly rather than leaving it drawing behind an opacity of zero */
+    var av = b.querySelector("[data-avatar]").__av;
+    if (av) { av.onScreen = !hide; if (!hide) requestAnimationFrame(av.loop); }
+  }, { rootMargin: "0px 0px -24px 0px" }).observe(f);
 })();
 </script>
 </body>

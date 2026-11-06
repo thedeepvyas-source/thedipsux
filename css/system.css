@@ -9,19 +9,26 @@
 
 /* ── 1. Tokens ─────────────────────────────────────────────────── */
 :root{
-  /* surface */
-  --bg:#FCFCFD; --surface:#FFFFFF; --raise:#F2F3F6; --inverse:#0B0C0F;
-  /* ink */
-  --ink:#0B0C0F; --ink-2:#31343C; --muted:#63676F; --faint:#6B6F79;
-  /* structure */
-  --line:rgba(11,12,15,.12); --line-2:rgba(11,12,15,.06); --line-3:rgba(11,12,15,.035);
-  /* the one accent */
-  --accent:#2540F0; --on-accent:#FFFFFF; --accent-soft:rgba(37,64,240,.08); --accent-line:rgba(37,64,240,.32);
-  --accent-tint:#5C6FE8; /* softer than the accent — used for the hovered project name */
-  /* type */
-  --sans:'Inter Tight','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  /* surface — story/surface and story/paper from the case-study file */
+  --bg:#FFFFFF; --surface:#FAF9F7; --raise:#FAF9F7; --inverse:#1C1B1A;
+  /* ink — story/ink, ink-2, ink-3.
+     ink-3 (#A29D96) measures 2.7:1 on white, so the faint step is darkened to
+     #7A746C (4.6:1). Everything else is the file's value. */
+  --ink:#1C1B1A; --ink-2:#44403B; --muted:#6B6762; --faint:#7A746C;
+  --ink-3:#A29D96;   /* the file's value, kept for non-text use */
+  /* structure — story/line and line-strong */
+  --line:#E6E2DC; --line-2:#EFECE7; --line-3:#F5F3EF; --line-strong:#CFC9C1;
+  /* the file's semantic inks, with their fills */
+  --warn:#94600E; --warn-fill:#FBF3E3;
+  --good:#3B7550;  --good-fill:#EDF5EF;
+  --risk:#B4472A;  --risk-fill:#FCEFE9; --risk-line:#EEC3B0;
+  /* the one accent — story/blue-ink */
+  --accent:#2E5A94; --on-accent:#FFFFFF; --accent-soft:#EDF2F9; --accent-line:#C5D5EB;
+  --accent-tint:#44719F; /* softer than the accent — used for the hovered project name */
+  /* type — the file is Inter throughout */
+  --sans:'Inter','Inter Tight',system-ui,-apple-system,'Segoe UI',sans-serif;
   --display:'Newsreader',Georgia,'Times New Roman',serif;
-  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mono:var(--sans);
   /* scale */
   --t-display:clamp(42px,6.8vw,98px);
   --t-statement:clamp(28px,4.2vw,56px);
@@ -30,19 +37,28 @@
   --t-body:17px; --t-sm:16px; --t-xs:14px; --t-label:11px;
   /* rhythm */
   --nav-h:75px;        /* measured; the hero subtracts it to fill the first screen */
-  --wrap:1240px;
-  --pad:clamp(20px,5vw,56px);
+  /* the file's column is 1248 inside a 1440 frame; deriving the wrap from the
+     column means the gutter can change without the column drifting */
+  --col:1248px;
+  --pad:clamp(20px,6.7vw,96px);
+  --wrap:calc(var(--col) + 2*var(--pad));
   --sec:clamp(64px,8vw,116px);
   --gap:clamp(28px,3.6vw,52px);
   --r:12px; --r-sm:7px;
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 html[data-theme="dark"]{
-  --bg:#0A0B0D; --surface:#111216; --raise:#191B20; --inverse:#F4F5F7;
-  --ink:#F4F5F7; --ink-2:#CBCED5; --muted:#9296A0; --faint:#868A94;
+  /* the file has no dark mode; these are its hues carried into the dark */
+  --bg:#131211; --surface:#1C1B1A; --raise:#1F1E1C; --inverse:#FAF9F7;
+  --ink:#F5F3EF; --ink-2:#D5CFC7; --muted:#A8A299; --faint:#938D85;
+  --ink-3:#7E786F;
   --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.075); --line-3:rgba(255,255,255,.04);
-  --accent:#7C8CFF; --on-accent:#0A0B0D; --accent-soft:rgba(124,140,255,.12); --accent-line:rgba(124,140,255,.4);
-  --accent-tint:#96A2F0;
+  --line-strong:rgba(255,255,255,.22);
+  --warn:#D7A454; --warn-fill:#2A2316;
+  --good:#74AF8A;  --good-fill:#17231B;   /* lifted for the dark surface */
+  --risk:#E08B6E;  --risk-fill:#2A1B16; --risk-line:#573228;
+  --accent:#8FB3E0; --on-accent:#131211; --accent-soft:#1A2230; --accent-line:rgba(143,179,224,.4);
+  --accent-tint:#A8C4E8;
 }
 
 /* ── 2. Base ───────────────────────────────────────────────────── */
@@ -69,7 +85,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .skip:focus{left:16px;top:14px;background:var(--inverse);color:var(--bg);padding:11px 18px;border-radius:999px;font-size:var(--t-sm)}
 
 /* ── 3. Primitives ─────────────────────────────────────────────── */
-.label{font-family:var(--mono);font-size:var(--t-label);letter-spacing:.17em;text-transform:uppercase;color:var(--faint);font-weight:400}
+.label{font-size:var(--t-label);letter-spacing:.17em;text-transform:uppercase;color:var(--faint);font-weight:400}
 .serif{font-family:var(--display);font-weight:400;font-style:italic;letter-spacing:-.005em}
 .accent{color:var(--accent)}
 
@@ -88,7 +104,7 @@ section[id]{--pad-top:var(--sec);
 .sec-head{display:grid;grid-template-columns:clamp(18px,1.6vw,22px) minmax(0,1.1fr) minmax(0,1fr);
   gap:0 clamp(16px,1.7vw,26px);align-items:start;
   padding-bottom:clamp(22px,2.6vw,32px);border-bottom:1px solid var(--line);margin-bottom:clamp(38px,5vw,72px)}
-.sec-head .idx{grid-column:1;grid-row:1;font-family:var(--mono);font-size:var(--t-label);
+.sec-head .idx{font-weight:600;grid-column:1;grid-row:1;font-size:var(--t-label);
   letter-spacing:.14em;color:var(--accent);padding-top:.7em}
 .sec-head h2{grid-column:2;grid-row:1;font-size:var(--t-h);font-weight:600;letter-spacing:-.02em;line-height:1.3}
 .sec-head .lede{grid-column:2;grid-row:2;font-size:clamp(21px,2.5vw,32px);line-height:1.28;letter-spacing:-.03em;
@@ -147,7 +163,7 @@ section[id]{--pad-top:var(--sec);
   color:var(--muted);transition:color .2s var(--ease),border-color .2s var(--ease),transform .3s var(--ease)}
 .icon-btn svg{width:15px;height:15px}
 .icon-btn:hover{color:var(--ink);border-color:var(--ink)}
-.nav-cv{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:9px 15px;border-radius:999px;
+.nav-cv{font-weight:600;font-size:11.5px;letter-spacing:.04em;padding:9px 15px;border-radius:999px;
   border:1px solid var(--line);color:var(--ink);transition:background-color .24s var(--ease),color .24s var(--ease),border-color .24s var(--ease)}
 .nav-cv:hover{background:var(--inverse);color:var(--bg);border-color:transparent}
 /* ── Theme toggle: a diya ───────────────────────────────────────
@@ -236,8 +252,8 @@ html[data-theme="dark"] .diya .s2{animation:smoke 2.4s 1.26s ease-out infinite}
 
 /* ── 5. Footer & toast ─────────────────────────────────────────── */
 footer{border-top:1px solid var(--line);padding:26px 0 40px}
-.foot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;
-  font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:var(--faint)}
+.foot-in{font-weight:600;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;
+  font-size:11.5px;letter-spacing:.05em;color:var(--faint)}
 .foot-in a:hover{color:var(--accent)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,16px);background:var(--inverse);color:var(--bg);
   font-size:13.5px;padding:11px 20px;border-radius:999px;opacity:0;pointer-events:none;z-index:120;

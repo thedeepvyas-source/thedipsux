@@ -7,7 +7,7 @@
 <meta name="description" content="A redesign of IGEL’s ten-year-old licence portal: a home that tells admins what to do next, guided tasks, and a Licence Copilot for partners. Case study by Deep Vyas.">
 <meta name="theme-color" content="#F6F5F0">
 <meta property="og:title" content="IGEL Licence Portal — a portal for admins who open it twice a year">
-<meta property="og:description" content="IGEL had already done its UX research. I led Apexon’s response and took it further: a portal that tells you what to do next, and a Copilot for the partners who use it every day.">
+<meta property="og:description" content="I led Apexon’s response: a portal that tells you what to do next, and a Copilot for the partners who use it every day.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://thedipsux.vercel.app/igel.html">
 <meta property="og:site_name" content="Deep Vyas">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="Deep Vyas — IGEL Licence Portal: a portal for admins who open it twice a year. Licence portal, desktop web, RFP response.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="IGEL Licence Portal — a portal for admins who open it twice a year">
-<meta name="twitter:description" content="IGEL had already done its UX research. I led Apexon’s response and took it further: a portal that tells you what to do next, and a Copilot for the partners who use it every day.">
+<meta name="twitter:description" content="I led Apexon’s response: a portal that tells you what to do next, and a Copilot for the partners who use it every day.">
 <meta name="twitter:image" content="https://thedipsux.vercel.app/og-igel.png">
 <meta name="twitter:image:alt" content="Deep Vyas — IGEL Licence Portal: a portal for admins who open it twice a year. Licence portal, desktop web, RFP response.">
 <link rel="canonical" href="https://thedipsux.vercel.app/igel.html">
@@ -51,7 +51,7 @@ document.documentElement.className+=" js";</script>
   --ink:#1C2628; --body:#3D4A4B; --muted:#5F6A69; --accent:#2E6470;
   --line:#DAD5CB; --line-2:#CFC9BD; --line-ink:#1C2628;
   --paper:#F6F5F0; --paper-2:#EDEBE4; --surface:#FFFFFF;
-  --case:#DD833E;                     /* IGEL's colour in the logo palette */
+  --case:#428F4F;                     /* IGEL's colour in the logo palette */
   --tint:rgba(221,131,62,.1);
   --hair:rgba(0,0,0,.08);
   --accent-hover:#275560; --accent-active:#1F4850; --accent-visited:#1F4850;
@@ -340,6 +340,197 @@ html[data-theme="dark"] .srail .lbl{background:var(--paper-2);color:var(--ink);
 .foot{padding:32px 96px;display:flex;align-items:flex-start;justify-content:space-between;
   box-shadow:inset 0 1px 0 0 var(--line)}
 .foot p{color:var(--muted);white-space:nowrap}
+/* ── the character, and the panel it opens ────────────────────
+   The character is a control, not decoration: it sits where a launcher
+   sits and opens a drawer that pushes the page across instead of
+   covering it. The page stays readable beside it, which makes this a
+   non-modal dialog, so focus is not trapped. Escape closes it and hands
+   focus back.
+
+   The same drawer, and the same CSS, on all six pages. */
+.avbtn{position:fixed;right:24px;bottom:24px;bottom:max(24px,env(safe-area-inset-bottom));
+  width:112px;height:112px;z-index:55;padding:0;border:0;background:none;cursor:pointer;
+  border-radius:999px;transition:opacity var(--d-base) var(--ease-out)}
+.avbtn:focus-visible{outline:2px solid var(--accent);outline-offset:6px}
+/* away: the footer wants that corner. hid: the panel has taken over. */
+.avbtn.away,.avbtn.hid{opacity:0;pointer-events:none}
+/* the sprite character is 77x128, not a disc, so it is centred in
+   the button rather than filling it. Frames are 128px tall and go soft
+   above that, so neither one is drawn larger. */
+.avmark{display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;--ink:var(--case)}
+
+.ask{position:fixed;top:0;right:0;bottom:0;width:360px;z-index:60;
+  display:flex;flex-direction:column;background:var(--paper);
+  box-shadow:inset 1px 0 0 0 var(--line);
+  transform:translateX(100%);transition:transform var(--d-enter) var(--ease-enter);
+  /* the pills and the input are a card lifted off the paper. The case
+     pages get that from --surface, which is white there; on the landing
+     page --surface equals --paper, so the same CSS came out flat. The
+     drawer carries its own value rather than inheriting a token that
+     differs per page, which is what kept the six pages from matching. */
+  --ask-card:#FFFFFF}
+html[data-theme="dark"] .ask{--ask-card:#202425}
+.ask.on{transform:none}
+.ask:focus{outline:none}
+body{transition:margin-right var(--d-enter) var(--ease-enter)}
+html.askopen body{margin-right:360px}
+
+.ask-top{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 0 28px}
+.ask-top p{color:var(--muted);font-weight:500;font-size:13px;line-height:18px;letter-spacing:.13px}
+.ask-x{width:36px;height:36px;flex:0 0 36px;border:0;background:none;padding:0;cursor:pointer;
+  border-radius:999px;color:var(--muted);display:flex;align-items:center;justify-content:center;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+.ask-x:hover{color:var(--ink);background:var(--paper-2)}
+.ask-x:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.ask-face{height:172px;flex:0 0 172px;display:flex;align-items:center;justify-content:center}
+.ask-face .avmark{width:128px;height:128px}
+
+.ask-scroll{flex:1 1 auto;overflow-y:auto;padding:0 28px 8px}
+.ask-q{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;
+  box-shadow:inset 0 -1px 0 0 var(--line)}
+.ask-q>li{border-top:1px solid var(--line)}
+.ask-q>li>button{width:100%;text-align:left;border:0;background:none;cursor:pointer;font:inherit;
+  padding:14px 0;color:var(--ink);font-weight:500;font-size:15px;line-height:21px;
+  display:flex;gap:16px;align-items:baseline;justify-content:space-between;
+  transition:color var(--d-micro) var(--ease-out)}
+.ask-q>li>button:hover{color:var(--accent)}
+.ask-q>li>button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ask-q>li>button::after{content:"+";color:var(--muted);font-weight:400}
+.ask-q>li>button[aria-expanded="true"]::after{content:"−"}
+.ask-a{padding:0 0 18px}
+.ask-a p{color:var(--body);font-size:14px;line-height:22px}
+.ask-a p+p{margin-top:10px}
+.ask-a ul{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ask-a li{color:var(--muted);font-size:13px;line-height:19px}
+.ask-a a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.ask-a a:hover{color:var(--accent-hover)}
+
+/* the link at the foot of each answer, into the section it was condensed from */
+.ask-jump{margin-top:14px}
+.ask-jump a{font-weight:500;font-size:13px;line-height:19px}
+
+/* the three questions that are the same on every case study */
+.ask-lbl{color:var(--muted);font-weight:500;font-size:12px;line-height:16px;
+  letter-spacing:.6px;text-transform:uppercase;padding:28px 0 6px}
+
+.ask-foot{padding:14px 28px 22px;box-shadow:inset 0 1px 0 0 var(--line);
+  display:flex;flex-direction:column;gap:10px}
+.ask-foot p{color:var(--muted);font-size:13px;line-height:19px}
+/* "Looking…", "Answered.", "Cleared." are announcements, not reading
+   matter — a sighted reader already watches the dots and the answer appear.
+   So the status line keeps its live region and leaves the layout. */
+.ask-note{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+.ask-foot a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+
+/* the field: it searches the answers above rather than asking anything */
+.ask-find{position:relative;display:flex}
+.ask-find input{flex:1 1 auto;width:100%;min-width:0;font:inherit;font-size:14px;
+  line-height:20px;color:var(--ink);background:var(--ask-card);border:0;border-radius:999px;
+  box-shadow:inset 0 0 0 1px var(--line),0 1px 2px rgba(0,0,0,.05);
+  padding:13px 50px 13px 18px;
+  -webkit-appearance:none;appearance:none;
+  transition:box-shadow var(--d-micro) var(--ease-out)}
+.ask-find input::placeholder{color:var(--muted)}
+.ask-find input:focus{outline:none;
+  box-shadow:inset 0 0 0 2px var(--accent),0 1px 2px rgba(0,0,0,.05)}
+.ask-find input::-webkit-search-cancel-button,
+.ask-find input::-webkit-search-decoration{-webkit-appearance:none;display:none}
+.ask-send{position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:34px;height:34px;display:grid;place-items:center;padding:0;
+  border:0;border-radius:50%;cursor:pointer;
+  color:var(--paper);background:var(--ink);
+  transition:background-color var(--d-micro) var(--ease-out),
+             opacity var(--d-micro) var(--ease-out)}
+.ask-send svg{display:block}
+.ask-send:hover{background:var(--accent)}
+.ask-send:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* nothing typed, nothing to send — the button says so without going away */
+.ask-find input:placeholder-shown~.ask-send{opacity:.3}
+
+/* the drawer is a conversation, not an accordion. The written
+   <ul class="ask-q"> stays in the page for anything that cannot run the
+   script, and is hidden the moment it can. */
+.js .ask-more{display:none}
+[hidden]{display:none!important}
+
+/* the face now scrolls with the conversation instead of sitting in a band
+   of its own: it is a greeting, not a header */
+.ask-scroll>.ask-face{flex:0 0 auto}
+.ask.talking .ask-face{height:0;flex-basis:0;opacity:0;overflow:hidden;
+  transition:height var(--d-base) var(--ease-out),opacity var(--d-micro) var(--ease-out)}
+
+/* the openers, and whatever is worth asking next: something to tap, which
+   is what every assistant anyone has used puts under an answer */
+.ask-start,.ask-more-q{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.ask-more-q{margin-top:20px}
+.ask-start-q{align-self:flex-start;max-width:100%;cursor:pointer;font:inherit;
+  text-align:left;margin:0;padding:8px 14px;border:0;border-radius:999px;
+  background:var(--ask-card);box-shadow:inset 0 0 0 1px var(--line);
+  color:var(--ink);font-size:13.5px;line-height:19px;
+  transition:box-shadow var(--d-micro) var(--ease-out),color var(--d-micro) var(--ease-out)}
+.ask-start-q:hover{color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.ask-start-q:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* when there is nothing left to suggest, say so rather than loop */
+.ask-spent{color:var(--muted);font-size:13px;line-height:19px}
+
+/* the conversation. What you asked is yours, so it gets a bubble on your
+   side; the answer is there to be read, so it is body text across the
+   column with nothing drawn round it. */
+.ask-log{display:flex;flex-direction:column}
+.ask-row{display:flex}
+.ask-you{justify-content:flex-end;margin-top:30px}
+.ask-you:first-child{margin-top:4px}
+.ask-you .ask-bub{max-width:85%;padding:9px 14px;border-radius:16px 16px 5px 16px;
+  background:var(--paper-2);color:var(--ink);font-size:14px;line-height:21px}
+.ask-reply{margin-top:14px}
+.ask-reply .ask-bub{width:100%}
+.ask-log p{color:var(--body);font-size:14px;line-height:22px}
+.ask-log p+p{margin-top:10px}
+.ask-log a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.ask-log a:hover{color:var(--accent-hover)}
+.ask-log ul{list-style:none;margin:10px 0 0;padding:0;
+  display:flex;flex-direction:column;gap:10px}
+.ask-log li{color:var(--muted);font-size:13px;line-height:19px}
+
+.ask-caret{display:inline-block;width:6px;height:13px;margin-left:1px;vertical-align:-2px;
+  background:var(--accent);border-radius:1px;animation:askcaret .9s steps(1) infinite}
+@keyframes askcaret{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+.ask-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+
+.ask-dots{display:inline-flex;gap:4px;padding:6px 0}
+.ask-dots i{width:5px;height:5px;border-radius:999px;background:var(--muted);
+  animation:askdot 1.1s ease-in-out infinite}
+.ask-dots i:nth-child(2){animation-delay:.15s}
+.ask-dots i:nth-child(3){animation-delay:.3s}
+@keyframes askdot{0%,60%,100%{opacity:.25}30%{opacity:.9}}
+
+.ask-reset{width:36px;height:36px;flex:0 0 36px;border:0;background:none;padding:0;
+  cursor:pointer;border-radius:999px;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:color var(--d-micro) var(--ease-out),background-color var(--d-micro) var(--ease-out)}
+.ask-reset:hover{color:var(--ink);background:var(--paper-2)}
+.ask-reset:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ask-top{gap:2px}
+.ask-top p{flex:1 1 auto}
+
+@media (prefers-reduced-motion:reduce){
+  .ask-caret{display:none}
+  .ask-dots i{animation:none;opacity:.5}
+  .ask.talking .ask-face{transition:none}
+}
+
+@media (max-width:860px){
+  .ask{width:100%}
+  html.askopen body{margin-right:0}
+  .avbtn{right:16px;bottom:16px;bottom:max(16px,env(safe-area-inset-bottom));width:76px;height:76px}
+  .ask-face{height:140px;flex-basis:140px}
+  .ask-face .avmark{width:108px;height:108px}
+}
+@media (prefers-reduced-motion:reduce){.ask,body,.avbtn{transition:none}}
 
 /* ── a section head: label left, heading column right ─────────────── */
 /* the label and the heading sit on a 120px gutter, both starting at the top */
@@ -933,7 +1124,7 @@ html[data-theme="dark"] .ba .after{border-color:var(--line)}
     <span class="ln" style="--i:1"><span>for admins who open it</span></span>
     <span class="ln" style="--i:2"><span>twice a year</span></span>
   </h1>
-  <p class="sub t-body-l" data-rev="rise" style="--i:0">IGEL&rsquo;s licence portal is ten years old, and most customers open it about once a year to renew. IGEL had already done its UX research. I led Apexon&rsquo;s response and took it further: a portal that tells you what to do next, and a Copilot for the partners who use it every day.</p>
+  <p class="sub t-body-l" data-rev="rise" style="--i:0">IGEL&rsquo;s licence portal is ten years old, and most customers open it about once a year to renew. I led Apexon&rsquo;s response: a portal that tells you what to do next, and a Copilot for the partners who use it every day.</p>
   <div class="meta" data-rev="rise" style="--i:1"><div><span class="ic"><img src="ig-assets/6192e.svg" alt="" width="16" height="16"></span><span class="k">My role</span><span class="v">Design Lead. I led the project for Apexon</span></div><div><span class="ic"><img src="ig-assets/fe185.svg" alt="" width="16" height="16"></span><span class="k">Client</span><span class="v">IGEL Technology</span></div><div><span class="ic"><img src="ig-assets/51d6d.svg" alt="" width="16" height="16"></span><span class="k">Platform</span><span class="v">Desktop web, with basic tablet and mobile</span></div><div><span class="ic"><img src="ig-assets/af725.svg" alt="" width="16" height="16"></span><span class="k">Scope</span><span class="v">The redesign, a clickable prototype of 14 screens, the Licence Copilot concept and the walkthrough, built on IGEL&rsquo;s own research</span></div><div><span class="ic"><img src="ig-assets/2ffcf.svg" alt="" width="16" height="16"></span><span class="k">Outcome</span><span class="v">Won the engagement. IGEL is going ahead with the redesign</span></div></div>
   <div class="heromedia">
     <figure class="figshot">
@@ -951,7 +1142,7 @@ html[data-theme="dark"] .ba .after{border-color:var(--line)}
       </div>
       <figcaption>Drag to compare. Left: the live portal before the project, with boxed components, a busy palette, small charts and tables that expect you to know what BOOKED_ILP means. Right: my redesigned Home. Customer details blurred; figures are sample data.</figcaption>
     </figure>
-    <div class="proto" data-rev="rise">
+    <div class="proto" id="prototype" data-rev="rise">
       <div class="in">
         <p class="k">Clickable prototype &middot; 14 screens</p>
         <h2>Click through the prototype yourself</h2>
@@ -1697,6 +1888,140 @@ html[data-theme="dark"] .ba .after{border-color:var(--line)}
     if(e.key === "Escape"){ close(); }
     else if(e.key === "Tab"){ e.preventDefault(); (document.activeElement === shut ? img : shut).focus(); }
   });
+})();
+</script>
+<button class="avbtn" aria-label="Ask about this project" aria-haspopup="dialog"
+        aria-expanded="false" aria-controls="ask">
+  <span class="avmark" data-avatar aria-hidden="true"></span>
+</button>
+
+<aside class="ask" id="ask" data-case="IGEL Licence Portal" role="dialog" aria-labelledby="ask-t" tabindex="-1" hidden>
+  <div class="ask-top">
+    <p id="ask-t">Ask about this project</p>
+    <button class="ask-x" type="button" aria-label="Close"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  </div>
+  <div class="ask-face"><span class="avmark" data-avatar aria-hidden="true"></span></div>
+  <div class="ask-scroll">
+    <ul class="ask-q">
+      <li data-k="problem challenge brief need pain point goal context situation solving solve statement issue broken wrong before background purpose users struggle struggled friction stopped slowed waiting">
+        <button type="button" aria-expanded="false" aria-controls="ask-a5">What problem are you solving here?</button>
+        <div class="ask-a" id="ask-a5" hidden><p>A ten&#8209;year&#8209;old portal, used at very different speeds. Customers open it about once a year to renew, and many never become fluent; partners and MSPs use it many times a day; IGEL&rsquo;s own team can change any licence for any customer.</p><p>The UX challenge: make it clear for the once&#8209;a&#8209;year customer, without slowing down the partner who lives in it.</p><p class="ask-jump"><a href="#problem">The problem, in full &rarr;</a></p></div>
+      </li>
+      <li data-k="prototype proto clickable click through demo interactive try play open link figma mockup screens tour walk explore test drive hands on show see view">
+        <button type="button" aria-expanded="false" aria-controls="ask-a15">Show me the clickable prototype</button>
+        <div class="ask-a" id="ask-a15" hidden><p>Fourteen screens and five flows, with a nine&#8209;step tour. Use the arrows at the bottom right to follow the tour, or click around freely. Sample data throughout.</p><p>Things to try:</p><ul>
+          <li><b>Renew an expired pack</b> — Home &rarr; Licences &rarr; the pack &rarr; Review &rarr; Done</li>
+          <li><b>Get started as Maria</b> — Sign&#8209;in link &rarr; Guided tasks</li>
+          <li><b>Redeem a purchase</b> — Orders &rarr; Redeem &rarr; Licences</li>
+          <li><b>Convert an OS10 pack</b> — The pack &rarr; More actions &rarr; Convert</li>
+          <li><b>Clean up devices</b> — Home &rarr; Devices &rarr; Release licence</li>
+      </ul><p class="ask-jump"><a href="https://claude.ai/artifact/K2xFrULHHjcHotZtoNF9Br" target="_blank" rel="noopener noreferrer">Open the prototype &#8599;</a></p><p class="ask-jump"><a href="#prototype">Or find it on the page &rarr;</a></p></div>
+      </li>
+      <li data-k="walkthrough video watch play recording recorded demo film clip presentation present presented screencast show see view movie">
+        <button type="button" aria-expanded="false" aria-controls="ask-a16">Show me the walkthrough video</button>
+        <div class="ask-a" id="ask-a16" hidden><p>Four minutes twenty&#8209;nine. I presented the redesign to IGEL as the clickable prototype and this recorded walkthrough &mdash; it moves through Home, licence health and the prioritised actions, and shows how the screens fit together.</p><p>The decisions further down the page explain each one. Sample data throughout.</p><p class="ask-jump"><a href="#walkthrough">Watch the walkthrough &rarr;</a></p></div>
+      </li>
+      <li data-k="role responsibility responsible ownership owned own credit scope yours yourself contribution contributed part parts share involvement involved personally alone solo team teammates colleagues others did do made">
+        <button type="button" aria-expanded="false" aria-controls="ask-a1">What did you own here?</button>
+        <div class="ask-a" id="ask-a1" hidden><p>I designed the redesign, the guided tasks, a clickable prototype of 14 screens and five flows with a nine‑step tour, the Licence Copilot concept and the walkthrough video — in about two weeks between the first call and the deadline.</p><p>I didn’t own the client relationship or the RFP itself, which were Apexon’s account lead; the architecture, migration, testing and the estimate, which were Apexon’s engineering and QA leads; or the brief and its two phases, which were IGEL’s CIO.</p><p class="ask-jump"><a href="#contribution">Who owned what, in full →</a></p></div>
+      </li>
+      <li data-k="decision decisions decide decided choice choices call calls chose choose chosen option options alternative alternatives tradeoff trade-off tradeoffs why rationale reasoning reason judgement judgment thinking approach big main key important">
+        <button type="button" aria-expanded="false" aria-controls="ask-a17">What were your big decisions?</button>
+        <div class="ask-a" id="ask-a17" hidden><p>Six, each with its own section on the page:</p><ul>
+          <li><a href="#d1">Turn Home into a to&#8209;do list</a></li>
+          <li><a href="#d2">Walk rare users through rare tasks</a></li>
+          <li><a href="#d3">Say it plainly, and make the next step obvious</a></li>
+          <li><a href="#d4">Show urgency without making people read dates</a></li>
+          <li><a href="#d5">Slow down the risky steps, then point to what&rsquo;s next</a></li>
+          <li><a href="#d6">Give partners answers, not exports</a></li>
+        </ul></div>
+      </li>
+      <li data-k="hard difficult challenge struggle pushback disagreement argument tension call ai copilot assistant llm chatbot">
+        <button type="button" aria-expanded="false" aria-controls="ask-a2">What was the hardest call you made?</button>
+        <div class="ask-a" id="ask-a2" hidden><p>Going past the brief. IGEL asked for better exports and in‑app dashboards, and Reports has both: utilisation by product, renewals by quarter and five CSV downloads.</p><p>Then I added a Licence Copilot. You ask a question in plain English and it builds the table or chart that answers it, from your own data. It suggests actions, but never takes them. The trade‑off is real — answers have to be right every time, and IGEL’s legal and security teams would have to approve it. It’s a concept in the prototype, not part of the agreed build.</p><p class="ask-jump"><a href="#d6">Decision 6, in full →</a></p></div>
+      </li>
+      <li data-k="impact outcome success metric kpi number data proof evidence worked work">
+        <button type="button" aria-expanded="false" aria-controls="ask-a3">How do you know it worked?</button>
+        <div class="ask-a" id="ask-a3" hidden><p>We won the work. IGEL chose us and they’re going ahead with the redesigned portal. That is the only outcome I can show — nothing has shipped, so there are no usage numbers, and I’m not going to guess at them.</p><p>Once it does ship, the number I’d hold it to is renewals that finish without a support ticket. Then duplicate licences created each quarter, time per guided task, and how long a partner takes to answer a common licence question.</p><p class="ask-jump"><a href="#results">Results and measurement limits →</a></p></div>
+      </li>
+      <li data-k="learn lesson mistake regret improve again retrospective differently wrong change redo revisit hindsight">
+        <button type="button" aria-expanded="false" aria-controls="ask-a4">What would you do differently?</button>
+        <div class="ask-a" id="ask-a4" hidden><p>I’d ask for even three short sessions with real admins and partners before the deadline. The whole redesign leans on personas and an audit, and I never put the prototype in front of someone who actually uses the portal.</p><p>The other two: a once‑a‑year tool and an every‑day tool are different products even when they’re the same portal, so it had to work at both speeds. And Phase 1 couldn’t touch the business logic — refactoring around the task did more, faster and with less risk than a rebuild would have.</p><p class="ask-jump"><a href="#reflection">Reflection →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="usability test tested testing validate validation participants sessions admins users proof">
+        <button type="button" aria-expanded="false" aria-controls="ask-a7">Was it tested with real users?</button>
+        <div class="ask-a" id="ask-a7" hidden><p>No. This was an RFP response, so IGEL judged the design, not admins. Our team sent 46 written questions and had an hour with their CIO, and his answers shaped the brief. Then IGEL clicked through the prototype and watched the recorded walkthrough, and chose our proposal.</p><p>That tells me the reasoning held up. It doesn’t tell me a once‑a‑year admin can run a renewal without help. The plain names, the guided tasks and the Copilot have not been checked with anyone who uses the portal.</p><p class="ask-jump"><a href="#testing">What was checked →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="research discovery interviews insights methods learn understand findings">
+        <button type="button" aria-expanded="false" aria-controls="ask-a8">What research did you do?</button>
+        <div class="ask-a" id="ask-a8" hidden><p>I read the handover before designing anything. Then our team sent IGEL 46 written questions and spent an hour with their CIO on June 8. His answers set the brief: three user groups, Phase 1 front end only, four languages, WCAG AA.</p><p>What I didn’t get was time with admins or partners. Two weeks to the deadline — and I’d still ask for three short sessions.</p><p class="ask-jump"><a href="#testing">What was checked →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="team size people how long duration timeline months weeks schedule colleagues agency">
+        <button type="button" aria-expanded="false" aria-controls="ask-a9">Who else was on it, and how long did it take?</button>
+        <div class="ask-a" id="ask-a9" hidden><p>About two weeks between the first call and the deadline.</p><p>I led the design for Apexon, alongside their account lead, who owned the client relationship and the RFP itself, and their engineering and QA leads, who owned architecture, migration, testing and the estimate. IGEL’s CIO owned the brief and its two phases.</p><p class="ask-jump"><a href="#contribution">Who owned what →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="deliverable deliverables handover handoff output artefacts artifacts shipped gave produced files screens many count number">
+        <button type="button" aria-expanded="false" aria-controls="ask-a10">What did you hand over?</button>
+        <div class="ask-a" id="ask-a10" hidden><p>A clickable prototype of 14 screens and five flows with a nine‑step tour, the guided tasks, the Licence Copilot concept, and a recorded walkthrough video — all of it part of Apexon’s response.</p><p class="ask-jump"><a href="#walkthrough">The walkthrough →</a></p></div>
+      </li>
+    </ul>
+    <p class="ask-lbl">Across all five</p>
+    <ul class="ask-q">
+      <li class="ask-more" data-k="research own yourself end to end full process strategy discovery just only screens visual">
+        <button type="button" aria-expanded="false" aria-controls="ask-a11">Do you do research yourself?</button>
+        <div class="ask-a" id="ask-a11" hidden><p>Myself. Research → strategy → screens — I own the whole chain, not just the last step.</p><p>It looks different on each project: 10 in‑home interviews and a 14‑day diary study on PetTrackr; 14 interviews and two factory‑floor site visits on Flint‑Link; a state audit and the three teams who owned the rules on myAster, where no sessions were available. Where there was no research, the case study says so.</p><p class="ask-jump"><a href="index.html#how">How I work →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="lead led leader leadership manage manager mentor senior principal head team people juniors direct reports">
+        <button type="button" aria-expanded="false" aria-controls="ask-a12">Have you led a team?</button>
+        <div class="ask-a" id="ask-a12" hidden><p>Yes. On myAster I led four designers for 10 months — I assigned the service flows, reviewed every screen against the shared patterns, and approved what went to engineering. On Flint‑Link I was the lead designer with a second designer and a project manager. On IGEL I led the design for Apexon’s RFP response.</p><p>And on PetTrackr I was the only designer, which is its own kind of lead: every call was mine to make, and to defend.</p><p class="ask-jump"><a href="index.html#work">All five projects →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="mobile desktop ios android app native web responsive platform phone tablet device">
+        <button type="button" aria-expanded="false" aria-controls="ask-a13">Do you design for mobile or desktop?</button>
+        <div class="ask-a" id="ask-a13" hidden><p>Both. PetTrackr is a native app for iOS and Android, more than 100 screens. myAster is a patient app. Flint‑Link is desktop and mobile, because customers use it standing at a press on the factory floor.</p><p>IGEL and Apex Insights are desktop portals — on Apex the Power BI tables needed every pixel of width they could get, which is why navigation collapsed to an icon rail.</p></div>
+      </li>
+      <li class="ask-more" data-k="contact email hire hiring available availability reach touch linkedin resume cv freelance recruiter talk call message write notice start">
+        <button type="button" aria-expanded="false" aria-controls="ask-a14">How do I reach you?</button>
+        <div class="ask-a" id="ask-a14" hidden><p>Email is the surest way: <a href="mailto:thedeepvyas@gmail.com">thedeepvyas@gmail.com</a>.</p><p>I’m also on <a href="https://www.linkedin.com/in/the-deep-vyas" target="_blank" rel="noopener">LinkedIn</a>.</p></div>
+      </li>
+          <li class="ask-more" data-k="b2b b2c enterprise consumer business industry domain sector saas client type">
+        <button type="button" aria-expanded="false" aria-controls="ask-a18">Do you work B2B or B2C?</button>
+        <div class="ask-a" id="ask-a18" hidden><p>Both, and not one more than the other. IGEL, Flint‑Link and Apex Insights are B2B — portals for admins, partners and facility leaders. myAster and PetTrackr are B2C — a patient app and a pet‑owner app.</p><p>What carries across is the chain: research → strategy → screens. I own the whole of it, not just the last step.</p><p class="ask-jump"><a href="index.html#work">All five projects →</a></p></div>
+      </li>
+      <li class="ask-more" data-k="portfolio case study studies more examples other projects browse">
+        <button type="button" aria-expanded="false" aria-controls="ask-a19">Which other projects should I look at?</button>
+        <div class="ask-a" id="ask-a19" hidden><ul>
+          <li><a href="myaster.html">myAster</a> — insurance answered before checkout, not after</li>
+    </ul>
+  </div>
+  <div class="ask-foot">
+    <form class="ask-find" role="search">
+      <label class="sr-only" for="ask-find">Ask about this project</label>
+      <input id="ask-find" type="search" autocomplete="off" spellcheck="false"
+             placeholder="Ask me anything">
+      <button class="ask-send" type="submit" aria-label="Send"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3.6"/><path d="M3.9 7.7L8 3.6l4.1 4.1"/></svg></button>
+    </form>
+    <p class="ask-hint">Anything these don’t cover is better over <a href="mailto:thedeepvyas@gmail.com">email</a>.</p>
+    <p class="ask-note" role="status" aria-live="polite"></p>
+  </div>
+</aside>
+<script src="clippy/clippy-eyes.js" defer></script>
+<script src="clippy/dv-clippy.js" defer></script>
+<script src="dv-clippy-mount.js" defer></script>
+<script src="dv-ask-chat.js" defer></script>
+<script>
+/* the sphere floats over the bottom right corner, which is where the footer
+   keeps its own link, so it clears out while the footer is on screen */
+(function(){
+  var b = document.querySelector(".avbtn"), f = document.querySelector(".foot");
+  if (!b || !f || !window.IntersectionObserver) return;
+  new IntersectionObserver(function(es){
+    var hide = es[0].isIntersecting;
+    b.classList.toggle("away", hide);
+    /* fixed means its own observer always reads it as on screen, so tell it
+       directly rather than leaving it drawing behind an opacity of zero */
+    var av = b.querySelector("[data-avatar]").__av;
+    if (av) { av.onScreen = !hide; if (!hide) requestAnimationFrame(av.loop); }
+  }, { rootMargin: "0px 0px -24px 0px" }).observe(f);
 })();
 </script>
 </body>

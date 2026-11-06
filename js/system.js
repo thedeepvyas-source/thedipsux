@@ -16,7 +16,7 @@
   function syncThemeColor(){
     var m = document.querySelector('meta[name="theme-color"]');
     if(!m){ m = document.createElement("meta"); m.name = "theme-color"; document.head.appendChild(m); }
-    m.content = root.getAttribute("data-theme") === "dark" ? "#0A0B0D" : "#FCFCFD";
+    m.content = root.getAttribute("data-theme") === "dark" ? "#0A0B0D" : "#FFFFFF";
   }
   syncThemeColor();
 
@@ -92,12 +92,9 @@
      plain <figure><img> and the feature degrades to a normal image
      without JS. */
   var shots = [].slice.call(
-    document.querySelectorAll(".gal figure img, .art img, .chero-fig img"));
+    document.querySelectorAll(".gal figure img, .art img, .chero-fig img, .stage figure img"));
 
   if(shots.length){
-    var MAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<circle cx="10.5" cy="10.5" r="7"/><path d="M20 20l-4.4-4.4M10.5 7.5v6M7.5 10.5h6"/></svg>';
     var EX  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
       'stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 
@@ -131,21 +128,16 @@
       if(opener){ opener.focus(); opener = null; }
     }
 
+    /* No visible affordance, but a real button: the screenshot is the control,
+       so it works with a keyboard and can take focus back on close. */
     shots.forEach(function(img){
-      var wrap = document.createElement("span");
+      var wrap = document.createElement("button");
+      wrap.type = "button";
       wrap.className = "zoomwrap";
+      wrap.setAttribute("aria-label", "Enlarge: " + (img.alt || "screenshot"));
       img.parentNode.insertBefore(wrap, img);
       wrap.appendChild(img);
-
-      var btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = "zoom-btn";
-      btn.innerHTML = MAG;
-      btn.setAttribute("aria-label", "Enlarge: " + (img.alt || "screenshot"));
-      wrap.appendChild(btn);
-
-      btn.addEventListener("click", function(){ opener = btn; open(img); });
-      img.addEventListener("click", function(){ opener = btn; open(img); });
+      wrap.addEventListener("click", function(){ opener = wrap; open(img); });
     });
 
     lbX.addEventListener("click", close);
@@ -154,4 +146,26 @@
       if(e.key === "Escape" && lb.classList.contains("on")) close();
     });
   }
+
+  /* The hero composition becomes a horizontal strip on small screens. Chrome
+     does not make a scroll container keyboard-reachable on its own, so give it
+     a tab stop — but only while it really scrolls, or desktop gains a tab stop
+     that does nothing. */
+  var stage = document.querySelector(".stage");
+  if (stage) {
+    var syncStage = function () {
+      if (stage.scrollWidth - stage.clientWidth > 2) {
+        stage.setAttribute("tabindex", "0");
+        stage.setAttribute("role", "group");
+        stage.setAttribute("aria-label", "Four myAster screens, scrollable");
+      } else {
+        stage.removeAttribute("tabindex");
+        stage.removeAttribute("role");
+        stage.removeAttribute("aria-label");
+      }
+    };
+    syncStage();
+    addEventListener("resize", syncStage, { passive: true });
+  }
+
 })();
