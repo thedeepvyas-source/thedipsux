@@ -799,6 +799,24 @@ html.askopen .foot p{white-space:normal}
   html.askopen body{margin-right:0}
 }
 </style>
+<style>
+/* ── swarm trigger ────────────────────────────────────────────────
+   The engine writes the button host's position as an inline style, so
+   everything here has to be !important to land. It sits under the
+   launcher rather than on top of it, and steps aside while the ask
+   drawer is open, which covers this corner. */
+body > div[data-swarm-ignore]{right:24px!important;bottom:20px!important;
+  transition:opacity .2s ease,transform .2s ease!important}
+.avbtn{bottom:74px!important}
+html.askopen body > div[data-swarm-ignore]{
+  opacity:0!important;transform:translateY(10px)!important;pointer-events:none!important}
+@media (max-width:640px){
+  body > div[data-swarm-ignore]{right:16px!important;bottom:14px!important}
+  .avbtn{bottom:60px!important}
+}
+.credit{padding:0 var(--px) 28px;color:var(--muted);font-size:13px;line-height:20px}
+.credit a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+</style>
 </head>
 <body>
 <a class="skip" href="#work">Skip to selected work</a>
@@ -1070,6 +1088,10 @@ html.askopen .foot p{white-space:normal}
 <footer class="foot">
   <p class="t-body-xs">© 2026 Deep Vyas</p>
   <a class="tlink" href="#top"><span class="in"><span class="lbl">Back to top</span><span class="sp"> </span><span class="arw top">↑</span></span></a>
+<p class="credit">The rebuild effect on this page is adapted from
+<a href="https://califa.github.io/swarm-site/" target="_blank" rel="noopener noreferrer">Swarm</a>,
+by <a href="https://joelcalifa.com" target="_blank" rel="noopener noreferrer">Joel Califa</a>.
+The idea and the motion design are his.</p>
 </footer>
 
 </div><!-- /.page -->
@@ -1340,5 +1362,8 @@ html.askopen .foot p{white-space:normal}
   }, { rootMargin: "0px 0px -24px 0px" }).observe(f);
 })();
 </script>
+<!-- swarm-cursors:start -->
+<script src="swarm-cursors.js" defer></script>
+<!-- swarm-cursors:end -->
 </body>
 </html>
